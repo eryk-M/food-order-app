@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiShoppingCart, FiUser } from 'react-icons/fi';
 import { FaBars } from 'react-icons/fa';
 export const Nav = styled.nav`
-	position: fixed;
+	position: absolute;
 	height: 20rem;
 	z-index: 1;
 	width: 100%;

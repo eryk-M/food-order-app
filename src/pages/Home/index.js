@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import Hero from '../../components/Hero';
 import NavBar from '../../components/NavBar';
 import NavBarBurger from '../../components/NavBurger';
-
+import Products from '../../components/Products';
 const Home = () => {
 	const [hidden, setHidden] = useState(true);
 
@@ -30,6 +30,7 @@ const Home = () => {
 			<NavBar width={width} toggle={toggleClass} />
 			<NavBarBurger hidden={hidden} toggle={toggleClass} />
 			<Hero />
+			<Products />
 		</>
 	);
 };

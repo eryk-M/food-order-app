@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Logo from '../../images/logo.png';
-import { FiShoppingCart, FiUser } from 'react-icons/fi';
 import {
 	Nav,
 	NavLogo,

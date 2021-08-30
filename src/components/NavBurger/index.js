@@ -9,12 +9,13 @@ import {
 	NavBurgerIconLink,
 	NavBurgerClose,
 } from './NavBurgerElements';
+
 import {
 	NavCart,
 	NavUser,
 	NavCartSpan,
-	NavLink,
 } from '../NavBar/NavBarElements';
+
 const NavBarBurger = ({ hidden, toggle }) => {
 	return (
 		<NavBurgerContainer right={hidden ? '-35rem' : '0'}>
