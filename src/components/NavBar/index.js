@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../../images/logo.png';
 import { FiShoppingCart, FiUser } from 'react-icons/fi';
 import {
@@ -15,7 +15,7 @@ import {
 	NavBurger,
 } from './NavBarElements';
 
-const NavBar = ({ width }) => {
+const NavBar = ({ width, toggle }) => {
 	const switchMenu = () => {
 		if (width > 840) {
 			return (
@@ -41,7 +41,7 @@ const NavBar = ({ width }) => {
 				</>
 			);
 		} else {
-			return <NavBurger />;
+			return <NavBurger onClick={toggle} />;
 		}
 	};
 

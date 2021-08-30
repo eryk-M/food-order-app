@@ -11,7 +11,7 @@ export const Nav = styled.nav`
 `;
 
 export const NavWrapper = styled.div`
-	max-width: 116rem;
+	max-width: 136rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

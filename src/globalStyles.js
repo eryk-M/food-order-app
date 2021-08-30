@@ -7,7 +7,8 @@ export const GlobalStyle = createGlobalStyle`
     --color-white: #fff;
     --color-grey-light:  rgb(232, 230, 227);
     --color-grey-dark: #252525;
-    --color-secondary: rgb(233, 58, 63);
+    --color-secondary: #E7272D;
+    --color-tertiary: #FFCC00;
 }
 
 * {
@@ -23,6 +24,10 @@ html {
 h1, h2, h3 {
     font-family: 'Arvo', sans-serif;
     font-weight: 700;
+}
+
+body {
+    font-family: 'Rubik', sans-serif
 }
 
 a {

@@ -2,13 +2,16 @@ import styled from 'styled-components/macro';
 
 import { Link } from 'react-router-dom';
 
-export const NavBurgerContainer = styled.div`
+export const NavBurgerContainer = styled.nav`
 	position: fixed;
 	background-color: var(--color-grey-dark);
 	width: 35rem;
 	height: 100vh;
 	z-index: 3;
+	/* right: -35rem; */
+	transition: all 0.5s;
 	right: -35rem;
+	right: ${(props) => props.right};
 `;
 
 export const NavBurgerIcons = styled.div`

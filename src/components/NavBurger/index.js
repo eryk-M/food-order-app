@@ -15,10 +15,10 @@ import {
 	NavCartSpan,
 	NavLink,
 } from '../NavBar/NavBarElements';
-const NavBurger = () => {
+const NavBarBurger = ({ hidden, toggle }) => {
 	return (
-		<NavBurgerContainer>
-			<NavBurgerClose>X</NavBurgerClose>
+		<NavBurgerContainer right={hidden ? '-35rem' : '0'}>
+			<NavBurgerClose onClick={toggle}>X</NavBurgerClose>
 			<NavBurgerIcons>
 				<NavBurgerIconLink to="/login">
 					<NavUser fontSize="4.5rem" />
@@ -45,4 +45,4 @@ const NavBurger = () => {
 	);
 };
 
-export default NavBurger;
+export default NavBarBurger;
