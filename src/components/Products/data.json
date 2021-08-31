@@ -1,0 +1,50 @@
+[
+	{
+		"img": "burgerClassic",
+		"alt": "Burger",
+		"name": "Classic Burger",
+		"desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+		"price": 19.99,
+		"button": "Add to Cart"
+	},
+	{
+		"img": "burgerDouble",
+		"alt": "Burger",
+		"name": "Double Burger",
+		"desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+		"price": 16.99,
+		"button": "Add to Cart"
+	},
+	{
+		"img": "burgerChicken",
+		"alt": "Burger",
+		"name": "Chicken Burger",
+		"desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+		"price": 14.99,
+		"button": "Add to Cart"
+	},
+	{
+		"img": "chickenCrispy",
+		"alt": "Crispy Chicken",
+		"name": "Crispy Chicken",
+		"desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+		"price": 12.99,
+		"button": "Add to Cart"
+	},
+	{
+		"img": "chickenSalad",
+		"alt": "Chicken Salad",
+		"name": "Chicken Salad",
+		"desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+		"price": 15.99,
+		"button": "Add to Cart"
+	},
+	{
+		"img": "chickenShashlik",
+		"alt": "Chicken Shashlik",
+		"name": "Chicken Shashlik",
+		"desc": "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
+		"price": 11.99,
+		"button": "Add to Cart"
+	}
+]
