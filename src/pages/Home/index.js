@@ -4,6 +4,7 @@ import Hero from '../../components/Hero';
 import NavBar from '../../components/NavBar';
 import NavBarBurger from '../../components/NavBurger';
 import Products from '../../components/Products';
+import { ModalOverlay } from '../../components/Modal/ModalElements';
 const Home = () => {
 	const [hidden, setHidden] = useState(true);
 
@@ -27,6 +28,7 @@ const Home = () => {
 	const [width] = useWindowSize();
 	return (
 		<>
+			{/* <ModalOverlay /> */}
 			<NavBar width={width} toggle={toggleClass} />
 			<NavBarBurger hidden={hidden} toggle={toggleClass} />
 			<Hero />

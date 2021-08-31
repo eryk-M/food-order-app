@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
 
 export const ProductsContainer = styled.section`
 	max-width: 136rem;
@@ -22,6 +23,9 @@ export const ProductsOption = styled.p`
 	&:not(:first-of-type) {
 		margin-left: 5rem;
 	}
+	&.active {
+		border-bottom: 3px solid var(--color-secondary);
+	}
 `;
 export const ProductsWrapper = styled.div`
 	width: 90vw;
@@ -32,27 +36,43 @@ export const ProductsWrapper = styled.div`
 	grid-column-gap: 1.5rem;
 	grid-row-gap: 2rem;
 `;
-export const ProductsCard = styled.figure`
-	font-family: 'Rubik', sans-serif;
-	text-align: center;
-`;
+
 export const ProductsImg = styled.img`
 	display: block;
 	width: 100%;
 	min-height: 12rem;
+	/* transform: scale(0); */
 	/* height: 30%; */
 	/* width: auto; */
+`;
+export const ProductsLink = styled(Link)`
+	color: #000;
+`;
+export const ProductsCard = styled.figure`
+	font-family: 'Rubik', sans-serif;
+	text-align: center;
+	transform: translateY(0);
+	transition: all 0.1s;
+	border-radius: 5px;
+	overflow: hidden;
+	&:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 0.1rem 3rem rgba(0, 0, 0, 0.2);
+		cursor: pointer;
+	}
 `;
 export const ProductsTitle = styled.h3`
 	font-size: 2rem;
 	margin: 2rem 0;
 	line-height: 1.4;
 	font-weight: 500;
+	font-family: 'Rubik', sans-serif;
 `;
 export const ProductsDesc = styled.p`
 	font-weight: 300;
 	font-size: 1.5rem;
 	line-height: 1.5;
+	padding: 1rem;
 `;
 export const ProductsPrice = styled.p`
 	font-family: 'Arvo', serif;
@@ -61,6 +81,7 @@ export const ProductsPrice = styled.p`
 	line-height: 1.4;
 	margin-top: 2rem;
 	color: var(--color-secondary);
+	padding: 1rem;
 `;
 
 // zobaczymy

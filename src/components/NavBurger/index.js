@@ -33,13 +33,13 @@ const NavBarBurger = ({ hidden, toggle }) => {
 			</NavBurgerIcons>
 			<NavBurgerList>
 				<NavBurgerItem>
-					<NavBurgerLink>Menu1</NavBurgerLink>
+					<NavBurgerLink to="/">Menu1</NavBurgerLink>
 				</NavBurgerItem>
 				<NavBurgerItem>
-					<NavBurgerLink>Menu1</NavBurgerLink>
+					<NavBurgerLink to="/">Menu1</NavBurgerLink>
 				</NavBurgerItem>
 				<NavBurgerItem>
-					<NavBurgerLink>Menu1</NavBurgerLink>
+					<NavBurgerLink to="/">Menu1</NavBurgerLink>
 				</NavBurgerItem>
 			</NavBurgerList>
 		</NavBurgerContainer>

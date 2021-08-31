@@ -1,12 +1,13 @@
-import burgerClassic from '../../images/burger-classic.jpg';
-import burgerDouble from '../../images/burger-double.jpg';
-import burgerChicken from '../../images/burger-chicken.jpg';
-import chickenCrispy from '../../images/chicken-crispy.jpg';
-import chickenSalad from '../../images/chicken-salad.jpg';
-import chickenShashlik from '../../images/chicken-shashlik.jpg';
+import burgerClassic from '../../images/burger-classic_cut.jpg';
+import burgerDouble from '../../images/burger-double_cut.jpg';
+import burgerChicken from '../../images/burger-chicken_cut.jpg';
+import chickenCrispy from '../../images/chicken-crispy_cut.jpg';
+import chickenSalad from '../../images/chicken-salad_cut.jpg';
+import chickenShashlik from '../../images/chicken-shashlik_cut.jpg';
 
 export const data = [
 	{
+		id: 1,
 		img: burgerClassic,
 		alt: 'Burger',
 		name: 'Classic Burger',
@@ -21,9 +22,10 @@ export const data = [
 			'Cheese',
 			'Mayonese',
 		],
-		category: 'Burger',
+		category: 'Burgers',
 	},
 	{
+		id: 2,
 		img: burgerDouble,
 		alt: 'Burger',
 		name: 'Double Burger',
@@ -39,9 +41,10 @@ export const data = [
 			'Sauce BBQ',
 			'Bacon',
 		],
-		category: 'Burger',
+		category: 'Burgers',
 	},
 	{
+		id: 3,
 		img: burgerChicken,
 		alt: 'Burger',
 		name: 'Chicken Burger',
@@ -57,9 +60,10 @@ export const data = [
 			'Onion',
 		],
 		button: 'Add to Cart',
-		category: 'Burger',
+		category: 'Burgers',
 	},
 	{
+		id: 4,
 		img: chickenCrispy,
 		alt: 'Crispy Chicken',
 		name: 'Crispy Chicken',
@@ -70,6 +74,7 @@ export const data = [
 		category: 'Chicken',
 	},
 	{
+		id: 5,
 		img: chickenSalad,
 		alt: 'Chicken Salad',
 		name: 'Chicken Salad',
@@ -86,6 +91,7 @@ export const data = [
 		category: 'Chicken',
 	},
 	{
+		id: 6,
 		img: chickenShashlik,
 		alt: 'Chicken Shashlik',
 		name: 'Chicken Shashlik',
