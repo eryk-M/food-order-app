@@ -5,11 +5,16 @@ import {
 	Switch,
 } from 'react-router-dom';
 import { GlobalStyle } from './globalStyles';
+import { AuthProvider } from './contexts/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './pages/Login';
+import User from './pages/User';
 
 import Home from './pages/Home';
 import Product from './pages/Product';
 import NavBar from './components/NavBar';
 import NavBarBurger from './components/NavBurger';
+
 function App() {
 	//navbar
 	const [hidden, setHidden] = useState(true);
@@ -33,7 +38,7 @@ function App() {
 
 	const [width] = useWindowSize();
 	return (
-		<div className="App">
+		<AuthProvider>
 			<Router>
 				<NavBar width={width} toggle={toggleClass} />
 				<NavBarBurger hidden={hidden} toggle={toggleClass} />
@@ -41,9 +46,19 @@ function App() {
 				<Switch>
 					<Route path="/" exact component={Home} />
 					<Route path="/product/:id" exact component={Product} />
+					<Route path="/login" component={Login} />
+					<Route path="/signup" component={Login} />
+					<Route path="/forgot-password" component={Login} />
+
+					<PrivateRoute path="/user" exact component={User} />
+					<PrivateRoute
+						path="/user/update-profile"
+						exact
+						component={User}
+					/>
 				</Switch>
 			</Router>
-		</div>
+		</AuthProvider>
 	);
 }
 

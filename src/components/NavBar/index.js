@@ -14,9 +14,12 @@ import {
 	NavBurger,
 } from './NavBarElements';
 
+import { useAuth } from '../../contexts/AuthContext';
 import { withRouter } from 'react-router-dom';
 
 const NavBar = (props) => {
+	const { currentUser } = useAuth();
+
 	const stylesNav = {
 		position: 'static',
 		backgroundColor: 'var(--color-grey-dark)',
@@ -45,7 +48,7 @@ const NavBar = (props) => {
 							<NavLink to="/">Menu3</NavLink>
 						</NavItem>
 					</NavList>
-					<NavLink to="/login">
+					<NavLink to={currentUser ? '/user' : '/login'}>
 						<NavUser fontSize="3rem" />
 					</NavLink>
 					<NavLink to="/cart">
