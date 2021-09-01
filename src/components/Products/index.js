@@ -80,13 +80,13 @@ const Products = () => {
 
 	return (
 		<>
-			<Modal
+			{/* <Modal
 				item={currentItem}
 				open={isOpen}
 				onClose={() => setIsOpen(false)}
 			>
 				Im Modal
-			</Modal>
+			</Modal> */}
 			<ProductsContainer>
 				<ProductsHeading>Our menu</ProductsHeading>
 				<ProductsFilter>
@@ -103,19 +103,20 @@ const Products = () => {
 				<ProductsWrapper>
 					{/* item */}
 					{initialItems.map((el) => (
-						<ProductsCard
-							key={el.id}
-							data-id={el.id}
-							onClick={(e) => {
-								setIsOpen(true);
-								findItem(e);
-							}}
-						>
-							<ProductsImg src={el.img} alt={el.alt} />
-							<ProductsTitle>{el.name}</ProductsTitle>
-							<ProductsDesc>{el.desc}</ProductsDesc>
-							<ProductsPrice>${el.price}</ProductsPrice>
-						</ProductsCard>
+						<ProductsLink key={el.id} to={`/product/${el.id}`}>
+							<ProductsCard
+								data-id={el.id}
+								onClick={(e) => {
+									setIsOpen(true);
+									findItem(e);
+								}}
+							>
+								<ProductsImg src={el.img} alt={el.alt} />
+								<ProductsTitle>{el.name}</ProductsTitle>
+								<ProductsDesc>{el.desc}</ProductsDesc>
+								<ProductsPrice>${el.price}</ProductsPrice>
+							</ProductsCard>
+						</ProductsLink>
 					))}
 				</ProductsWrapper>
 			</ProductsContainer>

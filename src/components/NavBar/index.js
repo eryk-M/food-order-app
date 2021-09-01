@@ -14,7 +14,22 @@ import {
 	NavBurger,
 } from './NavBarElements';
 
-const NavBar = ({ width, toggle }) => {
+import { withRouter } from 'react-router-dom';
+
+const NavBar = (props) => {
+	const stylesNav = {
+		position: 'static',
+		backgroundColor: 'var(--color-grey-dark)',
+		padding: '1rem 4rem',
+		height: '10rem',
+	};
+
+	const stylesLogo = {
+		height: '8rem',
+	};
+
+	const { pathname } = props.location;
+	const { width, toggle } = props;
 	const switchMenu = () => {
 		if (width > 840) {
 			return (
@@ -43,12 +58,15 @@ const NavBar = ({ width, toggle }) => {
 			return <NavBurger onClick={toggle} />;
 		}
 	};
-
+	// console.log(props);
 	return (
-		<Nav>
+		<Nav style={pathname === '/' ? null : stylesNav}>
 			<NavWrapper>
 				<NavLogo to="/">
-					<NavLogoImage src={Logo} />
+					<NavLogoImage
+						style={pathname === '/' ? null : stylesLogo}
+						src={Logo}
+					/>
 				</NavLogo>
 				{switchMenu()}
 			</NavWrapper>
@@ -56,4 +74,4 @@ const NavBar = ({ width, toggle }) => {
 	);
 };
 
-export default NavBar;
+export default withRouter(NavBar);

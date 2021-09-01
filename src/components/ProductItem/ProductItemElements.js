@@ -1,0 +1,147 @@
+import styled from 'styled-components/macro';
+
+import { FaCartPlus } from 'react-icons/fa';
+
+import { BsStar } from 'react-icons/bs';
+export const ProductContainer = styled.section`
+	display: flex;
+	/* height: 45rem; */
+	/* width: 80rem; */
+	/* margin-top: 5rem !important; */
+	border-radius: 5px;
+	overflow: hidden;
+	max-width: 136rem;
+	margin: 5rem auto;
+`;
+
+export const ProductLeft = styled.div`
+	background-color: #e7272de5;
+	/* clip-path: polygon(0 0, 100% 0, 55% 100%, 0% 100%);  */
+	clip-path: polygon(14% 0, 100% 0, 85% 100%, 0% 100%);
+
+	width: 50%;
+	display: flex;
+	justify-content: center;
+`;
+
+export const ProductImg = styled.img`
+	width: auto;
+	padding: 4rem;
+`;
+
+export const ProductRight = styled.div`
+	padding: 6rem;
+	width: 50%;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+`;
+
+export const ProductTitle = styled.h2`
+	font-family: 'Rubik', sans-serif;
+	font-weight: 500;
+	font-size: 3.5rem;
+	text-align: center;
+	margin-top: 2.5rem;
+`;
+
+export const ProductDesc = styled.p`
+	font-size: 1.5rem;
+	margin-top: 3rem;
+`;
+
+export const ProductIngredients = styled.ul`
+	list-style: circle;
+	margin-top: 2rem;
+	font-size: 1.6rem;
+	margin-left: 2rem;
+	line-height: 1.5;
+`;
+
+export const ProductIngredientsItem = styled.li``;
+
+export const ProductButton = styled.button`
+	padding: 1.2rem 1rem;
+	font-size: 1.2rem;
+	min-width: 13rem;
+	background-color: var(--color-secondary);
+	text-align: center;
+	color: var(--color-grey-light);
+	line-height: 2.2rem;
+	transition: all 0.2s;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&:hover {
+		background-color: var(--color-tertiary);
+		cursor: pointer;
+		color: #000;
+	}
+`;
+
+export const ProductCartIcon = styled(FaCartPlus)`
+	font-size: 2rem;
+	margin-right: 1rem;
+`;
+
+export const ProductForm = styled.form`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: auto;
+`;
+
+export const ProductQuantityLabel = styled.label`
+	font-size: 2rem;
+	margin-right: 1rem;
+`;
+
+export const ProductQuantity = styled.input`
+	text-align: center;
+	width: 4rem;
+	/* height: 2rem;  */
+	margin-right: 2rem;
+	font-size: 2rem;
+`;
+
+export const ProductStar = styled(BsStar)`
+	color: yellow;
+	cursor: pointer;
+	fill: black;
+	&:not(:first-of-type) {
+		margin-left: 1rem;
+	}
+`;
+
+export const ProductStarIcons = styled.div`
+	margin: 1rem auto;
+	margin-top: 1rem;
+	margin-bottom: 0rem;
+	display: flex;
+	font-size: 2.4rem;
+`;
+
+export const ProductRating = styled.p`
+	margin-top: 1rem;
+	text-align: center;
+	font-size: 1.6rem;
+`;
+
+export const ProductPrice = styled.p`
+	font-family: 'Arvo', serif;
+	font-weight: 700;
+	font-size: 3rem;
+	line-height: 1.4;
+	margin-top: 1rem;
+	text-align: center;
+	color: var(--color-secondary);
+	/* padding: 1rem; */
+`;
+
+export const ProductBackground = styled.div`
+	height: 10rem;
+	background-image: url(${(props) => props.background});
+	width: 100%;
+`;
