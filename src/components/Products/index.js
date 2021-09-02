@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import {
 	ProductsContainer,
@@ -15,15 +15,9 @@ import {
 	ProductsLink,
 } from './ProductsElements';
 
-import Button from '../Button';
-
-import Image1 from '../../images/burger-chicken.jpg';
-import Image2 from '../../images/burger-double.jpg';
-import Image3 from '../../images/burger-classic.jpg';
-
 import { data } from '../Products/dummyData';
-import Modal from '../../components/Modal';
-// import data from './data.json';
+
+import { ProductsContext } from '../../contexts/ProductsContext';
 
 const Products = () => {
 	// const [products, setProducts] = useState([]);
@@ -46,7 +40,9 @@ const Products = () => {
 	// 	fetchData();
 	// }, []);
 
-	const [initialItems, setInitialItems] = useState(data);
+	const products = useContext(ProductsContext);
+
+	const [filteredItems, setFilteredItems] = useState(products);
 	const [isOpen, setIsOpen] = useState(false);
 	const [currentItem, setCurrentItem] = useState();
 
@@ -62,12 +58,12 @@ const Products = () => {
 		e.target.classList.add('active');
 
 		if (option === 'All') {
-			setInitialItems(data);
+			setFilteredItems(products);
 		} else {
 			const filteredBurgers = data.filter(
 				(el) => el.category === option
 			);
-			setInitialItems(filteredBurgers);
+			setFilteredItems(filteredBurgers);
 		}
 	};
 
@@ -80,13 +76,6 @@ const Products = () => {
 
 	return (
 		<>
-			{/* <Modal
-				item={currentItem}
-				open={isOpen}
-				onClose={() => setIsOpen(false)}
-			>
-				Im Modal
-			</Modal> */}
 			<ProductsContainer>
 				<ProductsHeading>Our menu</ProductsHeading>
 				<ProductsFilter>
@@ -102,7 +91,7 @@ const Products = () => {
 				</ProductsFilter>
 				<ProductsWrapper>
 					{/* item */}
-					{initialItems.map((el) => (
+					{filteredItems.map((el) => (
 						<ProductsLink key={el.id} to={`/product/${el.id}`}>
 							<ProductsCard
 								data-id={el.id}

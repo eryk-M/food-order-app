@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Logo from '../../images/logo.png';
 import {
 	Nav,
@@ -17,8 +17,14 @@ import {
 import { useAuth } from '../../contexts/AuthContext';
 import { withRouter } from 'react-router-dom';
 
+import { CartContext } from '../../contexts/CartContext';
+
 const NavBar = (props) => {
 	const { currentUser } = useAuth();
+
+	const {
+		state: { cart },
+	} = useContext(CartContext);
 
 	const stylesNav = {
 		position: 'static',
@@ -53,7 +59,9 @@ const NavBar = (props) => {
 					</NavLink>
 					<NavLink to="/cart">
 						<NavCart />
-						<NavCartSpan>1</NavCartSpan>
+						{cart.length >= 1 && (
+							<NavCartSpan>{cart.length}</NavCartSpan>
+						)}
 					</NavLink>
 				</>
 			);

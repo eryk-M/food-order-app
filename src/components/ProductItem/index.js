@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 //for testing
 import { data } from '../Products/dummyData';
@@ -21,11 +21,32 @@ import {
 	ProductStarIcons,
 	ProductRating,
 	ProductPrice,
-	ProductBackground,
 } from './ProductItemElements';
 
+import { CartContext } from '../../contexts/CartContext';
+
 const ProductItem = ({ props }) => {
+	const {
+		state: { cart },
+		dispatch,
+	} = useContext(CartContext);
+
 	const [currentItem, setCurrentItem] = useState();
+	const [quantity, setQuantity] = useState(1);
+
+	const onInputChange = (e) => {
+		currentItem.quantity = Number(e.target.value);
+		setQuantity(e.target.value);
+	};
+
+	const addToCart = (e) => {
+		e.preventDefault();
+		console.log(quantity);
+		dispatch({
+			type: 'ADD_TO_CART',
+			payload: currentItem,
+		});
+	};
 
 	//testing instead of fetching
 	const findItem = () => {
@@ -40,6 +61,7 @@ const ProductItem = ({ props }) => {
 
 	return (
 		<>
+			{console.log(cart)}
 			{currentItem && (
 				<ProductContainer>
 					{/* <ProductBackground /> */}
@@ -60,8 +82,10 @@ const ProductItem = ({ props }) => {
 						<ProductRating>0/5 (0 ratings)</ProductRating>
 						<ProductDesc>{currentItem.desc}</ProductDesc>
 						<ProductIngredients>
-							{currentItem.ingredients.map((el) => (
-								<ProductIngredientsItem>{el}</ProductIngredientsItem>
+							{currentItem.ingredients.map((el, i) => (
+								<ProductIngredientsItem key={i}>
+									{el}
+								</ProductIngredientsItem>
 							))}
 						</ProductIngredients>
 						<ProductForm>
@@ -71,9 +95,11 @@ const ProductItem = ({ props }) => {
 							<ProductQuantity
 								name="quantity"
 								type="number"
-								value="1"
+								value={quantity}
+								onChange={(e) => onInputChange(e)}
+								min="1"
 							/>
-							<ProductButton>
+							<ProductButton onClick={(e) => addToCart(e)}>
 								<ProductCartIcon />
 								{currentItem.button}
 							</ProductButton>

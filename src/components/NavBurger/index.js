@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
 	NavBurgerContainer,
@@ -16,7 +16,13 @@ import {
 	NavCartSpan,
 } from '../NavBar/NavBarElements';
 
+import { CartContext } from '../../contexts/CartContext';
+
 const NavBarBurger = ({ hidden, toggle }) => {
+	const {
+		state: { cart },
+	} = useContext(CartContext);
+
 	return (
 		<NavBurgerContainer right={hidden ? '-35rem' : '0'}>
 			<NavBurgerClose onClick={toggle}>X</NavBurgerClose>
@@ -26,9 +32,11 @@ const NavBarBurger = ({ hidden, toggle }) => {
 				</NavBurgerIconLink>
 				<NavBurgerIconLink to="/cart">
 					<NavCart fontSize="4.5rem" />
-					<NavCartSpan top="2.5rem" right="5rem">
-						2
-					</NavCartSpan>
+					{cart.length >= 1 && (
+						<NavCartSpan top="2.5rem" right="5rem">
+							{cart.length}
+						</NavCartSpan>
+					)}
 				</NavBurgerIconLink>
 			</NavBurgerIcons>
 			<NavBurgerList>

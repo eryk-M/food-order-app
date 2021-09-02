@@ -15,6 +15,9 @@ import Product from './pages/Product';
 import NavBar from './components/NavBar';
 import NavBarBurger from './components/NavBurger';
 
+import { ProductsProvider } from './contexts/ProductsContext';
+import { CartProvider } from './contexts/CartContext';
+
 function App() {
 	//navbar
 	const [hidden, setHidden] = useState(true);
@@ -39,25 +42,29 @@ function App() {
 	const [width] = useWindowSize();
 	return (
 		<AuthProvider>
-			<Router>
-				<NavBar width={width} toggle={toggleClass} />
-				<NavBarBurger hidden={hidden} toggle={toggleClass} />
-				<GlobalStyle />
-				<Switch>
-					<Route path="/" exact component={Home} />
-					<Route path="/product/:id" exact component={Product} />
-					<Route path="/login" component={Login} />
-					<Route path="/signup" component={Login} />
-					<Route path="/forgot-password" component={Login} />
+			<ProductsProvider>
+				<CartProvider>
+					<Router>
+						<NavBar width={width} toggle={toggleClass} />
+						<NavBarBurger hidden={hidden} toggle={toggleClass} />
+						<GlobalStyle />
+						<Switch>
+							<Route path="/" exact component={Home} />
+							<Route path="/product/:id" exact component={Product} />
+							<Route path="/login" component={Login} />
+							<Route path="/signup" component={Login} />
+							<Route path="/forgot-password" component={Login} />
 
-					<PrivateRoute path="/user" exact component={User} />
-					<PrivateRoute
-						path="/user/update-profile"
-						exact
-						component={User}
-					/>
-				</Switch>
-			</Router>
+							<PrivateRoute path="/user" exact component={User} />
+							<PrivateRoute
+								path="/user/update-profile"
+								exact
+								component={User}
+							/>
+						</Switch>
+					</Router>
+				</CartProvider>
+			</ProductsProvider>
 		</AuthProvider>
 	);
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import Signup from '../../components/Signup';
-import SignIn from '../../components/SignIn';
-import ForgotPassword from '../../components/ForgotPassword';
+import Signup from '../../components/User/Signup';
+import SignIn from '../../components/User/SignIn';
+import ForgotPassword from '../../components/User/ForgotPassword';
 import { Switch, Route } from 'react-router-dom';
 //TEST
 import { Container } from 'react-bootstrap';

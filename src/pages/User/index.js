@@ -2,8 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from '../../components/PrivateRoute';
 
-import UserProfile from '../../components/UserProfile';
-import UpdateProfile from '../../components/UpdateProfile';
+import UserProfile from '../../components/User/UserProfile';
+import UpdateProfile from '../../components/User/UpdateProfile';
 const User = () => {
 	return (
 		<>
