@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import {
 	FormContainer,
@@ -19,6 +19,8 @@ const Signup = () => {
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
+	const userNameRef = useRef();
+
 	const { signup } = useAuth();
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -26,20 +28,26 @@ const Signup = () => {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-
 		if (
 			passwordRef.current.value !== passwordConfirmRef.current.value
 		) {
 			return setError('Passwords do not match');
 		}
-
 		try {
-			setError('');
-			setLoading(true);
-			await signup(emailRef.current.value, passwordRef.current.value);
-			history.push('/user');
-		} catch {
-			setError('Failed to create an account');
+			if (userNameRef.current.value.indexOf(' ') >= 0) {
+				setError('Username has to be without spaces');
+			} else {
+				setError('');
+				setLoading(true);
+				await signup(
+					emailRef.current.value,
+					passwordRef.current.value,
+					userNameRef.current.value,
+					history
+				);
+			}
+		} catch (e) {
+			setError(e.message);
 		}
 
 		setLoading(false);
@@ -51,6 +59,16 @@ const Signup = () => {
 				<FormHeading>Sign Up</FormHeading>
 				{error && <FormAlert variant="danger">{error}</FormAlert>}
 				<Form onSubmit={handleSubmit}>
+					<FormElement id="username">
+						<FormLabel>Username (max 12 characters)</FormLabel>
+						<FormInput
+							type="text"
+							ref={userNameRef}
+							placeholder="Your username"
+							required
+							maxLength="12"
+						/>
+					</FormElement>
 					<FormElement id="email">
 						<FormLabel>Email</FormLabel>
 						<FormInput

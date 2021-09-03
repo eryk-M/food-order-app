@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+// import { collection, query, where } from 'firebase/firestore';
 
 const AuthContext = React.createContext();
 
@@ -11,8 +12,45 @@ export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState();
 	const [loading, setLoading] = useState(true);
 
-	function signup(email, password) {
-		return auth.createUserWithEmailAndPassword(email, password);
+	async function signup(email, password, username, history) {
+		const userRef = db.collection('users');
+
+		await userRef
+			.where('username', '==', username)
+			.get()
+			.then((snapshot) => {
+				if (snapshot.empty) {
+					console.log('Robie uzytkownika');
+					return auth
+						.createUserWithEmailAndPassword(email, password)
+						.then(() => {
+							history.push('/user');
+						});
+				} else {
+					let error = new Error();
+					error = {
+						...error,
+						code: 'username/taken',
+						message: 'Username already taken',
+					};
+					throw error;
+				}
+			})
+			.then((createdUser) => {
+				db.collection('users')
+					.doc(createdUser.user.uid)
+					.set({ username: username });
+			})
+			.catch((err) => {
+				switch (err.code) {
+					case 'auth/email-already-in-use':
+						throw new Error('E-mail already in use');
+					case 'username/taken':
+						throw new Error(err.message);
+					default:
+						break;
+				}
+			});
 	}
 
 	function login(email, password) {

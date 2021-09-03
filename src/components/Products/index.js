@@ -11,7 +11,6 @@ import {
 	ProductsTitle,
 	ProductsDesc,
 	ProductsPrice,
-	ProductsButton,
 	ProductsLink,
 } from './ProductsElements';
 
@@ -43,8 +42,8 @@ const Products = () => {
 	const products = useContext(ProductsContext);
 
 	const [filteredItems, setFilteredItems] = useState(products);
-	const [isOpen, setIsOpen] = useState(false);
-	const [currentItem, setCurrentItem] = useState();
+	// const [isOpen, setIsOpen] = useState(false);
+	// const [currentItem, setCurrentItem] = useState();
 
 	const options = ['All', 'Burgers', 'Chicken'];
 
@@ -67,12 +66,12 @@ const Products = () => {
 		}
 	};
 
-	const findItem = (e) => {
-		const item = data.find(
-			(el) => Number(e.currentTarget.dataset.id) === el.id
-		);
-		setCurrentItem(item);
-	};
+	// const findItem = (e) => {
+	// 	const item = data.find(
+	// 		(el) => Number(e.currentTarget.dataset.id) === el.id
+	// 	);
+	// 	setCurrentItem(item);
+	// };
 
 	return (
 		<>
@@ -96,8 +95,8 @@ const Products = () => {
 							<ProductsCard
 								data-id={el.id}
 								onClick={(e) => {
-									setIsOpen(true);
-									findItem(e);
+									// setIsOpen(true);
+									// findItem(e);
 								}}
 							>
 								<ProductsImg src={el.img} alt={el.alt} />

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from '../../components/PrivateRoute';
 
 import UserProfile from '../../components/User/UserProfile';
