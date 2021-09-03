@@ -2,8 +2,18 @@ import React, { useRef, useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 
-//TESTING
-import { Form, Button, Card, Alert } from 'react-bootstrap';
+import {
+	FormContainer,
+	FormHeading,
+	Form,
+	FormElement,
+	FormLabel,
+	FormInput,
+	FormButton,
+	FormAlternative,
+	FormLink,
+	FormAlert,
+} from '../../Form/FormElements';
 
 const Signup = () => {
 	const emailRef = useRef();
@@ -37,44 +47,46 @@ const Signup = () => {
 
 	return (
 		<>
-			<Card>
-				<Card.Body>
-					<h2 className="text-center mb-4">Sign Up</h2>
-					{error && <Alert variant="danger">{error}</Alert>}
-					<Form onSubmit={handleSubmit}>
-						<Form.Group id="email">
-							<Form.Label>Email</Form.Label>
-							<Form.Control type="email" ref={emailRef} required />
-						</Form.Group>
-						<Form.Group id="password">
-							<Form.Label>Password</Form.Label>
-							<Form.Control
-								type="password"
-								ref={passwordRef}
-								required
-							/>
-						</Form.Group>
-						<Form.Group id="password-confirm">
-							<Form.Label>Password Confirmation</Form.Label>
-							<Form.Control
-								type="password"
-								ref={passwordConfirmRef}
-								required
-							/>
-						</Form.Group>
-						<Button
-							disabled={loading}
-							className="w-100"
-							type="submit"
-						>
-							Sign Up
-						</Button>
-					</Form>
-				</Card.Body>
-			</Card>
-			<div className="w-100 text-center mt-2">
-				Already have an account? <Link to="/login">Log In</Link>
-			</div>
+			<FormContainer>
+				<FormHeading>Sign Up</FormHeading>
+				{error && <FormAlert variant="danger">{error}</FormAlert>}
+				<Form onSubmit={handleSubmit}>
+					<FormElement id="email">
+						<FormLabel>Email</FormLabel>
+						<FormInput
+							type="email"
+							ref={emailRef}
+							placeholder="example@example.com"
+							required
+						/>
+					</FormElement>
+					<FormElement id="password">
+						<FormLabel>Password</FormLabel>
+						<FormInput
+							type="password"
+							ref={passwordRef}
+							placeholder="Enter your password"
+							required
+						/>
+					</FormElement>
+					<FormElement id="password-confirm">
+						<FormLabel>Password Confirmation</FormLabel>
+						<FormInput
+							type="password"
+							ref={passwordConfirmRef}
+							placeholder="Confirm your password"
+							required
+						/>
+					</FormElement>
+					<FormButton disabled={loading} type="submit">
+						Sign Up
+					</FormButton>
+				</Form>
+			</FormContainer>
+			<FormAlternative>
+				Already have an account?{' '}
+				<FormLink to="/login">Log In</FormLink>
+			</FormAlternative>
 		</>
 	);
 };

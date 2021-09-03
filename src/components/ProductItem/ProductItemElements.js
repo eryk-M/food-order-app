@@ -12,6 +12,12 @@ export const ProductContainer = styled.section`
 	overflow: hidden;
 	max-width: 136rem;
 	margin: 5rem auto;
+
+	@media screen and (max-width: 840px) {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 `;
 
 export const ProductLeft = styled.div`
@@ -22,6 +28,9 @@ export const ProductLeft = styled.div`
 	width: 50%;
 	display: flex;
 	justify-content: center;
+	@media screen and (max-width: 840px) {
+		width: 90%;
+	}
 `;
 
 export const ProductImg = styled.img`
@@ -35,6 +44,9 @@ export const ProductRight = styled.div`
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
+	@media screen and (max-width: 840px) {
+		width: 90%;
+	}
 `;
 
 export const ProductTitle = styled.h2`
@@ -100,7 +112,7 @@ export const ProductQuantityLabel = styled.label`
 
 export const ProductQuantity = styled.input`
 	text-align: center;
-	width: 4rem;
+	width: 6rem;
 	/* height: 2rem;  */
 	margin-right: 2rem;
 	font-size: 2rem;

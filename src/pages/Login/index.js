@@ -3,25 +3,37 @@ import Signup from '../../components/User/Signup';
 import SignIn from '../../components/User/SignIn';
 import ForgotPassword from '../../components/User/ForgotPassword';
 import { Switch, Route } from 'react-router-dom';
-//TEST
-import { Container } from 'react-bootstrap';
+
+import {
+	LoginContainer,
+	LoginLeft,
+	LoginRight,
+	LoginContent,
+	LoginHeading,
+	LoginDesc,
+} from './LoginElements.js';
 
 const Login = () => {
 	return (
-		<Container
-			className="d-flex align-items-center justify-content-center"
-			style={{ minHeight: '100vh' }}
-		>
-			<div className="w-100" style={{ maxWidth: '400px' }}>
-				<h1>Login page</h1>
+		<LoginContainer>
+			<LoginLeft>
+				<LoginContent>
+					<LoginHeading>Welcome to Burger Website</LoginHeading>
+					<LoginDesc>
+						Create an account to rate and comment our products.
+						<br />
+						<br /> You can also check your last orders.
+					</LoginDesc>
+				</LoginContent>
+			</LoginLeft>
+			<LoginRight>
 				<Switch>
 					<Route path="/login" component={SignIn} />
 					<Route path="/signup" component={Signup} />
 					<Route path="/forgot-password" component={ForgotPassword} />
 				</Switch>
-				{/* <SignIn /> */}
-			</div>
-		</Container>
+			</LoginRight>
+		</LoginContainer>
 	);
 };
 
