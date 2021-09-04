@@ -40,9 +40,7 @@ const ForgotPassword = () => {
 	return (
 		<>
 			<FormContainer>
-				<FormHeading className="text-center mb-4">
-					Reset Password
-				</FormHeading>
+				<FormHeading>Reset Password</FormHeading>
 				{error && <FormAlert variant="danger">{error}</FormAlert>}
 				{message && (
 					<FormAlert variant="success">{message}</FormAlert>

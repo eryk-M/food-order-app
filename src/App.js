@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import Product from './pages/Product';
 import NavBar from './components/NavBar';
 import NavBarBurger from './components/NavBurger';
+import Checkout from './pages/Checkout';
 
 import { ProductsProvider } from './contexts/ProductsContext';
 import { CartProvider } from './contexts/CartContext';
@@ -54,6 +55,7 @@ function App() {
 							<Route path="/login" component={Login} />
 							<Route path="/signup" component={Login} />
 							<Route path="/forgot-password" component={Login} />
+							<Route path="/cart" component={Checkout} />
 
 							<PrivateRoute path="/user" exact component={User} />
 							<PrivateRoute

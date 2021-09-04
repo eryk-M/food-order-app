@@ -20,9 +20,13 @@ export function AuthProvider({ children }) {
 			.get()
 			.then((snapshot) => {
 				if (snapshot.empty) {
-					console.log('Robie uzytkownika');
 					return auth
 						.createUserWithEmailAndPassword(email, password)
+						.then((createdUser) => {
+							db.collection('users')
+								.doc(createdUser.user.uid)
+								.set({ username: username });
+						})
 						.then(() => {
 							history.push('/user');
 						});
@@ -36,11 +40,7 @@ export function AuthProvider({ children }) {
 					throw error;
 				}
 			})
-			.then((createdUser) => {
-				db.collection('users')
-					.doc(createdUser.user.uid)
-					.set({ username: username });
-			})
+
 			.catch((err) => {
 				switch (err.code) {
 					case 'auth/email-already-in-use':

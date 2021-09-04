@@ -32,20 +32,25 @@ const Signup = () => {
 			passwordRef.current.value !== passwordConfirmRef.current.value
 		) {
 			return setError('Passwords do not match');
+		} else if (passwordRef.current.value.length < 6) {
+			return setError(
+				'Password has to be at least 6 characters long'
+			);
+		} else if (userNameRef.current.value.indexOf(' ') >= 0) {
+			return setError('Username has to be without spaces');
+		} else if (userNameRef.current.value.length < 4) {
+			return setError('Username must have at least 4 characters');
 		}
+
 		try {
-			if (userNameRef.current.value.indexOf(' ') >= 0) {
-				setError('Username has to be without spaces');
-			} else {
-				setError('');
-				setLoading(true);
-				await signup(
-					emailRef.current.value,
-					passwordRef.current.value,
-					userNameRef.current.value,
-					history
-				);
-			}
+			setError('');
+			setLoading(true);
+			await signup(
+				emailRef.current.value,
+				passwordRef.current.value,
+				userNameRef.current.value,
+				history
+			);
 		} catch (e) {
 			setError(e.message);
 		}
@@ -60,7 +65,7 @@ const Signup = () => {
 				{error && <FormAlert variant="danger">{error}</FormAlert>}
 				<Form onSubmit={handleSubmit}>
 					<FormElement id="username">
-						<FormLabel>Username (max 12 characters)</FormLabel>
+						<FormLabel>Username (4 - 12 characters) *</FormLabel>
 						<FormInput
 							type="text"
 							ref={userNameRef}
@@ -70,7 +75,7 @@ const Signup = () => {
 						/>
 					</FormElement>
 					<FormElement id="email">
-						<FormLabel>Email</FormLabel>
+						<FormLabel>Email *</FormLabel>
 						<FormInput
 							type="email"
 							ref={emailRef}
@@ -79,7 +84,7 @@ const Signup = () => {
 						/>
 					</FormElement>
 					<FormElement id="password">
-						<FormLabel>Password</FormLabel>
+						<FormLabel>Password (min 6 characters) *</FormLabel>
 						<FormInput
 							type="password"
 							ref={passwordRef}
@@ -88,7 +93,7 @@ const Signup = () => {
 						/>
 					</FormElement>
 					<FormElement id="password-confirm">
-						<FormLabel>Password Confirmation</FormLabel>
+						<FormLabel>Password Confirmation *</FormLabel>
 						<FormInput
 							type="password"
 							ref={passwordConfirmRef}

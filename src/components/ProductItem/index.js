@@ -36,7 +36,7 @@ const ProductItem = ({ props }) => {
 
 	const onInputChange = (e) => {
 		currentItem.quantity = Number(e.target.value);
-		setQuantity(e.target.value);
+		setQuantity(Number(e.target.value));
 	};
 
 	const addToCart = (e) => {
