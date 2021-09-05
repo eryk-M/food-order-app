@@ -7,7 +7,7 @@ import {
 	HeroContent,
 	HeroWrapper,
 } from './HeroElements';
-import Button from '../Button';
+import ButtonLink from '../ButtonLink';
 
 const Hero = () => {
 	return (
@@ -22,7 +22,7 @@ const Hero = () => {
 					</HeroP>
 					<HeroH1>The best burgers in town</HeroH1>
 					<HeroP fontFamily="Arvo, serif">From $10.99</HeroP>
-					<Button>Order now!</Button>
+					<ButtonLink>Order now!</ButtonLink>
 				</HeroContent>
 			</HeroWrapper>
 		</HeroContainer>
