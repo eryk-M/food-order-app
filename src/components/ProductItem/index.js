@@ -61,7 +61,6 @@ const ProductItem = ({ props }) => {
 
 	return (
 		<>
-			{console.log(cart)}
 			{currentItem && (
 				<ProductContainer>
 					{/* <ProductBackground /> */}

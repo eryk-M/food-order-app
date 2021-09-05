@@ -1,5 +1,10 @@
 export const cartReducer = (state, action) => {
 	switch (action.type) {
+		case 'SET_ITEMS':
+			return {
+				...state,
+				cart: [...action.payload],
+			};
 		case 'ADD_TO_CART':
 			const item = state.cart.filter(
 				(el) => el.id === action.payload.id
@@ -23,6 +28,24 @@ export const cartReducer = (state, action) => {
 			return {
 				...state,
 				cart: state.cart.filter((c) => c.id !== action.payload.id),
+			};
+		case 'ADD_QUANTITY':
+			return {
+				...state,
+				cart: state.cart.filter((el) =>
+					el.id === action.payload.id
+						? (el.quantity += 1)
+						: el.quantity
+				),
+			};
+		case 'REMOVE_QUANTITY':
+			return {
+				...state,
+				cart: state.cart.filter((el) =>
+					el.id === action.payload.id
+						? (el.quantity -= 1)
+						: el.quantity
+				),
 			};
 		default:
 			return state;

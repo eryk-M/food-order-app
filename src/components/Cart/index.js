@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { Steps } from 'rsuite';
 
-import 'rsuite/dist/styles/rsuite-default.css';
+import './steps.css';
 
 import {
 	CartWrapper,
@@ -12,13 +12,72 @@ import {
 	CartColumn,
 	CartImage,
 	CartDelete,
+	CartCouponInput,
+	CartCouponButton,
+	CartCouponForm,
+	CartQuantity,
+	CartTotal,
 } from './CartElements';
+
+import { CartContext } from '../../contexts/CartContext';
 
 //testing
 import Image from '../../images/burger-chicken_cut.jpg';
 
 const Cart = () => {
+	const {
+		state: { cart },
+		dispatch,
+	} = useContext(CartContext);
+
 	const [step, setStep] = useState(0);
+	const [totalPrice, setTotalPrice] = useState(0);
+
+	const getTotalPrice = () => {
+		const totalCartPrice = cart.reduce(
+			(total, item) => total + item.price * item.quantity,
+			0
+		);
+		setTotalPrice(totalCartPrice);
+	};
+
+	useEffect(() => {
+		getTotalPrice();
+	});
+
+	const findItem = (e) => {
+		const item = cart.find(
+			(el) => el.id === Number(e.currentTarget.dataset.id)
+		);
+		return item;
+	};
+
+	const onDeleteItem = (e) => {
+		dispatch({
+			type: 'REMOVE_FROM_CART',
+			payload: findItem(e),
+		});
+	};
+
+	const onChangeQuantity = (e) => {
+		const sign = e.currentTarget.innerText;
+		switch (sign) {
+			case '+':
+				dispatch({
+					type: 'ADD_QUANTITY',
+					payload: findItem(e),
+				});
+				break;
+			case '-':
+				dispatch({
+					type: 'REMOVE_QUANTITY',
+					payload: findItem(e),
+				});
+				break;
+			default:
+				break;
+		}
+	};
 
 	return (
 		<CartWrapper>
@@ -29,20 +88,60 @@ const Cart = () => {
 				<Steps.Item title="Finish" />
 			</Steps>
 			<CartContainer>
+				{/* belka na gorze */}
 				<CartList>
-					<CartItem>
-						<CartColumn>
-							<CartImage src={Image} />
-						</CartColumn>
-						<CartColumn width="50%">Cheese Burger</CartColumn>
-						<CartColumn width="16.6%">$5.00</CartColumn>
-						<CartColumn width="20%">- 1 +</CartColumn>
-						<CartColumn>$5.00</CartColumn>
-						<CartColumn>
-							<CartDelete />
-						</CartColumn>
+					<CartItem backgroundColor="#93949417" fontW="bold">
+						<CartColumn width="25rem"></CartColumn>
+						<CartColumn width="50%">Name</CartColumn>
+						<CartColumn width="14.6%">Price</CartColumn>
+						<CartColumn width="18.5%">Quantity</CartColumn>
+						<CartColumn width="6%">Total</CartColumn>
+						<CartColumn>Delete</CartColumn>
 					</CartItem>
+
+					{cart.map((el) => (
+						<CartItem key={el.id}>
+							<CartColumn>
+								<CartImage src={el.img} />
+							</CartColumn>
+							<CartColumn width="50%">{el.name}</CartColumn>
+							<CartColumn width="16.6%">
+								${el.price.toFixed(2)}
+							</CartColumn>
+							<CartColumn width="20%">
+								<CartQuantity
+									data-id={el.id}
+									onClick={(e) => onChangeQuantity(e)}
+								>
+									-
+								</CartQuantity>
+								{el.quantity}{' '}
+								<CartQuantity
+									data-id={el.id}
+									onClick={(e) => onChangeQuantity(e)}
+								>
+									+
+								</CartQuantity>
+							</CartColumn>
+							<CartColumn>
+								${(el.price * el.quantity).toFixed(2)}
+							</CartColumn>
+							<CartColumn>
+								<CartDelete
+									onClick={(e) => onDeleteItem(e)}
+									data-id={el.id}
+								/>
+							</CartColumn>
+						</CartItem>
+					))}
 				</CartList>
+				<CartCouponForm>
+					<CartCouponInput placeholder="Coupon code" />
+					<CartCouponButton disabled={!cart.length >= 1}>
+						Apply coupon
+					</CartCouponButton>
+				</CartCouponForm>
+				<CartTotal>Total price: ${totalPrice.toFixed(2)}</CartTotal>
 			</CartContainer>
 		</CartWrapper>
 	);
