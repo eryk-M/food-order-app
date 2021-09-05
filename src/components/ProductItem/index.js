@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 //for testing
 import { data } from '../Products/dummyData';
@@ -41,12 +41,15 @@ const ProductItem = ({ props }) => {
 
 	const addToCart = (e) => {
 		e.preventDefault();
-		console.log(quantity);
 		dispatch({
 			type: 'ADD_TO_CART',
 			payload: currentItem,
 		});
 	};
+
+	useEffect(() => {
+		localStorage.setItem('cart', JSON.stringify(cart));
+	}, [cart]);
 
 	//testing instead of fetching
 	const findItem = () => {
@@ -57,7 +60,6 @@ const ProductItem = ({ props }) => {
 	};
 
 	if (!currentItem) findItem();
-	//
 
 	return (
 		<>

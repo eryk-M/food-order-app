@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-
+import { Link } from 'react-router-dom';
 import { ImBin } from 'react-icons/im';
 
 export const CartWrapper = styled.div`
@@ -15,6 +15,10 @@ export const CartContainer = styled.div`
 `;
 
 export const CartList = styled.ul``;
+
+export const CartLink = styled(Link)`
+	color: #000;
+`;
 
 export const CartItem = styled.li`
 	background-color: ${(props) => props.backgroundColor};

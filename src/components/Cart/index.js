@@ -17,12 +17,10 @@ import {
 	CartCouponForm,
 	CartQuantity,
 	CartTotal,
+	CartLink,
 } from './CartElements';
 
 import { CartContext } from '../../contexts/CartContext';
-
-//testing
-import Image from '../../images/burger-chicken_cut.jpg';
 
 const Cart = () => {
 	const {
@@ -33,17 +31,17 @@ const Cart = () => {
 	const [step, setStep] = useState(0);
 	const [totalPrice, setTotalPrice] = useState(0);
 
-	const getTotalPrice = () => {
-		const totalCartPrice = cart.reduce(
-			(total, item) => total + item.price * item.quantity,
-			0
-		);
-		setTotalPrice(totalCartPrice);
-	};
-
 	useEffect(() => {
+		const getTotalPrice = () => {
+			const totalCartPrice = cart.reduce(
+				(total, item) => total + item.price * item.quantity,
+				0
+			);
+			setTotalPrice(totalCartPrice);
+		};
+		localStorage.setItem('cart', JSON.stringify(cart));
 		getTotalPrice();
-	});
+	}, [cart, dispatch]);
 
 	const findItem = (e) => {
 		const item = cart.find(
@@ -102,9 +100,15 @@ const Cart = () => {
 					{cart.map((el) => (
 						<CartItem key={el.id}>
 							<CartColumn>
-								<CartImage src={el.img} />
+								<CartLink to={`/product/${el.id}`}>
+									<CartImage src={el.img} />
+								</CartLink>
 							</CartColumn>
-							<CartColumn width="50%">{el.name}</CartColumn>
+							<CartColumn width="50%">
+								<CartLink to={`/product/${el.id}`}>
+									{el.name}
+								</CartLink>
+							</CartColumn>
 							<CartColumn width="16.6%">
 								${el.price.toFixed(2)}
 							</CartColumn>
@@ -136,7 +140,10 @@ const Cart = () => {
 					))}
 				</CartList>
 				<CartCouponForm>
-					<CartCouponInput placeholder="Coupon code" />
+					<CartCouponInput
+						disabled={!cart.length >= 1}
+						placeholder="Coupon code"
+					/>
 					<CartCouponButton disabled={!cart.length >= 1}>
 						Apply coupon
 					</CartCouponButton>

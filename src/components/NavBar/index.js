@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Logo from '../../images/logo.png';
 import {
 	Nav,
@@ -21,10 +21,22 @@ import { CartContext } from '../../contexts/CartContext';
 
 const NavBar = (props) => {
 	const { currentUser } = useAuth();
+	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
 
 	const {
 		state: { cart },
+		dispatch,
 	} = useContext(CartContext);
+
+	useEffect(() => {
+		if (localStorage.getItem('cart') && !isInitiallyFetched) {
+			dispatch({
+				type: 'SET_ITEMS',
+				payload: JSON.parse(localStorage.getItem('cart')),
+			});
+			setIsInitiallyFetched(true);
+		}
+	}, [isInitiallyFetched, dispatch]);
 
 	const stylesNav = {
 		position: 'static',
@@ -69,7 +81,6 @@ const NavBar = (props) => {
 			return <NavBurger onClick={toggle} />;
 		}
 	};
-	// console.log(props);
 	return (
 		<Nav style={pathname === '/' ? null : stylesNav}>
 			<NavWrapper>
