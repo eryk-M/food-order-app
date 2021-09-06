@@ -4,21 +4,18 @@ import { FaCartPlus } from 'react-icons/fa';
 import { GiConfirmed } from 'react-icons/gi';
 import { BsStar } from 'react-icons/bs';
 
-const fadeIn = keyframes`
+const fadeInRight = keyframes`
 from {
-    opacity: 0%;
+    right: -100%;
 }
 
 to {
-    opacity: 100%
+    right: 0;
 }
 `;
 
 export const ProductContainer = styled.section`
 	display: flex;
-	/* height: 45rem; */
-	/* width: 80rem; */
-	/* margin-top: 5rem !important; */
 	border-radius: 5px;
 	overflow: hidden;
 	max-width: 136rem;
@@ -33,7 +30,6 @@ export const ProductContainer = styled.section`
 
 export const ProductLeft = styled.div`
 	background-color: #e7272de5;
-	/* clip-path: polygon(0 0, 100% 0, 55% 100%, 0% 100%);  */
 	clip-path: polygon(14% 0, 100% 0, 85% 100%, 0% 100%);
 
 	width: 50%;
@@ -174,14 +170,17 @@ export const ProductAdded = styled.div`
 	position: absolute;
 	top: -5rem;
 	right: 0;
+
 	font-size: 1.6rem;
-	color: var(--color-grey-dark);
-	background-color: #a9cf23;
+	color: #fff;
+	background-color: var(--color-green);
 	padding: 1rem;
 	display: flex;
 	align-items: center;
 	opacity: 100%;
-	animation: ${fadeIn} 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+	font-weight: 100;
+	border-radius: 0.5rem;
+	animation: ${fadeInRight} 0.71s cubic-bezier(0.075, 0.82, 0.165, 1);
 `;
 export const ProductAddedIcon = styled(GiConfirmed)`
 	margin-right: 0.5rem;

@@ -104,6 +104,9 @@ const ProductItem = ({ props }) => {
 									<ProductAddedIcon /> Product added to cart
 								</ProductAdded>
 							)}
+							{/* <ProductAdded>
+								<ProductAddedIcon /> Product added to cart
+							</ProductAdded> */}
 							<ProductQuantityLabel htmlFor="quantity">
 								Quantity:
 							</ProductQuantityLabel>

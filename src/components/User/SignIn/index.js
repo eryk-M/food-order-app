@@ -31,12 +31,23 @@ const SignIn = () => {
 			setError('');
 			setLoading(true);
 			await login(emailRef.current.value, passwordRef.current.value);
+			setLoading(false);
 			history.push('/user');
 		} catch {
 			setError('Failed to sign in. Email is incorrect.');
 		}
+	}
 
-		setLoading(false);
+	async function handleLoginDemo() {
+		try {
+			setError('');
+			setLoading(true);
+			await login('test@test.pl', 'test123');
+			setLoading(false);
+			history.push('/user');
+		} catch {
+			setError('Failed to sign in. Email is incorrect.');
+		}
 	}
 
 	return (
@@ -69,6 +80,9 @@ const SignIn = () => {
 						{/* <Loader /> */}
 					</FormButton>
 				</Form>
+				<FormButton disabled={loading} onClick={handleLoginDemo}>
+					{loading ? <Loader /> : 'DEMO'}
+				</FormButton>
 				<FormAlternative>
 					<FormLink to="/forgot-password">Forgot Password?</FormLink>
 				</FormAlternative>

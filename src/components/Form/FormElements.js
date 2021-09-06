@@ -70,6 +70,7 @@ export const FormButton = styled.button`
 	color: var(--color-grey-light);
 	margin: auto;
 	vertical-align: middle;
+	cursor: pointer;
 	/* position: relative; */
 	&:disabled {
 		opacity: 0.5;

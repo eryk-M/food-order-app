@@ -59,7 +59,12 @@ function App() {
 
 							<PrivateRoute path="/user" exact component={User} />
 							<PrivateRoute
-								path="/user/update-profile"
+								path="/user/change-password"
+								exact
+								component={User}
+							/>
+							<PrivateRoute
+								path="/user/orders"
 								exact
 								component={User}
 							/>

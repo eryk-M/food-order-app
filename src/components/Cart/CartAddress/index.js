@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useAuth } from '../../../contexts/AuthContext';
+
 import {
 	Form,
 	FormElement,
@@ -15,7 +17,9 @@ import {
 } from './CartAddressElements';
 
 import Button from '../../Button/index';
+
 const CartAddress = ({ onChangeStep }) => {
+	const { currentUser } = useAuth();
 	return (
 		<div>
 			<CartAddressHeading>
@@ -46,7 +50,14 @@ const CartAddress = ({ onChangeStep }) => {
 
 					<FormElement>
 						<FormLabel htmlFor="zipcode">Zip/Postal Code *</FormLabel>
-						<FormInput name="zipcode" type="number" required />
+						<FormInput
+							name="zipcode"
+							type="text"
+							required
+							inputmode="numeric"
+							pattern="[0-9]{2}[-][0-9]{3}"
+							placeholder="e.g. 10-100 or 10100"
+						/>
 					</FormElement>
 					<CartAddressSteps>
 						<Button type="text" onClick={() => onChangeStep('back')}>
