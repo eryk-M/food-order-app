@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 
 const ButtonMain = styled.button`
 	width: ${(props) => props.width};
-	margin-left: ${(props) => props.marginLeft};
+	margin-left: ${(props) => props.marginleft};
 	padding: 1rem;
 	text-transform: uppercase;
 	letter-spacing: 1px;

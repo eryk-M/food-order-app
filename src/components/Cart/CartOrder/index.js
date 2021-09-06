@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 
 import {
 	CartList,
@@ -12,6 +12,7 @@ import {
 	CartTotal,
 	CartLink,
 	CartTotalContent,
+	CartNoItems,
 } from './CartOrderElements';
 
 import Button from '../../Button/index';
@@ -61,15 +62,27 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 	return (
 		<>
 			<CartList>
-				<CartItem backgroundColor="#93949417" fontW="bold">
-					<CartColumn width="25rem"></CartColumn>
-					<CartColumn width="50%">Name</CartColumn>
-					<CartColumn width="14.6%">Price</CartColumn>
-					<CartColumn width="18.5%">Quantity</CartColumn>
-					<CartColumn width="6%">Total</CartColumn>
-					<CartColumn>Delete</CartColumn>
-				</CartItem>
+				{cart.length >= 1 && (
+					<CartItem backgroundColor="#93949417" fontW="bold">
+						<CartColumn
+							width="25rem"
+							mobileWidth="20rem"
+						></CartColumn>
+						<CartColumn width="50%" mobileWidth="10rem">
+							Name
+						</CartColumn>
+						<CartColumn width="14.6%">Price</CartColumn>
+						<CartColumn width="18.5%">Quantity</CartColumn>
+						<CartColumn width="6%" display="none">
+							Total
+						</CartColumn>
+						<CartColumn>Delete</CartColumn>
+					</CartItem>
+				)}
 
+				{cart.length === 0 && (
+					<CartNoItems>Your cart is empty.</CartNoItems>
+				)}
 				{cart.map((el) => (
 					<CartItem key={el.id}>
 						<CartColumn>
@@ -77,13 +90,18 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 								<CartImage src={el.img} />
 							</CartLink>
 						</CartColumn>
-						<CartColumn width="50%">
+						<CartColumn width="50%" mobileWidth="10rem">
 							<CartLink to={`/product/${el.id}`}>{el.name}</CartLink>
 						</CartColumn>
 						<CartColumn width="16.6%">
 							${el.price.toFixed(2)}
 						</CartColumn>
-						<CartColumn width="20%">
+						<CartColumn
+							width="20%"
+							display="flex"
+							flexDirection="column"
+							alignItems="center"
+						>
 							<CartQuantity
 								data-id={el.id}
 								onClick={(e) => onChangeQuantity(e)}
@@ -98,7 +116,7 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 								+
 							</CartQuantity>
 						</CartColumn>
-						<CartColumn>
+						<CartColumn display="none">
 							${(el.price * el.quantity).toFixed(2)}
 						</CartColumn>
 						<CartColumn>
@@ -115,7 +133,7 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 					disabled={!cart.length >= 1}
 					placeholder="Coupon code"
 				/>
-				<Button disabled={!cart.length >= 1} marginLeft="2rem">
+				<Button disabled={!cart.length >= 1} marginleft="2rem">
 					Apply coupon
 				</Button>
 			</CartCouponForm>
@@ -128,7 +146,7 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 					width="100%"
 					onClick={() => onChangeStep()}
 				>
-					Proceed to address
+					Proceed to address &#10141;
 				</Button>
 			</CartTotal>
 		</>

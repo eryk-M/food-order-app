@@ -19,6 +19,9 @@ export const GlobalStyle = createGlobalStyle`
 
 html {
     font-size: 62.5%;
+    @media only screen and (max-width: 840px) {
+		font-size: 50%;
+	}
 }
 
 h1, h2, h3 {

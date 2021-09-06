@@ -6,6 +6,9 @@ export const CartWrapper = styled.div`
 	max-width: 136rem;
 	margin: 0 auto;
 	padding: 2rem;
+	@media only screen and (max-width: 840px) {
+		padding: 0.5rem;
+	}
 `;
 
 export const CartContainer = styled.div`
@@ -32,6 +35,16 @@ export const CartItem = styled.li`
 export const CartColumn = styled.div`
 	width: ${(props) => props.width};
 	padding: 2rem;
+
+	@media only screen and (max-width: 840px) {
+		width: ${(props) => props.mobileWidth};
+	}
+
+	@media only screen and (max-width: 630px) {
+		display: ${(props) => props.display};
+		flex-direction: ${(props) => props.flexDirection};
+		align-items: ${(props) => props.alignItems};
+	}
 `;
 
 export const CartImage = styled.img`
@@ -78,4 +91,13 @@ export const CartCouponInput = styled.input`
 	&::placeholder {
 		opacity: 0.5;
 	}
+`;
+
+export const CartNoItems = styled.p`
+	text-align: center;
+	margin: 2rem 0;
+	font-size: 2rem;
+	opacity: 0.7;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	padding-top: 3rem;
 `;

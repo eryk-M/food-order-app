@@ -21,6 +21,8 @@ import {
 	ProductStarIcons,
 	ProductRating,
 	ProductPrice,
+	ProductAdded,
+	ProductAddedIcon,
 } from './ProductItemElements';
 
 import { CartContext } from '../../contexts/CartContext';
@@ -33,19 +35,25 @@ const ProductItem = ({ props }) => {
 
 	const [currentItem, setCurrentItem] = useState();
 	const [quantity, setQuantity] = useState(1);
+	const [isAdded, setIsAdded] = useState(false);
 
 	const onInputChange = (e) => {
 		currentItem.quantity = Number(e.target.value);
 		setQuantity(Number(e.target.value));
 	};
 
-	const addToCart = (e) => {
+	async function addToCart(e) {
 		e.preventDefault();
-		dispatch({
+		await dispatch({
 			type: 'ADD_TO_CART',
 			payload: currentItem,
 		});
-	};
+		setIsAdded(true);
+
+		setTimeout(() => {
+			setIsAdded(false);
+		}, 4000);
+	}
 
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
@@ -89,7 +97,13 @@ const ProductItem = ({ props }) => {
 								</ProductIngredientsItem>
 							))}
 						</ProductIngredients>
-						<ProductForm>
+
+						<ProductForm onSubmit={(e) => addToCart(e)}>
+							{isAdded && (
+								<ProductAdded>
+									<ProductAddedIcon /> Product added to cart
+								</ProductAdded>
+							)}
 							<ProductQuantityLabel htmlFor="quantity">
 								Quantity:
 							</ProductQuantityLabel>
@@ -99,8 +113,11 @@ const ProductItem = ({ props }) => {
 								value={quantity}
 								onChange={(e) => onInputChange(e)}
 								min="1"
+								max="10"
+								maxLength="2"
 							/>
-							<ProductButton onClick={(e) => addToCart(e)}>
+
+							<ProductButton>
 								<ProductCartIcon />
 								{currentItem.button}
 							</ProductButton>

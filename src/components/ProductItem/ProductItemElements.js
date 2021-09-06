@@ -1,8 +1,19 @@
 import styled from 'styled-components/macro';
-
+import { keyframes } from 'styled-components';
 import { FaCartPlus } from 'react-icons/fa';
-
+import { GiConfirmed } from 'react-icons/gi';
 import { BsStar } from 'react-icons/bs';
+
+const fadeIn = keyframes`
+from {
+    opacity: 0%;
+}
+
+to {
+    opacity: 100%
+}
+`;
+
 export const ProductContainer = styled.section`
 	display: flex;
 	/* height: 45rem; */
@@ -103,6 +114,7 @@ export const ProductForm = styled.form`
 	justify-content: center;
 	align-items: center;
 	margin-left: auto;
+	position: relative;
 `;
 
 export const ProductQuantityLabel = styled.label`
@@ -156,4 +168,22 @@ export const ProductBackground = styled.div`
 	height: 10rem;
 	background-image: url(${(props) => props.background});
 	width: 100%;
+`;
+
+export const ProductAdded = styled.div`
+	position: absolute;
+	top: -5rem;
+	right: 0;
+	font-size: 1.6rem;
+	color: var(--color-grey-dark);
+	background-color: #a9cf23;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	opacity: 100%;
+	animation: ${fadeIn} 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+`;
+export const ProductAddedIcon = styled(GiConfirmed)`
+	margin-right: 0.5rem;
+	font-size: 2rem;
 `;

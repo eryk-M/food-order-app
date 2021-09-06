@@ -36,20 +36,27 @@ export const Form = styled.form``;
 export const FormElement = styled.div``;
 
 export const FormLabel = styled.label`
-	margin-bottom: 1rem;
-	font-weight: bold;
 	font-size: 1.6rem;
 `;
 
 export const FormInput = styled.input`
 	font-size: 1.6rem;
 	margin-bottom: 1.5rem;
+	margin-top: 1rem;
 	padding: 1rem;
 	width: 100%;
 	display: block;
+	border-radius: 0.5rem;
+	border: 1px solid rgba(0, 0, 0, 0.8);
 
+	-moz-appearance: textfield;
 	&::placeholder {
 		opacity: 0.5;
+	}
+	&::-webkit-outer-spin-button,
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
 	}
 `;
 
