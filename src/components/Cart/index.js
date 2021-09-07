@@ -49,9 +49,9 @@ const Cart = () => {
 	return (
 		<CartWrapper>
 			<Steps current={step}>
-				<Steps.Item title="Order details" />
+				<Steps.Item title="Details" />
 				<Steps.Item title="Address" />
-				<Steps.Item title="Checkout summary" />
+				<Steps.Item title="Summary" />
 				<Steps.Item title="Finish" />
 			</Steps>
 			<CartContainer>

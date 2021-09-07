@@ -35,13 +35,28 @@ export const NavList = styled.ul`
 
 export const NavItem = styled.li``;
 
+export const NavCartSpan = styled.span`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	background-color: var(--color-primary);
+	height: 2.4rem;
+	width: 2.4rem;
+	font-size: 2.4rem;
+	border-radius: 50%;
+	top: ${(props) => props.top ?? '-1.8rem'};
+	right: ${(props) => props.right ?? '-1.8rem'};
+	color: var(--color-grey-light);
+`;
+
 export const NavLink = styled(Link)`
 	position: relative;
 	color: var(--color-grey-light);
 	margin-left: 5rem;
 	transition: color 0.3s;
 	&:hover {
-		color: var(--color-secondary);
+		color: var(--color-primary);
 	}
 `;
 
@@ -54,22 +69,8 @@ export const NavUser = styled(FiUser)`
 	color: var(--color-grey-light);
 	transition: color 0.3s;
 	&:hover {
-		color: var(--color-secondary);
+		color: var(--color-primary);
 	}
-`;
-
-export const NavCartSpan = styled.span`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	background-color: var(--color-secondary);
-	height: 2.4rem;
-	width: 2.4rem;
-	font-size: 2.4rem;
-	border-radius: 50%;
-	top: ${(props) => props.top ?? '-1.8rem'};
-	right: ${(props) => props.right ?? '-1.8rem'};
 `;
 
 export const NavBurger = styled(FaBars)`

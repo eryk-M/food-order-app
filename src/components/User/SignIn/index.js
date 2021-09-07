@@ -34,7 +34,8 @@ const SignIn = () => {
 			setLoading(false);
 			history.push('/user');
 		} catch {
-			setError('Failed to sign in. Email is incorrect.');
+			setLoading(false);
+			setError('Failed to sign in. Email or password is incorrect.');
 		}
 	}
 
@@ -46,7 +47,8 @@ const SignIn = () => {
 			setLoading(false);
 			history.push('/user');
 		} catch {
-			setError('Failed to sign in. Email is incorrect.');
+			setLoading(false);
+			setError('Failed to sign in. Email or password is incorrect.');
 		}
 	}
 
@@ -62,6 +64,7 @@ const SignIn = () => {
 							type="email"
 							ref={emailRef}
 							placeholder="example@example.com"
+							disabled={loading}
 							required
 						/>
 					</FormElement>
@@ -71,18 +74,21 @@ const SignIn = () => {
 							type="password"
 							ref={passwordRef}
 							placeholder="Enter your password"
+							disabled={loading}
 							required
 						/>
 					</FormElement>
 
-					<FormButton disabled={loading} type="submit">
-						{loading ? <Loader /> : 'Log In'}
-						{/* <Loader /> */}
-					</FormButton>
+					<FormButton loading={loading} text="Log In" />
 				</Form>
-				<FormButton disabled={loading} onClick={handleLoginDemo}>
-					{loading ? <Loader /> : 'DEMO'}
-				</FormButton>
+
+				<FormButton
+					secondary
+					loading={loading}
+					text="DEMO"
+					type="text"
+					onClick={handleLoginDemo}
+				/>
 				<FormAlternative>
 					<FormLink to="/forgot-password">Forgot Password?</FormLink>
 				</FormAlternative>

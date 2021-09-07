@@ -24,7 +24,7 @@ export const ProductsOption = styled.p`
 		margin-left: 5rem;
 	}
 	&.active {
-		border-bottom: 3px solid var(--color-secondary);
+		border-bottom: 3px solid var(--color-primary);
 	}
 `;
 export const ProductsWrapper = styled.div`
@@ -80,7 +80,7 @@ export const ProductsPrice = styled.p`
 	font-size: 2.5rem;
 	line-height: 1.4;
 	margin-top: 2rem;
-	color: var(--color-secondary);
+	color: var(--color-primary);
 	padding: 1rem;
 `;
 

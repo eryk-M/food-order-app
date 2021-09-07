@@ -1,8 +1,19 @@
 import React, { useRef, useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 
-//TESTING
-import { Form, Button, Card, Alert } from 'react-bootstrap';
+import {
+	Form,
+	FormElement,
+	FormLabel,
+	FormInput,
+	FormButton,
+	FormGroup,
+	FormSpan,
+} from '../../Form/FormElements';
+
+import { Alert } from '../../Alert';
+
+import { UserAccountHeading } from './UserAccountElements';
 
 const UserAccount = () => {
 	const nameRef = useRef();
@@ -17,107 +28,111 @@ const UserAccount = () => {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
+	const [showSuccess, setShowSuccess] = useState(false);
+	const [spanEmail, setSpanEmail] = useState('');
+	const [emailError, setEmailError] = useState(false);
+
 	async function handleSubmit(e) {
 		e.preventDefault();
 
 		if (emailRef.current.value === currentUser.email) {
-			return setError('Email has to be different than actual');
+			setEmailError(true);
+			setSpanEmail('Email is the same as before');
+			return;
 		}
 
 		try {
-			setLoading(true);
+			setEmailError('');
+			setSpanEmail(false);
 			setError('');
+			setLoading(true);
 			await updateEmail(emailRef.current.value);
-			setLoading(false);
-			alert('email updated');
+			setShowSuccess(true);
+			setTimeout(() => {
+				setLoading(false);
+				setShowSuccess(false);
+			}, 4000);
 		} catch {
+			setLoading(false);
 			setError('Failed to update email.');
 		}
 	}
 
 	return (
 		<>
-			<Card>
-				<Card.Body>
-					<h2 className="text-center mb-4">Update Profile</h2>
-					{error && <Alert variant="danger">{error}</Alert>}
-					<Form onSubmit={handleSubmit}>
-						<Form.Group id="email">
-							<Form.Label>Email</Form.Label>
-							<Form.Control
-								type="email"
-								ref={emailRef}
-								required
-								defaultValue={currentUser.email}
-							/>
-						</Form.Group>
-						{/* test */}
-						<Form.Group id="name">
-							<Form.Label>Name</Form.Label>
-							<Form.Control
-								type="text"
-								ref={nameRef}
-								// required
-								// defaultValue={currentUser.email}
-							/>
-						</Form.Group>
-						<Form.Group id="username">
-							<Form.Label>Username</Form.Label>
-							<Form.Control
-								type="text"
-								ref={usernameRef}
-								// required
-								// defaultValue={currentUser.email}
-							/>
-						</Form.Group>
-						<Form.Group id="address">
-							<Form.Label>Address</Form.Label>
-							<Form.Control
-								type="text"
-								ref={addressRef}
-								// required
-								// defaultValue={currentUser.email}
-							/>
-						</Form.Group>
-						<Form.Group id="phone">
-							<Form.Label>Phone</Form.Label>
-							<Form.Control
-								type="number"
-								ref={phoneRef}
-								// required
-								// defaultValue={currentUser.email}
-							/>
-						</Form.Group>
-						<Form.Group id="zipcode">
-							<Form.Label>Zip/Postal Code</Form.Label>
-							<Form.Control
-								type="number"
-								ref={zipCodeRef}
-								// required
-								// defaultValue={currentUser.email}
-							/>
-						</Form.Group>
-						<Form.Group id="city">
-							<Form.Label>City</Form.Label>
-							<Form.Control
-								type="text"
-								ref={cityRef}
-								// required
-								// defaultValue={currentUser.email}
-							/>
-						</Form.Group>
-						{/* test */}
-
-						<Button
-							disabled={loading}
-							className="w-100"
-							type="submit"
-						>
-							Update
-						</Button>
-					</Form>
-				</Card.Body>
-			</Card>
+			<UserAccountHeading>General Info</UserAccountHeading>
+			{/* {error && <Alert variant="danger">{error}</Alert>} */}
+			<Form onSubmit={handleSubmit}>
+				{showSuccess && <Alert success>Profile updated</Alert>}
+				{error && <Alert error>{error}</Alert>}
+				<FormGroup flex>
+					<FormElement id="email">
+						<FormLabel>Email</FormLabel>
+						<FormInput
+							type="email"
+							ref={emailRef}
+							required
+							defaultValue={currentUser.email}
+							error={emailError}
+						/>
+						{emailError && <FormSpan>{spanEmail}</FormSpan>}
+					</FormElement>
+					<FormElement id="username" marginleft="2rem">
+						<FormLabel>Username</FormLabel>
+						<FormInput
+							type="text"
+							ref={usernameRef}
+							// required
+							// defaultValue={currentUser.email}
+						/>
+					</FormElement>
+				</FormGroup>
+				{/* test */}
+				<FormElement id="name">
+					<FormLabel>Name</FormLabel>
+					<FormInput
+						type="text"
+						ref={nameRef}
+						// defaultValue={currentUser.email}
+					/>
+				</FormElement>
+				<FormElement id="address">
+					<FormLabel>Address</FormLabel>
+					<FormInput
+						type="text"
+						ref={addressRef}
+						// defaultValue={currentUser.email}
+					/>
+				</FormElement>
+				<FormElement id="phone">
+					<FormLabel>Phone</FormLabel>
+					<FormInput
+						type="number"
+						ref={phoneRef}
+						// defaultValue={currentUser.email}
+					/>
+				</FormElement>
+				<FormGroup flex>
+					<FormElement id="city">
+						<FormLabel>City</FormLabel>
+						<FormInput
+							type="text"
+							ref={cityRef}
+							// defaultValue={currentUser.email}
+						/>
+					</FormElement>
+					<FormElement id="zipcode" marginleft="2rem">
+						<FormLabel>Zip/Postal Code</FormLabel>
+						<FormInput
+							type="number"
+							ref={zipCodeRef}
+							// defaultValue={currentUser.email}
+						/>
+					</FormElement>
+				</FormGroup>
+				{/* test */}
+				<FormButton loading={loading} text="Update" />
+			</Form>
 		</>
 	);
 };

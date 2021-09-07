@@ -7,9 +7,10 @@ export const GlobalStyle = createGlobalStyle`
     --color-white: #fff;
     --color-grey-light:  rgb(232, 230, 227);
     --color-grey-dark: #252525;
-    --color-secondary: #E7272D;
-    --color-tertiary: #FFCC00;
+    --color-primary: #E7272D;
+    --color-secondary: #FFCC00;
     --color-green: #11c454;
+    --color-red: #f81212;
 }
 
 * {
@@ -43,5 +44,9 @@ ul {
     list-style: none;
 }
 
-
+.active-user-nav {
+    font-weight: 700;
+    background-color: var(--color-secondary)
+ 
+}
 `;

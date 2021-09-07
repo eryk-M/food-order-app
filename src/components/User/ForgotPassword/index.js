@@ -55,9 +55,7 @@ const ForgotPassword = () => {
 							required
 						/>
 					</FormElement>
-					<FormButton disabled={loading} type="submit">
-						Reset Password
-					</FormButton>
+					<FormButton loading={loading} text="Reset Password" />
 				</Form>
 				<FormAlternative>
 					<FormLink to="/login">Login again</FormLink>

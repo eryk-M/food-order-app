@@ -21,9 +21,11 @@ import {
 	ProductStarIcons,
 	ProductRating,
 	ProductPrice,
-	ProductAdded,
-	ProductAddedIcon,
+	// ProductAdded,
+	// ProductAddedIcon,
 } from './ProductItemElements';
+
+import { Alert } from '../Alert/index';
 
 import { CartContext } from '../../contexts/CartContext';
 
@@ -100,9 +102,7 @@ const ProductItem = ({ props }) => {
 
 						<ProductForm onSubmit={(e) => addToCart(e)}>
 							{isAdded && (
-								<ProductAdded>
-									<ProductAddedIcon /> Product added to cart
-								</ProductAdded>
+								<Alert success>Product added to cart</Alert>
 							)}
 							{/* <ProductAdded>
 								<ProductAddedIcon /> Product added to cart
@@ -118,9 +118,10 @@ const ProductItem = ({ props }) => {
 								min="1"
 								max="10"
 								maxLength="2"
+								disabled={isAdded}
 							/>
 
-							<ProductButton>
+							<ProductButton disabled={isAdded}>
 								<ProductCartIcon />
 								{currentItem.button}
 							</ProductButton>

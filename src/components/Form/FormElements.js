@@ -2,6 +2,8 @@ import styled from 'styled-components/macro';
 
 import { Link } from 'react-router-dom';
 
+import Loader from '../Loader';
+
 export const FormContainer = styled.div`
 	min-width: 40%;
 
@@ -26,15 +28,20 @@ export const FormAlert = styled.div`
 export const FormHeading = styled.h2`
 	text-align: center;
 	margin-bottom: 5rem;
-	/* font-family: 'Rubik', sans-serif; */
 	text-transform: uppercase;
 	font-weight: bold;
 `;
 
-export const Form = styled.form``;
+export const Form = styled.form`
+	position: relative;
+`;
 
-export const FormElement = styled.div``;
-
+export const FormElement = styled.div`
+	margin-left: ${(props) => props.marginleft};
+`;
+export const FormGroup = styled.div`
+	display: ${(props) => (props.flex ? 'flex' : '')};
+`;
 export const FormLabel = styled.label`
 	font-size: 1.6rem;
 `;
@@ -47,7 +54,12 @@ export const FormInput = styled.input`
 	width: 100%;
 	display: block;
 	border-radius: 0.5rem;
-	border: 1px solid rgba(0, 0, 0, 0.8);
+	border: ${(props) => {
+		if (props.error) {
+			return '1px solid var(--color-red)';
+		}
+		return '1px solid rgba(0, 0, 0, 0.5);';
+	}};
 
 	-moz-appearance: textfield;
 	&::placeholder {
@@ -60,22 +72,44 @@ export const FormInput = styled.input`
 	}
 `;
 
-export const FormButton = styled.button`
+export const FormBtn = styled.button`
 	border: none;
 	font-size: 1.8rem;
 	width: 100%;
-	margin-top: 1.5rem;
-	padding: 1rem;
-	background-color: var(--color-secondary);
-	color: var(--color-grey-light);
-	margin: auto;
+	height: 4.5rem;
+	background-color: ${(props) =>
+		props.secondary
+			? 'var(--color-secondary)'
+			: 'var(--color-primary)'};
+	color: ${(props) =>
+		props.secondary
+			? 'var(--color-grey-dark)'
+			: 'var(--color-grey-light)'};
+	/* margin: auto; */
 	vertical-align: middle;
 	cursor: pointer;
+	margin-top: 1.5rem;
 	/* position: relative; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	&:disabled {
 		opacity: 0.5;
+		cursor: default;
 	}
 `;
+
+export const FormButton = (props) => {
+	return (
+		<FormBtn
+			{...props}
+			disabled={props.loading}
+			type={props.type ?? 'submit'}
+		>
+			{props.loading === true ? <Loader /> : props.text}
+		</FormBtn>
+	);
+};
 
 export const FormLink = styled(Link)``;
 
@@ -83,4 +117,11 @@ export const FormAlternative = styled.div`
 	margin-top: 2rem;
 	font-size: 1.6rem;
 	text-align: right;
+`;
+
+export const FormSpan = styled.span`
+	display: block;
+	font-size: 1.4rem;
+	color: var(--color-red);
+	margin-bottom: 1rem;
 `;

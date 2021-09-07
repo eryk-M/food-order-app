@@ -5,8 +5,13 @@ import {
 	UserNavList,
 	UserNavItem,
 	UserNavLink,
-	UserLogout,
+	UserNavIconPassword,
+	UserNavIconBriefcase,
+	UserNavIconUser,
+	UserNavIconLogout,
 } from './UserNavElements';
+
+import Button from '../../Button';
 
 import { useHistory } from 'react-router-dom';
 
@@ -32,18 +37,38 @@ const UserNav = () => {
 		<UserSideNav>
 			<UserNavList>
 				<UserNavItem>
-					<UserNavLink to="/user">Account</UserNavLink>
+					<UserNavLink
+						to="/user"
+						exact
+						activeClassName="active-user-nav"
+					>
+						<UserNavIconUser />
+						Account
+					</UserNavLink>
 				</UserNavItem>
 				<UserNavItem>
-					<UserNavLink to="/user/change-password">
+					<UserNavLink
+						to="/user/change-password"
+						activeClassName="active-user-nav"
+					>
+						<UserNavIconPassword />
 						Password
 					</UserNavLink>
 				</UserNavItem>
 				<UserNavItem>
-					<UserNavLink to="/user/orders">My orders</UserNavLink>
+					<UserNavLink
+						to="/user/orders"
+						activeClassName="active-user-nav"
+					>
+						<UserNavIconBriefcase />
+						My orders
+					</UserNavLink>
 				</UserNavItem>
 			</UserNavList>
-			<UserLogout onClick={handleLogout}>Log Out</UserLogout>
+			<Button onClick={handleLogout} marginbottom="5rem">
+				<UserNavIconLogout />
+				Log Out
+			</Button>
 		</UserSideNav>
 	);
 };

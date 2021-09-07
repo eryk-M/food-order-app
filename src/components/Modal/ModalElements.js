@@ -79,7 +79,7 @@ export const ModalButton = styled.button`
 	padding: 1.2rem 1rem;
 	font-size: 1.2rem;
 	min-width: 13rem;
-	background-color: var(--color-secondary);
+	background-color: var(--color-primary);
 	text-align: center;
 	color: var(--color-grey-light);
 	line-height: 2.2rem;
@@ -90,7 +90,7 @@ export const ModalButton = styled.button`
 	align-items: center;
 
 	&:hover {
-		background-color: var(--color-tertiary);
+		background-color: var(--color-secondary);
 		cursor: pointer;
 		color: #000;
 	}

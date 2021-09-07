@@ -2,14 +2,39 @@ import styled from 'styled-components/macro';
 
 export const UserContainer = styled.div`
 	min-height: 50rem;
-	max-width: 120rem;
 	box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.1);
-	margin: 8rem auto;
+	margin: 3rem auto;
 	background-color: white;
 	display: flex;
-	padding: 3rem;
+
+	@media screen and (max-width: 570px) {
+		flex-direction: column;
+	}
 `;
 
 export const UserContent = styled.div`
-	margin-left: 2rem;
+	margin: 5rem;
+	@media screen and (max-width: 570px) {
+		width: 60%;
+		margin: 2rem auto;
+	}
+`;
+
+export const UserHeading = styled.h1`
+	padding-left: 1rem;
+	font-family: 'Rubik', sans-serif;
+	text-transform: capitalize;
+	font-size: 3rem;
+`;
+
+export const UserWrapper = styled.div`
+	max-width: 120rem;
+	margin: 2rem auto;
+`;
+
+export const UserDesc = styled.p`
+	color: var(--color-grey-dark);
+	margin-top: 1rem;
+	font-size: 1.6rem;
+	padding-left: 1rem;
 `;

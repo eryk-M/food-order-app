@@ -8,23 +8,26 @@ const ButtonMain = styled.button`
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-size: 1.4rem;
-	background-color: var(--color-secondary);
+	background-color: var(--color-primary);
 	color: var(--color-grey-light);
 	border: none;
 	cursor: pointer;
 	transition: all 0.2s;
-
+	margin-bottom: ${(props) => props.marginbottom};
 	&:hover {
-		background-color: var(--color-tertiary);
+		background-color: var(--color-secondary);
 		color: var(--color-grey-dark);
 	}
 	&:disabled {
 		opacity: 0.5;
 		cursor: default;
 		&:hover {
-			background-color: var(--color-secondary);
+			background-color: var(--color-primary);
 			color: var(--color-grey-light);
 		}
+	}
+	@media screen and (max-width: 570px) {
+		margin-bottom: 0;
 	}
 `;
 

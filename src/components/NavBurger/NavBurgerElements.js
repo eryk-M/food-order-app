@@ -56,3 +56,12 @@ export const NavBurgerClose = styled.div`
 	/* text-align: center; */
 	cursor: pointer;
 `;
+
+export const NavBurgerOverlay = styled.div`
+	display: ${(props) => props.display};
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 3;
+`;

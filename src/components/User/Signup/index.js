@@ -72,6 +72,7 @@ const Signup = () => {
 							placeholder="Your username"
 							required
 							maxLength="12"
+							disabled={loading}
 						/>
 					</FormElement>
 					<FormElement id="email">
@@ -81,6 +82,7 @@ const Signup = () => {
 							ref={emailRef}
 							placeholder="example@example.com"
 							required
+							disabled={loading}
 						/>
 					</FormElement>
 					<FormElement id="password">
@@ -90,6 +92,7 @@ const Signup = () => {
 							ref={passwordRef}
 							placeholder="Enter your password"
 							required
+							disabled={loading}
 						/>
 					</FormElement>
 					<FormElement id="password-confirm">
@@ -99,11 +102,10 @@ const Signup = () => {
 							ref={passwordConfirmRef}
 							placeholder="Confirm your password"
 							required
+							disabled={loading}
 						/>
 					</FormElement>
-					<FormButton disabled={loading} type="submit">
-						Sign Up
-					</FormButton>
+					<FormButton loading={loading} text="Sign Up" />
 				</Form>
 			</FormContainer>
 			<FormAlternative>

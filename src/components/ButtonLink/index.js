@@ -5,14 +5,14 @@ const ButtonAnchor = styled.a`
 	padding: 1.2rem 1rem;
 	font-size: 1.2rem;
 	min-width: 13rem;
-	background-color: var(--color-secondary);
+	background-color: var(--color-primary);
 	text-align: center;
 	color: var(--color-grey-light);
 	line-height: 2.2rem;
 	transition: all 0.2s;
 
 	&:hover {
-		background-color: var(--color-tertiary);
+		background-color: var(--color-secondary);
 		cursor: pointer;
 		color: #000;
 	}

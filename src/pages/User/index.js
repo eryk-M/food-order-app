@@ -6,29 +6,41 @@ import UserPassword from '../../components/User/UserPassword';
 import UserOrders from '../../components/User/UserOrders';
 import UserNav from '../../components/User/UserNav';
 
-import { UserContainer, UserContent } from './UserElements';
+import {
+	UserContainer,
+	UserContent,
+	UserHeading,
+	UserWrapper,
+	UserDesc,
+} from './UserElements';
 
 import { GlobalStyle } from '../../globalStyles';
 
 const User = () => {
 	return (
-		<UserContainer>
-			<GlobalStyle backgroundColor="#93949417" />
-			<UserNav />
-			<UserContent>
-				<PrivateRoute path="/user" exact component={UserAccount} />
-				<PrivateRoute
-					path="/user/change-password"
-					exact
-					component={UserPassword}
-				/>
-				<PrivateRoute
-					path="/user/orders"
-					exact
-					component={UserOrders}
-				/>
-			</UserContent>
-		</UserContainer>
+		<UserWrapper>
+			<UserHeading>Account settings</UserHeading>
+			<UserDesc>
+				Here you can edit your personal info and see latest orders
+			</UserDesc>
+			<UserContainer>
+				<GlobalStyle backgroundColor="#93949417" />
+				<UserNav />
+				<UserContent>
+					<PrivateRoute path="/user" exact component={UserAccount} />
+					<PrivateRoute
+						path="/user/change-password"
+						exact
+						component={UserPassword}
+					/>
+					<PrivateRoute
+						path="/user/orders"
+						exact
+						component={UserOrders}
+					/>
+				</UserContent>
+			</UserContainer>
+		</UserWrapper>
 	);
 };
 

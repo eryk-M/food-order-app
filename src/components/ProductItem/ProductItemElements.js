@@ -4,16 +4,6 @@ import { FaCartPlus } from 'react-icons/fa';
 import { GiConfirmed } from 'react-icons/gi';
 import { BsStar } from 'react-icons/bs';
 
-const fadeInRight = keyframes`
-from {
-    right: -100%;
-}
-
-to {
-    right: 0;
-}
-`;
-
 export const ProductContainer = styled.section`
 	display: flex;
 	border-radius: 5px;
@@ -83,7 +73,7 @@ export const ProductButton = styled.button`
 	padding: 1.2rem 1rem;
 	font-size: 1.2rem;
 	min-width: 13rem;
-	background-color: var(--color-secondary);
+	background-color: var(--color-primary);
 	text-align: center;
 	color: var(--color-grey-light);
 	line-height: 2.2rem;
@@ -94,9 +84,19 @@ export const ProductButton = styled.button`
 	align-items: center;
 
 	&:hover {
-		background-color: var(--color-tertiary);
+		background-color: var(--color-secondary);
 		cursor: pointer;
 		color: #000;
+	}
+
+	&:disabled {
+		cursor: default;
+		opacity: 0.5;
+
+		&:hover {
+			background-color: var(--color-primary);
+			color: var(--color-grey-light);
+		}
 	}
 `;
 
@@ -156,7 +156,7 @@ export const ProductPrice = styled.p`
 	line-height: 1.4;
 	margin-top: 1rem;
 	text-align: center;
-	color: var(--color-secondary);
+	color: var(--color-primary);
 	/* padding: 1rem; */
 `;
 
@@ -166,23 +166,23 @@ export const ProductBackground = styled.div`
 	width: 100%;
 `;
 
-export const ProductAdded = styled.div`
-	position: absolute;
-	top: -5rem;
-	right: 0;
+// export const ProductAdded = styled.div`
+// 	position: absolute;
+// 	top: -5rem;
+// 	right: 0;
 
-	font-size: 1.6rem;
-	color: #fff;
-	background-color: var(--color-green);
-	padding: 1rem;
-	display: flex;
-	align-items: center;
-	opacity: 100%;
-	font-weight: 100;
-	border-radius: 0.5rem;
-	animation: ${fadeInRight} 0.71s cubic-bezier(0.075, 0.82, 0.165, 1);
-`;
-export const ProductAddedIcon = styled(GiConfirmed)`
-	margin-right: 0.5rem;
-	font-size: 2rem;
-`;
+// 	font-size: 1.6rem;
+// 	color: #fff;
+// 	background-color: var(--color-green);
+// 	padding: 1rem;
+// 	display: flex;
+// 	align-items: center;
+// 	opacity: 100%;
+// 	font-weight: 100;
+// 	border-radius: 0.5rem;
+// 	animation: ${fadeInRight} 0.71s cubic-bezier(0.075, 0.82, 0.165, 1);
+// `;
+// export const ProductAddedIcon = styled(GiConfirmed)`
+// 	margin-right: 0.5rem;
+// 	font-size: 2rem;
+// `;
