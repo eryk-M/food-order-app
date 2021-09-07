@@ -1,14 +1,15 @@
 import React, { useState, createContext } from 'react';
 
 //TEST
-import { data } from '../components/Products/dummyData';
+import { dummyData } from '../components/Products/dummyData';
 
 export const ProductsContext = createContext();
 
 export const ProductsProvider = ({ children }) => {
-	data.forEach((el) => (el.quantity = 1));
+	dummyData.forEach((el) => (el.quantity = 1));
 
-	const [products, setProducts] = useState(data);
+	//...setProducts brakuje jbc
+	const [products] = useState(dummyData);
 
 	return (
 		<ProductsContext.Provider value={products}>

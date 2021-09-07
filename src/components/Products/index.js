@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 
 import {
 	ProductsContainer,
@@ -14,38 +14,35 @@ import {
 	ProductsLink,
 } from './ProductsElements';
 
-import { data } from '../Products/dummyData';
+import { useApi } from '../../contexts/APIContext';
 
-import { ProductsContext } from '../../contexts/ProductsContext';
+// import { dummyData } from '../Products/dummyData';
 
 const Products = () => {
-	// const [products, setProducts] = useState([]);
+	const [data, setData] = useState([]);
+	const [filteredItems, setFilteredItems] = useState([]);
 
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		try {
-	// 			const response = await fetch('./data.json', {
-	// 				method: 'GET',
-	// 				headers: {
-	// 					'Content-Type': 'application/json',
-	// 				},
-	// 			});
-	// 			const json = await response.json();
-	// 			console.log(json);
-	// 		} catch (e) {
-	// 			console.log('error', e);
-	// 		}
-	// 	};
-	// 	fetchData();
-	// }, []);
+	//API
+	const { setItems, getProducts } = useApi();
 
-	const products = useContext(ProductsContext);
-
-	const [filteredItems, setFilteredItems] = useState(products);
-	// const [isOpen, setIsOpen] = useState(false);
-	// const [currentItem, setCurrentItem] = useState();
+	// const onSetItems = () => {
+	// 	try {
+	// 		console.log('Wrzucam...');
+	// 		setItems(dummyData);
+	// 		// await getImageUrl(data);
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
 
 	const options = ['All', 'Burgers', 'Chicken'];
+
+	useLayoutEffect(() => {
+		getProducts().then((data) => {
+			setData(data);
+			setFilteredItems(data);
+		});
+	}, [getProducts]);
 
 	const filterProducts = (e, option) => {
 		const options = [
@@ -57,7 +54,7 @@ const Products = () => {
 		e.target.classList.add('active');
 
 		if (option === 'All') {
-			setFilteredItems(products);
+			setFilteredItems(data);
 		} else {
 			const filteredBurgers = data.filter(
 				(el) => el.category === option
@@ -66,15 +63,9 @@ const Products = () => {
 		}
 	};
 
-	// const findItem = (e) => {
-	// 	const item = data.find(
-	// 		(el) => Number(e.currentTarget.dataset.id) === el.id
-	// 	);
-	// 	setCurrentItem(item);
-	// };
-
 	return (
 		<>
+			{/* <button onClick={onSetItems}>ustaw itemy</button> */}
 			<ProductsContainer>
 				<ProductsHeading>Our menu</ProductsHeading>
 				<ProductsFilter>

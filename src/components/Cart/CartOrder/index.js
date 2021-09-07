@@ -25,33 +25,31 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 		dispatch,
 	} = useContext(CartContext);
 
-	const findItem = (e) => {
-		const item = cart.find(
-			(el) => el.id === Number(e.currentTarget.dataset.id)
-		);
+	const findItem = (id) => {
+		const item = cart.find((el) => el.id === id);
 		return item;
 	};
 
-	const onDeleteItem = (e) => {
+	const onDeleteItem = (id) => {
 		dispatch({
 			type: 'REMOVE_FROM_CART',
-			payload: findItem(e),
+			payload: findItem(id),
 		});
 	};
 
-	const onChangeQuantity = (e) => {
+	const onChangeQuantity = (e, id) => {
 		const sign = e.currentTarget.innerText;
 		switch (sign) {
 			case '+':
 				dispatch({
 					type: 'ADD_QUANTITY',
-					payload: findItem(e),
+					payload: findItem(id),
 				});
 				break;
 			case '-':
 				dispatch({
 					type: 'REMOVE_QUANTITY',
-					payload: findItem(e),
+					payload: findItem(id),
 				});
 				break;
 			default:
@@ -103,15 +101,13 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 							alignItems="center"
 						>
 							<CartQuantity
-								data-id={el.id}
-								onClick={(e) => onChangeQuantity(e)}
+								onClick={(e) => onChangeQuantity(e, el.id)}
 							>
 								-
 							</CartQuantity>
 							{el.quantity}{' '}
 							<CartQuantity
-								data-id={el.id}
-								onClick={(e) => onChangeQuantity(e)}
+								onClick={(e) => onChangeQuantity(e, el.id)}
 							>
 								+
 							</CartQuantity>
@@ -120,10 +116,7 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 							${(el.price * el.quantity).toFixed(2)}
 						</CartColumn>
 						<CartColumn>
-							<CartDelete
-								onClick={(e) => onDeleteItem(e)}
-								data-id={el.id}
-							/>
+							<CartDelete onClick={() => onDeleteItem(el.id)} />
 						</CartColumn>
 					</CartItem>
 				))}

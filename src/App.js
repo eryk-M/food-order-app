@@ -18,7 +18,7 @@ import Checkout from './pages/Checkout';
 
 import { ProductsProvider } from './contexts/ProductsContext';
 import { CartProvider } from './contexts/CartContext';
-
+import { APIProvider } from './contexts/APIContext';
 function App() {
 	//navbar
 	const [hidden, setHidden] = useState(true);
@@ -45,31 +45,37 @@ function App() {
 		<AuthProvider>
 			<ProductsProvider>
 				<CartProvider>
-					<Router>
-						<NavBar width={width} toggle={toggleClass} />
-						<NavBarBurger hidden={hidden} toggle={toggleClass} />
-						<GlobalStyle />
-						<Switch>
-							<Route path="/" exact component={Home} />
-							<Route path="/product/:id" exact component={Product} />
-							<Route path="/login" component={Login} />
-							<Route path="/signup" component={Login} />
-							<Route path="/forgot-password" component={Login} />
-							<Route path="/cart" component={Checkout} />
+					<APIProvider>
+						<Router>
+							<NavBar width={width} toggle={toggleClass} />
+							<NavBarBurger hidden={hidden} toggle={toggleClass} />
+							<GlobalStyle />
+							<Switch>
+								<Route path="/" exact component={Home} />
+								<Route
+									path="/product/:id"
+									exact
+									component={Product}
+								/>
+								<Route path="/login" component={Login} />
+								<Route path="/signup" component={Login} />
+								<Route path="/forgot-password" component={Login} />
+								<Route path="/cart" component={Checkout} />
 
-							<PrivateRoute path="/user" exact component={User} />
-							<PrivateRoute
-								path="/user/change-password"
-								exact
-								component={User}
-							/>
-							<PrivateRoute
-								path="/user/orders"
-								exact
-								component={User}
-							/>
-						</Switch>
-					</Router>
+								<PrivateRoute path="/user" exact component={User} />
+								<PrivateRoute
+									path="/user/change-password"
+									exact
+									component={User}
+								/>
+								<PrivateRoute
+									path="/user/orders"
+									exact
+									component={User}
+								/>
+							</Switch>
+						</Router>
+					</APIProvider>
 				</CartProvider>
 			</ProductsProvider>
 		</AuthProvider>

@@ -21,7 +21,7 @@ import Button from '../../Button/index';
 const CartAddress = ({ onChangeStep }) => {
 	const { currentUser } = useAuth();
 	return (
-		<div>
+		<>
 			<CartAddressHeading>
 				Add shipping address
 				<CartAddressIcon marginleft="4rem" />
@@ -69,7 +69,7 @@ const CartAddress = ({ onChangeStep }) => {
 					</CartAddressSteps>
 				</Form>
 			</CartAddressContainer>
-		</div>
+		</>
 	);
 };
 

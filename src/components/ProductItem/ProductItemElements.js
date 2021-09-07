@@ -1,7 +1,5 @@
 import styled from 'styled-components/macro';
-import { keyframes } from 'styled-components';
 import { FaCartPlus } from 'react-icons/fa';
-import { GiConfirmed } from 'react-icons/gi';
 import { BsStar } from 'react-icons/bs';
 
 export const ProductContainer = styled.section`

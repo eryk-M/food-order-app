@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
 
-import Loader from '../../Loader/index';
 import {
 	FormContainer,
 	FormHeading,

@@ -17,6 +17,8 @@ import { useHistory } from 'react-router-dom';
 
 import { useAuth } from '../../../contexts/AuthContext';
 
+import { FormAlert } from '../../Form/FormElements';
+
 const UserNav = () => {
 	const [error, setError] = useState('');
 	const { logout } = useAuth();
@@ -65,6 +67,7 @@ const UserNav = () => {
 					</UserNavLink>
 				</UserNavItem>
 			</UserNavList>
+			{error && <FormAlert>{error}</FormAlert>}
 			<Button onClick={handleLogout} marginbottom="5rem">
 				<UserNavIconLogout />
 				Log Out

@@ -1,8 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, {
+	useContext,
+	useState,
+	useEffect,
+	createContext,
+} from 'react';
 import { auth, db } from '../firebase';
 // import { collection, query, where } from 'firebase/firestore';
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export function useAuth() {
 	return useContext(AuthContext);

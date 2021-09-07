@@ -99,14 +99,10 @@ export const FormBtn = styled.button`
 	}
 `;
 
-export const FormButton = (props) => {
+export const FormButton = ({ loading, type, text, ...rest }) => {
 	return (
-		<FormBtn
-			{...props}
-			disabled={props.loading}
-			type={props.type ?? 'submit'}
-		>
-			{props.loading === true ? <Loader /> : props.text}
+		<FormBtn {...rest} disabled={loading} type={type ?? 'submit'}>
+			{loading ? <Loader /> : text}
 		</FormBtn>
 	);
 };

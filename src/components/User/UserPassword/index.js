@@ -12,7 +12,6 @@ import {
 	FormButton,
 	FormSpan,
 } from '../../Form/FormElements';
-import Loader from '../../Loader';
 import { Alert } from '../../Alert';
 
 const UserPassword = () => {

@@ -1,8 +1,6 @@
 import styled, { keyframes } from 'styled-components/macro';
-// import {keyframes} from 'styled-components'
 
 import { GiConfirmed } from 'react-icons/gi';
-import { BiErrorCircle } from 'react-icons/bi';
 const fadeInRight = keyframes`
 from {
     right: -100%;

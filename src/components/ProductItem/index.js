@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 
 //for testing
-import { data } from '../Products/dummyData';
+import { dummyData } from '../Products/dummyData';
 
 import {
 	ProductContainer,
@@ -21,13 +21,12 @@ import {
 	ProductStarIcons,
 	ProductRating,
 	ProductPrice,
-	// ProductAdded,
-	// ProductAddedIcon,
 } from './ProductItemElements';
 
 import { Alert } from '../Alert/index';
 
 import { CartContext } from '../../contexts/CartContext';
+import { useApi } from '../../contexts/APIContext';
 
 const ProductItem = ({ props }) => {
 	const {
@@ -35,9 +34,17 @@ const ProductItem = ({ props }) => {
 		dispatch,
 	} = useContext(CartContext);
 
+	const { getOneProduct } = useApi();
+
 	const [currentItem, setCurrentItem] = useState();
 	const [quantity, setQuantity] = useState(1);
 	const [isAdded, setIsAdded] = useState(false);
+
+	if (!currentItem) {
+		getOneProduct(Number(props.match.params.id)).then((data) =>
+			setCurrentItem(data)
+		);
+	}
 
 	const onInputChange = (e) => {
 		currentItem.quantity = Number(e.target.value);
@@ -60,16 +67,6 @@ const ProductItem = ({ props }) => {
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart]);
-
-	//testing instead of fetching
-	const findItem = () => {
-		const item = data.find(
-			(el) => Number(props.match.params.id) === el.id
-		);
-		setCurrentItem(item);
-	};
-
-	if (!currentItem) findItem();
 
 	return (
 		<>

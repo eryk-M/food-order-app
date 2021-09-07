@@ -1,14 +1,14 @@
-import burgerClassic from '../../images/burger-classic_cut.jpg';
-import burgerDouble from '../../images/burger-double_cut.jpg';
-import burgerChicken from '../../images/burger-chicken_cut.jpg';
-import chickenCrispy from '../../images/chicken-crispy_cut.jpg';
-import chickenSalad from '../../images/chicken-salad_cut.jpg';
-import chickenShashlik from '../../images/chicken-shashlik_cut.jpg';
+// import burgerClassic from '../../images/burger-classic_cut.jpg';
+// import burgerDouble from '../../images/burger-double_cut.jpg';
+// import burgerChicken from '../../images/burger-chicken_cut.jpg';
+// import chickenCrispy from '../../images/chicken-crispy_cut.jpg';
+// import chickenSalad from '../../images/chicken-salad_cut.jpg';
+// import chickenShashlik from '../../images/chicken-shashlik_cut.jpg';
 
-export const data = [
+export const dummyData = [
 	{
 		id: 1,
-		img: burgerClassic,
+		img: 'burger-classic_cut',
 		alt: 'Burger',
 		name: 'Classic Burger',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -23,10 +23,11 @@ export const data = [
 			'Mayonese',
 		],
 		category: 'Burgers',
+		quantity: 1,
 	},
 	{
 		id: 2,
-		img: burgerDouble,
+		img: 'burger-double_cut',
 		alt: 'Burger',
 		name: 'Double Burger',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -42,10 +43,11 @@ export const data = [
 			'Bacon',
 		],
 		category: 'Burgers',
+		quantity: 1,
 	},
 	{
 		id: 3,
-		img: burgerChicken,
+		img: 'burger-chicken_cut',
 		alt: 'Burger',
 		name: 'Chicken Burger',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -61,10 +63,11 @@ export const data = [
 		],
 		button: 'Add to Cart',
 		category: 'Burgers',
+		quantity: 1,
 	},
 	{
 		id: 4,
-		img: chickenCrispy,
+		img: 'chicken-crispy_cut',
 		alt: 'Crispy Chicken',
 		name: 'Crispy Chicken',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -72,10 +75,11 @@ export const data = [
 		button: 'Add to Cart',
 		ingredients: ['5x Crispy chicken wings', 'Garlic Sauce'],
 		category: 'Chicken',
+		quantity: 1,
 	},
 	{
 		id: 5,
-		img: chickenSalad,
+		img: 'chicken-salad_cut',
 		alt: 'Chicken Salad',
 		name: 'Chicken Salad',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -89,10 +93,11 @@ export const data = [
 			'Oil',
 		],
 		category: 'Chicken',
+		quantity: 1,
 	},
 	{
 		id: 6,
-		img: chickenShashlik,
+		img: 'chicken-shashlik_cut',
 		alt: 'Chicken Shashlik',
 		name: 'Chicken Shashlik',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -106,5 +111,6 @@ export const data = [
 			'Salad',
 		],
 		category: 'Chicken',
+		quantity: 1,
 	},
 ];
