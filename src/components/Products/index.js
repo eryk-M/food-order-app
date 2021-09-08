@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
 	ProductsContainer,
@@ -37,11 +37,15 @@ const Products = () => {
 
 	const options = ['All', 'Burgers', 'Chicken'];
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		getProducts().then((data) => {
 			setData(data);
 			setFilteredItems(data);
 		});
+		return () => {
+			setData();
+			setFilteredItems();
+		};
 	}, [getProducts]);
 
 	const filterProducts = (e, option) => {
@@ -81,22 +85,23 @@ const Products = () => {
 				</ProductsFilter>
 				<ProductsWrapper>
 					{/* item */}
-					{filteredItems.map((el) => (
-						<ProductsLink key={el.id} to={`/product/${el.id}`}>
-							<ProductsCard
-								data-id={el.id}
-								onClick={(e) => {
-									// setIsOpen(true);
-									// findItem(e);
-								}}
-							>
-								<ProductsImg src={el.img} alt={el.alt} />
-								<ProductsTitle>{el.name}</ProductsTitle>
-								<ProductsDesc>{el.desc}</ProductsDesc>
-								<ProductsPrice>${el.price}</ProductsPrice>
-							</ProductsCard>
-						</ProductsLink>
-					))}
+					{filteredItems &&
+						filteredItems.map((el) => (
+							<ProductsLink key={el.id} to={`/product/${el.id}`}>
+								<ProductsCard
+									data-id={el.id}
+									onClick={(e) => {
+										// setIsOpen(true);
+										// findItem(e);
+									}}
+								>
+									<ProductsImg src={el.img} alt={el.alt} />
+									<ProductsTitle>{el.name}</ProductsTitle>
+									<ProductsDesc>{el.desc}</ProductsDesc>
+									<ProductsPrice>${el.price}</ProductsPrice>
+								</ProductsCard>
+							</ProductsLink>
+						))}
 				</ProductsWrapper>
 			</ProductsContainer>
 		</>

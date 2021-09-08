@@ -14,12 +14,16 @@ import {
 	UserDesc,
 } from './UserElements';
 
+import { useAuth } from '../../contexts/AuthContext';
+
 import { GlobalStyle } from '../../globalStyles';
 
 const User = () => {
+	const { currentUser } = useAuth();
+
 	return (
-		<UserWrapper>
-			<UserHeading>Account settings</UserHeading>
+		<UserWrapper className="user">
+			<UserHeading>Hello, {currentUser.displayName}!</UserHeading>
 			<UserDesc>
 				Here you can edit your personal info and see latest orders
 			</UserDesc>

@@ -9,10 +9,12 @@ export function useApi() {
 }
 
 export function APIProvider({ children }) {
-	// HELPER AT START TO SET COLLECTION OF PRODUCTS
-	function setItems(data) {
-		const productsRef = db.collection('products');
+	const productsRef = db.collection('products');
+	const usersRef = db.collection('users');
 
+	// HELPER AT START TO SET COLLECTION OF PRODUCTS
+
+	function setItems(data) {
 		data.forEach((el) => {
 			const storageRef = storage.ref(`images/${el.img}.jpg`);
 			storageRef.getDownloadURL().then((url) => {
@@ -41,7 +43,6 @@ export function APIProvider({ children }) {
 	}
 
 	async function getProducts() {
-		const productsRef = db.collection('products');
 		let data = [];
 		await productsRef.get().then((snapshot) => {
 			snapshot.forEach((doc) => {
@@ -53,8 +54,6 @@ export function APIProvider({ children }) {
 	}
 
 	async function getOneProduct(id) {
-		const productsRef = db.collection('products');
-
 		let product;
 		await productsRef
 			.where('id', '==', id)
@@ -65,10 +64,46 @@ export function APIProvider({ children }) {
 		return product;
 	}
 
+	async function getUserInfo(uid) {
+		let user;
+		await usersRef
+			.doc(uid)
+			.get()
+			.then((doc) => {
+				user = doc.data();
+			});
+		return user;
+	}
+
+	async function updateUserInfo(
+		uid,
+		name,
+		address,
+		phone,
+		city,
+		zip
+	) {
+		await usersRef
+			.doc(uid)
+			.update({
+				name: name,
+				address: address,
+				phone: phone,
+				city: city,
+				zip: zip,
+			})
+			.catch((err) => {
+				console.error(err);
+				throw new Error('Error updating user!');
+			});
+	}
+
 	const value = {
 		setItems,
 		getProducts,
 		getOneProduct,
+		getUserInfo,
+		updateUserInfo,
 	};
 
 	return (

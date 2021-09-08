@@ -28,12 +28,23 @@ export function AuthProvider({ children }) {
 					return auth
 						.createUserWithEmailAndPassword(email, password)
 						.then((createdUser) => {
-							db.collection('users')
-								.doc(createdUser.user.uid)
-								.set({ username: username });
+							db.collection('users').doc(createdUser.user.uid).set({
+								name: '',
+								address: '',
+								phone: '',
+								city: '',
+								zip: '',
+								orders: [],
+							});
 						})
 						.then(() => {
-							history.push('/user');
+							const user = auth.currentUser;
+
+							user
+								.updateProfile({ displayName: username })
+								.then(() => {
+									history.push('/user');
+								});
 						});
 				} else {
 					let error = new Error();
