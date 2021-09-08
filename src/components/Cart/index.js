@@ -1,4 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, {
+	useState,
+	useContext,
+	useEffect,
+	useRef,
+} from 'react';
 
 import { Switch, Route, useHistory } from 'react-router-dom';
 
@@ -8,20 +13,34 @@ import './steps.css';
 
 import { CartWrapper, CartContainer } from './CartElements';
 
-import CartOrder from './CartOrder/index';
-import CartAddress from './CartAddress/index';
+import CartOrder from './CartOrder';
+import CartAddress from './CartAddress';
+import CartSummary from './CartSummary';
+
 import { CartContext } from '../../contexts/CartContext';
 
+import { useAuth } from '../../contexts/AuthContext';
+import { useApi } from '../../contexts/APIContext';
 const Cart = () => {
 	const {
 		state: { cart },
 		dispatch,
 	} = useContext(CartContext);
+	const { currentUser } = useAuth();
+	const { getUserInfo } = useApi();
 
 	const [step, setStep] = useState(0);
 	const [totalPrice, setTotalPrice] = useState(0);
-
+	const [userData, setUserData] = useState();
 	const history = useHistory();
+
+	useEffect(() => {
+		if (!userData && currentUser) {
+			getUserInfo(currentUser.uid).then((data) => {
+				setUserData(data);
+			});
+		}
+	}, [currentUser, getUserInfo, userData]);
 
 	useEffect(() => {
 		const getTotalPrice = () => {
@@ -38,10 +57,13 @@ const Cart = () => {
 			history.push('/cart');
 		} else if (step === 1) {
 			history.push('/cart/address');
+		} else if (step === 2) {
+			history.push('/cart/summary');
 		}
 	}, [cart, dispatch, step, history]);
 
-	const onChangeStep = (where) => {
+	const onChangeStep = (e, where) => {
+		e.preventDefault();
 		if (where === 'back') return setStep(step - 1);
 		setStep(step + 1);
 	};
@@ -70,7 +92,20 @@ const Cart = () => {
 					<Route
 						path="/cart/address"
 						exact
-						render={() => <CartAddress onChangeStep={onChangeStep} />}
+						render={() => (
+							<CartAddress
+								step={step}
+								userData={userData}
+								onChangeStep={onChangeStep}
+							/>
+						)}
+					/>
+					<Route
+						path="/cart/summary"
+						exact
+						render={() => (
+							<CartSummary step={step} onChangeStep={onChangeStep} />
+						)}
 					/>
 				</Switch>
 			</CartContainer>

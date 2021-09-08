@@ -17,9 +17,9 @@ export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState();
 	const [loading, setLoading] = useState(true);
 
-	async function signup(email, password, username, history) {
-		const userRef = db.collection('users');
+	const userRef = db.collection('users');
 
+	async function signup(email, password, username, history) {
 		await userRef
 			.where('username', '==', username)
 			.get()

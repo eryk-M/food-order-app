@@ -16,7 +16,9 @@ import Loader from '../../Loader';
 
 import { UserAccountHeading } from './UserAccountElements';
 
-const UserAccount = () => {
+// TODO: Aktualizacja inputow po kliknieciu Update np. name > Name
+
+const UserAccount = ({ userData }) => {
 	const nameRef = useRef();
 	const addressRef = useRef();
 	const phoneRef = useRef();
@@ -30,8 +32,9 @@ const UserAccount = () => {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [user, setUser] = useState();
-
 	const [showSuccess, setShowSuccess] = useState(false);
+
+	if (!user && userData) setUser(userData);
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -63,34 +66,30 @@ const UserAccount = () => {
 				getUserInfo(currentUser.uid).then((data) => {
 					setUser(data);
 				});
+				setTimeout(() => {
+					setLoading(false);
+					setShowSuccess(false);
+				}, 1000);
 			})
 			.catch(() => {
 				setError('Failed to update');
 			})
-			.finally(() => {
-				setTimeout(() => {
-					console.log(user.name);
-					emailRef.current.value = currentUser.email;
-					nameRef.current.value = user.name;
-					addressRef.current.value = user.address;
-					phoneRef.current.value = user.phone;
-					cityRef.current.value = user.city;
-					zipCodeRef.current.value = user.zip;
-					setLoading(false);
-					setShowSuccess(false);
-				}, 4000);
-			});
+			.finally(() => {});
 	}
 
-	useEffect(() => {
-		if (!user) {
-			setLoading(true);
-			getUserInfo(currentUser.uid).then((data) => {
-				setUser(data);
-				setLoading(false);
-			});
-		}
-	}, [currentUser.uid, getUserInfo, user]);
+	// useEffect(() => {
+	// 	showSuccess &&
+	// 		setTimeout(() => {
+	// 			emailRef.current.value = currentUser.email;
+	// 			nameRef.current.value = user.name;
+	// 			addressRef.current.value = user.address;
+	// 			phoneRef.current.value = user.phone;
+	// 			cityRef.current.value = user.city;
+	// 			zipCodeRef.current.value = user.zip;
+	// 			setLoading(false);
+	// 			setShowSuccess(false);
+	// 		}, 4000);
+	// }, [currentUser.uid, getUserInfo, user]);
 
 	return (
 		<>

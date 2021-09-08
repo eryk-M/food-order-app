@@ -16,7 +16,6 @@ import NavBar from './components/NavBar';
 import NavBarBurger from './components/NavBurger';
 import Checkout from './pages/Checkout';
 
-import { ProductsProvider } from './contexts/ProductsContext';
 import { CartProvider } from './contexts/CartContext';
 import { APIProvider } from './contexts/APIContext';
 function App() {
@@ -27,57 +26,36 @@ function App() {
 		setHidden(!hidden);
 	};
 
-	function useWindowSize() {
-		const [size, setSize] = useState([0]);
-		useLayoutEffect(() => {
-			function updateSize() {
-				setSize([window.innerWidth]);
-			}
-			window.addEventListener('resize', updateSize);
-			updateSize();
-			return () => window.removeEventListener('resize', updateSize);
-		}, []);
-		return size;
-	}
-
-	const [width] = useWindowSize();
 	return (
 		<AuthProvider>
-			<ProductsProvider>
-				<CartProvider>
-					<APIProvider>
-						<Router>
-							<NavBar width={width} toggle={toggleClass} />
-							<NavBarBurger hidden={hidden} toggle={toggleClass} />
-							<GlobalStyle />
-							<Switch>
-								<Route path="/" exact component={Home} />
-								<Route
-									path="/product/:id"
-									exact
-									component={Product}
-								/>
-								<Route path="/login" component={Login} />
-								<Route path="/signup" component={Login} />
-								<Route path="/forgot-password" component={Login} />
-								<Route path="/cart" component={Checkout} />
-
-								<PrivateRoute path="/user" exact component={User} />
-								<PrivateRoute
-									path="/user/change-password"
-									exact
-									component={User}
-								/>
-								<PrivateRoute
-									path="/user/orders"
-									exact
-									component={User}
-								/>
-							</Switch>
-						</Router>
-					</APIProvider>
-				</CartProvider>
-			</ProductsProvider>
+			<CartProvider>
+				<APIProvider>
+					<Router>
+						<NavBar toggle={toggleClass} />
+						<NavBarBurger hidden={hidden} toggle={toggleClass} />
+						<GlobalStyle />
+						<Switch>
+							<Route path="/" exact component={Home} />
+							<Route path="/product/:id" exact component={Product} />
+							<Route path="/login" component={Login} />
+							<Route path="/signup" component={Login} />
+							<Route path="/forgot-password" component={Login} />
+							<Route path="/cart" component={Checkout} />
+							<PrivateRoute path="/user" exact component={User} />
+							<PrivateRoute
+								path="/user/change-password"
+								exact
+								component={User}
+							/>
+							<PrivateRoute
+								path="/user/orders"
+								exact
+								component={User}
+							/>
+						</Switch>
+					</Router>
+				</APIProvider>
+			</CartProvider>
 		</AuthProvider>
 	);
 }

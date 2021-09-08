@@ -22,6 +22,7 @@ import { CartContext } from '../../contexts/CartContext';
 const NavBar = (props) => {
 	const { currentUser } = useAuth();
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
+	const size = useWindowSize();
 
 	const {
 		state: { cart },
@@ -50,9 +51,9 @@ const NavBar = (props) => {
 	};
 
 	const { pathname } = props.location;
-	const { width, toggle } = props;
+	const { toggle } = props;
 	const switchMenu = () => {
-		if (width > 840) {
+		if (size.width > 840) {
 			return (
 				<>
 					<NavList>
@@ -97,3 +98,24 @@ const NavBar = (props) => {
 };
 
 export default withRouter(NavBar);
+
+// Hook
+function useWindowSize() {
+	const [windowSize, setWindowSize] = useState({
+		width: undefined,
+		height: undefined,
+	});
+	useEffect(() => {
+		function handleResize() {
+			// Set window width/height to state
+			setWindowSize({
+				width: window.innerWidth,
+				height: window.innerHeight,
+			});
+		}
+		window.addEventListener('resize', handleResize);
+		handleResize();
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+	return windowSize;
+}

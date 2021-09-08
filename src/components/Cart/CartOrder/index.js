@@ -137,7 +137,7 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 				<Button
 					disabled={!cart.length >= 1}
 					width="100%"
-					onClick={() => onChangeStep()}
+					onClick={(e) => onChangeStep(e)}
 				>
 					Proceed to address &#10141;
 				</Button>

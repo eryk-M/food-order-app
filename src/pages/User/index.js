@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PrivateRoute from '../../components/PrivateRoute';
 
 import UserAccount from '../../components/User/UserAccount';
@@ -15,11 +15,24 @@ import {
 } from './UserElements';
 
 import { useAuth } from '../../contexts/AuthContext';
+import { useApi } from '../../contexts/APIContext';
 
 import { GlobalStyle } from '../../globalStyles';
 
 const User = () => {
 	const { currentUser } = useAuth();
+
+	const { getUserInfo } = useApi();
+
+	const [userData, setUserData] = useState();
+
+	useEffect(() => {
+		if (!userData) {
+			getUserInfo(currentUser.uid).then((data) => {
+				setUserData(data);
+			});
+		}
+	}, [currentUser.uid, getUserInfo, userData]);
 
 	return (
 		<UserWrapper className="user">
@@ -31,7 +44,12 @@ const User = () => {
 				<GlobalStyle backgroundColor="#93949417" />
 				<UserNav />
 				<UserContent>
-					<PrivateRoute path="/user" exact component={UserAccount} />
+					<PrivateRoute
+						path="/user"
+						exact
+						component={UserAccount}
+						userData={userData}
+					/>
 					<PrivateRoute
 						path="/user/change-password"
 						exact
