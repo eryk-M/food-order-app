@@ -17,25 +17,30 @@ export const CartContainer = styled.div`
 	margin: 4rem auto;
 `;
 
-export const CartList = styled.ul``;
+export const CartList = styled.div`
+	display: table-row-group;
+`;
 
+export const CartTable = styled.div`
+	display: table;
+	width: 100%;
+`;
 export const CartLink = styled(Link)`
 	color: #000;
 `;
 
-export const CartItem = styled.li`
+export const CartItem = styled.div`
 	background-color: ${(props) => props.backgroundColor};
+	display: table-row;
 	font-weight: ${(props) => props.fontW};
 	font-size: 1.6rem;
-	display: flex;
-	align-items: center;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 export const CartColumn = styled.div`
-	width: ${(props) => props.width};
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	display: table-cell;
+	vertical-align: middle;
 	padding: 2rem;
-
 	@media only screen and (max-width: 840px) {
 		width: ${(props) => props.mobileWidth};
 	}

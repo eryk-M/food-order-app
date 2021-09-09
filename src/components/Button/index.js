@@ -14,6 +14,8 @@ const ButtonMain = styled.button`
 	cursor: pointer;
 	transition: all 0.2s;
 	margin-bottom: ${(props) => props.marginbottom};
+	border-radius: 5px;
+	box-shadow: 0 0.2rem 1.5rem rgba(0, 0, 0, 0.2);
 	&:hover {
 		background-color: var(--color-secondary);
 		color: var(--color-grey-dark);

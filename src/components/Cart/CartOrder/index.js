@@ -13,6 +13,7 @@ import {
 	CartLink,
 	CartTotalContent,
 	CartNoItems,
+	CartTable,
 } from './CartOrderElements';
 
 import Button from '../../Button/index';
@@ -67,68 +68,59 @@ const CartOrder = ({
 
 	return (
 		<>
-			<CartList>
-				{cart.length >= 1 && (
-					<CartItem backgroundColor="#93949417" fontW="bold">
-						<CartColumn
-							width="25rem"
-							mobileWidth="20rem"
-						></CartColumn>
-						<CartColumn width="50%" mobileWidth="10rem">
-							Name
-						</CartColumn>
-						<CartColumn width="14.6%">Price</CartColumn>
-						<CartColumn width="18.5%">Quantity</CartColumn>
-						<CartColumn width="6%" display="none">
-							Total
-						</CartColumn>
-						<CartColumn>Delete</CartColumn>
-					</CartItem>
-				)}
+			<CartTable>
+				<CartList>
+					{cart.length >= 1 && (
+						<CartItem backgroundColor="#93949417" fontW="bold">
+							<CartColumn></CartColumn>
+							<CartColumn>Name</CartColumn>
+							<CartColumn>Price</CartColumn>
+							<CartColumn>Quantity</CartColumn>
+							<CartColumn display="none">Total</CartColumn>
+							<CartColumn>Delete</CartColumn>
+						</CartItem>
+					)}
 
-				{cart.length === 0 && (
-					<CartNoItems>Your cart is empty.</CartNoItems>
-				)}
-				{cart.map((el) => (
-					<CartItem key={el.id}>
-						<CartColumn>
-							<CartLink to={`/product/${el.id}`}>
-								<CartImage src={el.img} />
-							</CartLink>
-						</CartColumn>
-						<CartColumn width="50%" mobileWidth="10rem">
-							<CartLink to={`/product/${el.id}`}>{el.name}</CartLink>
-						</CartColumn>
-						<CartColumn width="16.6%">
-							${el.price.toFixed(2)}
-						</CartColumn>
-						<CartColumn
-							width="20%"
-							display="flex"
-							flexDirection="column"
-							alignItems="center"
-						>
-							<CartQuantity
-								onClick={(e) => onChangeQuantity(e, el.id)}
-							>
-								-
-							</CartQuantity>
-							{el.quantity}{' '}
-							<CartQuantity
-								onClick={(e) => onChangeQuantity(e, el.id)}
-							>
-								+
-							</CartQuantity>
-						</CartColumn>
-						<CartColumn display="none">
-							${(el.price * el.quantity).toFixed(2)}
-						</CartColumn>
-						<CartColumn>
-							<CartDelete onClick={() => onDeleteItem(el.id)} />
-						</CartColumn>
-					</CartItem>
-				))}
-			</CartList>
+					{cart.length === 0 && (
+						<CartNoItems>Your cart is empty.</CartNoItems>
+					)}
+
+					{cart.map((el) => (
+						<CartItem key={el.id}>
+							<CartColumn>
+								<CartLink to={`/product/${el.id}`}>
+									<CartImage src={el.img} />
+								</CartLink>
+							</CartColumn>
+							<CartColumn>
+								<CartLink to={`/product/${el.id}`}>
+									{el.name}
+								</CartLink>
+							</CartColumn>
+							<CartColumn>${el.price.toFixed(2)}</CartColumn>
+							<CartColumn>
+								<CartQuantity
+									onClick={(e) => onChangeQuantity(e, el.id)}
+								>
+									-
+								</CartQuantity>
+								{el.quantity}{' '}
+								<CartQuantity
+									onClick={(e) => onChangeQuantity(e, el.id)}
+								>
+									+
+								</CartQuantity>
+							</CartColumn>
+							<CartColumn display="none">
+								${(el.price * el.quantity).toFixed(2)}
+							</CartColumn>
+							<CartColumn>
+								<CartDelete onClick={() => onDeleteItem(el.id)} />
+							</CartColumn>
+						</CartItem>
+					))}
+				</CartList>
+			</CartTable>
 			<CartCouponForm>
 				<CartCouponInput
 					disabled={!cart.length >= 1}
