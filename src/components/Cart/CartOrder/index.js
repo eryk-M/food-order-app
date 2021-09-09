@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import {
 	CartList,
@@ -19,7 +19,12 @@ import Button from '../../Button/index';
 
 import { CartContext } from '../../../contexts/CartContext';
 
-const CartOrder = ({ totalPrice, onChangeStep }) => {
+const CartOrder = ({
+	setDispatchTotalPrice,
+	step,
+	totalPrice,
+	onChangeStep,
+}) => {
 	const {
 		state: { cart },
 		dispatch,
@@ -30,13 +35,16 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 		return item;
 	};
 
+	useEffect(() => {
+		if (step !== 0) onChangeStep(undefined, 'begin');
+	}, [step, onChangeStep]);
+
 	const onDeleteItem = (id) => {
 		dispatch({
 			type: 'REMOVE_FROM_CART',
 			payload: findItem(id),
 		});
 	};
-
 	const onChangeQuantity = (e, id) => {
 		const sign = e.currentTarget.innerText;
 		switch (sign) {
@@ -137,7 +145,10 @@ const CartOrder = ({ totalPrice, onChangeStep }) => {
 				<Button
 					disabled={!cart.length >= 1}
 					width="100%"
-					onClick={(e) => onChangeStep(e)}
+					onClick={(e) => {
+						setDispatchTotalPrice();
+						onChangeStep(e, 'push');
+					}}
 				>
 					Proceed to address &#10141;
 				</Button>

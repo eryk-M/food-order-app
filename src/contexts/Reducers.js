@@ -47,6 +47,16 @@ export const cartReducer = (state, action) => {
 						: el.quantity
 				),
 			};
+		case 'SET_ADDRESS':
+			return {
+				...state,
+				address: action.payload,
+			};
+		case 'SET_TOTAL_PRICE':
+			return {
+				...state,
+				totalPrice: action.payload,
+			};
 		default:
 			return state;
 	}

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router';
 import {
 	Form,
@@ -16,7 +16,17 @@ import {
 
 import Button from '../../Button/index';
 
-const CartAddress = ({ onChangeStep, userData, step }) => {
+const CartAddress = ({
+	nameRef,
+	phoneRef,
+	addressRef,
+	cityRef,
+	zipRef,
+	onChangeStep,
+	userData,
+	step,
+	setAddressInfo,
+}) => {
 	if (step === 0) return <Redirect to="/cart" />;
 
 	return (
@@ -26,10 +36,16 @@ const CartAddress = ({ onChangeStep, userData, step }) => {
 				<CartAddressIcon marginleft="4rem" />
 			</CartAddressHeading>
 			<CartAddressContainer>
-				<Form onSubmit={(e) => onChangeStep(e)}>
+				<Form
+					onSubmit={(e) => {
+						setAddressInfo(e);
+						onChangeStep(e, 'push');
+					}}
+				>
 					<FormElement>
 						<FormLabel htmlFor="name">Name *</FormLabel>
 						<FormInput
+							ref={nameRef}
 							name="name"
 							type="text"
 							defaultValue={userData ? userData.name : ''}
@@ -40,6 +56,7 @@ const CartAddress = ({ onChangeStep, userData, step }) => {
 					<FormElement>
 						<FormLabel htmlFor="number">Phone number *</FormLabel>
 						<FormInput
+							ref={phoneRef}
 							name="number"
 							type="number"
 							defaultValue={userData ? userData.phone : ''}
@@ -50,6 +67,7 @@ const CartAddress = ({ onChangeStep, userData, step }) => {
 					<FormElement>
 						<FormLabel htmlFor="address">Address *</FormLabel>
 						<FormInput
+							ref={addressRef}
 							name="address"
 							type="text"
 							defaultValue={userData ? userData.address : ''}
@@ -60,6 +78,7 @@ const CartAddress = ({ onChangeStep, userData, step }) => {
 					<FormElement>
 						<FormLabel htmlFor="city">City *</FormLabel>
 						<FormInput
+							ref={cityRef}
 							name="city"
 							type="text"
 							defaultValue={userData ? userData.city : ''}
@@ -70,6 +89,7 @@ const CartAddress = ({ onChangeStep, userData, step }) => {
 					<FormElement>
 						<FormLabel htmlFor="zipcode">Zip/Postal Code *</FormLabel>
 						<FormInput
+							ref={zipRef}
 							name="zipcode"
 							type="text"
 							defaultValue={userData ? userData.zip : ''}

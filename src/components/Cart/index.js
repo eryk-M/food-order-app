@@ -3,6 +3,7 @@ import React, {
 	useContext,
 	useEffect,
 	useRef,
+	useCallback,
 } from 'react';
 
 import { Switch, Route, useHistory } from 'react-router-dom';
@@ -22,10 +23,17 @@ import { CartContext } from '../../contexts/CartContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useApi } from '../../contexts/APIContext';
 const Cart = () => {
+	const nameRef = useRef();
+	const phoneRef = useRef();
+	const addressRef = useRef();
+	const cityRef = useRef();
+	const zipRef = useRef();
+
 	const {
 		state: { cart },
 		dispatch,
 	} = useContext(CartContext);
+
 	const { currentUser } = useAuth();
 	const { getUserInfo } = useApi();
 
@@ -33,6 +41,33 @@ const Cart = () => {
 	const [totalPrice, setTotalPrice] = useState(0);
 	const [userData, setUserData] = useState();
 	const history = useHistory();
+
+	const setAddressInfo = (e) => {
+		e.preventDefault();
+		dispatch({
+			type: 'SET_ADDRESS',
+			payload: {
+				name: nameRef.current.value,
+				phone: phoneRef.current.value,
+				address: addressRef.current.value,
+				city: cityRef.current.value,
+				zip: zipRef.current.value,
+			},
+		});
+	};
+	const setDispatchTotalPrice = () => {
+		dispatch({
+			type: 'SET_TOTAL_PRICE',
+			payload: totalPrice.toFixed(2),
+		});
+	};
+	const getTotalPrice = useCallback(() => {
+		const totalCartPrice = cart.reduce(
+			(total, item) => total + item.price * item.quantity,
+			0
+		);
+		setTotalPrice(totalCartPrice);
+	}, [cart]);
 
 	useEffect(() => {
 		if (!userData && currentUser) {
@@ -43,29 +78,31 @@ const Cart = () => {
 	}, [currentUser, getUserInfo, userData]);
 
 	useEffect(() => {
-		const getTotalPrice = () => {
-			const totalCartPrice = cart.reduce(
-				(total, item) => total + item.price * item.quantity,
-				0
-			);
-			setTotalPrice(totalCartPrice);
-		};
 		localStorage.setItem('cart', JSON.stringify(cart));
 		getTotalPrice();
-
-		if (step === 0) {
-			history.push('/cart');
-		} else if (step === 1) {
-			history.push('/cart/address');
-		} else if (step === 2) {
-			history.push('/cart/summary');
-		}
-	}, [cart, dispatch, step, history]);
+	}, [cart, getTotalPrice]);
 
 	const onChangeStep = (e, where) => {
-		e.preventDefault();
-		if (where === 'back') return setStep(step - 1);
-		setStep(step + 1);
+		const { pathname } = history.location;
+		if (e !== undefined) e.preventDefault();
+
+		if (where === 'back') {
+			setStep(step - 1);
+			if (pathname === '/cart/address') {
+				history.push('/cart');
+			} else if (pathname === '/cart/summary') {
+				history.push('/cart/address');
+			}
+		} else if (where === 'begin') {
+			setStep(0);
+		} else if (where === 'push') {
+			setStep(step + 1);
+			if (pathname === '/cart') {
+				history.push('/cart/address');
+			} else if (pathname === '/cart/address') {
+				history.push('/cart/summary');
+			}
+		}
 	};
 
 	return (
@@ -83,6 +120,7 @@ const Cart = () => {
 						exact
 						render={() => (
 							<CartOrder
+								setDispatchTotalPrice={setDispatchTotalPrice}
 								step={step}
 								onChangeStep={onChangeStep}
 								totalPrice={totalPrice}
@@ -94,8 +132,14 @@ const Cart = () => {
 						exact
 						render={() => (
 							<CartAddress
+								nameRef={nameRef}
+								phoneRef={phoneRef}
+								addressRef={addressRef}
+								cityRef={cityRef}
+								zipRef={zipRef}
 								step={step}
 								userData={userData}
+								setAddressInfo={setAddressInfo}
 								onChangeStep={onChangeStep}
 							/>
 						)}
