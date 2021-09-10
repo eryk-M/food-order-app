@@ -44,9 +44,17 @@ ul {
     list-style: none;
 }
 
+input, textarea {
+    border: 1px solid #ccc !important;
+    border-radius: 0.5rem;
+    font-weight: 400;
+    outline: 0;
+	font-family: inherit;
+}
+
+
 .active-user-nav {
     font-weight: 700;
     background-color: var(--color-secondary)
- 
 }
 `;

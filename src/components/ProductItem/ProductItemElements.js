@@ -127,7 +127,7 @@ export const ProductQuantity = styled.input`
 export const ProductStar = styled(BsStar)`
 	color: yellow;
 	cursor: pointer;
-	fill: black;
+	fill: #fed700;
 	&:not(:first-of-type) {
 		margin-left: 1rem;
 	}

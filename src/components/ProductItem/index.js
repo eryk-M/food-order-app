@@ -1,8 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 
-//for testing
-import { dummyData } from '../Products/dummyData';
-
 import {
 	ProductContainer,
 	ProductLeft,
@@ -27,6 +24,8 @@ import { Alert } from '../Alert/index';
 
 import { CartContext } from '../../contexts/CartContext';
 import { useApi } from '../../contexts/APIContext';
+
+import Review from '../Review';
 
 const ProductItem = ({ props }) => {
 	const {
@@ -71,60 +70,62 @@ const ProductItem = ({ props }) => {
 	return (
 		<>
 			{currentItem && (
-				<ProductContainer>
-					{/* <ProductBackground /> */}
-					<ProductLeft>
-						<ProductImg src={currentItem.img} />
-					</ProductLeft>
+				<>
+					<ProductContainer>
+						<ProductLeft>
+							<ProductImg src={currentItem.img} />
+						</ProductLeft>
 
-					<ProductRight>
-						<ProductTitle>{currentItem.name}</ProductTitle>
-						<ProductPrice>${currentItem.price}</ProductPrice>
-						<ProductStarIcons>
-							<ProductStar />
-							<ProductStar />
-							<ProductStar />
-							<ProductStar />
-							<ProductStar />
-						</ProductStarIcons>
-						<ProductRating>0/5 (0 ratings)</ProductRating>
-						<ProductDesc>{currentItem.desc}</ProductDesc>
-						<ProductIngredients>
-							{currentItem.ingredients.map((el, i) => (
-								<ProductIngredientsItem key={i}>
-									{el}
-								</ProductIngredientsItem>
-							))}
-						</ProductIngredients>
+						<ProductRight>
+							<ProductTitle>{currentItem.name}</ProductTitle>
+							<ProductPrice>${currentItem.price}</ProductPrice>
+							<ProductStarIcons>
+								<ProductStar />
+								<ProductStar />
+								<ProductStar />
+								<ProductStar />
+								<ProductStar />
+							</ProductStarIcons>
+							<ProductRating>0/5 (0 ratings)</ProductRating>
+							<ProductDesc>{currentItem.desc}</ProductDesc>
+							<ProductIngredients>
+								{currentItem.ingredients.map((el, i) => (
+									<ProductIngredientsItem key={i}>
+										{el}
+									</ProductIngredientsItem>
+								))}
+							</ProductIngredients>
 
-						<ProductForm onSubmit={(e) => addToCart(e)}>
-							{isAdded && (
-								<Alert success>Product added to cart</Alert>
-							)}
-							{/* <ProductAdded>
+							<ProductForm onSubmit={(e) => addToCart(e)}>
+								{isAdded && (
+									<Alert success>Product added to cart</Alert>
+								)}
+								{/* <ProductAdded>
 								<ProductAddedIcon /> Product added to cart
 							</ProductAdded> */}
-							<ProductQuantityLabel htmlFor="quantity">
-								Quantity:
-							</ProductQuantityLabel>
-							<ProductQuantity
-								name="quantity"
-								type="number"
-								value={quantity}
-								onChange={(e) => onInputChange(e)}
-								min="1"
-								max="10"
-								maxLength="2"
-								disabled={isAdded}
-							/>
+								<ProductQuantityLabel htmlFor="quantity">
+									Quantity:
+								</ProductQuantityLabel>
+								<ProductQuantity
+									name="quantity"
+									type="number"
+									value={quantity}
+									onChange={(e) => onInputChange(e)}
+									min="1"
+									max="10"
+									maxLength="2"
+									disabled={isAdded}
+								/>
 
-							<ProductButton disabled={isAdded}>
-								<ProductCartIcon />
-								{currentItem.button}
-							</ProductButton>
-						</ProductForm>
-					</ProductRight>
-				</ProductContainer>
+								<ProductButton disabled={isAdded}>
+									<ProductCartIcon />
+									{currentItem.button}
+								</ProductButton>
+							</ProductForm>
+						</ProductRight>
+					</ProductContainer>
+					<Review />
+				</>
 			)}
 		</>
 	);
