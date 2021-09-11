@@ -72,6 +72,17 @@ export const FormInput = styled.input`
 	}
 `;
 
+export const FormTextArea = styled.textarea`
+	resize: none;
+	padding: 1rem;
+	height: 20rem;
+	width: 100%;
+	border-radius: 0.5rem;
+	color: #666;
+	outline: 0;
+	font-size: 1.6rem;
+`;
+
 export const FormBtn = styled.button`
 	border: none;
 	font-size: 1.8rem;

@@ -14,7 +14,6 @@ import {
 	ProductButton,
 	ProductCartIcon,
 	ProductIngredientsItem,
-	ProductStar,
 	ProductStarIcons,
 	ProductRating,
 	ProductPrice,
@@ -22,10 +21,14 @@ import {
 
 import { Alert } from '../Alert/index';
 
+import ReactStars from 'react-rating-stars-component';
 import { CartContext } from '../../contexts/CartContext';
 import { useApi } from '../../contexts/APIContext';
-
-import Review from '../Review';
+import {
+	StarIcon,
+	StarHalfIcon,
+} from '../Reviews/FormReview/StarRating';
+import Reviews from '../Reviews';
 
 const ProductItem = ({ props }) => {
 	const {
@@ -33,9 +36,9 @@ const ProductItem = ({ props }) => {
 		dispatch,
 	} = useContext(CartContext);
 
-	const { getOneProduct } = useApi();
-
+	const { getOneProduct, getReviewsCount } = useApi();
 	const [currentItem, setCurrentItem] = useState();
+	const [ratings, setRatings] = useState();
 	const [quantity, setQuantity] = useState(1);
 	const [isAdded, setIsAdded] = useState(false);
 
@@ -43,6 +46,9 @@ const ProductItem = ({ props }) => {
 		getOneProduct(Number(props.match.params.id)).then((data) =>
 			setCurrentItem(data)
 		);
+		getReviewsCount(Number(props.match.params.id)).then((data) => {
+			setRatings(data);
+		});
 	}
 
 	const onInputChange = (e) => {
@@ -67,9 +73,28 @@ const ProductItem = ({ props }) => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart]);
 
+	const starSettings = {
+		size: 25,
+		isHalf: true,
+		edit: false,
+		count: 5,
+		activeColor: '#ffc107',
+		color: '#e4e5e9',
+		emptyIcon: <StarIcon />,
+		halfIcon: <StarHalfIcon />,
+		filledIcon: <StarIcon />,
+	};
+
+	const addZeroes = (num) => {
+		const dec = num.toString().split('.')[1];
+		if (!dec) return num;
+		const len = dec.length > 0 ? 1 : 0;
+		return Number(num).toFixed(len);
+	};
+
 	return (
 		<>
-			{currentItem && (
+			{currentItem && ratings && (
 				<>
 					<ProductContainer>
 						<ProductLeft>
@@ -80,13 +105,17 @@ const ProductItem = ({ props }) => {
 							<ProductTitle>{currentItem.name}</ProductTitle>
 							<ProductPrice>${currentItem.price}</ProductPrice>
 							<ProductStarIcons>
-								<ProductStar />
-								<ProductStar />
-								<ProductStar />
-								<ProductStar />
-								<ProductStar />
+								<ReactStars
+									value={ratings.avgRating}
+									{...starSettings}
+								/>
 							</ProductStarIcons>
-							<ProductRating>0/5 (0 ratings)</ProductRating>
+							<ProductRating>
+								{ratings.avgRating
+									? addZeroes(ratings.avgRating)
+									: '0'}
+								/5 ({ratings.size ?? '0'} ratings)
+							</ProductRating>
 							<ProductDesc>{currentItem.desc}</ProductDesc>
 							<ProductIngredients>
 								{currentItem.ingredients.map((el, i) => (
@@ -100,9 +129,6 @@ const ProductItem = ({ props }) => {
 								{isAdded && (
 									<Alert success>Product added to cart</Alert>
 								)}
-								{/* <ProductAdded>
-								<ProductAddedIcon /> Product added to cart
-							</ProductAdded> */}
 								<ProductQuantityLabel htmlFor="quantity">
 									Quantity:
 								</ProductQuantityLabel>
@@ -124,7 +150,10 @@ const ProductItem = ({ props }) => {
 							</ProductForm>
 						</ProductRight>
 					</ProductContainer>
-					<Review />
+					<Reviews
+						setRatings={setRatings}
+						productId={currentItem.id}
+					/>
 				</>
 			)}
 		</>

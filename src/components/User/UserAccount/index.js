@@ -11,6 +11,7 @@ import {
 } from '../../Form/FormElements';
 
 import { Alert } from '../../Alert';
+import { Redirect, useLocation } from 'react-router-dom';
 
 import Loader from '../../Loader';
 
@@ -25,6 +26,7 @@ const UserAccount = ({ userData }) => {
 	const zipCodeRef = useRef();
 	const cityRef = useRef();
 	const emailRef = useRef();
+	const { query } = useLocation();
 
 	const { currentUser, updateEmail } = useAuth();
 	const { getUserInfo, updateUserInfo } = useApi();
@@ -33,6 +35,8 @@ const UserAccount = ({ userData }) => {
 	const [loading, setLoading] = useState(false);
 	const [user, setUser] = useState();
 	const [showSuccess, setShowSuccess] = useState(false);
+
+	if (query) return <Redirect to={query} />;
 
 	if (!user && userData) setUser(userData);
 

@@ -2,6 +2,8 @@ import React, { createContext, useContext } from 'react';
 
 import { db, storage } from '../firebase';
 
+import { arrayUnion } from 'firebase/firestore';
+
 const APIContext = createContext();
 
 export function useApi() {
@@ -11,6 +13,7 @@ export function useApi() {
 export function APIProvider({ children }) {
 	const productsRef = db.collection('products');
 	const usersRef = db.collection('users');
+	const reviewsRef = db.collection('reviews');
 
 	// HELPER AT START TO SET COLLECTION OF PRODUCTS
 
@@ -98,12 +101,105 @@ export function APIProvider({ children }) {
 			});
 	}
 
+	async function addReview(
+		productId,
+		userId,
+		userName,
+		date,
+		body,
+		rating
+	) {
+		await reviewsRef
+			.doc(productId.toString())
+			.collection('reviews')
+			.add({
+				userId: userId,
+				userName: userName,
+				date: date,
+				body: body,
+				rating: rating,
+			})
+			.then(() => {
+				const reviews = [];
+				let avgRating = 0;
+				reviewsRef
+					.doc(productId.toString())
+					.collection('reviews')
+					.get()
+					.then((snapshot) => {
+						snapshot.docs.forEach((doc) => {
+							reviews.push(doc.data());
+						});
+						reviews.forEach((el) => {
+							avgRating += el.rating;
+						});
+						avgRating = avgRating / snapshot.docs.length;
+						return avgRating;
+					})
+					.then((rating) => {
+						// TODO:
+						reviewsRef.doc(productId.toString()).set({
+							avgRating: rating,
+						});
+					});
+			})
+			.catch((err) => {
+				console.error(err);
+				throw new Error('Something went wrong! Try again');
+			});
+	}
+
+	async function getReviews(productId) {
+		let reviews = [];
+		await reviewsRef
+			.doc(productId.toString())
+			.collection('reviews')
+			.orderBy('date', 'desc')
+			.get()
+			.then((snapshot) => {
+				snapshot.docs.forEach((doc) => {
+					reviews.push(doc.data());
+				});
+			});
+
+		return reviews;
+	}
+
+	async function getReviewsCount(productId) {
+		let size;
+		let avgRating;
+		await reviewsRef
+			.doc(productId.toString())
+			.collection('reviews')
+			.get()
+			.then((snapshot) => {
+				size = snapshot.size;
+			})
+			.then(async () => {
+				await reviewsRef
+					.doc(productId.toString())
+					.get()
+					.then((snapshot) => {
+						avgRating = snapshot.data()
+							? snapshot.data().avgRating
+							: 0;
+					});
+			});
+		return {
+			size: size ?? 0,
+			avgRating: avgRating ?? 0,
+		};
+	}
+
 	const value = {
 		setItems,
 		getProducts,
 		getOneProduct,
 		getUserInfo,
 		updateUserInfo,
+		addReview,
+		getReviews,
+		getReviewsCount,
 	};
 
 	return (

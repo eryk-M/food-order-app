@@ -43,7 +43,10 @@ export function AuthProvider({ children }) {
 							user
 								.updateProfile({ displayName: username })
 								.then(() => {
-									history.push('/user');
+									history.push({
+										pathname: '/user',
+										query: history.location.query,
+									});
 								});
 						});
 				} else {

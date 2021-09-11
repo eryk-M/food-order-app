@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
 import { FaCartPlus } from 'react-icons/fa';
-import { BsStar } from 'react-icons/bs';
+
+import { FaStar } from 'react-icons/fa';
 
 export const ProductContainer = styled.section`
 	display: flex;
@@ -124,10 +125,9 @@ export const ProductQuantity = styled.input`
 	font-size: 2rem;
 `;
 
-export const ProductStar = styled(BsStar)`
-	color: yellow;
+export const ProductStar = styled(FaStar)`
 	cursor: pointer;
-	fill: #fed700;
+	color: #e4e5e9;
 	&:not(:first-of-type) {
 		margin-left: 1rem;
 	}

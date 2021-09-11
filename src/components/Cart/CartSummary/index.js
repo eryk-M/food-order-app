@@ -32,7 +32,6 @@ const CartSummary = ({ step, onChangeStep }) => {
 
 	if (step === 0) return <Redirect to="/cart" />;
 
-	console.log(cart, address, totalPrice);
 	return (
 		<CartSummaryContainer>
 			<CartSummaryDetails>

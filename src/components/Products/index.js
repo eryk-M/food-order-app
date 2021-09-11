@@ -16,7 +16,7 @@ import {
 
 import { useApi } from '../../contexts/APIContext';
 
-// import { dummyData } from '../Products/dummyData';
+import { dummyData } from '../Products/dummyData';
 
 const Products = () => {
 	const [data, setData] = useState([]);
@@ -25,15 +25,15 @@ const Products = () => {
 	//API
 	const { setItems, getProducts } = useApi();
 
-	// const onSetItems = () => {
-	// 	try {
-	// 		console.log('Wrzucam...');
-	// 		setItems(dummyData);
-	// 		// await getImageUrl(data);
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// };
+	const onSetItems = () => {
+		try {
+			console.log('Wrzucam...');
+			setItems(dummyData);
+			// await getImageUrl(data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	const options = ['All', 'Burgers', 'Chicken'];
 
@@ -69,7 +69,7 @@ const Products = () => {
 
 	return (
 		<>
-			{/* <button onClick={onSetItems}>ustaw itemy</button> */}
+			<button onClick={onSetItems}>ustaw itemy</button>
 			<ProductsContainer>
 				<ProductsHeading>Our menu</ProductsHeading>
 				<ProductsFilter>

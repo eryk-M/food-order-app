@@ -21,6 +21,7 @@ export const GlobalStyle = createGlobalStyle`
 
 html {
     font-size: 62.5%;
+    scroll-behavior: smooth;
     @media only screen and (max-width: 840px) {
 		font-size: 50%;
 	}
@@ -51,7 +52,9 @@ input, textarea {
     outline: 0;
 	font-family: inherit;
 }
-
+.stars-error {
+    border: 1px solid var(--color-red);
+}
 
 .active-user-nav {
     font-weight: 700;

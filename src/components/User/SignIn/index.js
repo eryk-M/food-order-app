@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 
 import {
 	FormContainer,
@@ -22,6 +22,7 @@ const SignIn = () => {
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const history = useHistory();
+	const { query } = useLocation();
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -31,7 +32,7 @@ const SignIn = () => {
 			setLoading(true);
 			await login(emailRef.current.value, passwordRef.current.value);
 			setLoading(false);
-			history.push('/user');
+			history.push({ pathname: '/user', query: query });
 		} catch {
 			setLoading(false);
 			setError('Failed to sign in. Email or password is incorrect.');
@@ -44,7 +45,7 @@ const SignIn = () => {
 			setLoading(true);
 			await login('test@test.pl', 'test123');
 			setLoading(false);
-			history.push('/user');
+			history.push({ pathname: '/user', query: query });
 		} catch {
 			setLoading(false);
 			setError('Failed to sign in. Email or password is incorrect.');
@@ -93,7 +94,10 @@ const SignIn = () => {
 				</FormAlternative>
 			</FormContainer>
 			<FormAlternative>
-				Need an account? <FormLink to="/signup">Sign up</FormLink>
+				Need an account?{' '}
+				<FormLink to={{ pathname: '/signup', query: query }}>
+					Sign up
+				</FormLink>
 			</FormAlternative>
 		</>
 	);

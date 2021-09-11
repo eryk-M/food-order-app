@@ -21,9 +21,7 @@ import { GlobalStyle } from '../../globalStyles';
 
 const User = () => {
 	const { currentUser } = useAuth();
-
 	const { getUserInfo } = useApi();
-
 	const [userData, setUserData] = useState();
 
 	useEffect(() => {
