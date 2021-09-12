@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-const ButtonAnchor = styled.a`
+import { Link } from 'react-router-dom';
+
+const ButtonAnchor = styled(Link)`
 	padding: 1.2rem 1rem;
-	font-size: 1.2rem;
+	font-size: ${(props) => props.font ?? '1.2rem'};
 	min-width: 13rem;
 	background-color: var(--color-primary);
 	text-align: center;
@@ -18,8 +20,8 @@ const ButtonAnchor = styled.a`
 	}
 `;
 
-const ButtonLink = ({ children }) => {
-	return <ButtonAnchor>{children}</ButtonAnchor>;
+const ButtonLink = ({ children, ...rest }) => {
+	return <ButtonAnchor {...rest}>{children}</ButtonAnchor>;
 };
 
 export default ButtonLink;

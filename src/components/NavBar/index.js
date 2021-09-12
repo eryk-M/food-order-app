@@ -64,7 +64,7 @@ const NavBar = (props) => {
 							<NavLink to="/">Menu2</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink to="/">Menu3</NavLink>
+							<NavLink to="/food-tracker">Food tracker</NavLink>
 						</NavItem>
 					</NavList>
 					<NavLink to={currentUser ? '/user' : '/login'}>

@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
+import Loader from '../Loader';
+
 const ButtonMain = styled.button`
 	width: ${(props) => props.width};
 	margin-left: ${(props) => props.marginleft};

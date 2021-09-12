@@ -104,10 +104,17 @@ export const FormBtn = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	transition: all 0.2s;
 	&:disabled {
 		opacity: 0.5;
 		cursor: default;
 	}
+
+	${(props) =>
+		props.button
+			? 'letter-spacing: 1px;width: unset;font-size: 1.4rem;padding: 1rem;text-transform: uppercase;margin: 0;box-shadow: 0 0.2rem 1.5rem rgba(0, 0, 0, 0.2);border-radius: 5px;width:16rem;&:hover {background-color: var(--color-secondary);color: var(--color-grey-dark);}'
+			: ''}
 `;
 
 export const FormButton = ({ loading, type, text, ...rest }) => {

@@ -17,11 +17,12 @@ import { CartWrapper, CartContainer } from './CartElements';
 import CartOrder from './CartOrder';
 import CartAddress from './CartAddress';
 import CartSummary from './CartSummary';
+import CartComplete from './CartComplete';
 
 import { CartContext } from '../../contexts/CartContext';
-
 import { useAuth } from '../../contexts/AuthContext';
 import { useApi } from '../../contexts/APIContext';
+
 const Cart = () => {
 	const nameRef = useRef();
 	const phoneRef = useRef();
@@ -82,7 +83,7 @@ const Cart = () => {
 		getTotalPrice();
 	}, [cart, getTotalPrice]);
 
-	const onChangeStep = (e, where) => {
+	const onChangeStep = (e, where, orderId) => {
 		const { pathname } = history.location;
 		if (e !== undefined) e.preventDefault();
 
@@ -101,6 +102,11 @@ const Cart = () => {
 				history.push('/cart/address');
 			} else if (pathname === '/cart/address') {
 				history.push('/cart/summary');
+			} else if (pathname === '/cart/summary') {
+				history.push({
+					pathname: '/cart/complete',
+					order: orderId,
+				});
 			}
 		}
 	};
@@ -111,7 +117,7 @@ const Cart = () => {
 				<Steps.Item title="Details" />
 				<Steps.Item title="Address" />
 				<Steps.Item title="Summary" />
-				<Steps.Item title="Finish" />
+				<Steps.Item title="Complete" />
 			</Steps>
 			<CartContainer>
 				<Switch>
@@ -148,8 +154,17 @@ const Cart = () => {
 						path="/cart/summary"
 						exact
 						render={() => (
-							<CartSummary step={step} onChangeStep={onChangeStep} />
+							<CartSummary
+								currentUserId={currentUser ? currentUser.uid : ''}
+								step={step}
+								onChangeStep={onChangeStep}
+							/>
 						)}
+					/>
+					<Route
+						path="/cart/complete"
+						exact
+						render={() => <CartComplete step={step} />}
 					/>
 				</Switch>
 			</CartContainer>

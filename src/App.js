@@ -15,6 +15,7 @@ import Product from './pages/Product';
 import NavBar from './components/NavBar';
 import NavBarBurger from './components/NavBurger';
 import Checkout from './pages/Checkout';
+import Tracker from './pages/Tracker';
 
 import { CartProvider } from './contexts/CartContext';
 import { APIProvider } from './contexts/APIContext';
@@ -41,6 +42,8 @@ function App() {
 							<Route path="/signup" component={Login} />
 							<Route path="/forgot-password" component={Login} />
 							<Route path="/cart" component={Checkout} />
+							<Route path="/food-tracker" component={Tracker} />
+
 							<PrivateRoute path="/user" exact component={User} />
 							<PrivateRoute
 								path="/user/change-password"

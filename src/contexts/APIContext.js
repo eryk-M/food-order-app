@@ -2,8 +2,6 @@ import React, { createContext, useContext } from 'react';
 
 import { db, storage } from '../firebase';
 
-import { arrayUnion } from 'firebase/firestore';
-
 const APIContext = createContext();
 
 export function useApi() {
@@ -14,7 +12,7 @@ export function APIProvider({ children }) {
 	const productsRef = db.collection('products');
 	const usersRef = db.collection('users');
 	const reviewsRef = db.collection('reviews');
-
+	const ordersRef = db.collection('orders');
 	// HELPER AT START TO SET COLLECTION OF PRODUCTS
 
 	function setItems(data) {
@@ -191,6 +189,42 @@ export function APIProvider({ children }) {
 		};
 	}
 
+	async function addOrder(
+		userInfo,
+		orderInfo,
+		totalPrice,
+		orderId,
+		userId
+	) {
+		await ordersRef
+			.add({
+				orderId: orderId,
+				userId: userId ?? '',
+				totalPrice: totalPrice,
+				step: 1,
+				userInfo: userInfo,
+				orderInfo: orderInfo,
+			})
+			.catch((err) => {
+				return err;
+			});
+	}
+
+	async function getOrder(orderId) {
+		let order;
+		await ordersRef
+			.where('orderId', '==', orderId)
+			.get()
+			.then((snapshot) => {
+				order = snapshot.docs[0].data();
+			})
+			.catch((err) => {
+				return err;
+			});
+
+		return order;
+	}
+
 	const value = {
 		setItems,
 		getProducts,
@@ -200,6 +234,8 @@ export function APIProvider({ children }) {
 		addReview,
 		getReviews,
 		getReviewsCount,
+		addOrder,
+		getOrder,
 	};
 
 	return (

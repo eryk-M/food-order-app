@@ -57,6 +57,12 @@ export const cartReducer = (state, action) => {
 				...state,
 				totalPrice: action.payload,
 			};
+		case 'RESET_CART':
+			return {
+				address: {},
+				cart: [],
+				totalPrice: 0,
+			};
 		default:
 			return state;
 	}
