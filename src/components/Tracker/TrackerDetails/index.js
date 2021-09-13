@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { useLocation, useHistory, Redirect } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 
 import { Steps } from 'rsuite';
 

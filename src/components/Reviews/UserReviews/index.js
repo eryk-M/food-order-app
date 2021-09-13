@@ -1,10 +1,6 @@
 import React from 'react';
-import ReactStars from 'react-rating-stars-component';
 
-import {
-	StarIcon,
-	StarHalfIcon,
-} from '../../Reviews/FormReview/StarRating';
+import StarRating from '../FormReview/StarRating';
 
 import {
 	UserReviewsContainer,
@@ -21,22 +17,9 @@ import Loader from '../../Loader';
 const UserReviews = ({ reviews, loading }) => {
 	const dateNow = Date.now();
 
-	const starSettings = {
-		size: 15,
-		isHalf: true,
-		edit: false,
-		count: 5,
-		activeColor: '#ffc107',
-		color: '#e4e5e9',
-		emptyIcon: <StarIcon />,
-		halfIcon: <StarHalfIcon />,
-		filledIcon: <StarIcon />,
-	};
-
 	return (
 		<UserReviewsContainer className="user">
 			{loading && <Loader />}
-			{/* TODO: JAK DODASZ OCENE TO JEST NIE TA ILOSC GWIAZDEK CO TRZEBA ??? */}
 			{reviews &&
 				reviews.map((review, i) => (
 					<UserReview key={i}>
@@ -45,7 +28,7 @@ const UserReviews = ({ reviews, loading }) => {
 							{timeDifference(dateNow, review.date)}
 						</UserReviewTime>
 						<UserReviewRating>
-							<ReactStars value={review.rating} {...starSettings} />
+							<StarRating rating={review.rating} show />
 						</UserReviewRating>
 						<UserReviewBody>{review.body}</UserReviewBody>
 					</UserReview>

@@ -35,9 +35,7 @@ const FormReview = ({
 
 	const history = useHistory();
 	const { currentUser } = useAuth();
-	const { addReview, getReviewsCount } = useApi();
-
-	const [loading, setLoading] = useState(false);
+	const { addReview } = useApi();
 
 	const handleChangeInput = (e) => {
 		setReviewBody(e.target.value);
@@ -61,13 +59,7 @@ const FormReview = ({
 				reviewBody,
 				rating
 			).then(() => {
-				getReviewsCount(productId).then((data) => {
-					setRatings(data);
-				});
-
 				sectionReviewRef.current.scrollIntoView();
-
-				console.log(rating);
 				pushReviewToArray({
 					body: reviewBody,
 					date: date,
@@ -95,12 +87,7 @@ const FormReview = ({
 						<FormReviewLabelRating>
 							Your rating *
 						</FormReviewLabelRating>
-						<StarRating
-							rating={rating}
-							setRating={setRating}
-							setStarError={setStarError}
-							starError={starError}
-						/>
+						<StarRating setRating={setRating} rating={rating} />
 						{starError && (
 							<span
 								style={{

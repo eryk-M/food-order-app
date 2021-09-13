@@ -120,6 +120,7 @@ export function APIProvider({ children }) {
 			.then(() => {
 				const reviews = [];
 				let avgRating = 0;
+				let size;
 				reviewsRef
 					.doc(productId.toString())
 					.collection('reviews')
@@ -131,13 +132,14 @@ export function APIProvider({ children }) {
 						reviews.forEach((el) => {
 							avgRating += el.rating;
 						});
+						size = snapshot.size;
 						avgRating = avgRating / snapshot.docs.length;
-						return avgRating;
+						return [avgRating, size];
 					})
 					.then((rating) => {
-						// TODO:
 						reviewsRef.doc(productId.toString()).set({
-							avgRating: rating,
+							avgRating: rating[0],
+							ratingCount: rating[1],
 						});
 					});
 			})
@@ -161,32 +163,6 @@ export function APIProvider({ children }) {
 			});
 
 		return reviews;
-	}
-
-	async function getReviewsCount(productId) {
-		let size;
-		let avgRating;
-		await reviewsRef
-			.doc(productId.toString())
-			.collection('reviews')
-			.get()
-			.then((snapshot) => {
-				size = snapshot.size;
-			})
-			.then(async () => {
-				await reviewsRef
-					.doc(productId.toString())
-					.get()
-					.then((snapshot) => {
-						avgRating = snapshot.data()
-							? snapshot.data().avgRating
-							: 0;
-					});
-			});
-		return {
-			size: size ?? 0,
-			avgRating: avgRating ?? 0,
-		};
 	}
 
 	async function addOrder(
@@ -233,7 +209,6 @@ export function APIProvider({ children }) {
 		updateUserInfo,
 		addReview,
 		getReviews,
-		getReviewsCount,
 		addOrder,
 		getOrder,
 	};

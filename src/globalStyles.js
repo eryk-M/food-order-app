@@ -26,7 +26,7 @@ html {
 		font-size: 50%;
 	}
     @media only screen and (max-width: 600px) {
-      font-size: 37.5%; // 1rem = 6px; 6px/16px = 37.5%
+      font-size: 37.5%;
   }
 }
 

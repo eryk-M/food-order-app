@@ -42,7 +42,6 @@ const Reviews = ({ setRatings, productId }) => {
 	}, [getReviews, productId, currentUser]);
 
 	const pushReviewToArray = (data) => {
-		console.log(data);
 		setReviews([data, ...reviews]);
 	};
 

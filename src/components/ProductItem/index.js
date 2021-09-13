@@ -21,34 +21,42 @@ import {
 
 import { Alert } from '../Alert/index';
 
-import ReactStars from 'react-rating-stars-component';
 import { CartContext } from '../../contexts/CartContext';
 import { useApi } from '../../contexts/APIContext';
-import {
-	StarIcon,
-	StarHalfIcon,
-} from '../Reviews/FormReview/StarRating';
+import StarRating from '../Reviews/FormReview/StarRating';
 import Reviews from '../Reviews';
+
+import { db } from '../../firebase';
+
+import { useFirestoreQuery } from '../../hooks/useFirestoreQuery';
 
 const ProductItem = ({ props }) => {
 	const {
 		state: { cart },
 		dispatch,
 	} = useContext(CartContext);
-
-	const { getOneProduct, getReviewsCount } = useApi();
+	const { data } = useFirestoreQuery(
+		db.collection('reviews').doc(props.match.params.id)
+	);
+	const { getOneProduct } = useApi();
 	const [currentItem, setCurrentItem] = useState();
 	const [ratings, setRatings] = useState();
 	const [quantity, setQuantity] = useState(1);
 	const [isAdded, setIsAdded] = useState(false);
 
+	useEffect(() => {
+		if (data) {
+			setRatings(data);
+		}
+		return () => {
+			setRatings();
+		};
+	}, [data]);
+
 	if (!currentItem) {
 		getOneProduct(Number(props.match.params.id)).then((data) =>
 			setCurrentItem(data)
 		);
-		getReviewsCount(Number(props.match.params.id)).then((data) => {
-			setRatings(data);
-		});
 	}
 
 	const onInputChange = (e) => {
@@ -73,17 +81,17 @@ const ProductItem = ({ props }) => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart]);
 
-	const starSettings = {
-		size: 25,
-		isHalf: true,
-		edit: false,
-		count: 5,
-		activeColor: '#ffc107',
-		color: '#e4e5e9',
-		emptyIcon: <StarIcon />,
-		halfIcon: <StarHalfIcon />,
-		filledIcon: <StarIcon />,
-	};
+	// const starSettings = {
+	// 	size: 25,
+	// 	isHalf: true,
+	// 	edit: false,
+	// 	count: 5,
+	// 	activeColor: '#ffc107',
+	// 	color: '#e4e5e9',
+	// 	emptyIcon: <StarIcon />,
+	// 	halfIcon: <StarHalfIcon />,
+	// 	filledIcon: <StarIcon />,
+	// };
 
 	const addZeroes = (num) => {
 		const dec = num.toString().split('.')[1];
@@ -91,10 +99,9 @@ const ProductItem = ({ props }) => {
 		const len = dec.length > 0 ? 1 : 0;
 		return Number(num).toFixed(len);
 	};
-
 	return (
 		<>
-			{currentItem && ratings && (
+			{currentItem && (
 				<>
 					<ProductContainer>
 						<ProductLeft>
@@ -105,16 +112,14 @@ const ProductItem = ({ props }) => {
 							<ProductTitle>{currentItem.name}</ProductTitle>
 							<ProductPrice>${currentItem.price}</ProductPrice>
 							<ProductStarIcons>
-								<ReactStars
-									value={ratings.avgRating}
-									{...starSettings}
+								<StarRating
+									rating={ratings ? ratings.avgRating.toFixed() : 0}
+									show
 								/>
 							</ProductStarIcons>
 							<ProductRating>
-								{ratings.avgRating
-									? addZeroes(ratings.avgRating)
-									: '0'}
-								/5 ({ratings.size ?? '0'} ratings)
+								{ratings ? addZeroes(ratings.avgRating) : '0'}
+								/5 ({ratings ? ratings.ratingCount : '0'} ratings)
 							</ProductRating>
 							<ProductDesc>{currentItem.desc}</ProductDesc>
 							<ProductIngredients>

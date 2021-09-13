@@ -1,41 +1,45 @@
-import React, { useState } from 'react';
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
-import styled from 'styled-components/macro';
-import ReactStars from 'react-rating-stars-component';
+import React, { useState, useEffect } from 'react';
 
-export const StarIcon = styled(FaStar)`
-	transition: color 0.2s;
-	margin-right: 0.5rem;
-`;
+import { StarLabel, StarInput, StarIcon } from './StarRatingElements';
 
-export const StarHalfIcon = styled(FaStarHalfAlt)`
-	transition: color 0.2s;
-	margin-right: 0.5rem;
-`;
+const StarRating = ({ rating, setRating, show }) => {
+	const [hover, setHover] = useState(null);
 
-const StarRating = ({ setRating, setStarError, starError }) => {
-	const ratingChanged = (newRating) => {
-		setStarError('');
-		setRating(newRating);
-	};
-
-	const starSettings = {
-		size: 25,
-		value: 0,
-		onChange: ratingChanged,
-		count: 5,
-		activeColor: '#ffc107',
-		color: '#e4e5e9',
-		emptyIcon: <StarIcon />,
-		filledIcon: <StarIcon />,
-	};
+	useEffect(() => {
+		if (rating && !show) {
+			setRating(rating);
+		}
+	}, [rating, setRating, show]);
 
 	return (
-		<div
-			className={starError ? 'stars-error' : ''}
-			style={{ margin: '1rem 0', display: 'inline-block' }}
-		>
-			<ReactStars {...starSettings} />
+		<div>
+			{[...Array(5)].map((star, i) => {
+				const ratingValue = i + 1;
+
+				return (
+					<StarLabel key={i}>
+						<StarInput
+							type="radio"
+							name="rating"
+							value={ratingValue}
+							onClick={() => (show ? null : setRating(ratingValue))}
+						/>
+						<StarIcon
+							color={
+								ratingValue <= (hover || rating)
+									? '#ffc107'
+									: '#e4e5e9'
+							}
+							size={25}
+							onMouseEnter={() =>
+								show ? null : setHover(ratingValue)
+							}
+							onMouseLeave={() => (show ? null : setHover(null))}
+							show={`${show}`}
+						/>
+					</StarLabel>
+				);
+			})}
 		</div>
 	);
 };
