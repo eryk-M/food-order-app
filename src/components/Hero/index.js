@@ -22,7 +22,7 @@ const Hero = () => {
 					</HeroP>
 					<HeroH1>The best burgers in town</HeroH1>
 					<HeroP fontFamily="Arvo, serif">From $10.99</HeroP>
-					<ButtonLink>Order now!</ButtonLink>
+					<ButtonLink to="/">Order now!</ButtonLink>
 				</HeroContent>
 			</HeroWrapper>
 		</HeroContainer>

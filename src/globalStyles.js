@@ -25,6 +25,9 @@ html {
     @media only screen and (max-width: 840px) {
 		font-size: 50%;
 	}
+    @media only screen and (max-width: 600px) {
+      font-size: 37.5%; // 1rem = 6px; 6px/16px = 37.5%
+  }
 }
 
 h1, h2, h3 {

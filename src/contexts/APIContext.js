@@ -201,7 +201,7 @@ export function APIProvider({ children }) {
 				orderId: orderId,
 				userId: userId ?? '',
 				totalPrice: totalPrice,
-				step: 1,
+				step: 0,
 				userInfo: userInfo,
 				orderInfo: orderInfo,
 			})

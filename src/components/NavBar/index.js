@@ -19,6 +19,8 @@ import { withRouter } from 'react-router-dom';
 
 import { CartContext } from '../../contexts/CartContext';
 
+import { useWindowSize } from '../../hooks/useWindowSize';
+
 const NavBar = (props) => {
 	const { currentUser } = useAuth();
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
@@ -98,24 +100,3 @@ const NavBar = (props) => {
 };
 
 export default withRouter(NavBar);
-
-// Hook
-function useWindowSize() {
-	const [windowSize, setWindowSize] = useState({
-		width: undefined,
-		height: undefined,
-	});
-	useEffect(() => {
-		function handleResize() {
-			// Set window width/height to state
-			setWindowSize({
-				width: window.innerWidth,
-				height: window.innerHeight,
-			});
-		}
-		window.addEventListener('resize', handleResize);
-		handleResize();
-		return () => window.removeEventListener('resize', handleResize);
-	}, []);
-	return windowSize;
-}
