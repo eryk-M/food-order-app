@@ -49,7 +49,6 @@ ul {
 }
 
 input, textarea {
-    border: 1px solid #ccc !important;
     border-radius: 0.5rem;
     font-weight: 400;
     outline: 0;

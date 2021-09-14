@@ -25,10 +25,12 @@ export function AuthProvider({ children }) {
 			.get()
 			.then((snapshot) => {
 				if (snapshot.empty) {
+					console.log(snapshot);
 					return auth
 						.createUserWithEmailAndPassword(email, password)
 						.then((createdUser) => {
 							db.collection('users').doc(createdUser.user.uid).set({
+								username: username,
 								name: '',
 								address: '',
 								phone: '',
@@ -54,7 +56,6 @@ export function AuthProvider({ children }) {
 					error = {
 						...error,
 						code: 'username/taken',
-						message: 'Username already taken',
 					};
 					throw error;
 				}
@@ -63,9 +64,9 @@ export function AuthProvider({ children }) {
 			.catch((err) => {
 				switch (err.code) {
 					case 'auth/email-already-in-use':
-						throw new Error('E-mail already in use');
+						throw new Error(err.code);
 					case 'username/taken':
-						throw new Error(err.message);
+						throw new Error(err.code);
 					default:
 						break;
 				}

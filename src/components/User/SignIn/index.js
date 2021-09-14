@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useHistory, useLocation } from 'react-router-dom';
 
@@ -12,71 +12,99 @@ import {
 	FormButton,
 	FormAlternative,
 	FormLink,
-	FormAlert,
+	FormError,
 } from '../../Form/FormElements';
 
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 const SignIn = () => {
-	const emailRef = useRef();
-	const passwordRef = useRef();
 	const { login } = useAuth();
-	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const history = useHistory();
 	const { query } = useLocation();
 
-	async function handleSubmit(e) {
-		e.preventDefault();
+	const validationSchema = Yup.object().shape({
+		email: Yup.string()
+			.required('Email is required')
+			.email('Email is invalid'),
+		password: Yup.string()
+			.required('Password is required')
+			.min(6, 'Password must be at least 6 characters'),
+	});
 
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		setError,
+		clearErrors,
+	} = useForm({ resolver: yupResolver(validationSchema) });
+
+	const onSubmit = async (data) => {
 		try {
-			setError('');
+			clearErrors();
 			setLoading(true);
-			await login(emailRef.current.value, passwordRef.current.value);
+			await login(data.email, data.password);
 			setLoading(false);
 			history.push({ pathname: '/user', query: query });
 		} catch {
 			setLoading(false);
-			setError('Failed to sign in. Email or password is incorrect.');
+			setError(
+				'email',
+				{
+					message: 'Email or password is incorrect',
+				},
+				{ shouldFocus: true }
+			);
+			setError('password', {
+				message: 'Email or password is incorrect',
+			});
 		}
-	}
-
-	async function handleLoginDemo() {
+	};
+	const onSubmitDemo = async () => {
 		try {
-			setError('');
+			clearErrors();
 			setLoading(true);
 			await login('test@test.pl', 'test123');
 			setLoading(false);
 			history.push({ pathname: '/user', query: query });
 		} catch {
 			setLoading(false);
-			setError('Failed to sign in. Email or password is incorrect.');
 		}
-	}
+	};
 
 	return (
 		<>
 			<FormContainer>
 				<FormHeading>Log In</FormHeading>
-				{error && <FormAlert variant="danger">{error}</FormAlert>}
-				<Form onSubmit={handleSubmit}>
+				<Form onSubmit={handleSubmit(onSubmit)}>
 					<FormElement id="email">
 						<FormLabel>Email</FormLabel>
 						<FormInput
 							type="email"
-							ref={emailRef}
 							placeholder="example@example.com"
 							disabled={loading}
-							required
+							{...register('email')}
+							error={errors.email}
 						/>
+						{errors.email && (
+							<FormError>{errors.email.message}</FormError>
+						)}
 					</FormElement>
 					<FormElement id="password">
 						<FormLabel>Password</FormLabel>
 						<FormInput
 							type="password"
-							ref={passwordRef}
 							placeholder="Enter your password"
 							disabled={loading}
-							required
+							{...register('password')}
+							error={errors.password}
 						/>
+						{errors.password && (
+							<FormError>{errors.password.message}</FormError>
+						)}
 					</FormElement>
 
 					<FormButton loading={loading} text="Log In" />
@@ -87,7 +115,7 @@ const SignIn = () => {
 					loading={loading}
 					text="DEMO"
 					type="text"
-					onClick={handleLoginDemo}
+					onClick={onSubmitDemo}
 				/>
 				<FormAlternative>
 					<FormLink to="/forgot-password">Forgot Password?</FormLink>

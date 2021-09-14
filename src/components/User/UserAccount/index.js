@@ -8,6 +8,7 @@ import {
 	FormInput,
 	FormButton,
 	FormGroup,
+	FormError,
 } from '../../Form/FormElements';
 
 import { Alert } from '../../Alert';
@@ -17,21 +18,54 @@ import Loader from '../../Loader';
 
 import { UserAccountHeading } from './UserAccountElements';
 
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 // TODO: Aktualizacja inputow po kliknieciu Update np. name > Name
 
 const UserAccount = ({ userData }) => {
-	const nameRef = useRef();
-	const addressRef = useRef();
-	const phoneRef = useRef();
-	const zipCodeRef = useRef();
-	const cityRef = useRef();
-	const emailRef = useRef();
+	// const nameRef = useRef();
+	// const addressRef = useRef();
+	// const phoneRef = useRef();
+	// const zipCodeRef = useRef();
+	// const cityRef = useRef();
+	// const emailRef = useRef();
+
+	const validationSchema = Yup.object().shape({
+		name: Yup.string()
+			.min(3, 'Name must be at least 3 characters')
+			.max(20, 'Name must have maximum of 20 characters'),
+		address: Yup.string()
+			.min(3, 'Address must be at least 3 characters')
+			.max(30, 'Address must have maximum of 20 characters'),
+		phone: Yup.string().matches(
+			/[0-9]{9}/,
+			'Phone must be in 9 digits format'
+		),
+		city: Yup.string()
+			.min(3, 'City must be at least 3 characters')
+			.max(20, 'City must have maximum of 20 characters')
+			.matches(/[A-Za-z]/, 'Only letters are allowed'),
+		zipcode: Yup.string().matches(
+			/[0-9]{2}-[0-9]{3}/,
+			'Zip code must be in xx-xxx format'
+		),
+	});
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		setError,
+		clearErrors,
+	} = useForm({ resolver: yupResolver(validationSchema) });
 	const { query } = useLocation();
 
 	const { currentUser, updateEmail } = useAuth();
 	const { getUserInfo, updateUserInfo } = useApi();
 
-	const [error, setError] = useState('');
+	// const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [user, setUser] = useState();
 	const [showSuccess, setShowSuccess] = useState(false);
@@ -40,46 +74,46 @@ const UserAccount = ({ userData }) => {
 
 	if (!user && userData) setUser(userData);
 
-	async function handleSubmit(e) {
-		e.preventDefault();
+	// async function handleSubmit(e) {
+	// 	e.preventDefault();
 
-		const promises = [];
+	// 	const promises = [];
 
-		setLoading(true);
+	// 	setLoading(true);
 
-		if (emailRef.current.value !== currentUser.email) {
-			promises.push(updateEmail(emailRef.current.value));
-		}
+	// 	if (emailRef.current.value !== currentUser.email) {
+	// 		promises.push(updateEmail(emailRef.current.value));
+	// 	}
 
-		promises.push(
-			updateUserInfo(
-				currentUser.uid,
-				nameRef.current.value.charAt(0).toUpperCase() +
-					nameRef.current.value.slice(1),
-				addressRef.current.value.charAt(0).toUpperCase() +
-					addressRef.current.value.slice(1),
-				phoneRef.current.value,
-				cityRef.current.value,
-				zipCodeRef.current.value
-			)
-		);
+	// 	promises.push(
+	// 		updateUserInfo(
+	// 			currentUser.uid,
+	// 			nameRef.current.value.charAt(0).toUpperCase() +
+	// 				nameRef.current.value.slice(1),
+	// 			addressRef.current.value.charAt(0).toUpperCase() +
+	// 				addressRef.current.value.slice(1),
+	// 			phoneRef.current.value,
+	// 			cityRef.current.value,
+	// 			zipCodeRef.current.value
+	// 		)
+	// 	);
 
-		Promise.all(promises)
-			.then(() => {
-				setShowSuccess(true);
-				getUserInfo(currentUser.uid).then((data) => {
-					setUser(data);
-				});
-				setTimeout(() => {
-					setLoading(false);
-					setShowSuccess(false);
-				}, 1000);
-			})
-			.catch(() => {
-				setError('Failed to update');
-			})
-			.finally(() => {});
-	}
+	// 	Promise.all(promises)
+	// 		.then(() => {
+	// 			setShowSuccess(true);
+	// 			getUserInfo(currentUser.uid).then((data) => {
+	// 				setUser(data);
+	// 			});
+	// 			setTimeout(() => {
+	// 				setLoading(false);
+	// 				setShowSuccess(false);
+	// 			}, 1000);
+	// 		})
+	// 		.catch(() => {
+	// 			setError('Failed to update');
+	// 		})
+	// 		.finally(() => {});
+	// }
 
 	// useEffect(() => {
 	// 	showSuccess &&
@@ -95,23 +129,29 @@ const UserAccount = ({ userData }) => {
 	// 		}, 4000);
 	// }, [currentUser.uid, getUserInfo, user]);
 
+	const onSubmit = (data) => console.log(data);
+
 	return (
 		<>
 			<UserAccountHeading>General Info</UserAccountHeading>
 			{!user && <Loader />}
 			{user && (
-				<Form onSubmit={handleSubmit}>
+				<Form onSubmit={handleSubmit(onSubmit)}>
 					{showSuccess && <Alert success>Profile updated</Alert>}
-					{error && <Alert error>{error}</Alert>}
+					{/* {error && <Alert error>{error}</Alert>} */}
 					<FormGroup flex>
 						<FormElement id="email">
 							<FormLabel>Email</FormLabel>
 							<FormInput
 								type="email"
-								ref={emailRef}
+								{...register('email')}
 								required
 								defaultValue={currentUser.email}
+								error={errors.email}
 							/>
+							{errors.email && (
+								<FormError>{errors.email.message}</FormError>
+							)}
 						</FormElement>
 					</FormGroup>
 					{/* test */}
@@ -119,52 +159,71 @@ const UserAccount = ({ userData }) => {
 						<FormLabel>Name</FormLabel>
 						<FormInput
 							type="text"
-							ref={nameRef}
+							{...register('name')}
 							defaultValue={user.name}
-							min="3"
-							max="20"
+							error={errors.name}
 						/>
+						{errors.name && (
+							<FormError>{errors.name.message}</FormError>
+						)}
 					</FormElement>
 					<FormElement id="address">
 						<FormLabel>Address</FormLabel>
 						<FormInput
 							type="text"
-							ref={addressRef}
+							{...register('address')}
 							defaultValue={user.address}
-							min="3"
-							max="30"
 							placeholder="Street, Flat/House number"
+							error={errors.address}
 						/>
+						{errors.address && (
+							<FormError>{errors.address.message}</FormError>
+						)}
 					</FormElement>
 					<FormElement id="phone">
 						<FormLabel>Phone</FormLabel>
 						<FormInput
 							type="tel"
-							ref={phoneRef}
+							// ref={phoneRef}
+							{...register('phone')}
 							defaultValue={user.phone}
-							pattern="[0-9]{9}"
+							// pattern="[0-9]{9}"
 							placeholder="9 digits"
+							error={errors.phone}
 						/>
+						{errors.phone && (
+							<FormError>{errors.phone.message}</FormError>
+						)}
 					</FormElement>
 					<FormGroup flex>
 						<FormElement id="city">
 							<FormLabel>City</FormLabel>
 							<FormInput
 								type="text"
-								ref={cityRef}
+								{...register('city')}
+								// ref={cityRef}
 								defaultValue={user.city}
 								// pattern="[A-Za-z]"
+								error={errors.city}
 							/>
+							{errors.city && (
+								<FormError>{errors.city.message}</FormError>
+							)}
 						</FormElement>
 						<FormElement id="zipcode" marginleft="2rem">
 							<FormLabel>Zip/Postal Code</FormLabel>
 							<FormInput
 								type="text"
-								ref={zipCodeRef}
+								{...register('zipcode')}
+								// ref={zipCodeRef}
 								defaultValue={user.zip}
-								pattern="[0-9]{2}-[0-9]{3}"
+								// pattern="[0-9]{2}-[0-9]{3}"
 								placeholder="e.g. 11-111"
+								error={errors.zipcode}
 							/>
+							{errors.zipcode && (
+								<FormError>{errors.zipcode.message}</FormError>
+							)}
 						</FormElement>
 					</FormGroup>
 					<FormButton loading={loading} text="Update" />

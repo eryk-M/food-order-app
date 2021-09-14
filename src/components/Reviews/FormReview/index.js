@@ -14,12 +14,18 @@ import {
 } from './FormReviewElements';
 
 import Button from '../../Button';
-import { FormInput, FormTextArea } from '../../Form/FormElements';
+import {
+	FormInput,
+	FormTextArea,
+	FormError,
+} from '../../Form/FormElements';
 
 import StarRating from './StarRating';
 
 import { useAuth } from '../../../contexts/AuthContext';
 import { useApi } from '../../../contexts/APIContext';
+
+import { useForm } from 'react-hook-form';
 
 const FormReview = ({
 	productId,
@@ -27,27 +33,28 @@ const FormReview = ({
 	sectionReviewRef,
 	isAdded,
 	setIsAdded,
-	setRatings,
 }) => {
 	const [rating, setRating] = useState(null);
-	const [reviewBody, setReviewBody] = useState('');
 	const [starError, setStarError] = useState(false);
 
 	const history = useHistory();
 	const { currentUser } = useAuth();
 	const { addReview } = useApi();
 
-	const handleChangeInput = (e) => {
-		setReviewBody(e.target.value);
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
+	//HOOK FORM
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			displayName: currentUser.displayName,
+		},
+	});
+	const onSubmit = (data) => {
 		if (!rating) {
 			return setStarError('You need to rate the product!');
 		}
-
 		const date = Date.now();
 
 		try {
@@ -56,12 +63,12 @@ const FormReview = ({
 				currentUser.uid,
 				currentUser.displayName,
 				date,
-				reviewBody,
+				data.body,
 				rating
 			).then(() => {
 				sectionReviewRef.current.scrollIntoView();
 				pushReviewToArray({
-					body: reviewBody,
+					body: data.body,
 					date: date,
 					rating: rating,
 					userId: currentUser.uid,
@@ -74,12 +81,13 @@ const FormReview = ({
 			console.error(err);
 		}
 	};
+
 	return (
 		<FormReviewContainer>
 			{isAdded && 'You already review this product'}
 			{/* TODO: DODAJ !isAdded na dole jak zrobisz!! */}
 			{currentUser && (
-				<FormReviewForm onSubmit={(e) => handleSubmit(e)}>
+				<FormReviewForm onSubmit={handleSubmit(onSubmit)}>
 					<FormReviewNote>
 						Add review and let us know what you think!
 					</FormReviewNote>
@@ -89,16 +97,7 @@ const FormReview = ({
 						</FormReviewLabelRating>
 						<StarRating setRating={setRating} rating={rating} />
 						{starError && (
-							<span
-								style={{
-									margin: '1rem 0',
-									color: 'var(--color-red)',
-									fontSize: '1.4rem',
-									display: 'block',
-								}}
-							>
-								{starError}
-							</span>
+							<FormError>You need to rate this product</FormError>
 						)}
 					</FormReviewFormRating>
 					<FormReviewFormCommentBottom>
@@ -107,11 +106,8 @@ const FormReview = ({
 								Name
 							</FormReviewFormCommentLabel>
 							<FormInput
-								defaultValue={currentUser.displayName}
-								disabled={currentUser ?? 'true'}
-								required
-								minLength="2"
-								maxLength="14"
+								{...register('displayName')}
+								disabled={true}
 							/>
 						</FormReviewFormComment>
 					</FormReviewFormCommentBottom>
@@ -120,10 +116,17 @@ const FormReview = ({
 							Your review *
 						</FormReviewFormCommentLabel>
 						<FormTextArea
-							required
-							maxLength="800"
-							onChange={(e) => handleChangeInput(e)}
+							{...register('body', {
+								required: 'Text required here',
+								maxLength: {
+									value: 800,
+									message: 'You have reached max length',
+								},
+							})}
 						/>
+						{errors.body && (
+							<FormError>{errors.body.message}</FormError>
+						)}
 					</FormReviewFormComment>
 					<Button width="100%">Add review</Button>
 				</FormReviewForm>

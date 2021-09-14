@@ -1,8 +1,18 @@
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 
 import { Link } from 'react-router-dom';
-
+import { MdErrorOutline } from 'react-icons/md';
 import Loader from '../Loader';
+
+const fadeIn = keyframes`
+from{
+    opacity: 0%
+}
+
+to {
+    opacity: 100%
+}
+`;
 
 export const FormContainer = styled.div`
 	min-width: 40%;
@@ -54,11 +64,14 @@ export const FormInput = styled.input`
 	width: 100%;
 	display: block;
 	border-radius: 0.5rem;
+	transition: border 0.1s ease-in;
 	border: ${(props) => {
-		if (props.error) {
+		if (props.warning) {
+			return '1px solid orange';
+		} else if (props.error) {
 			return '1px solid var(--color-red)';
 		}
-		return '1px solid rgba(0, 0, 0, 0.5);';
+		return '1px solid #ccc;';
 	}};
 
 	-moz-appearance: textfield;
@@ -144,3 +157,27 @@ export const FormSpan = styled.span`
 	color: var(--color-red);
 	margin-bottom: 1rem;
 `;
+
+export const FormErr = styled.p`
+	font-size: 1.4rem;
+	color: ${(props) =>
+		props.warning ? 'orange' : 'var(--color-red)'};
+	margin: 1rem 0;
+	animation: ${fadeIn} 0.1s ease-in;
+	opacity: 100%;
+`;
+
+export const FormErrIcon = styled(MdErrorOutline)`
+	font-size: 2rem;
+	vertical-align: middle;
+	margin-right: 1rem;
+`;
+
+export const FormError = ({ children, ...rest }) => {
+	return (
+		<FormErr {...rest}>
+			<FormErrIcon />
+			{children}
+		</FormErr>
+	);
+};

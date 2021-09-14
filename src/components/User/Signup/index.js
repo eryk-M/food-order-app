@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
 
@@ -12,98 +12,130 @@ import {
 	FormButton,
 	FormAlternative,
 	FormLink,
+	FormError,
 	FormAlert,
 } from '../../Form/FormElements';
 
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 const Signup = () => {
-	const emailRef = useRef();
-	const passwordRef = useRef();
-	const passwordConfirmRef = useRef();
-	const userNameRef = useRef();
+	//TODO: username musi sie zgadzac teraz nie wazne czy mala czy duza to sie nie zgadza
+	const validationSchema = Yup.object().shape({
+		userName: Yup.string()
+			.required('Username is required')
+			.trim()
+			.min(4, 'Username must be at least 4 characters')
+			.max(12, 'Username must have maximum of 12 characters'),
+		email: Yup.string()
+			.required('Email is required')
+			.email('Email is invalid'),
+		password: Yup.string()
+			.required('Password is required')
+			.min(6, 'Password must be at least 6 characters'),
+		confirmPassword: Yup.string()
+			.required('Confirm Password is required')
+			.oneOf([Yup.ref('password'), null], 'Passwords must match'),
+	});
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		setError,
+		clearErrors,
+	} = useForm({ resolver: yupResolver(validationSchema) });
 
 	const { signup } = useAuth();
-	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const history = useHistory();
 
-	async function handleSubmit(e) {
-		e.preventDefault();
-		if (
-			passwordRef.current.value !== passwordConfirmRef.current.value
-		) {
-			return setError('Passwords do not match');
-		} else if (passwordRef.current.value.length < 6) {
-			return setError(
-				'Password has to be at least 6 characters long'
-			);
-		} else if (userNameRef.current.value.indexOf(' ') >= 0) {
-			return setError('Username has to be without spaces');
-		} else if (userNameRef.current.value.length < 4) {
-			return setError('Username must have at least 4 characters');
-		}
-
+	const onSubmit = async (data) => {
 		try {
-			setError('');
+			clearErrors();
 			setLoading(true);
-			await signup(
-				emailRef.current.value,
-				passwordRef.current.value,
-				userNameRef.current.value,
-				history
-			);
+			await signup(data.email, data.password, data.userName, history);
+			setLoading(false);
 		} catch (e) {
-			setError(e.message);
+			setLoading(false);
+			if (e.message === 'username/taken') {
+				setError('userName', {
+					message: 'Username already in use!',
+				});
+			} else if (e.message === 'auth/email-already-in-use') {
+				setError('email', {
+					message: 'E-mail already in use!',
+				});
+			} else {
+				setError('fatal', {
+					message: 'Something went wrong. Please try again.',
+				});
+			}
 		}
-
-		setLoading(false);
-	}
+	};
 
 	return (
 		<>
 			<FormContainer>
 				<FormHeading>Sign Up</FormHeading>
-				{error && <FormAlert variant="danger">{error}</FormAlert>}
-				<Form onSubmit={handleSubmit}>
+				{errors.fatal && (
+					<FormAlert variant="danger">
+						{errors.fatal.message}
+					</FormAlert>
+				)}
+				<Form onSubmit={handleSubmit(onSubmit)}>
 					<FormElement id="username">
 						<FormLabel>Username (4 - 12 characters) *</FormLabel>
 						<FormInput
 							type="text"
-							ref={userNameRef}
 							placeholder="Your username"
-							required
-							maxLength="12"
+							{...register('userName')}
 							disabled={loading}
+							error={errors.userName}
 						/>
+						{errors.userName && (
+							<FormError>{errors.userName.message}</FormError>
+						)}
 					</FormElement>
 					<FormElement id="email">
 						<FormLabel>Email *</FormLabel>
 						<FormInput
 							type="email"
-							ref={emailRef}
+							{...register('email')}
 							placeholder="example@example.com"
-							required
 							disabled={loading}
+							error={errors.email}
 						/>
+						{errors.email && (
+							<FormError>{errors.email.message}</FormError>
+						)}
 					</FormElement>
 					<FormElement id="password">
 						<FormLabel>Password (min 6 characters) *</FormLabel>
 						<FormInput
 							type="password"
-							ref={passwordRef}
+							{...register('password')}
 							placeholder="Enter your password"
-							required
 							disabled={loading}
+							error={errors.password}
 						/>
+						{errors.password && (
+							<FormError>{errors.password.message}</FormError>
+						)}
 					</FormElement>
 					<FormElement id="password-confirm">
 						<FormLabel>Password Confirmation *</FormLabel>
 						<FormInput
 							type="password"
-							ref={passwordConfirmRef}
+							{...register('confirmPassword')}
 							placeholder="Confirm your password"
-							required
 							disabled={loading}
+							error={errors.confirmPassword}
 						/>
+						{errors.confirmPassword && (
+							<FormError>{errors.confirmPassword.message}</FormError>
+						)}
 					</FormElement>
 					<FormButton loading={loading} text="Sign Up" />
 				</Form>

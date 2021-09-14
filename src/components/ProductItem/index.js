@@ -19,15 +19,14 @@ import {
 	ProductPrice,
 } from './ProductItemElements';
 
-import { Alert } from '../Alert/index';
+import { Alert } from '../Alert';
 
 import { CartContext } from '../../contexts/CartContext';
 import { useApi } from '../../contexts/APIContext';
 import StarRating from '../Reviews/FormReview/StarRating';
+
 import Reviews from '../Reviews';
-
 import { db } from '../../firebase';
-
 import { useFirestoreQuery } from '../../hooks/useFirestoreQuery';
 
 const ProductItem = ({ props }) => {
@@ -38,6 +37,7 @@ const ProductItem = ({ props }) => {
 	const { data } = useFirestoreQuery(
 		db.collection('reviews').doc(props.match.params.id)
 	);
+
 	const { getOneProduct } = useApi();
 	const [currentItem, setCurrentItem] = useState();
 	const [ratings, setRatings] = useState();
@@ -81,24 +81,13 @@ const ProductItem = ({ props }) => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart]);
 
-	// const starSettings = {
-	// 	size: 25,
-	// 	isHalf: true,
-	// 	edit: false,
-	// 	count: 5,
-	// 	activeColor: '#ffc107',
-	// 	color: '#e4e5e9',
-	// 	emptyIcon: <StarIcon />,
-	// 	halfIcon: <StarHalfIcon />,
-	// 	filledIcon: <StarIcon />,
-	// };
-
 	const addZeroes = (num) => {
 		const dec = num.toString().split('.')[1];
 		if (!dec) return num;
 		const len = dec.length > 0 ? 1 : 0;
 		return Number(num).toFixed(len);
 	};
+
 	return (
 		<>
 			{currentItem && (
