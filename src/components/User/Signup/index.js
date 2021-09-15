@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
-
+import { useApi } from 'contexts/APIContext';
 import {
 	FormContainer,
 	FormHeading,
@@ -14,7 +14,7 @@ import {
 	FormLink,
 	FormError,
 	FormAlert,
-} from '../../Form/FormElements';
+} from 'components/Form/FormElements';
 
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -22,12 +22,26 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 const Signup = () => {
 	//TODO: username musi sie zgadzac teraz nie wazne czy mala czy duza to sie nie zgadza
+
+	const { signup } = useAuth();
+	const { validateUsername } = useApi();
+
 	const validationSchema = Yup.object().shape({
 		userName: Yup.string()
 			.required('Username is required')
 			.trim()
 			.min(4, 'Username must be at least 4 characters')
-			.max(12, 'Username must have maximum of 12 characters'),
+			.max(12, 'Username must have maximum of 12 characters')
+			.test(
+				'userName',
+				'Username is already taken',
+				async (value) => {
+					let response = await validateUsername(value).then((el) => {
+						return !el;
+					});
+					return response;
+				}
+			),
 		email: Yup.string()
 			.required('Email is required')
 			.email('Email is invalid'),
@@ -47,7 +61,6 @@ const Signup = () => {
 		clearErrors,
 	} = useForm({ resolver: yupResolver(validationSchema) });
 
-	const { signup } = useAuth();
 	const [loading, setLoading] = useState(false);
 	const history = useHistory();
 
@@ -59,11 +72,8 @@ const Signup = () => {
 			setLoading(false);
 		} catch (e) {
 			setLoading(false);
-			if (e.message === 'username/taken') {
-				setError('userName', {
-					message: 'Username already in use!',
-				});
-			} else if (e.message === 'auth/email-already-in-use') {
+			console.log();
+			if (e.message === 'auth/email-already-in-use') {
 				setError('email', {
 					message: 'E-mail already in use!',
 				});

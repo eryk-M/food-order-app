@@ -11,13 +11,13 @@ import {
 	UserNavIconLogout,
 } from './UserNavElements';
 
-import Button from '../../Button';
+import Button from 'components/Button';
 
 import { useHistory } from 'react-router-dom';
 
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 
-import { FormAlert } from '../../Form/FormElements';
+import { FormAlert } from 'components/Form/FormElements';
 
 const UserNav = () => {
 	const [error, setError] = useState('');

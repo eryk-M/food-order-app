@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Logo from '../../images/logo.png';
+import Logo from 'images/logo.png';
 import {
 	Nav,
 	NavLogo,
@@ -14,12 +14,12 @@ import {
 	NavBurger,
 } from './NavBarElements';
 
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 import { withRouter } from 'react-router-dom';
 
-import { CartContext } from '../../contexts/CartContext';
+import { CartContext } from 'contexts/CartContext';
 
-import { useWindowSize } from '../../hooks/useWindowSize';
+import { useWindowSize } from 'hooks/useWindowSize';
 
 const NavBar = (props) => {
 	const { currentUser } = useAuth();

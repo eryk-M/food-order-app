@@ -13,7 +13,7 @@ import {
 
 import { useLocation, useHistory, Redirect } from 'react-router-dom';
 
-import ButtonLink from '../../ButtonLink';
+import ButtonLink from 'components/ButtonLink';
 
 const CartComplete = ({ step }) => {
 	const [orderId, setOrderId] = useState('');

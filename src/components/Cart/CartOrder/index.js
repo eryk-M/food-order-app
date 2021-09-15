@@ -16,9 +16,9 @@ import {
 	CartTable,
 } from './CartOrderElements';
 
-import Button from '../../Button/index';
+import Button from 'components/Button/index';
 
-import { CartContext } from '../../../contexts/CartContext';
+import { CartContext } from 'contexts/CartContext';
 
 const CartOrder = ({
 	setDispatchTotalPrice,

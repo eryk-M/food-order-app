@@ -20,56 +20,31 @@ export function AuthProvider({ children }) {
 	const userRef = db.collection('users');
 
 	async function signup(email, password, username, history) {
-		await userRef
-			.where('username', '==', username)
-			.get()
-			.then((snapshot) => {
-				if (snapshot.empty) {
-					console.log(snapshot);
-					return auth
-						.createUserWithEmailAndPassword(email, password)
-						.then((createdUser) => {
-							db.collection('users').doc(createdUser.user.uid).set({
-								username: username,
-								name: '',
-								address: '',
-								phone: '',
-								city: '',
-								zip: '',
-								orders: [],
-							});
-						})
-						.then(() => {
-							const user = auth.currentUser;
-
-							user
-								.updateProfile({ displayName: username })
-								.then(() => {
-									history.push({
-										pathname: '/user',
-										query: history.location.query,
-									});
-								});
-						});
-				} else {
-					let error = new Error();
-					error = {
-						...error,
-						code: 'username/taken',
-					};
-					throw error;
-				}
+		return auth
+			.createUserWithEmailAndPassword(email, password)
+			.then((createdUser) => {
+				db.collection('users').doc(createdUser.user.uid).set({
+					username: username,
+					name: '',
+					address: '',
+					phone: '',
+					city: '',
+					zip: '',
+					orders: [],
+				});
 			})
+			.then(() => {
+				const user = auth.currentUser;
 
+				user.updateProfile({ displayName: username }).then(() => {
+					history.push({
+						pathname: '/user',
+						query: history.location.query,
+					});
+				});
+			})
 			.catch((err) => {
-				switch (err.code) {
-					case 'auth/email-already-in-use':
-						throw new Error(err.code);
-					case 'username/taken':
-						throw new Error(err.code);
-					default:
-						break;
-				}
+				throw new Error(err.code);
 			});
 	}
 

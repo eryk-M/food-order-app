@@ -14,7 +14,7 @@ import {
 	ProductsLink,
 } from './ProductsElements';
 
-import { useApi } from '../../contexts/APIContext';
+import { useApi } from 'contexts/APIContext';
 
 import { dummyData } from '../Products/dummyData';
 

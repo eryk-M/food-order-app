@@ -12,7 +12,7 @@ import {
 	UserReviewNoItems,
 } from './UserReviewsElements';
 
-import Loader from '../../Loader';
+import Loader from 'components/Loader';
 
 const UserReviews = ({ reviews, loading }) => {
 	const dateNow = Date.now();

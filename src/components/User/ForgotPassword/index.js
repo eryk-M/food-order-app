@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 
 import {
 	FormContainer,
@@ -12,7 +12,7 @@ import {
 	FormAlternative,
 	FormLink,
 	FormAlert,
-} from '../../Form/FormElements';
+} from 'components/Form/FormElements';
 
 const ForgotPassword = () => {
 	const emailRef = useRef();

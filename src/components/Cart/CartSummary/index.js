@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 
 import { Redirect } from 'react-router-dom';
 
-import { CartContext } from '../../../contexts/CartContext';
+import { CartContext } from 'contexts/CartContext';
 
 import {
 	CartSummaryContainer,
@@ -22,9 +22,9 @@ import {
 	CartSummaryIconWrapper,
 } from './CartSummaryElements';
 
-import Button from '../../Button';
-import { FormButton } from '../../Form/FormElements';
-import { useApi } from '../../../contexts/APIContext';
+import Button from 'components/Button';
+import { FormButton } from 'components/Form/FormElements';
+import { useApi } from 'contexts/APIContext';
 
 import { useHistory } from 'react-router-dom';
 

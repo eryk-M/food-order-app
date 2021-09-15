@@ -15,9 +15,9 @@ import {
 	FormLabel,
 	FormInput,
 	FormButton,
-} from '../../Form/FormElements';
+} from 'components/Form/FormElements';
 
-import { useApi } from '../../../contexts/APIContext';
+import { useApi } from 'contexts/APIContext';
 
 const TrackerForm = () => {
 	const { orderId } = useLocation();

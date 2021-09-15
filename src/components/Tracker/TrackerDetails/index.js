@@ -4,11 +4,11 @@ import { useLocation, Redirect } from 'react-router-dom';
 
 import { Steps } from 'rsuite';
 
-import { useFirestoreQuery } from '../../../hooks/useFirestoreQuery';
-import { useWindowSize } from '../../../hooks/useWindowSize';
-import '../../Cart/steps.css';
+import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useWindowSize } from 'hooks/useWindowSize';
+import 'components/Cart/steps.css';
 
-import { db } from '../../../firebase';
+import { db } from 'firebase';
 
 import {
 	TrackerDetailsContainer,

@@ -17,7 +17,7 @@ import {
 	NavCartSpan,
 } from '../NavBar/NavBarElements';
 
-import { CartContext } from '../../contexts/CartContext';
+import { CartContext } from 'contexts/CartContext';
 
 const NavBarBurger = ({ hidden, toggle }) => {
 	const {

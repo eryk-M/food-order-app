@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 
 import { UserAccountHeading } from '../UserAccount/UserAccountElements';
 
@@ -11,8 +11,8 @@ import {
 	FormInput,
 	FormButton,
 	FormSpan,
-} from '../../Form/FormElements';
-import { Alert } from '../../Alert';
+} from 'components/Form/FormElements';
+import { Alert } from 'components/Alert';
 
 const UserPassword = () => {
 	const passwordRef = useRef();

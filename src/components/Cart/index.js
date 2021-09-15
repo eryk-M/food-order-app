@@ -2,7 +2,6 @@ import React, {
 	useState,
 	useContext,
 	useEffect,
-	useRef,
 	useCallback,
 } from 'react';
 
@@ -19,17 +18,11 @@ import CartAddress from './CartAddress';
 import CartSummary from './CartSummary';
 import CartComplete from './CartComplete';
 
-import { CartContext } from '../../contexts/CartContext';
-import { useAuth } from '../../contexts/AuthContext';
-import { useApi } from '../../contexts/APIContext';
+import { CartContext } from 'contexts/CartContext';
+import { useAuth } from 'contexts/AuthContext';
+import { useApi } from 'contexts/APIContext';
 
 const Cart = () => {
-	const nameRef = useRef();
-	const phoneRef = useRef();
-	const addressRef = useRef();
-	const cityRef = useRef();
-	const zipRef = useRef();
-
 	const {
 		state: { cart },
 		dispatch,
@@ -43,19 +36,6 @@ const Cart = () => {
 	const [userData, setUserData] = useState();
 	const history = useHistory();
 
-	const setAddressInfo = (e) => {
-		e.preventDefault();
-		dispatch({
-			type: 'SET_ADDRESS',
-			payload: {
-				name: nameRef.current.value,
-				phone: phoneRef.current.value,
-				address: addressRef.current.value,
-				city: cityRef.current.value,
-				zip: zipRef.current.value,
-			},
-		});
-	};
 	const setDispatchTotalPrice = () => {
 		dispatch({
 			type: 'SET_TOTAL_PRICE',
@@ -138,14 +118,9 @@ const Cart = () => {
 						exact
 						render={() => (
 							<CartAddress
-								nameRef={nameRef}
-								phoneRef={phoneRef}
-								addressRef={addressRef}
-								cityRef={cityRef}
-								zipRef={zipRef}
 								step={step}
 								userData={userData}
-								setAddressInfo={setAddressInfo}
+								dispatch={dispatch}
 								onChangeStep={onChangeStep}
 							/>
 						)}
@@ -155,7 +130,7 @@ const Cart = () => {
 						exact
 						render={() => (
 							<CartSummary
-								currentUserId={currentUser ? currentUser.uid : ''}
+								currentUserId={currentUser?.uid}
 								step={step}
 								onChangeStep={onChangeStep}
 							/>

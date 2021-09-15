@@ -3,8 +3,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import FormReview from './FormReview';
 import UserReviews from './UserReviews';
 
-import { useApi } from '../../contexts/APIContext';
-import { useAuth } from '../../contexts/AuthContext';
+import { useApi } from 'contexts/APIContext';
+import { useAuth } from 'contexts/AuthContext';
 import styled from 'styled-components/macro';
 
 const ReviewsContainer = styled.section`

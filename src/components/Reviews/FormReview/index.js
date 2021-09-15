@@ -13,17 +13,17 @@ import {
 	FormReviewFormCommentBottom,
 } from './FormReviewElements';
 
-import Button from '../../Button';
+import Button from 'components/Button';
 import {
 	FormInput,
 	FormTextArea,
 	FormError,
-} from '../../Form/FormElements';
+} from 'components/Form/FormElements';
 
 import StarRating from './StarRating';
 
-import { useAuth } from '../../../contexts/AuthContext';
-import { useApi } from '../../../contexts/APIContext';
+import { useAuth } from 'contexts/AuthContext';
+import { useApi } from 'contexts/APIContext';
 
 import { useForm } from 'react-hook-form';
 
@@ -41,14 +41,13 @@ const FormReview = ({
 	const { currentUser } = useAuth();
 	const { addReview } = useApi();
 
-	//HOOK FORM
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			displayName: currentUser.displayName,
+			displayName: currentUser?.displayName,
 		},
 	});
 	const onSubmit = (data) => {

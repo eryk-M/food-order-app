@@ -21,13 +21,15 @@ import {
 
 import { Alert } from '../Alert';
 
-import { CartContext } from '../../contexts/CartContext';
-import { useApi } from '../../contexts/APIContext';
+import { CartContext } from 'contexts/CartContext';
+import { useApi } from 'contexts/APIContext';
 import StarRating from '../Reviews/FormReview/StarRating';
 
 import Reviews from '../Reviews';
-import { db } from '../../firebase';
-import { useFirestoreQuery } from '../../hooks/useFirestoreQuery';
+
+import { db } from 'firebase';
+
+import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 
 const ProductItem = ({ props }) => {
 	const {

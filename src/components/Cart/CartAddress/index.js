@@ -5,7 +5,8 @@ import {
 	FormElement,
 	FormLabel,
 	FormInput,
-} from '../../Form/FormElements';
+	FormError,
+} from 'components/Form/FormElements';
 
 import {
 	CartAddressContainer,
@@ -14,21 +15,61 @@ import {
 	CartAddressIcon,
 } from './CartAddressElements';
 
-import Button from '../../Button/index';
+import Button from 'components/Button';
 
-const CartAddress = ({
-	nameRef,
-	phoneRef,
-	addressRef,
-	cityRef,
-	zipRef,
-	onChangeStep,
-	userData,
-	step,
-	setAddressInfo,
-}) => {
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+const CartAddress = ({ onChangeStep, userData, step, dispatch }) => {
+	const validationSchema = Yup.object().shape({
+		name: Yup.string()
+			.required('Name is required')
+			.min(3, 'Name must be at least 3 characters')
+			.max(20, 'Name must have maximum of 20 characters'),
+		address: Yup.string()
+			.required('Address is required')
+			.min(3, 'Address must be at least 3 characters')
+			.max(30, 'Address must have maximum of 20 characters'),
+		phone: Yup.string()
+			.required('Phone is required')
+			.matches(/[0-9]{9}/, 'Phone must be in 9 digits format'),
+		city: Yup.string()
+			.required('City is required')
+			.min(3, 'City must be at least 3 characters')
+			.max(20, 'City must have maximum of 20 characters')
+			.matches(/[A-Za-z]/, 'Only letters are allowed'),
+		zipcode: Yup.string()
+			.required('Zip code is required')
+			.matches(
+				/[0-9]{2}-[0-9]{3}/,
+				'Zip code must be in xx-xxx format'
+			),
+	});
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(validationSchema),
+	});
+
 	if (step === 0) return <Redirect to="/cart" />;
 
+	const onSubmit = (data) => {
+		dispatch({
+			type: 'SET_ADDRESS',
+			payload: {
+				name: data.name,
+				phone: data.phone,
+				address: data.address,
+				city: data.city,
+				zip: data.zipcode,
+			},
+		});
+		onChangeStep(undefined, 'push');
+	};
 	return (
 		<>
 			<CartAddressHeading>
@@ -36,68 +77,71 @@ const CartAddress = ({
 				<CartAddressIcon marginleft="4rem" />
 			</CartAddressHeading>
 			<CartAddressContainer>
-				<Form
-					onSubmit={(e) => {
-						setAddressInfo(e);
-						onChangeStep(e, 'push');
-					}}
-				>
+				<Form onSubmit={handleSubmit(onSubmit)}>
 					<FormElement>
 						<FormLabel htmlFor="name">Name *</FormLabel>
 						<FormInput
-							ref={nameRef}
-							name="name"
+							{...register('name')}
 							type="text"
-							defaultValue={userData ? userData.name : ''}
-							required
+							defaultValue={userData?.name}
+							error={errors.name}
 						/>
+						{errors.name && (
+							<FormError>{errors.name.message}</FormError>
+						)}
 					</FormElement>
 
 					<FormElement>
-						<FormLabel htmlFor="number">Phone number *</FormLabel>
+						<FormLabel>Phone number *</FormLabel>
 						<FormInput
-							ref={phoneRef}
-							name="number"
-							type="number"
-							defaultValue={userData ? userData.phone : ''}
-							required
+							{...register('phone')}
+							type="text"
+							defaultValue={userData?.phone}
+							error={errors.phone}
 						/>
+						{errors.phone && (
+							<FormError>{errors.phone.message}</FormError>
+						)}
 					</FormElement>
 
 					<FormElement>
-						<FormLabel htmlFor="address">Address *</FormLabel>
+						<FormLabel>Address *</FormLabel>
 						<FormInput
-							ref={addressRef}
-							name="address"
+							{...register('address')}
 							type="text"
-							defaultValue={userData ? userData.address : ''}
-							required
+							defaultValue={userData?.address}
+							error={errors.address}
 						/>
+						{errors.address && (
+							<FormError>{errors.address.message}</FormError>
+						)}
 					</FormElement>
 
 					<FormElement>
-						<FormLabel htmlFor="city">City *</FormLabel>
+						<FormLabel>City *</FormLabel>
 						<FormInput
-							ref={cityRef}
-							name="city"
+							{...register('city')}
 							type="text"
-							defaultValue={userData ? userData.city : ''}
-							required
+							defaultValue={userData?.city}
+							error={errors.city}
 						/>
+						{errors.city && (
+							<FormError>{errors.city.message}</FormError>
+						)}
 					</FormElement>
 
 					<FormElement>
-						<FormLabel htmlFor="zipcode">Zip/Postal Code *</FormLabel>
+						<FormLabel>Zip/Postal Code *</FormLabel>
 						<FormInput
-							ref={zipRef}
-							name="zipcode"
+							{...register('zipcode')}
 							type="text"
-							defaultValue={userData ? userData.zip : ''}
-							required
-							inputmode="numeric"
-							pattern="[0-9]{2}[-][0-9]{3}"
+							defaultValue={userData?.zip}
 							placeholder="e.g. 10-100 or 10100"
+							error={errors.zipcode}
 						/>
+						{errors.zipcode && (
+							<FormError>{errors.zipcode.message}</FormError>
+						)}
 					</FormElement>
 					<CartAddressSteps>
 						<Button
@@ -106,7 +150,7 @@ const CartAddress = ({
 						>
 							&#8592; Back to order{' '}
 						</Button>
-						<Button type="submit" marginleft="auto">
+						<Button marginleft="auto" type="submit">
 							Proceed to summary &#10141;
 						</Button>
 					</CartAddressSteps>

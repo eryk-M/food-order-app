@@ -172,6 +172,7 @@ export function APIProvider({ children }) {
 		orderId,
 		userId
 	) {
+		console.log(userInfo, orderInfo, totalPrice, orderId, userId);
 		await ordersRef
 			.add({
 				orderId: orderId,
@@ -201,6 +202,20 @@ export function APIProvider({ children }) {
 		return order;
 	}
 
+	async function validateUsername(username) {
+		let found = false;
+		await usersRef
+			.where('username', '==', username)
+			.get()
+			.then((snapshot) => {
+				if (snapshot.empty) {
+					return found;
+				} else {
+					found = true;
+				}
+			});
+		return found;
+	}
 	const value = {
 		setItems,
 		getProducts,
@@ -211,6 +226,7 @@ export function APIProvider({ children }) {
 		getReviews,
 		addOrder,
 		getOrder,
+		validateUsername,
 	};
 
 	return (

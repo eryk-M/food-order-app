@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from 'contexts/AuthContext';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import {
@@ -13,7 +13,7 @@ import {
 	FormAlternative,
 	FormLink,
 	FormError,
-} from '../../Form/FormElements';
+} from 'components/Form/FormElements';
 
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
