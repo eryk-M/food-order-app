@@ -63,7 +63,7 @@ const NavBar = (props) => {
 							<NavLink to="/">Menu1</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink to="/">Menu2</NavLink>
+							<NavLink to="/products">Products</NavLink>
 						</NavItem>
 						<NavItem>
 							<NavLink to="/food-tracker">Food tracker</NavLink>

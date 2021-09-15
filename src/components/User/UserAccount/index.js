@@ -74,7 +74,7 @@ const UserAccount = ({ userData }) => {
 			.max(20, 'City must have maximum of 20 characters'),
 		zipcode: Yup.string().test(
 			'zipcode',
-			'Zip code must be in xx-xxx format',
+			'Zip code must be in xx-xxx format. Only digits are allowed',
 			(value) => (value ? /[0-9]{2}-[0-9]{3}/.test(value) : true)
 		),
 	});

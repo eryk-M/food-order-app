@@ -52,8 +52,8 @@ const NavBarBurger = ({ hidden, toggle }) => {
 						</NavBurgerLink>
 					</NavBurgerItem>
 					<NavBurgerItem>
-						<NavBurgerLink to="/" onClick={toggle}>
-							Menu1
+						<NavBurgerLink to="/products" onClick={toggle}>
+							Products
 						</NavBurgerLink>
 					</NavBurgerItem>
 					<NavBurgerItem>

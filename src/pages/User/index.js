@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import PrivateRoute from '../../components/PrivateRoute';
+import PrivateRoute from 'components/PrivateRoute';
 
-import UserAccount from '../../components/User/UserAccount';
-import UserPassword from '../../components/User/UserPassword';
-import UserOrders from '../../components/User/UserOrders';
-import UserNav from '../../components/User/UserNav';
+import UserAccount from 'components/User/UserAccount';
+import UserPassword from 'components/User/UserPassword';
+import UserOrders from 'components/User/UserOrders';
+import UserNav from 'components/User/UserNav';
 
 import {
 	UserContainer,
@@ -14,10 +14,10 @@ import {
 	UserDesc,
 } from './UserElements';
 
-import { useAuth } from '../../contexts/AuthContext';
-import { useApi } from '../../contexts/APIContext';
+import { useAuth } from 'contexts/AuthContext';
+import { useApi } from 'contexts/APIContext';
 
-import { GlobalStyle } from '../../globalStyles';
+import { GlobalStyle } from 'globalStyles';
 
 const User = () => {
 	const { currentUser } = useAuth();

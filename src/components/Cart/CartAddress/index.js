@@ -43,7 +43,7 @@ const CartAddress = ({ onChangeStep, userData, step, dispatch }) => {
 			.required('Zip code is required')
 			.matches(
 				/[0-9]{2}-[0-9]{3}/,
-				'Zip code must be in xx-xxx format'
+				'Zip code must be in xx-xxx format. Only digits are allowed'
 			),
 	});
 
