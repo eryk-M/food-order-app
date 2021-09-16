@@ -32,6 +32,8 @@ export function APIProvider({ children }) {
 						ingredients: el.ingredients,
 						category: el.category,
 						quantity: el.quantity,
+						avgRating: 0,
+						popularity: 0,
 					})
 					.then(() => {
 						console.log(el.id, ' successfully written!');
@@ -137,9 +139,13 @@ export function APIProvider({ children }) {
 						return [avgRating, size];
 					})
 					.then((rating) => {
+						console.log('ustawiam');
 						reviewsRef.doc(productId.toString()).set({
 							avgRating: rating[0],
 							ratingCount: rating[1],
+						});
+						productsRef.doc(productId.toString()).update({
+							avgRating: rating[0],
 						});
 					});
 			})
@@ -202,6 +208,23 @@ export function APIProvider({ children }) {
 		return order;
 	}
 
+	async function getUserOrders(userId) {
+		let orders = [];
+
+		await ordersRef
+			.where('userId', '==', userId)
+			.get()
+			.then((snapshot) => {
+				snapshot.docs.forEach((doc) => {
+					orders.push(doc.data());
+				});
+			})
+			.catch((err) => {
+				return err;
+			});
+		return orders;
+	}
+
 	async function validateUsername(username) {
 		let found = false;
 		await usersRef
@@ -226,6 +249,7 @@ export function APIProvider({ children }) {
 		getReviews,
 		addOrder,
 		getOrder,
+		getUserOrders,
 		validateUsername,
 	};
 

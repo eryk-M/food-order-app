@@ -3,17 +3,36 @@ import styled from 'styled-components/macro';
 export const ContentContainer = styled.ul`
 	/* width: 80%; */
 	margin-top: 3rem;
+	/* width: 80%; */
 `;
 
 export const ContentItem = styled.li`
 	display: flex;
 	padding: 0 1rem;
 	padding-bottom: 3rem;
+	/* max-width: 30rem; */
+
+	/* max-width: 50%; */
 	&:not(:last-of-type) {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	}
 	&:not(:first-of-type) {
 		padding-top: 3rem;
+	}
+`;
+
+export const ContentItemImageWrapper = styled.div`
+	position: relative;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0.6rem;
+		right: -0.6rem;
+		height: 20rem;
+		width: 20rem;
+		background-color: var(--color-primary);
+		z-index: -1;
 	}
 `;
 
@@ -23,7 +42,6 @@ export const ContentItemImage = styled.img`
 `;
 
 export const ContentItemInfo = styled.div`
-	/* margin-left: 2rem; */
 	margin: 1rem 0 0 2rem;
 `;
 
@@ -34,10 +52,11 @@ export const ContentItemHeading = styled.h2`
 export const ContentItemDesc = styled.p`
 	font-size: 1.4rem;
 	/* padding: 0 2rem; */
-	width: 80%;
+	/* width: 100%; */
 	color: var(--color-grey-dark);
 	font-style: italic;
 	line-height: 1.4;
+	word-wrap: break-word;
 `;
 
 export const ContentItemButton = styled.div`

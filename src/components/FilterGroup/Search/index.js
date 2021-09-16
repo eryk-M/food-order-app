@@ -7,13 +7,19 @@ import {
 } from 'components/Form/FormElements';
 import { BsSearch } from 'react-icons/bs';
 import { SearchContainer } from './SearchElements';
-const Search = () => {
+const Search = ({ setQuery }) => {
 	return (
 		<SearchContainer>
-			<Form>
+			<Form onSubmit={(e) => e.preventDefault()}>
 				<FormElement>
-					<BsSearch />
-					<FormInput placeholder="Search products" />
+					<BsSearch className="search-icon" />
+					<FormInput
+						type="text"
+						placeholder="Search products"
+						onChange={(e) => {
+							setQuery(e.currentTarget.value);
+						}}
+					/>
 				</FormElement>
 			</Form>
 		</SearchContainer>

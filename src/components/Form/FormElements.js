@@ -49,7 +49,7 @@ export const Form = styled.form`
 export const FormElement = styled.div`
 	margin-left: ${(props) => props.marginleft};
 
-	& svg {
+	& .search-icon {
 		position: absolute;
 		font-size: 1.8rem;
 		top: 0;

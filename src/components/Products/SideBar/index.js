@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
 	GiHamburger,
@@ -15,35 +15,55 @@ import {
 	SideBarList,
 	SideBarItem,
 } from './SideBarElements';
-const Sidebar = () => {
+
+const Sidebar = ({ setCategory }) => {
+	const [appState, changeState] = useState({
+		activeObject: null,
+		objects: [
+			{ name: 'All', icon: BiGridAlt },
+			{ name: 'Burgers', icon: GiHamburger },
+			{ name: 'Chicken', icon: GiRoastChicken },
+			{ name: 'Fries', icon: GiFrenchFries },
+			{ name: 'Drinks', icon: GiBeerBottle },
+		],
+	});
+
+	if (!appState.activeObject)
+		changeState({ ...appState, activeObject: appState.objects[0] });
+
+	const toggleActive = (index) => {
+		changeState({
+			...appState,
+			activeObject: appState.objects[index],
+		});
+	};
+
+	const toggleActiveStyles = (index) => {
+		if (appState.objects[index] === appState.activeObject) {
+			return 'active';
+		} else {
+			return '';
+		}
+	};
+
 	return (
 		<SideBarContainer>
 			<SideBarList>
-				<SideBarItem className="active">
-					<BiGridAlt />
-					All
-					<MdKeyboardArrowRight className="icon-arrow" />
-				</SideBarItem>
-				<SideBarItem>
-					<GiHamburger />
-					Burgers
-					<MdKeyboardArrowRight className="icon-arrow" />
-				</SideBarItem>
-				<SideBarItem>
-					<GiRoastChicken />
-					Chicken
-					<MdKeyboardArrowRight className="icon-arrow" />
-				</SideBarItem>
-				<SideBarItem>
-					<GiFrenchFries />
-					Fries
-					<MdKeyboardArrowRight className="icon-arrow" />
-				</SideBarItem>
-				<SideBarItem>
-					<GiBeerBottle />
-					Drinks
-					<MdKeyboardArrowRight className="icon-arrow" />
-				</SideBarItem>
+				{appState.objects.map(({ name, icon }, i) => (
+					<SideBarItem
+						key={i}
+						data-category={name}
+						onClick={(e) => {
+							setCategory(e.currentTarget.dataset.category);
+							toggleActive(i);
+						}}
+						className={toggleActiveStyles(i)}
+					>
+						{React.createElement(icon)}
+						{name}
+						<MdKeyboardArrowRight className="icon-arrow" />
+					</SideBarItem>
+				))}
 			</SideBarList>
 		</SideBarContainer>
 	);

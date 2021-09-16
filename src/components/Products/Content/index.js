@@ -9,6 +9,7 @@ import {
 	ContentItemDesc,
 	ContentItemButton,
 	ContentItemPrice,
+	ContentItemImageWrapper,
 } from './ContentElements';
 
 import {
@@ -20,121 +21,73 @@ import { Link } from 'react-router-dom';
 
 import StarRating from 'components/Reviews/FormReview/StarRating';
 
-import img from 'images/burger-chicken_cut.jpg';
+const Content = ({
+	data,
+	searchQuery: { sort, query, category, minPrice, maxPrice },
+}) => {
+	//TODO: SORT BY POPULARITY
+	const sortFunction = (a, b) => {
+		if (sort === 'default') {
+			return true;
+		} else if (sort === 'low') {
+			return a.price - b.price;
+		} else if (sort === 'high') {
+			return b.price - a.price;
+		} else if (sort === 'average') {
+			return b.avgRating - a.avgRating;
+		}
+	};
 
-const Content = () => {
+	const filterQuery = (el) => {
+		if (query === '') {
+			return el;
+		} else {
+			return el.name.toLowerCase().includes(query.toLowerCase());
+		}
+	};
+
+	const filterPrice = (el) =>
+		el.price <= maxPrice && el.price >= minPrice;
+
+	const filterCategory = (el) => {
+		if (category === 'All') {
+			return el;
+		} else {
+			return el.category === category;
+		}
+	};
+
 	return (
 		<ContentContainer>
-			<ContentItem>
-				<Link to={`/product/1`}>
-					<ContentItemImage src={img} />
-				</Link>
-				<ContentItemInfo>
-					<Link to={`/product/1`}>
-						<ContentItemHeading>Burger Classic</ContentItemHeading>
-					</Link>
-					<ContentItemPrice>$14.99</ContentItemPrice>
-					<StarRating rating={4} size={15} show />
-					<ContentItemDesc>
-						Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem
-						ipsum lorem ipsum Lorem ipsum lorem ipsum
-					</ContentItemDesc>
-					<ContentItemButton>
-						<ProductButton>
-							<ProductCartIcon />
-							Add to cart
-						</ProductButton>
-					</ContentItemButton>
-				</ContentItemInfo>
-			</ContentItem>
-			<ContentItem>
-				<Link to={`/product/1`}>
-					<ContentItemImage src={img} />
-				</Link>
-				<ContentItemInfo>
-					<Link to={`/product/1`}>
-						<ContentItemHeading>Burger Classic</ContentItemHeading>
-					</Link>
-					<ContentItemPrice>$14.99</ContentItemPrice>
-					<StarRating rating={4} size={15} show />
-					<ContentItemDesc>
-						Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem
-						ipsum lorem ipsum Lorem ipsum lorem ipsum
-					</ContentItemDesc>
-					<ContentItemButton>
-						<ProductButton>
-							<ProductCartIcon />
-							Add to cart
-						</ProductButton>
-					</ContentItemButton>
-				</ContentItemInfo>
-			</ContentItem>
-			<ContentItem>
-				<Link to={`/product/1`}>
-					<ContentItemImage src={img} />
-				</Link>
-				<ContentItemInfo>
-					<Link to={`/product/1`}>
-						<ContentItemHeading>Burger Classic</ContentItemHeading>
-					</Link>
-					<ContentItemPrice>$14.99</ContentItemPrice>
-					<StarRating rating={4} size={15} show />
-					<ContentItemDesc>
-						Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem
-						ipsum lorem ipsum Lorem ipsum lorem ipsum
-					</ContentItemDesc>
-					<ContentItemButton>
-						<ProductButton>
-							<ProductCartIcon />
-							Add to cart
-						</ProductButton>
-					</ContentItemButton>
-				</ContentItemInfo>
-			</ContentItem>
-			<ContentItem>
-				<Link to={`/product/1`}>
-					<ContentItemImage src={img} />
-				</Link>
-				<ContentItemInfo>
-					<Link to={`/product/1`}>
-						<ContentItemHeading>Burger Classic</ContentItemHeading>
-					</Link>
-					<ContentItemPrice>$14.99</ContentItemPrice>
-					<StarRating rating={4} size={15} show />
-					<ContentItemDesc>
-						Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem
-						ipsum lorem ipsum Lorem ipsum lorem ipsum
-					</ContentItemDesc>
-					<ContentItemButton>
-						<ProductButton>
-							<ProductCartIcon />
-							Add to cart
-						</ProductButton>
-					</ContentItemButton>
-				</ContentItemInfo>
-			</ContentItem>
-			<ContentItem>
-				<Link to={`/product/1`}>
-					<ContentItemImage src={img} />
-				</Link>
-				<ContentItemInfo>
-					<Link to={`/product/1`}>
-						<ContentItemHeading>Burger Classic</ContentItemHeading>
-					</Link>
-					<ContentItemPrice>$14.99</ContentItemPrice>
-					<StarRating rating={4} size={15} show />
-					<ContentItemDesc>
-						Lorem ipsum lorem ipsum Lorem ipsum lorem ipsum Lorem
-						ipsum lorem ipsum Lorem ipsum lorem ipsum
-					</ContentItemDesc>
-					<ContentItemButton>
-						<ProductButton>
-							<ProductCartIcon />
-							Add to cart
-						</ProductButton>
-					</ContentItemButton>
-				</ContentItemInfo>
-			</ContentItem>
+			{data &&
+				data
+					.filter((el) => filterCategory(el))
+					.filter((el) => filterPrice(el))
+					.filter((el) => filterQuery(el))
+					.sort((a, b) => sortFunction(a, b))
+					.map((el) => (
+						<ContentItem key={el.id}>
+							<ContentItemImageWrapper>
+								<Link to={`/product/${el.id}`}>
+									<ContentItemImage src={el.img} alt={el.alt} />
+								</Link>
+							</ContentItemImageWrapper>
+							<ContentItemInfo>
+								<Link to={`/product/${el.id}`}>
+									<ContentItemHeading>{el.name}</ContentItemHeading>
+								</Link>
+								<ContentItemPrice>${el.price}</ContentItemPrice>
+								<StarRating rating={el.avgRating} size={15} show />
+								<ContentItemDesc>{el.desc}</ContentItemDesc>
+								<ContentItemButton>
+									<ProductButton>
+										<ProductCartIcon />
+										Add to cart
+									</ProductButton>
+								</ContentItemButton>
+							</ContentItemInfo>
+						</ContentItem>
+					))}
 		</ContentContainer>
 	);
 };

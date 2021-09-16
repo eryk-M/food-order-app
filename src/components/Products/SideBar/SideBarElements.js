@@ -12,7 +12,6 @@ export const SideBarItem = styled.li`
 	/* font-weight: 700; */
 	/* background-color: var(--color-primary); */
 	position: relative;
-
 	.icon-arrow {
 		fill: black;
 		font-size: 2.8rem;

@@ -12,7 +12,6 @@ import './rc-slider-override.css';
 const PriceFilter = ({ price }) => {
 	return (
 		<PriceFilterContainer>
-			{/* <PriceFilterSpan size={2}>Filter by price</PriceFilterSpan> */}
 			<PriceFilterSpan size={1.6}>
 				Filter by price: ${price.minPrice} - ${price.maxPrice}
 			</PriceFilterSpan>

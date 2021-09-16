@@ -35,7 +35,7 @@ const UserReviews = ({ reviews, loading }) => {
 				))}
 			{reviews.length === 0 && !loading && (
 				<UserReviewNoItems>
-					There is no reviews yet. Be first and add review in form
+					There are no reviews yet. Be first and add review in form
 					below.
 				</UserReviewNoItems>
 			)}

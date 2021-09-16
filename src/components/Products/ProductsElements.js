@@ -8,4 +8,5 @@ export const ProductsContainer = styled.div`
 
 export const ProductsSearchWrapper = styled.div`
 	display: flex;
+	width: 100%;
 `;

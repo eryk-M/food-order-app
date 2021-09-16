@@ -1,30 +1,16 @@
 import React from 'react';
 
-import {
-	SearchFormContainer,
-	SearchFormForm,
-	SearchFormSelect,
-	SearchFormOption,
-	SearchFormLabel,
-} from './SearchFormElements';
+import { SearchFormContainer } from './SearchFormElements';
 
-import Search from './Search';
-import PriceFilter from './PriceFilter';
+import Search from 'components/FilterGroup/Search';
+import PriceFilter from 'components/FilterGroup/PriceFilter';
+import Select from 'components/FilterGroup/Select';
 
-const SearchForm = ({ price }) => {
+const SearchForm = ({ price, setQuery, setSort }) => {
 	return (
 		<SearchFormContainer>
-			<Search />
-			<SearchFormForm>
-				<SearchFormLabel>Sort by: </SearchFormLabel>
-				<SearchFormSelect>
-					<SearchFormOption>Default sorting</SearchFormOption>
-					<SearchFormOption>popularity</SearchFormOption>
-					<SearchFormOption>average rating</SearchFormOption>
-					<SearchFormOption>price: low to high</SearchFormOption>
-					<SearchFormOption>price: high to low</SearchFormOption>
-				</SearchFormSelect>
-			</SearchFormForm>
+			<Search setQuery={setQuery} />
+			<Select setSort={setSort} />
 			<PriceFilter price={price} />
 		</SearchFormContainer>
 	);
