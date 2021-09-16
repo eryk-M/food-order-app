@@ -2,19 +2,18 @@ import React from 'react';
 
 import {
 	Form,
-	FormLabel,
 	FormInput,
 	FormElement,
 } from 'components/Form/FormElements';
-
+import { BsSearch } from 'react-icons/bs';
 import { SearchContainer } from './SearchElements';
 const Search = () => {
 	return (
 		<SearchContainer>
 			<Form>
 				<FormElement>
-					<FormLabel>Search products</FormLabel>
-					<FormInput />
+					<BsSearch />
+					<FormInput placeholder="Search products" />
 				</FormElement>
 			</Form>
 		</SearchContainer>

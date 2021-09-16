@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import SideBar from './SideBar';
 import Content from './Content';
-import Sort from './Sort';
+import SearchForm from './SearchForm';
 
 import {
 	ProductsContainer,
@@ -10,9 +10,19 @@ import {
 } from './ProductsElements';
 
 const Products = () => {
+	const [minPrice, setMinPrice] = useState(0);
+	const [maxPrice, setMaxPrice] = useState(40);
+
 	return (
 		<ProductsContainer>
-			<Sort />
+			<SearchForm
+				price={{
+					minPrice: minPrice,
+					maxPrice: maxPrice,
+					setMaxPrice,
+					setMinPrice,
+				}}
+			/>
 			<ProductsSearchWrapper>
 				<SideBar />
 				<Content />

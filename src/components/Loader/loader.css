@@ -26,6 +26,11 @@
 	border-color: #fff transparent transparent transparent;
 }
 
+.form .lds-ring {
+	position: absolute;
+	left: 5%;
+}
+
 .lds-ring div:nth-child(1) {
 	animation-delay: -0.45s;
 }

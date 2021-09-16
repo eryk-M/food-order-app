@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { StarLabel, StarInput, StarIcon } from './StarRatingElements';
 
-const StarRating = ({ rating, setRating, show }) => {
+const StarRating = ({ rating, setRating, show, size }) => {
 	const [hover, setHover] = useState(null);
 
 	useEffect(() => {
@@ -30,7 +30,7 @@ const StarRating = ({ rating, setRating, show }) => {
 									? '#ffc107'
 									: '#e4e5e9'
 							}
-							size={25}
+							size={size ?? 25}
 							onMouseEnter={() =>
 								show ? null : setHover(ratingValue)
 							}

@@ -48,6 +48,15 @@ export const Form = styled.form`
 
 export const FormElement = styled.div`
 	margin-left: ${(props) => props.marginleft};
+
+	& svg {
+		position: absolute;
+		font-size: 1.8rem;
+		top: 0;
+		right: 1rem;
+		transform: translateY(60%);
+		opacity: 0.6;
+	}
 `;
 export const FormGroup = styled.div`
 	display: ${(props) => (props.flex ? 'flex' : '')};
@@ -117,7 +126,7 @@ export const FormBtn = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
+	position: relative;
 	transition: all 0.2s;
 	&:disabled {
 		opacity: 0.5;
@@ -138,7 +147,8 @@ export const FormButton = ({ loading, type, text, ...rest }) => {
 			disabled={loading}
 			type={type ?? 'submit'}
 		>
-			{loading ? <Loader /> : text}
+			{loading && <Loader />}
+			{text}
 		</FormBtn>
 	);
 };
