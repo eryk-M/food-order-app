@@ -30,7 +30,7 @@ const Reviews = ({ productId }) => {
 
 	useEffect(() => {
 		if (currentUser) {
-			const user = data?.find((el) => el.userId === currentUser.uid);
+			const user = data?.some((el) => el.userId === currentUser.uid);
 			if (user) setIsAdded(true);
 		}
 	}, [data, currentUser]);

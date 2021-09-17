@@ -44,7 +44,6 @@ const Item = ({ el }) => {
 			payload: el,
 		});
 		setIsAdded(true);
-
 		setTimeout(() => {
 			setIsAdded(false);
 		}, 4000);

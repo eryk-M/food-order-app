@@ -37,6 +37,7 @@ export const UserNavIconLogout = styled(BiLogOutCircle)`
 export const UserNavList = styled.ul`
 	font-size: 1.6rem;
 	margin-top: 3.5rem;
+	width: 30rem;
 	/* margin-top: 3.5rem; */
 	@media screen and (max-width: 570px) {
 		margin-top: 0;
@@ -44,6 +45,7 @@ export const UserNavList = styled.ul`
 `;
 
 export const UserNavItem = styled.li`
+	width: 60%;
 	&:not(:last-child) {
 		margin-bottom: 0.5rem;
 	}

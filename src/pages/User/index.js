@@ -20,11 +20,12 @@ import { GlobalStyle } from 'globalStyles';
 
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getUserDoc } from 'utils/firebaseGetters';
+import { useLocation } from 'react-router-dom';
 
 const User = () => {
 	const { currentUser } = useAuth();
 	const { data } = useFirestoreQuery(getUserDoc(currentUser.uid));
-
+	const { pathname } = useLocation();
 	return (
 		<UserWrapper className="user">
 			<UserHeading>Hello, {currentUser.displayName}!</UserHeading>
@@ -34,7 +35,9 @@ const User = () => {
 			<UserContainer>
 				<GlobalStyle backgroundColor="#93949417" />
 				<UserNav />
-				<UserContent>
+				<UserContent
+					margin={pathname === '/user/orders' ? '0' : '5rem'}
+				>
 					<PrivateRoute
 						path="/user"
 						exact

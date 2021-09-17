@@ -13,7 +13,7 @@ export const UserContainer = styled.div`
 `;
 
 export const UserContent = styled.div`
-	margin: 5rem;
+	margin: ${(props) => props.margin};
 	@media screen and (max-width: 570px) {
 		width: 60%;
 		margin: 2rem auto;

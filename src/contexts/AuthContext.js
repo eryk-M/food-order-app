@@ -5,7 +5,6 @@ import React, {
 	createContext,
 } from 'react';
 import { auth, db } from '../firebase';
-// import { collection, query, where } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -17,7 +16,7 @@ export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState();
 	const [loading, setLoading] = useState(true);
 
-	const userRef = db.collection('users');
+	// const userRef = db.collection('users');
 
 	async function signup(email, password, username, history) {
 		return auth
