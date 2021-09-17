@@ -18,12 +18,13 @@ import { useApi } from 'contexts/APIContext';
 
 import { dummyData } from '../ProductsOLD/dummyData';
 
-const Products = () => {
-	const [data, setData] = useState([]);
-	const [filteredItems, setFilteredItems] = useState([]);
+import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { getAllProducts } from 'utils/firebaseGetters';
 
+const Products = () => {
+	const { data } = useFirestoreQuery(getAllProducts());
 	//API
-	const { setItems, getProducts } = useApi();
+	const { setItems } = useApi();
 
 	const onSetItems = () => {
 		try {
@@ -37,36 +38,6 @@ const Products = () => {
 
 	const options = ['All', 'Burgers', 'Chicken'];
 
-	useEffect(() => {
-		getProducts().then((data) => {
-			setData(data);
-			setFilteredItems(data);
-		});
-		return () => {
-			setData();
-			setFilteredItems();
-		};
-	}, [getProducts]);
-
-	const filterProducts = (e, option) => {
-		const options = [
-			...document.body.querySelectorAll(
-				'.ProductsElements__ProductsOption-sc-1g6n3ml-3'
-			),
-		];
-		options.forEach((option) => option.classList.remove('active'));
-		e.target.classList.add('active');
-
-		if (option === 'All') {
-			setFilteredItems(data);
-		} else {
-			const filteredBurgers = data.filter(
-				(el) => el.category === option
-			);
-			setFilteredItems(filteredBurgers);
-		}
-	};
-
 	return (
 		<>
 			<button onClick={onSetItems}>ustaw itemy</button>
@@ -75,7 +46,6 @@ const Products = () => {
 				<ProductsFilter>
 					{options.map((option, i) => (
 						<ProductsOption
-							onClick={(e) => filterProducts(e, option)}
 							key={i}
 							className={option === 'All' ? 'active' : ''}
 						>
@@ -85,8 +55,8 @@ const Products = () => {
 				</ProductsFilter>
 				<ProductsWrapper>
 					{/* item */}
-					{filteredItems &&
-						filteredItems.map((el) => (
+					{data &&
+						data.map((el) => (
 							<ProductsLink key={el.id} to={`/product/${el.id}`}>
 								<ProductsCard
 									data-id={el.id}

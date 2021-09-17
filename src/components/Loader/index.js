@@ -9,7 +9,7 @@ const Loader = () => {
 		alignItems: 'center',
 	};
 	return (
-		<div style={styles}>
+		<div className="loader-wrapper" style={styles}>
 			<div className="lds-ring">
 				<div></div>
 				<div></div>

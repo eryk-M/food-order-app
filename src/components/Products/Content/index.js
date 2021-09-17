@@ -1,25 +1,8 @@
 import React from 'react';
 
-import {
-	ContentContainer,
-	ContentItem,
-	ContentItemImage,
-	ContentItemInfo,
-	ContentItemHeading,
-	ContentItemDesc,
-	ContentItemButton,
-	ContentItemPrice,
-	ContentItemImageWrapper,
-} from './ContentElements';
+import { ContentList } from './ContentElements';
 
-import {
-	ProductButton,
-	ProductCartIcon,
-} from 'components/ProductItem/ProductItemElements';
-
-import { Link } from 'react-router-dom';
-
-import StarRating from 'components/Reviews/FormReview/StarRating';
+import Item from './Item';
 
 const Content = ({
 	data,
@@ -58,37 +41,15 @@ const Content = ({
 	};
 
 	return (
-		<ContentContainer>
+		<ContentList>
 			{data &&
 				data
 					.filter((el) => filterCategory(el))
 					.filter((el) => filterPrice(el))
 					.filter((el) => filterQuery(el))
 					.sort((a, b) => sortFunction(a, b))
-					.map((el) => (
-						<ContentItem key={el.id}>
-							<ContentItemImageWrapper>
-								<Link to={`/product/${el.id}`}>
-									<ContentItemImage src={el.img} alt={el.alt} />
-								</Link>
-							</ContentItemImageWrapper>
-							<ContentItemInfo>
-								<Link to={`/product/${el.id}`}>
-									<ContentItemHeading>{el.name}</ContentItemHeading>
-								</Link>
-								<ContentItemPrice>${el.price}</ContentItemPrice>
-								<StarRating rating={el.avgRating} size={15} show />
-								<ContentItemDesc>{el.desc}</ContentItemDesc>
-								<ContentItemButton>
-									<ProductButton>
-										<ProductCartIcon />
-										Add to cart
-									</ProductButton>
-								</ContentItemButton>
-							</ContentItemInfo>
-						</ContentItem>
-					))}
-		</ContentContainer>
+					.map((el) => <Item key={el.id} el={el} />)}
+		</ContentList>
 	);
 };
 

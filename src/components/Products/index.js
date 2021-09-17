@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import SideBar from './SideBar';
 import Content from './Content';
@@ -9,28 +9,19 @@ import {
 	ProductsSearchWrapper,
 } from './ProductsElements';
 
-import { useApi } from 'contexts/APIContext';
+import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { getAllProducts } from 'utils/firebaseGetters';
+
+import Loader from 'components/Loader';
 
 const Products = () => {
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(40);
-	const [data, setData] = useState([]);
 	const [category, setCategory] = useState('All');
 	const [query, setQuery] = useState('');
 	const [sort, setSort] = useState('');
 
-	const { getProducts } = useApi();
-
-	useEffect(() => {
-		const controller = new AbortController();
-		if (data.length === 0) {
-			getProducts().then((data) => {
-				setData(data);
-			});
-		}
-		return () => controller.abort();
-	}, [getProducts, data]);
-
+	const { data, loading } = useFirestoreQuery(getAllProducts());
 	return (
 		<ProductsContainer>
 			<SearchForm
@@ -43,18 +34,22 @@ const Products = () => {
 				setQuery={setQuery}
 				setSort={setSort}
 			/>
-			<ProductsSearchWrapper>
+			<ProductsSearchWrapper className="products">
 				<SideBar setCategory={setCategory} />
-				<Content
-					data={data}
-					searchQuery={{
-						query: query,
-						category: category,
-						sort: sort,
-						minPrice: minPrice,
-						maxPrice: maxPrice,
-					}}
-				/>
+				{loading ? (
+					<Loader />
+				) : (
+					<Content
+						data={data}
+						searchQuery={{
+							query: query,
+							category: category,
+							sort: sort,
+							minPrice: minPrice,
+							maxPrice: maxPrice,
+						}}
+					/>
+				)}
 			</ProductsSearchWrapper>
 		</ProductsContainer>
 	);

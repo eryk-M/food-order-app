@@ -8,7 +8,7 @@ import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { useWindowSize } from 'hooks/useWindowSize';
 import 'components/Cart/steps.css';
 
-import { db } from 'firebase';
+import { getOrder } from 'utils/firebaseGetters';
 
 import {
 	TrackerDetailsContainer,
@@ -27,12 +27,8 @@ import {
 const TrackerDetails = () => {
 	const { order } = useLocation();
 	const size = useWindowSize();
-	const [step, setStep] = useState();
-	const { data } = useFirestoreQuery(
-		order
-			? db.collection('orders').where('orderId', '==', order.orderId)
-			: null
-	);
+	const [step, setStep] = useState(null);
+	const { data } = useFirestoreQuery(getOrder(order?.orderId));
 
 	useEffect(() => {
 		if (data) {
@@ -40,7 +36,7 @@ const TrackerDetails = () => {
 		}
 
 		return () => {
-			setStep();
+			setStep(null);
 		};
 	}, [data]);
 

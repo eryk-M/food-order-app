@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
-import { useApi } from 'contexts/APIContext';
 import {
 	FormContainer,
 	FormHeading,
@@ -20,11 +19,12 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { validateUsername } from 'utils/firebaseGetters';
+
 const Signup = () => {
 	//TODO: username musi sie zgadzac teraz nie wazne czy mala czy duza to sie nie zgadza
 
 	const { signup } = useAuth();
-	const { validateUsername } = useApi();
 
 	const validationSchema = Yup.object().shape({
 		userName: Yup.string()
@@ -36,9 +36,11 @@ const Signup = () => {
 				'userName',
 				'Username is already taken',
 				async (value) => {
-					let response = await validateUsername(value).then((el) => {
-						return !el;
-					});
+					let response = await validateUsername(value)
+						.get()
+						.then((snapshot) => {
+							return snapshot.empty;
+						});
 					return response;
 				}
 			),
@@ -72,7 +74,6 @@ const Signup = () => {
 			setLoading(false);
 		} catch (e) {
 			setLoading(false);
-			console.log();
 			if (e.message === 'auth/email-already-in-use') {
 				setError('email', {
 					message: 'E-mail already in use!',

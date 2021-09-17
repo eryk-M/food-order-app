@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import { useApi } from 'contexts/APIContext';
 import { useAuth } from 'contexts/AuthContext';
+
+import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { getUserOrders } from 'utils/firebaseGetters';
+
 const UserOrders = () => {
-	const { getUserOrders } = useApi();
 	const { currentUser } = useAuth();
-	const [orders, setOrders] = useState([]);
 
-	useEffect(() => {
-		if (orders.length === 0) {
-			getUserOrders(currentUser.uid).then((data) => {
-				setOrders(data);
-			});
-		}
-	}, [currentUser.uid, orders, getUserOrders]);
+	const { data, loading } = useFirestoreQuery(
+		getUserOrders(currentUser.uid)
+	);
 
-	console.log(orders);
+	console.log(loading);
 
 	return <div>UserOrders</div>;
 };

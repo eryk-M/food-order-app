@@ -29,7 +29,6 @@ import { useForm } from 'react-hook-form';
 
 const FormReview = ({
 	productId,
-	pushReviewToArray,
 	sectionReviewRef,
 	isAdded,
 	setIsAdded,
@@ -66,13 +65,6 @@ const FormReview = ({
 				rating
 			).then(() => {
 				sectionReviewRef.current.scrollIntoView();
-				pushReviewToArray({
-					body: data.body,
-					date: date,
-					rating: rating,
-					userId: currentUser.uid,
-					userName: currentUser.displayName,
-				});
 				setStarError('');
 				setIsAdded(true);
 			});

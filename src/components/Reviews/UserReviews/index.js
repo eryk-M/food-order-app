@@ -33,7 +33,7 @@ const UserReviews = ({ reviews, loading }) => {
 						<UserReviewBody>{review.body}</UserReviewBody>
 					</UserReview>
 				))}
-			{reviews.length === 0 && !loading && (
+			{reviews?.length === 0 && !loading && (
 				<UserReviewNoItems>
 					There are no reviews yet. Be first and add review in form
 					below.

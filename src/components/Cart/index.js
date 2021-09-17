@@ -20,7 +20,9 @@ import CartComplete from './CartComplete';
 
 import { CartContext } from 'contexts/CartContext';
 import { useAuth } from 'contexts/AuthContext';
-import { useApi } from 'contexts/APIContext';
+
+import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { getUserDoc } from 'utils/firebaseGetters';
 
 const Cart = () => {
 	const {
@@ -29,12 +31,13 @@ const Cart = () => {
 	} = useContext(CartContext);
 
 	const { currentUser } = useAuth();
-	const { getUserInfo } = useApi();
-
 	const [step, setStep] = useState(0);
 	const [totalPrice, setTotalPrice] = useState(0);
-	const [userData, setUserData] = useState();
 	const history = useHistory();
+
+	const { data } = useFirestoreQuery(
+		currentUser ? getUserDoc(currentUser.uid) : null
+	);
 
 	const setDispatchTotalPrice = () => {
 		dispatch({
@@ -49,14 +52,6 @@ const Cart = () => {
 		);
 		setTotalPrice(totalCartPrice);
 	}, [cart]);
-
-	useEffect(() => {
-		if (!userData && currentUser) {
-			getUserInfo(currentUser.uid).then((data) => {
-				setUserData(data);
-			});
-		}
-	}, [currentUser, getUserInfo, userData]);
 
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
@@ -119,7 +114,7 @@ const Cart = () => {
 						render={() => (
 							<CartAddress
 								step={step}
-								userData={userData}
+								userData={data}
 								dispatch={dispatch}
 								onChangeStep={onChangeStep}
 							/>

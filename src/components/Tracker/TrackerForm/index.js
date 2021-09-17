@@ -15,41 +15,53 @@ import {
 	FormLabel,
 	FormInput,
 	FormButton,
+	FormError,
 } from 'components/Form/FormElements';
 
-import { useApi } from 'contexts/APIContext';
+import { getOrder } from 'utils/firebaseGetters';
+
+import { useForm } from 'react-hook-form';
+import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const TrackerForm = () => {
 	const { orderId } = useLocation();
 	const history = useHistory();
 	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState('');
 
-	const { getOrder } = useApi();
-
-	const orderRef = useRef();
-
-	const findOrder = (e) => {
-		e.preventDefault();
-		setLoading(true);
-		if (!isNaN(orderRef.current.value)) {
-			getOrder(orderRef.current.value).then((order) => {
-				if (!order) {
-					setError('There is no order with this ID!');
-					setLoading(false);
-				} else {
-					orderRef.current.value = '';
-					setLoading(false);
-					history.push({
-						pathname: '/food-tracker/order',
-						order: order,
+	const validationSchema = Yup.object().shape({
+		orderId: Yup.string()
+			.required('Order ID is required')
+			.matches(/[0-9]{10}/, 'Order ID must be in 10 digits format')
+			.test('orderId', 'Order ID does not exist', async (value) => {
+				let response = await getOrder(value)
+					.get()
+					.then((snapshot) => {
+						return snapshot.empty;
 					});
-				}
+				return !response;
+			}),
+	});
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(validationSchema),
+	});
+
+	const onSubmit = async (data) => {
+		setLoading(true);
+		await getOrder(data.orderId)
+			.get()
+			.then((snapshot) => {
+				history.push({
+					pathname: '/food-tracker/order',
+					order: snapshot.docs[0].data(),
+				});
 			});
-		} else {
-			setError('Only digits are accepted!');
-			setLoading(false);
-		}
+		setLoading(false);
 	};
 
 	return (
@@ -64,19 +76,19 @@ const TrackerForm = () => {
 				User profile &#8594; My orders
 			</TrackerFormNote>
 			<TrackerFormWrapper>
-				<Form onSubmit={(e) => findOrder(e)}>
+				<Form onSubmit={handleSubmit(onSubmit)}>
 					<FormElement>
 						<FormLabel>Order ID</FormLabel>
 						<FormInput
-							ref={orderRef}
-							type="tel"
+							type="text"
 							placeholder="Enter 10 digits Order ID"
-							pattern="[0-9]{10}"
 							defaultValue={orderId ?? ''}
-							maxLength="10"
-							required
+							{...register('orderId')}
+							error={errors.orderId}
 						/>
-						{error && <p>{error}</p>}
+						{errors.orderId && (
+							<FormError>{errors.orderId.message}</FormError>
+						)}
 						<FormButton
 							loading={loading}
 							type="submit"

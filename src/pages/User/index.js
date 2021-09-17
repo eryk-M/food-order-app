@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PrivateRoute from 'components/PrivateRoute';
 
 import UserAccount from 'components/User/UserAccount';
@@ -15,22 +15,15 @@ import {
 } from './UserElements';
 
 import { useAuth } from 'contexts/AuthContext';
-import { useApi } from 'contexts/APIContext';
 
 import { GlobalStyle } from 'globalStyles';
 
+import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { getUserDoc } from 'utils/firebaseGetters';
+
 const User = () => {
 	const { currentUser } = useAuth();
-	const { getUserInfo } = useApi();
-	const [userData, setUserData] = useState();
-
-	useEffect(() => {
-		if (!userData) {
-			getUserInfo(currentUser.uid).then((data) => {
-				setUserData(data);
-			});
-		}
-	}, [currentUser.uid, getUserInfo, userData]);
+	const { data } = useFirestoreQuery(getUserDoc(currentUser.uid));
 
 	return (
 		<UserWrapper className="user">
@@ -46,7 +39,7 @@ const User = () => {
 						path="/user"
 						exact
 						component={UserAccount}
-						userData={userData}
+						userData={data}
 					/>
 					<PrivateRoute
 						path="/user/change-password"

@@ -26,6 +26,17 @@
 	border-color: #fff transparent transparent transparent;
 }
 
+.products .lds-ring div {
+	border-color: var(--color-primary) transparent transparent
+		transparent;
+}
+
+.products .loader-wrapper {
+	margin-left: 10rem;
+	align-items: unset !important;
+	margin-top: 5rem;
+}
+
 .form .lds-ring {
 	position: absolute;
 	left: 5%;

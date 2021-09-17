@@ -22,14 +22,12 @@ import {
 import { Alert } from '../Alert';
 
 import { CartContext } from 'contexts/CartContext';
-import { useApi } from 'contexts/APIContext';
 import StarRating from '../Reviews/FormReview/StarRating';
 
 import Reviews from '../Reviews';
 
-import { db } from 'firebase';
-
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { getOneProduct } from 'utils/firebaseGetters';
 
 const ProductItem = ({ props }) => {
 	const {
@@ -37,28 +35,18 @@ const ProductItem = ({ props }) => {
 		dispatch,
 	} = useContext(CartContext);
 	const { data } = useFirestoreQuery(
-		db.collection('reviews').doc(props.match.params.id)
+		getOneProduct(Number(props.match.params.id))
 	);
 
-	const { getOneProduct } = useApi();
 	const [currentItem, setCurrentItem] = useState();
-	const [ratings, setRatings] = useState();
 	const [quantity, setQuantity] = useState(1);
 	const [isAdded, setIsAdded] = useState(false);
-
-	useEffect(() => {
-		if (data) {
-			setRatings(data);
-		}
-		return () => {
-			setRatings();
-		};
-	}, [data]);
-
-	if (!currentItem) {
-		getOneProduct(Number(props.match.params.id)).then((data) =>
-			setCurrentItem(data)
-		);
+	if (
+		(!currentItem && data) ||
+		(data instanceof Array &&
+			data[0].ratingCount !== currentItem.ratingCount)
+	) {
+		setCurrentItem(data[0]);
 	}
 
 	const onInputChange = (e) => {
@@ -104,13 +92,13 @@ const ProductItem = ({ props }) => {
 							<ProductPrice>${currentItem.price}</ProductPrice>
 							<ProductStarIcons>
 								<StarRating
-									rating={ratings ? ratings.avgRating.toFixed() : 0}
+									rating={currentItem.avgRating.toFixed()}
 									show
 								/>
 							</ProductStarIcons>
 							<ProductRating>
-								{ratings ? addZeroes(ratings.avgRating) : '0'}
-								/5 ({ratings ? ratings.ratingCount : '0'} ratings)
+								{addZeroes(currentItem.avgRating)}
+								/5 ({currentItem.ratingCount} ratings)
 							</ProductRating>
 							<ProductDesc>{currentItem.desc}</ProductDesc>
 							<ProductIngredients>
@@ -146,10 +134,7 @@ const ProductItem = ({ props }) => {
 							</ProductForm>
 						</ProductRight>
 					</ProductContainer>
-					<Reviews
-						setRatings={setRatings}
-						productId={currentItem.id}
-					/>
+					<Reviews productId={currentItem.id} />
 				</>
 			)}
 		</>

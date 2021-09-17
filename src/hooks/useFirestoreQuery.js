@@ -8,18 +8,25 @@ const reducer = (state, action) => {
 		case 'idle':
 			return { status: 'idle', data: undefined, error: undefined };
 		case 'loading':
-			return { status: 'loading', data: undefined, error: undefined };
+			return {
+				loading: true,
+				status: 'loading',
+				data: undefined,
+				error: undefined,
+			};
 		case 'success':
 			return {
 				status: 'success',
 				data: action.payload,
 				error: undefined,
+				loading: false,
 			};
 		case 'error':
 			return {
 				status: 'error',
 				data: undefined,
 				error: action.payload,
+				loading: false,
 			};
 		default:
 			throw new Error('invalid action');
@@ -35,6 +42,7 @@ export function useFirestoreQuery(query) {
 		status: query ? 'loading' : 'idle',
 		data: undefined,
 		error: undefined,
+		loading: false,
 	};
 	// Setup our state and actions
 	const [state, dispatch] = useReducer(reducer, initialState);
