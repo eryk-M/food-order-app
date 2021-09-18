@@ -20,12 +20,15 @@ import { GlobalStyle } from 'globalStyles';
 
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getUserDoc } from 'utils/firebaseGetters';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 
 const User = () => {
-	const { currentUser } = useAuth();
+	const { currentUser, admin } = useAuth();
 	const { data } = useFirestoreQuery(getUserDoc(currentUser.uid));
 	const { pathname } = useLocation();
+
+	if (admin) return <Redirect to="/admin" />;
+
 	return (
 		<UserWrapper className="user">
 			<UserHeading>Hello, {currentUser.displayName}!</UserHeading>

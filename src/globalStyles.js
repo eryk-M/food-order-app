@@ -64,4 +64,37 @@ input, textarea {
     font-weight: 700;
     background-color: var(--color-secondary)
 }
+
+.is-hidden-menu {
+    width: 5rem !important;
+    & a {
+        width: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        & .icon-arrow {
+            display: none !important
+        }
+        & .icon-left {
+            margin-right: 0;
+        }
+        & p {
+            display: none;
+        width: 5rem;
+        }
+    }
+    
+    & img {
+        height: 4rem;
+    }
+    
+    & ul {
+        padding: 0;
+    }
+}
+.is-hidden-content{
+    margin-left: 5rem !important;
+    padding-left: 1rem;
+   
+}
 `;

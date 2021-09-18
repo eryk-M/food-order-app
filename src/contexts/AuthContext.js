@@ -15,7 +15,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState();
 	const [loading, setLoading] = useState(true);
-
+	const [admin, setAdmin] = useState();
 	// const userRef = db.collection('users');
 
 	async function signup(email, password, username, history) {
@@ -23,7 +23,9 @@ export function AuthProvider({ children }) {
 			.createUserWithEmailAndPassword(email, password)
 			.then((createdUser) => {
 				db.collection('users').doc(createdUser.user.uid).set({
+					email: email,
 					username: username,
+					isAdmin: false,
 					name: '',
 					address: '',
 					phone: '',
@@ -47,8 +49,23 @@ export function AuthProvider({ children }) {
 			});
 	}
 
-	function login(email, password) {
-		return auth.signInWithEmailAndPassword(email, password);
+	function login(email, password, history, query) {
+		return auth
+			.signInWithEmailAndPassword(email, password)
+			.then((snapshot) => {
+				db.collection('users')
+					.doc(snapshot.user.uid)
+					.get()
+					.then((doc) => {
+						const user = doc.data();
+						if (user.isAdmin) {
+							history.push('/admin');
+							setAdmin(true);
+						} else {
+							history.push({ pathname: '/user', query: query });
+						}
+					});
+			});
 	}
 
 	function logout(email, password) {
@@ -60,7 +77,11 @@ export function AuthProvider({ children }) {
 	}
 
 	function updateEmail(email) {
-		return currentUser.updateEmail(email);
+		return currentUser.updateEmail(email).then((user) => {
+			db.collection('users').doc(user.user.uid).update({
+				email: email,
+			});
+		});
 	}
 
 	function updatePassword(password) {
@@ -77,6 +98,7 @@ export function AuthProvider({ children }) {
 
 	const value = {
 		currentUser,
+		admin,
 		login,
 		signup,
 		logout,

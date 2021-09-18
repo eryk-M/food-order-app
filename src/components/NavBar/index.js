@@ -60,7 +60,7 @@ const NavBar = (props) => {
 				<>
 					<NavList>
 						<NavItem>
-							<NavLink to="/">Menu1</NavLink>
+							<NavLink to="/admin">Admin</NavLink>
 						</NavItem>
 						<NavItem>
 							<NavLink to="/products">Products</NavLink>
@@ -84,8 +84,17 @@ const NavBar = (props) => {
 			return <NavBurger onClick={toggle} />;
 		}
 	};
+
+	const conditionalMenu = () => {
+		if (pathname === '/') {
+			return null;
+		} else if (pathname.substring(0, 6) === '/admin') {
+			return { display: 'none' };
+		} else return stylesNav;
+	};
+
 	return (
-		<Nav style={pathname === '/' ? null : stylesNav}>
+		<Nav style={conditionalMenu()}>
 			<NavWrapper>
 				<NavLogo to="/">
 					<NavLogoImage

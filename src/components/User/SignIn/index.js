@@ -46,9 +46,8 @@ const SignIn = () => {
 		try {
 			clearErrors();
 			setLoading(true);
-			await login(data.email, data.password);
+			await login(data.email, data.password, history, query);
 			setLoading(false);
-			history.push({ pathname: '/user', query: query });
 		} catch {
 			setLoading(false);
 			setError(
@@ -67,9 +66,19 @@ const SignIn = () => {
 		try {
 			clearErrors();
 			setLoading(true);
-			await login('test@test.pl', 'test123');
+			await login('test@test.pl', 'test123', history, query);
 			setLoading(false);
-			history.push({ pathname: '/user', query: query });
+		} catch {
+			setLoading(false);
+		}
+	};
+
+	const onSubmitAdmin = async () => {
+		try {
+			clearErrors();
+			setLoading(true);
+			await login('admin@admin.pl', 'admin123', history, query);
+			setLoading(false);
 		} catch {
 			setLoading(false);
 		}
@@ -116,6 +125,13 @@ const SignIn = () => {
 					text="DEMO"
 					type="text"
 					onClick={onSubmitDemo}
+				/>
+				<FormButton
+					secondary
+					loading={loading}
+					text="ADMIN"
+					type="text"
+					onClick={onSubmitAdmin}
 				/>
 				<FormAlternative>
 					<FormLink to="/forgot-password">Forgot Password?</FormLink>
