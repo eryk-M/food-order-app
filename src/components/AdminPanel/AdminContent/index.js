@@ -10,7 +10,7 @@ const AdminContent = () => {
 	return (
 		<Switch>
 			<Route path="/admin" exact component={Dashboard} />
-			<Route path="/admin/products" exact component={Products} />
+			<Route path="/admin/products" component={Products} />
 			<Route path="/admin/users" exact component={Users} />
 		</Switch>
 	);

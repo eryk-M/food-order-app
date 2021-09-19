@@ -11,6 +11,11 @@ export const SelectContent = styled.select`
 	padding: 1rem;
 	outline: none;
 	font-family: 'Rubik', sans-serif;
+	margin-bottom: 1.5rem;
+	margin-top: 1rem;
+	width: ${(props) => props.width ?? ''};
+	display: ${(props) => props.display ?? ''};
+	margin-left: ${(props) => props.marginleft ?? ''};
 `;
 
 export const SelectOption = styled.option`
@@ -20,6 +25,7 @@ export const SelectOption = styled.option`
 `;
 
 export const SelectLabel = styled.label`
+	display: block;
 	font-size: 1.8rem;
 	margin-right: 1rem;
 `;

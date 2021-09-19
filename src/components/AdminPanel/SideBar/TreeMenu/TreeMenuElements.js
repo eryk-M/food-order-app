@@ -25,15 +25,30 @@ export const TreeItemMain = styled.li`
 	&:hover {
 		background-color: var(--color-primary);
 	}
+	& .icon-arrow {
+		display: block;
+		font-size: 2rem;
+		margin-left: auto;
+		margin-right: 0;
+	}
+	.is-active {
+		background-color: var(--color-primary);
+		& .icon-arrow {
+			display: block;
+			margin-left: auto;
+			font-size: 2rem;
+			transition: all 0.2s ease-in-out;
+			margin-right: 0 !important;
+		}
+	}
 `;
 
 export const TreeNavLink = styled(NavLink)`
 	display: block;
 	font-size: 1.6rem;
-	width: calc(24rem - 0.5rem * 2);
-	padding: 1rem;
+	padding: 1.2rem 1.4rem;
 	/* background-color: #d2404096; */
-	border-radius: 5px;
+	/* border-radius: 5px; */
 	display: flex;
 	align-items: center;
 	transition: all 0.2s ease-in-out;
@@ -44,13 +59,22 @@ export const TreeNavLink = styled(NavLink)`
 	&:hover {
 		background-color: var(--color-primary);
 	}
+	& .icon-arrow {
+		display: none;
+		transition: all 0.2s ease-in-out;
+		margin-right: 0;
+	}
 `;
 
 export const TreeList = styled.ul`
-	padding: 0 0.8rem;
+	/* padding: 0 0.8rem; */
 	width: 100%;
+	background-color: #3e4a54;
 `;
 
 export const TreeItem = styled.li`
 	margin: 0.1rem 0;
+	&:not(:last-of-type) {
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
 `;

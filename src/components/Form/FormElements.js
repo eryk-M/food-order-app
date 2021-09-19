@@ -48,7 +48,8 @@ export const Form = styled.form`
 
 export const FormElement = styled.div`
 	margin-left: ${(props) => props.marginleft};
-
+	/* margin: 0 auto; */
+	/* text-align: center; */
 	& .search-icon {
 		position: absolute;
 		font-size: 1.8rem;
@@ -57,12 +58,28 @@ export const FormElement = styled.div`
 		transform: translateY(60%);
 		opacity: 0.6;
 	}
+
+	/* & input[type='file'] {
+		width: 20rem;
+	} */
 `;
 export const FormGroup = styled.div`
 	display: ${(props) => (props.flex ? 'flex' : '')};
+	justify-content: ${(props) => props.justify};
+	align-items: ${(props) => props.align};
+	margin: ${(props) => props.margin};
 `;
 export const FormLabel = styled.label`
 	font-size: 1.6rem;
+`;
+
+export const FormCheckbox = styled.input`
+	/* vertical-align: middle; */
+	margin-left: 1rem;
+	font-size: 2.3rem;
+	/* margin-top: 1rem;
+    margin-bottom: 1rem; */
+	/* margin: 2rem 0 2rem 1rem; */
 `;
 
 export const FormInput = styled.input`
@@ -70,8 +87,8 @@ export const FormInput = styled.input`
 	margin-bottom: 1.5rem;
 	margin-top: 1rem;
 	padding: 1rem;
-	width: 100%;
-	display: block;
+	width: ${(props) => props.width ?? '100%'};
+	display: ${(props) => props.display ?? 'block'};
 	border-radius: 0.5rem;
 	transition: border 0.1s ease-in;
 	border: ${(props) => {

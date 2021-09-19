@@ -64,7 +64,7 @@ export const SideBarLink = styled(NavLink)`
 	align-items: center;
 	transition: all 0.2s ease-in-out;
 	& .icon-left {
-		font-size: 2.5rem;
+		font-size: 2.2rem;
 		margin-right: 1.2rem;
 		transition: all 0.01s ease-in-out;
 	}

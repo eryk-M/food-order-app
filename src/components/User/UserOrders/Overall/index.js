@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import Order from '../Order';
 
 import {
-	OrdersTableRow,
-	OrdersTableCell,
-	OrdersTableButton,
-} from '../UserOrdersElements';
+	TableRow,
+	TableCell,
+	TableButton,
+} from 'components/Table/TableElements';
 
 import { IoIosArrowDown } from 'react-icons/io';
 
@@ -19,29 +19,25 @@ const Overall = ({ el }) => {
 
 	return (
 		<>
-			<OrdersTableRow>
-				<OrdersTableCell>{el.orderId}</OrdersTableCell>
-				<OrdersTableCell>17.09.2021</OrdersTableCell>
-				<OrdersTableCell>Processing</OrdersTableCell>
-				<OrdersTableCell>${el.totalPrice}</OrdersTableCell>
-				<OrdersTableCell>
-					<OrdersTableButton
+			<TableRow>
+				<TableCell>{el.orderId}</TableCell>
+				<TableCell>17.09.2021</TableCell>
+				<TableCell>Processing</TableCell>
+				<TableCell>${el.totalPrice}</TableCell>
+				<TableCell>
+					<TableButton
 						onClick={() => setOpen((currOpen) => !currOpen)}
 					>
 						View
 						<IoIosArrowDown style={open ? null : iconRotate} />
-					</OrdersTableButton>
-				</OrdersTableCell>
-			</OrdersTableRow>
-			<OrdersTableRow>
-				<OrdersTableCell
-					colSpan={5}
-					className="cell-word-wrap"
-					padding={0}
-				>
+					</TableButton>
+				</TableCell>
+			</TableRow>
+			<TableRow>
+				<TableCell colSpan={5} className="cell-word-wrap" padding={0}>
 					<Order el={el} open={open} />
-				</OrdersTableCell>
-			</OrdersTableRow>
+				</TableCell>
+			</TableRow>
 		</>
 	);
 };

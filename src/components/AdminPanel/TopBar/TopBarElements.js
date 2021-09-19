@@ -3,10 +3,15 @@ import styled from 'styled-components/macro';
 import { NavLink } from 'react-router-dom';
 
 export const TopBarNav = styled.nav`
+	position: fixed;
+	top: 0;
+	background-color: var(--color-white);
+	width: 100%;
 	margin-left: 25rem;
 	border-bottom: 1px solid #dee2e6;
 	padding: 2rem;
 	transition: margin-left 0.2s ease-in-out;
+	z-index: 5;
 `;
 
 export const TopBarList = styled.ul`

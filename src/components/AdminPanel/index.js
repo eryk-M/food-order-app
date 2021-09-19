@@ -7,9 +7,13 @@ import AdminContent from './AdminContent';
 import TopBar from './TopBar';
 
 const AdminContentContainer = styled.div`
-	margin-left: 27rem;
-	margin-top: 2rem;
+	margin-top: 6rem;
+	margin-left: 25rem;
+	padding-top: 2rem;
+	padding-left: 2rem;
 	transition: margin-left 0.2s ease-in-out;
+	min-height: calc(100vh - 6rem);
+	background-color: #93949417;
 `;
 
 const AdminPanel = () => {

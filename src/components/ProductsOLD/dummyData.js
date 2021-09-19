@@ -24,6 +24,9 @@ export const dummyData = [
 		],
 		category: 'Burgers',
 		quantity: 1,
+		sale: true,
+		discountPrice: 0,
+		availability: true,
 	},
 	{
 		id: 2,
@@ -44,6 +47,9 @@ export const dummyData = [
 		],
 		category: 'Burgers',
 		quantity: 1,
+		sale: false,
+		discountPrice: 0,
+		availability: true,
 	},
 	{
 		id: 3,
@@ -64,6 +70,9 @@ export const dummyData = [
 		button: 'Add to Cart',
 		category: 'Burgers',
 		quantity: 1,
+		sale: true,
+		discountPrice: 0,
+		availability: true,
 	},
 	{
 		id: 4,
@@ -76,6 +85,9 @@ export const dummyData = [
 		ingredients: ['5x Crispy chicken wings', 'Garlic Sauce'],
 		category: 'Chicken',
 		quantity: 1,
+		sale: false,
+		discountPrice: 0,
+		availability: true,
 	},
 	{
 		id: 5,
@@ -94,6 +106,9 @@ export const dummyData = [
 		],
 		category: 'Chicken',
 		quantity: 1,
+		sale: true,
+		discountPrice: 0,
+		availability: true,
 	},
 	{
 		id: 6,
@@ -112,5 +127,8 @@ export const dummyData = [
 		],
 		category: 'Chicken',
 		quantity: 1,
+		sale: false,
+		discountPrice: 0,
+		availability: false,
 	},
 ];

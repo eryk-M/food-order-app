@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { MdKeyboardArrowRight } from 'react-icons/md';
-
+import { MdKeyboardArrowDown } from 'react-icons/md';
 import {
 	TreeNavLink,
 	TreeP,
@@ -10,24 +10,46 @@ import {
 	Tree,
 	TreeItemMain,
 } from './TreeMenuElements';
-const TreeMenu = ({ text, mainIcon, list }) => {
+
+import { SlideDown } from 'react-slidedown';
+
+const TreeMenu = ({ text, mainIcon, list, hidden }) => {
+	const [closed, setClosed] = useState(true);
+
+	const rotateArrowList = {
+		transform: 'rotate(180deg)',
+	};
+
 	return (
-		<Tree>
-			<TreeItemMain activeClassName="is-active">
+		<Tree className={hidden ? 'is-hidden-menu' : ''}>
+			<TreeItemMain
+				activeClassName="is-active"
+				onClick={() => setClosed((currClosed) => !currClosed)}
+			>
 				{React.createElement(mainIcon, { className: 'icon-left' })}
 				<TreeP>{text}</TreeP>
-				<MdKeyboardArrowRight className="icon-arrow" />
+				<MdKeyboardArrowDown
+					style={closed ? null : rotateArrowList}
+					className="icon-arrow"
+				/>
 			</TreeItemMain>
-			<TreeList>
-				{list.map((el, i) => (
-					<TreeItem key={i}>
-						<TreeNavLink to={el.path}>
-							{React.createElement(el.icon)}
-							{el.text}
-						</TreeNavLink>
-					</TreeItem>
-				))}
-			</TreeList>
+			<SlideDown className="my-dropdown-slidedown" closed={closed}>
+				<TreeList>
+					{list.map((el, i) => (
+						<TreeItem key={i}>
+							<TreeNavLink
+								exact
+								to={el.path}
+								activeClassName="is-active"
+							>
+								{React.createElement(el.icon)}
+								{el.text}
+								<MdKeyboardArrowRight className="icon-arrow" />
+							</TreeNavLink>
+						</TreeItem>
+					))}
+				</TreeList>
+			</SlideDown>
 		</Tree>
 	);
 };

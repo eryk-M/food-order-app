@@ -38,8 +38,8 @@ const SideBar = ({ hidden }) => {
 					</SideBarLink>
 				</SideBarItem>
 				<SideBarTree>
-					<TreeMenu {...treeProducts} />
-					<TreeMenu {...treeUsers} />
+					<TreeMenu {...treeProducts} hidden={hidden} />
+					<TreeMenu {...treeUsers} hidden={hidden} />
 				</SideBarTree>
 
 				<SideBarItem>

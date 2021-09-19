@@ -6,12 +6,13 @@ import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getUserOrders } from 'utils/firebaseGetters';
 
 import {
-	OrdersTable,
-	OrdersTableBody,
-	OrdersTableRow,
-	OrdersTableCell,
-	OrdersTableWrapper,
-} from './UserOrdersElements.js';
+	Table,
+	TableBody,
+	TableRow,
+	TableCell,
+} from 'components/Table/TableElements';
+
+import { OrdersTableWrapper } from './UserOrdersElements';
 
 import Overall from './Overall';
 const UserOrders = () => {
@@ -20,18 +21,18 @@ const UserOrders = () => {
 	const { data } = useFirestoreQuery(getUserOrders(currentUser.uid));
 	return (
 		<OrdersTableWrapper>
-			<OrdersTable>
-				<OrdersTableBody>
-					<OrdersTableRow backgroundColor="#93949417" fontW="bold">
-						<OrdersTableCell>ID</OrdersTableCell>
-						<OrdersTableCell>Date</OrdersTableCell>
-						<OrdersTableCell>Status</OrdersTableCell>
-						<OrdersTableCell>Total</OrdersTableCell>
-						<OrdersTableCell>Details</OrdersTableCell>
-					</OrdersTableRow>
+			<Table>
+				<TableBody>
+					<TableRow backgroundColor="#93949417" fontW="bold">
+						<TableCell>ID</TableCell>
+						<TableCell>Date</TableCell>
+						<TableCell>Status</TableCell>
+						<TableCell>Total</TableCell>
+						<TableCell>Details</TableCell>
+					</TableRow>
 					{data && data.map((el, i) => <Overall key={i} el={el} />)}
-				</OrdersTableBody>
-			</OrdersTable>
+				</TableBody>
+			</Table>
 		</OrdersTableWrapper>
 	);
 };

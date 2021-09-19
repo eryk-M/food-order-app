@@ -25,7 +25,7 @@ const Products = () => {
 	const { data } = useFirestoreQuery(getAllProducts());
 	//API
 	const { setItems } = useApi();
-
+	console.log(dummyData);
 	const onSetItems = () => {
 		try {
 			console.log('Wrzucam...');

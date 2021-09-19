@@ -7,9 +7,9 @@ import {
 } from 'components/Form/FormElements';
 import { BsSearch } from 'react-icons/bs';
 import { SearchContainer } from './SearchElements';
-const Search = ({ setQuery }) => {
+const Search = ({ setQuery, width }) => {
 	return (
-		<SearchContainer>
+		<SearchContainer width={width}>
 			<Form onSubmit={(e) => e.preventDefault()}>
 				<FormElement>
 					<BsSearch className="search-icon" />

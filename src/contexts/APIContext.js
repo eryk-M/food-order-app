@@ -35,6 +35,9 @@ export function APIProvider({ children }) {
 						avgRating: 0,
 						popularity: 0,
 						ratingCount: 0,
+						availability: el.availability,
+						discountPrice: el.discountPrice,
+						sale: el.sale,
 					})
 					.then(() => {
 						console.log(el.id, ' successfully written!');
