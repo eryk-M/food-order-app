@@ -44,6 +44,16 @@ export const FormHeading = styled.h2`
 
 export const Form = styled.form`
 	position: relative;
+
+	/* .file-label {
+		display: inline-block;
+		background-color: var(--color-secondary);
+		padding: 1rem 1.5rem;
+		border-radius: 5px;
+		cursor: pointer;
+		box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.2);
+		 margin: 5rem 0;
+	}  */
 `;
 
 export const FormElement = styled.div`

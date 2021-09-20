@@ -15,21 +15,17 @@ export const SideBarContainer = styled.aside`
 	left: 0;
 	bottom: 0;
 	font-weight: 100;
-	transition: width 0.2s ease-in-out;
 	.is-active {
 		background-color: var(--color-primary);
 		& .icon-arrow {
 			display: block;
 			margin-left: auto;
 			font-size: 2rem;
-			transition: all 0.2s ease-in-out;
 		}
 	}
 `;
 
-export const SideBarP = styled.p`
-	transition: all 0.1s ease-in-out;
-`;
+export const SideBarP = styled.p``;
 
 export const SideBarLogo = styled(Link)`
 	display: block;
@@ -42,14 +38,12 @@ export const SideBarLogo = styled(Link)`
 `;
 export const SideBarLogoImage = styled.img`
 	height: 10rem;
-	transition: height 0.2s ease-in-out;
 `;
 
 export const SideBarList = styled.ul`
 	margin-top: 2.3rem;
 	padding: 0 0.4rem;
 	width: 100%;
-	transition: all 0.2s ease-in-out;
 `;
 export const SideBarItem = styled.li`
 	margin: 0.1rem 0;
@@ -62,16 +56,13 @@ export const SideBarLink = styled(NavLink)`
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
-	transition: all 0.2s ease-in-out;
 	& .icon-left {
 		font-size: 2.2rem;
 		margin-right: 1.2rem;
-		transition: all 0.01s ease-in-out;
 	}
 
 	& .icon-arrow {
 		display: none;
-		transition: all 0.2s ease-in-out;
 	}
 	&:hover {
 		background-color: var(--color-primary);
@@ -94,7 +85,6 @@ export const SideBarTreeLink = styled(Link)`
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
-	transition: all 0.2s ease-in-out;
 	& svg {
 		font-size: 2.2rem;
 		margin-right: 1.2rem;

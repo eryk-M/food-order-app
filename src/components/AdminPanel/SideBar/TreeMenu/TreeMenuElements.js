@@ -2,7 +2,6 @@ import styled from 'styled-components/macro';
 
 import { NavLink } from 'react-router-dom';
 
-export const Tree = styled.li``;
 export const TreeP = styled.p`
 	transition: all 0.1s ease-in-out;
 `;
@@ -10,23 +9,26 @@ export const TreeP = styled.p`
 export const TreeItemMain = styled.li`
 	display: block;
 	font-size: 1.6rem;
-	width: calc(25rem - 0.5rem * 2);
+	/* width: calc(25rem - 0.5rem * 2); */
+	width: ${(props) =>
+		props.hidden ? '5rem' : 'calc(25rem - 0.5rem * 2)'};
 	padding: 1rem;
 	/* background-color: #d2404096; */
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	cursor: pointer;
-	transition: all 0.2s ease-in-out;
 	& svg {
 		font-size: 2.2rem;
-		margin-right: 1.2rem;
+		margin-right: ${(props) => (props.hidden ? '' : '1.2rem')};
 	}
+
 	&:hover {
 		background-color: var(--color-primary);
 	}
 	& .icon-arrow {
-		display: block;
+		display: ${(props) => (props.hidden ? 'none' : 'block')};
 		font-size: 2rem;
 		margin-left: auto;
 		margin-right: 0;
@@ -54,7 +56,7 @@ export const TreeNavLink = styled(NavLink)`
 	transition: all 0.2s ease-in-out;
 	& svg {
 		font-size: 2.2rem;
-		margin-right: 1.2rem;
+		margin-right: ${(props) => (props.hidden ? '' : '1.2rem')};
 	}
 	&:hover {
 		background-color: var(--color-primary);
@@ -63,6 +65,28 @@ export const TreeNavLink = styled(NavLink)`
 		display: none;
 		transition: all 0.2s ease-in-out;
 		margin-right: 0;
+	}
+`;
+
+export const Tree = styled.li`
+	${TreeItemMain} {
+		${(props) => {
+			if (props.hidden) {
+				return `
+            width: 5rem;
+            `;
+			}
+		}}
+	}
+
+	${TreeNavLink} {
+		${(props) => {
+			if (props.hidden) {
+				return `
+            font-size: 2.5rem;
+            `;
+			}
+		}}
 	}
 `;
 

@@ -45,6 +45,7 @@ const Edit = (props) => {
 	const { data, loading } = useFirestoreQuery(
 		getOneProduct(Number(props.match.params.id))
 	);
+
 	const [ingredients, setIngredients] = useState([]);
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
 	const [ingredientToAdd, setIngredientToAdd] = useState('');
@@ -81,8 +82,6 @@ const Edit = (props) => {
 		setIsInitiallyFetched(true);
 	}
 
-	const onSubmit = (data) => console.log(data);
-
 	const removeFromIngredients = (index) => {
 		let ings = ingredients.filter((el, i) => i !== index);
 		setIngredients(ings);
@@ -93,6 +92,8 @@ const Edit = (props) => {
 		setIngredients(ings);
 		setIngredientToAdd('');
 	};
+
+	const onSubmit = (data) => console.log(data);
 
 	return (
 		<>
@@ -105,8 +106,15 @@ const Edit = (props) => {
 
 					<Form onSubmit={handleSubmit(onSubmit)}>
 						<FormElement>
-							<FormLabel>Select image</FormLabel>
-							<FormInput {...register('file')} type="file" />
+							<FormLabel className="file-label" htmlFor="file">
+								Select image
+							</FormLabel>
+							<FormInput
+								id="file"
+								{...register('file')}
+								type="file"
+								accept=".jpg,.jpeg"
+							/>
 						</FormElement>
 						<FormGroup flex align="center" margin="2rem 0">
 							<FormLabel>Available?</FormLabel>

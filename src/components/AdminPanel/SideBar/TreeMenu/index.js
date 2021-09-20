@@ -25,12 +25,14 @@ const TreeMenu = ({ text, mainIcon, list, hidden }) => {
 			<TreeItemMain
 				activeClassName="is-active"
 				onClick={() => setClosed((currClosed) => !currClosed)}
+				hidden={hidden}
 			>
 				{React.createElement(mainIcon, { className: 'icon-left' })}
-				<TreeP>{text}</TreeP>
+				<TreeP hidden={hidden}>{text}</TreeP>
 				<MdKeyboardArrowDown
 					style={closed ? null : rotateArrowList}
 					className="icon-arrow"
+					hidden={hidden}
 				/>
 			</TreeItemMain>
 			<SlideDown className="my-dropdown-slidedown" closed={closed}>
@@ -41,9 +43,10 @@ const TreeMenu = ({ text, mainIcon, list, hidden }) => {
 								exact
 								to={el.path}
 								activeClassName="is-active"
+								hidden={hidden}
 							>
 								{React.createElement(el.icon)}
-								{el.text}
+								<TreeP>{el.text}</TreeP>
 								<MdKeyboardArrowRight className="icon-arrow" />
 							</TreeNavLink>
 						</TreeItem>

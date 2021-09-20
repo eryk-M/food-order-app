@@ -56,6 +56,10 @@ input, textarea {
     outline: 0;
 	font-family: inherit;
 }
+
+/* input[type=file]{
+    display: none;
+} */
 .stars-error {
     border: 1px solid var(--color-red);
 }
@@ -64,6 +68,15 @@ input, textarea {
     font-weight: 700;
     background-color: var(--color-secondary)
 }
+
+::-webkit-file-upload-button {
+    display: inline-block;
+		background-color: var(--color-secondary);
+		padding: 1rem 1.5rem;
+		border-radius: 5px;
+		cursor: pointer;
+		box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.2);
+	}
 
 .is-hidden-menu {
     width: 5rem !important;
@@ -83,6 +96,15 @@ input, textarea {
         width: 5rem;
         }
     }
+    & li {
+        /* width: 5rem; */
+        /* display: none; */
+        & li {
+            
+            /* width: 5rem; */
+        }
+    }
+    
     
     & img {
         height: 4rem;
