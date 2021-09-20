@@ -57,9 +57,9 @@ input, textarea {
 	font-family: inherit;
 }
 
-/* input[type=file]{
-    display: none;
-} */
+input[type=file]{
+    border: none;
+}
 .stars-error {
     border: 1px solid var(--color-red);
 }
@@ -70,12 +70,14 @@ input, textarea {
 }
 
 ::-webkit-file-upload-button {
-    display: inline-block;
+        display: inline-block;
 		background-color: var(--color-secondary);
 		padding: 1rem 1.5rem;
 		border-radius: 5px;
 		cursor: pointer;
 		box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.2);
+        border: none;
+        margin-right: 1rem;
 	}
 
 .is-hidden-menu {

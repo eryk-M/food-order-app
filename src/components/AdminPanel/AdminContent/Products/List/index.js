@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
-import { getAllProducts } from 'utils/firebaseGetters';
-
 import { Link } from 'react-router-dom';
 
 import {
@@ -22,9 +19,11 @@ import {
 	SaleIcon,
 	CrossIcon,
 } from 'components/AdminPanel/Icons';
+import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { getAllProducts } from 'utils/firebaseGetters';
 
 const List = () => {
-	const { data, loading } = useFirestoreQuery(getAllProducts());
+	const { data } = useFirestoreQuery(getAllProducts());
 	const [query, setQuery] = useState('');
 	return (
 		<MainContainer>

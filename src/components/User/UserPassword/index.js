@@ -55,7 +55,12 @@ const UserPassword = () => {
 			<UserAccountHeading>Change password</UserAccountHeading>
 
 			<Form onSubmit={handleSubmit}>
-				{showSuccess && <Alert success>Password changed</Alert>}
+				{showSuccess && (
+					<Alert top="110%" success>
+						Password changed
+					</Alert>
+				)}
+
 				{error && <Alert error>{error}</Alert>}
 				<FormElement>
 					<FormLabel htmlFor="password">Password</FormLabel>

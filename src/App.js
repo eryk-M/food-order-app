@@ -22,7 +22,7 @@ import AdminPage from './pages/Admin';
 
 import { CartProvider } from './contexts/CartContext';
 import { APIProvider } from './contexts/APIContext';
-
+import { AdminAPIProvider } from 'contexts/AdminAPIContext';
 const routes = (
 	<Route>
 		<Route path="/" exact component={Home} />
@@ -41,7 +41,9 @@ const routes = (
 			component={User}
 		/>
 		<PrivateRoute path="/user/orders" exact component={User} />
-		<PrivateRoute path="/admin" component={AdminPage} />
+		<AdminAPIProvider>
+			<PrivateRoute path="/admin" component={AdminPage} />
+		</AdminAPIProvider>
 	</Route>
 );
 

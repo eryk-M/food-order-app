@@ -10,6 +10,7 @@ export const MainContainer = styled.div`
 `;
 
 export const EditContainer = styled.div`
+	position: relative;
 	background-color: var(--color-white);
 	padding: 1.5rem;
 	border-radius: 5px;

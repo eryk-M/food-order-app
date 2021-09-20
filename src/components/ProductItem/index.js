@@ -111,7 +111,9 @@ const ProductItem = ({ props }) => {
 
 							<ProductForm onSubmit={(e) => addToCart(e)}>
 								{isAdded && (
-									<Alert success>Product added to cart</Alert>
+									<Alert top="-5rem" right="0" success>
+										Product added to cart
+									</Alert>
 								)}
 								<ProductQuantityLabel htmlFor="quantity">
 									Quantity:

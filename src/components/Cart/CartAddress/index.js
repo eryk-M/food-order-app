@@ -145,7 +145,7 @@ const CartAddress = ({ onChangeStep, userData, step, dispatch }) => {
 					</FormElement>
 					<CartAddressSteps>
 						<Button
-							type="text"
+							type="button"
 							onClick={(e) => onChangeStep(e, 'back')}
 						>
 							&#8592; Back to order{' '}

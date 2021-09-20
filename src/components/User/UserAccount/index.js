@@ -22,11 +22,13 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import { getUserDoc } from 'utils/firebaseGetters';
+
 //TODO: REFRESH UI po update
 
 const UserAccount = ({ userData }) => {
 	const { currentUser, updateEmail } = useAuth();
-	const { getUserInfo, updateUserInfo } = useApi();
+	const { updateUserInfo } = useApi();
 	const { query } = useLocation();
 
 	const [inputChanged, setInputChanged] = useState(false);
@@ -119,9 +121,11 @@ const UserAccount = ({ userData }) => {
 		Promise.all(promises)
 			.then(() => {
 				setShowSuccess(true);
-				getUserInfo(currentUser.uid).then((data) => {
-					setUser(data);
-				});
+				getUserDoc(currentUser.uid)
+					.get()
+					.then((doc) => {
+						setUser(doc.data());
+					});
 				setTimeout(() => {
 					setLoading(false);
 					setShowSuccess(false);
@@ -139,7 +143,12 @@ const UserAccount = ({ userData }) => {
 			{!user && <Loader />}
 			{user && (
 				<Form onSubmit={handleSubmit(onSubmit)}>
-					{showSuccess && <Alert success>Profile updated</Alert>}
+					{showSuccess && (
+						<Alert right="0" top="-5rem" success>
+							Profile updated
+						</Alert>
+					)}
+
 					{error && <Alert error>{error}</Alert>}
 					<FormGroup flex>
 						<FormElement id="email">

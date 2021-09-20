@@ -1,14 +1,14 @@
-// import burgerClassic from '../../images/burger-classic_cut.jpg';
-// import burgerDouble from '../../images/burger-double_cut.jpg';
-// import burgerChicken from '../../images/burger-chicken_cut.jpg';
-// import chickenCrispy from '../../images/chicken-crispy_cut.jpg';
-// import chickenSalad from '../../images/chicken-salad_cut.jpg';
-// import chickenShashlik from '../../images/chicken-shashlik_cut.jpg';
+import burgerClassic from 'images/burger-classic_cut.jpg';
+import burgerDouble from 'images/burger-double_cut.jpg';
+import burgerChicken from 'images/burger-chicken_cut.jpg';
+import chickenCrispy from 'images/chicken-crispy_cut.jpg';
+import chickenSalad from 'images/chicken-salad_cut.jpg';
+import chickenShashlik from 'images/chicken-shashlik_cut.jpg';
 
 export const dummyData = [
 	{
 		id: 1,
-		img: 'burger-classic_cut',
+		img: burgerClassic,
 		alt: 'Burger',
 		name: 'Classic Burger',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -33,7 +33,7 @@ export const dummyData = [
 	},
 	{
 		id: 2,
-		img: 'burger-double_cut',
+		img: burgerDouble,
 		alt: 'Burger',
 		name: 'Double Burger',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -59,7 +59,7 @@ export const dummyData = [
 	},
 	{
 		id: 3,
-		img: 'burger-chicken_cut',
+		img: burgerChicken,
 		alt: 'Burger',
 		name: 'Chicken Burger',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -85,7 +85,7 @@ export const dummyData = [
 	},
 	{
 		id: 4,
-		img: 'chicken-crispy_cut',
+		img: chickenCrispy,
 		alt: 'Crispy Chicken',
 		name: 'Crispy Chicken',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -103,7 +103,7 @@ export const dummyData = [
 	},
 	{
 		id: 5,
-		img: 'chicken-salad_cut',
+		img: chickenSalad,
 		alt: 'Chicken Salad',
 		name: 'Chicken Salad',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
@@ -127,7 +127,7 @@ export const dummyData = [
 	},
 	{
 		id: 6,
-		img: 'chicken-shashlik_cut',
+		img: chickenShashlik,
 		alt: 'Chicken Shashlik',
 		name: 'Chicken Shashlik',
 		desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry',

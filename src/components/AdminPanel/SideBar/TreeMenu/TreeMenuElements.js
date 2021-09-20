@@ -9,11 +9,9 @@ export const TreeP = styled.p`
 export const TreeItemMain = styled.li`
 	display: block;
 	font-size: 1.6rem;
-	/* width: calc(25rem - 0.5rem * 2); */
 	width: ${(props) =>
 		props.hidden ? '5rem' : 'calc(25rem - 0.5rem * 2)'};
 	padding: 1rem;
-	/* background-color: #d2404096; */
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
@@ -49,8 +47,6 @@ export const TreeNavLink = styled(NavLink)`
 	display: block;
 	font-size: 1.6rem;
 	padding: 1.2rem 1.4rem;
-	/* background-color: #d2404096; */
-	/* border-radius: 5px; */
 	display: flex;
 	align-items: center;
 	transition: all 0.2s ease-in-out;
@@ -68,7 +64,7 @@ export const TreeNavLink = styled(NavLink)`
 	}
 `;
 
-export const Tree = styled.li`
+export const Tree = styled.div`
 	${TreeItemMain} {
 		${(props) => {
 			if (props.hidden) {
@@ -91,7 +87,6 @@ export const Tree = styled.li`
 `;
 
 export const TreeList = styled.ul`
-	/* padding: 0 0.8rem; */
 	width: 100%;
 	background-color: #3e4a54;
 `;

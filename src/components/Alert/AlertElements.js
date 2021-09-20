@@ -1,20 +1,20 @@
 import styled, { keyframes } from 'styled-components/macro';
 
 import { GiConfirmed } from 'react-icons/gi';
-const fadeInRight = keyframes`
+const fadeIn = keyframes`
 from {
-    right: -100%;
+    opacity: 0%;
 }
 
 to {
-    right: 0;
+    opacity: 100%;
 }
 `;
 
 export const AlertContainer = styled.div`
 	position: absolute;
-	top: -5rem;
-	right: 0;
+	top: ${(props) => props.top};
+	right: ${(props) => props.right};
 	font-size: 1.6rem;
 	color: #fff;
 	background-color: ${(props) => {
@@ -28,7 +28,7 @@ export const AlertContainer = styled.div`
 	opacity: 100%;
 	font-weight: 100;
 	border-radius: 0.5rem;
-	animation: ${fadeInRight} 0.71s cubic-bezier(0.075, 0.82, 0.165, 1);
+	animation: ${fadeIn} 0.71s cubic-bezier(0.075, 0.82, 0.165, 1);
 `;
 export const AlertSuccessIcon = styled(GiConfirmed)`
 	margin-right: 0.5rem;

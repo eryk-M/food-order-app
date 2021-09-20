@@ -51,7 +51,11 @@ const Item = ({ el }) => {
 
 	return (
 		<ItemWrapper>
-			{isAdded && <Alert success>Product added to cart</Alert>}
+			{isAdded && (
+				<Alert top="2rem" right="2rem" success>
+					Product added to cart
+				</Alert>
+			)}
 
 			<ItemImageWrapper>
 				<Link to={`/product/${el.id}`}>

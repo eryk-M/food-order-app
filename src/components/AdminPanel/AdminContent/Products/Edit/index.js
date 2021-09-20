@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import {
 	Form,
@@ -11,11 +11,7 @@ import {
 	FormError,
 } from 'components/Form/FormElements';
 
-import { MinusIcon } from 'components/AdminPanel/Icons';
-
 import {
-	SelectForm,
-	SelectLabel,
 	SelectContent,
 	SelectOption,
 } from 'components/FilterGroup/Select/SelectElements';
@@ -29,17 +25,18 @@ import {
 } from './EditElements';
 
 import { EditContainer } from 'components/AdminPanel/Containers';
-
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
-import { getOneProduct } from 'utils/firebaseGetters';
+import { MinusIcon } from 'components/AdminPanel/Icons';
 
 import Button from 'components/Button';
 
+import { Alert } from 'components/Alert';
 import { storage } from 'firebase';
 
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { getOneProduct } from 'utils/firebaseGetters';
 
 const Edit = (props) => {
 	const { data, loading } = useFirestoreQuery(
@@ -49,8 +46,36 @@ const Edit = (props) => {
 	const [ingredients, setIngredients] = useState([]);
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
 	const [ingredientToAdd, setIngredientToAdd] = useState('');
+	const [showSuccess, setShowSuccess] = useState(false);
+	//"image/jpeg"
+
+	const FILE_SIZE = 5242880;
+	const SUPPORTED_FORMATS = ['image/jpeg', 'image/png'];
 
 	const validationSchema = Yup.object().shape({
+		dummy: Yup.string(),
+		file: Yup.mixed()
+			.test('fileSize', 'File too large. Max 5 MB', (value) => {
+				if (!value.length) return true;
+				return value[0].size <= FILE_SIZE;
+				// console.log(value);
+			})
+			.test(
+				'fileFormat',
+				'Unsupported file type. Only images in jpeg or png.',
+				(value) => {
+					if (!value.length) return true;
+					return SUPPORTED_FORMATS.includes(value[0].type);
+				}
+			),
+		ingredients: Yup.mixed().when('dummy', {
+			is: (value) => ingredients.length === 0,
+			then: Yup.string().test(
+				'ingredients',
+				'Add minimum 1 ingredient',
+				(value) => false
+			),
+		}),
 		name: Yup.string()
 			.test('name', 'Name must be at least 3 characters', (value) =>
 				value ? value.length > 3 : true
@@ -59,7 +84,8 @@ const Edit = (props) => {
 		price: Yup.number().test(
 			'price',
 			'Format: e.g. 11.00, 12.99',
-			(value) => (value + '').match(/^\d*\.{1}\d*$/)
+			(value) =>
+				(value + '').match(/^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/)
 		),
 		discount: Yup.string().test(
 			'discount',
@@ -93,12 +119,33 @@ const Edit = (props) => {
 		setIngredientToAdd('');
 	};
 
-	const onSubmit = (data) => console.log(data);
+	const handleKeyPress = (e) => {
+		if (e.key === 'Enter') {
+			addToIngredients();
+		}
+	};
+
+	//  TODO: SKONCZYLEM TUTAJ
+	const onSubmit = async (data) => {
+		if (data.file.length !== 0) {
+			const fileData = await storage
+				.ref(`images/${data.file[0].name}`)
+				.put(data.file[0]);
+			const imageSrc = await fileData.ref.getDownloadURL();
+			console.log(imageSrc);
+		}
+		console.log(data);
+	};
 
 	return (
 		<>
 			{data && (
 				<EditContainer>
+					{showSuccess && (
+						<Alert right="1rem" top="1rem" success>
+							Product updated
+						</Alert>
+					)}
 					<EditHeading>{data[0].name}</EditHeading>
 					<EditImageWrapper>
 						<EditImage src={data[0].img} />
@@ -113,8 +160,11 @@ const Edit = (props) => {
 								id="file"
 								{...register('file')}
 								type="file"
-								accept=".jpg,.jpeg"
+								accept="image/jpeg, image/png"
 							/>
+							{errors.file && (
+								<FormError>{errors.file.message}</FormError>
+							)}
 						</FormElement>
 						<FormGroup flex align="center" margin="2rem 0">
 							<FormLabel>Available?</FormLabel>
@@ -162,7 +212,6 @@ const Edit = (props) => {
 									<FormLabel>Price</FormLabel>
 									<FormInput
 										{...register('price')}
-										// type="number"
 										defaultValue={data[0].price}
 										error={errors.price}
 									/>
@@ -188,6 +237,11 @@ const Edit = (props) => {
 							<FormElement marginleft="2rem">
 								<FormLabel>Ingredients</FormLabel>
 								<IngredientList>
+									{errors.ingredients && (
+										<FormError>
+											{errors.ingredients.message}
+										</FormError>
+									)}
 									{ingredients.map((el, i) => (
 										<IngredientItem key={i}>
 											{el}
@@ -202,6 +256,7 @@ const Edit = (props) => {
 									onChange={(e) => setIngredientToAdd(e.target.value)}
 									display="inline"
 									width="20rem"
+									onKeyPress={(e) => handleKeyPress(e)}
 								/>
 								<Button
 									type="button"
