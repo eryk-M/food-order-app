@@ -1,5 +1,7 @@
 import { db } from 'firebase';
 
+// MAIN PAGE //
+
 export const getUserDoc = (uid) => db.collection('users').doc(uid);
 
 export const getReviews = (productId) =>
@@ -22,3 +24,10 @@ export const getOneProduct = (id) =>
 
 export const validateUsername = (username) =>
 	db.collection('users').where('username', '==', username);
+
+// ADMIN PANEL //
+export const getAdminAllProducts = () =>
+	db.collection('adminProducts');
+
+export const getAdminOneProduct = (id) =>
+	db.collection('adminProducts').where('id', '==', id);

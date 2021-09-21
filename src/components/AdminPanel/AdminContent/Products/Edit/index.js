@@ -25,7 +25,7 @@ import {
 } from './EditElements';
 
 import { EditContainer } from 'components/AdminPanel/Containers';
-import { MinusIcon } from 'components/AdminPanel/Icons';
+import { MinusIcon, EditBigIcon } from 'components/AdminPanel/Icons';
 
 import Button from 'components/Button';
 
@@ -36,17 +36,21 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
-import { getOneProduct } from 'utils/firebaseGetters';
+
+import { useAdminApi } from 'contexts/AdminAPIContext';
+import { getAdminOneProduct } from 'utils/firebaseGetters';
 
 const Edit = (props) => {
 	const { data, loading } = useFirestoreQuery(
-		getOneProduct(Number(props.match.params.id))
+		getAdminOneProduct(Number(props.match.params.id))
 	);
+	const { updateAdminProduct } = useAdminApi();
 
 	const [ingredients, setIngredients] = useState([]);
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
 	const [ingredientToAdd, setIngredientToAdd] = useState('');
 	const [showSuccess, setShowSuccess] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	//"image/jpeg"
 
 	const FILE_SIZE = 5242880;
@@ -80,6 +84,7 @@ const Edit = (props) => {
 			.test('name', 'Name must be at least 3 characters', (value) =>
 				value ? value.length > 3 : true
 			)
+			.trim()
 			.max(20, 'Name must have maximum of 20 characters'),
 		price: Yup.number().test(
 			'price',
@@ -127,20 +132,33 @@ const Edit = (props) => {
 
 	//  TODO: SKONCZYLEM TUTAJ
 	const onSubmit = async (data) => {
+		let imageSrc;
+		setIsLoading(true);
 		if (data.file.length !== 0) {
 			const fileData = await storage
 				.ref(`images/${data.file[0].name}`)
 				.put(data.file[0]);
-			const imageSrc = await fileData.ref.getDownloadURL();
-			console.log(imageSrc);
+			imageSrc = await fileData.ref.getDownloadURL();
 		}
-		console.log(data);
+		updateAdminProduct(
+			props.match.params.id,
+			data,
+			ingredients,
+			imageSrc
+		).then(() => {
+			setShowSuccess(true);
+			setTimeout(() => {
+				setIsLoading(false);
+				setShowSuccess(false);
+			}, 3000);
+		});
 	};
 
 	return (
 		<>
 			{data && (
 				<EditContainer>
+					<EditBigIcon />
 					{showSuccess && (
 						<Alert right="1rem" top="1rem" success>
 							Product updated
@@ -268,7 +286,11 @@ const Edit = (props) => {
 							</FormElement>
 						</FormGroup>
 
-						<FormButton type="submit" text="Update" />
+						<FormButton
+							loading={isLoading}
+							type="submit"
+							text="Update"
+						/>
 					</Form>
 				</EditContainer>
 			)}

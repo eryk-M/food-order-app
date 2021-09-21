@@ -24,13 +24,16 @@ import { getAllProducts } from 'utils/firebaseGetters';
 const Products = () => {
 	const { data } = useFirestoreQuery(getAllProducts());
 	//API
-	const { setItems } = useApi();
+	const { setItems, setAdminItems } = useApi();
 	console.log(dummyData);
-	const onSetItems = () => {
+	const onSetItems = (admin) => {
 		try {
 			console.log('Wrzucam...');
-			setItems(dummyData);
-			// await getImageUrl(data);
+			if (admin) {
+				setItems(dummyData, true);
+			} else {
+				setItems(dummyData);
+			}
 		} catch (err) {
 			console.log(err);
 		}
@@ -41,6 +44,9 @@ const Products = () => {
 	return (
 		<>
 			<button onClick={onSetItems}>ustaw itemy</button>
+			<button onClick={() => onSetItems(true)}>
+				ustaw admin products
+			</button>
 			<ProductsContainer>
 				<ProductsHeading>Our menu</ProductsHeading>
 				<ProductsFilter>

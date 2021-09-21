@@ -10,41 +10,72 @@ export function useApi() {
 
 export function APIProvider({ children }) {
 	const productsRef = db.collection('products');
+	const adminProductsRef = db.collection('adminProducts');
+
 	const usersRef = db.collection('users');
 	const reviewsRef = db.collection('reviews');
 	const ordersRef = db.collection('orders');
 	// HELPER AT START TO SET COLLECTION OF PRODUCTS
 
-	function setItems(data) {
+	function setItems(data, admin) {
 		data.forEach((el) => {
 			const storageRef = storage.ref(`images/${el.img}.jpg`);
 			storageRef.getDownloadURL().then((url) => {
-				productsRef
-					.doc(`${el.id}`)
-					.set({
-						id: el.id,
-						img: url,
-						alt: el.alt,
-						name: el.name,
-						desc: el.desc,
-						price: el.price,
-						button: el.button,
-						ingredients: el.ingredients,
-						category: el.category,
-						quantity: el.quantity,
-						avgRating: el.avgRating,
-						popularity: el.popularity,
-						ratingCount: el.ratingCount,
-						availability: el.availability,
-						discountPrice: el.discountPrice,
-						sale: el.sale,
-					})
-					.then(() => {
-						console.log(el.id, ' successfully written!');
-					})
-					.catch((err) => {
-						console.log(err);
-					});
+				if (admin) {
+					adminProductsRef
+						.doc(`${el.id}`)
+						.set({
+							id: el.id,
+							img: url,
+							alt: el.alt,
+							name: el.name,
+							desc: el.desc,
+							price: el.price,
+							button: el.button,
+							ingredients: el.ingredients,
+							category: el.category,
+							quantity: el.quantity,
+							avgRating: el.avgRating,
+							popularity: el.popularity,
+							ratingCount: el.ratingCount,
+							availability: el.availability,
+							discountPrice: el.discountPrice,
+							sale: el.sale,
+						})
+						.then(() => {
+							console.log(el.id, ' admin successfully written!');
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+				} else {
+					productsRef
+						.doc(`${el.id}`)
+						.set({
+							id: el.id,
+							img: url,
+							alt: el.alt,
+							name: el.name,
+							desc: el.desc,
+							price: el.price,
+							button: el.button,
+							ingredients: el.ingredients,
+							category: el.category,
+							quantity: el.quantity,
+							avgRating: el.avgRating,
+							popularity: el.popularity,
+							ratingCount: el.ratingCount,
+							availability: el.availability,
+							discountPrice: el.discountPrice,
+							sale: el.sale,
+						})
+						.then(() => {
+							console.log(el.id, ' successfully written!');
+						})
+						.catch((err) => {
+							console.log(err);
+						});
+				}
 			});
 		});
 	}

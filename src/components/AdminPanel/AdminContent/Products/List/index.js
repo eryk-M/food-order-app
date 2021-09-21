@@ -20,10 +20,10 @@ import {
 	CrossIcon,
 } from 'components/AdminPanel/Icons';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
-import { getAllProducts } from 'utils/firebaseGetters';
+import { getAdminAllProducts } from 'utils/firebaseGetters';
 
 const List = () => {
-	const { data } = useFirestoreQuery(getAllProducts());
+	const { data } = useFirestoreQuery(getAdminAllProducts());
 	const [query, setQuery] = useState('');
 	return (
 		<MainContainer>
