@@ -2,17 +2,16 @@ import styled from 'styled-components/macro';
 
 export const EditImage = styled.img`
 	height: 15rem;
+	width: 15rem;
 	margin: 2rem auto;
 	display: block;
+	border: 1px solid rgba(0, 0, 0, 0.4);
 `;
 
-export const EditImageWrapper = styled.div``;
-
-export const EditHeading = styled.h2`
-	text-align: center;
-	font-size: 2.4rem;
-	padding-bottom: 2rem;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+export const EditImageWrapper = styled.div`
+	height: 15rem;
+	width: 15rem;
+	margin: 0 auto;
 `;
 
 export const IngredientList = styled.ul`

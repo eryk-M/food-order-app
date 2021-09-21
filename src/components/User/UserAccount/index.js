@@ -93,7 +93,7 @@ const UserAccount = ({ userData }) => {
 
 	if (!user && userData) setUser(userData);
 
-	const onSubmit = (data) => {
+	const onSubmit = async (data) => {
 		const promises = [];
 		setLoading(true);
 
@@ -117,24 +117,20 @@ const UserAccount = ({ userData }) => {
 				data.zipcode
 			)
 		);
-
-		Promise.all(promises)
-			.then(() => {
-				setShowSuccess(true);
-				getUserDoc(currentUser.uid)
-					.get()
-					.then((doc) => {
-						setUser(doc.data());
-					});
-				setTimeout(() => {
-					setLoading(false);
-					setShowSuccess(false);
-				}, 1000);
-			})
-			.catch(() => {
-				setError('Failed to update');
-			})
-			.finally(() => {});
+		try {
+			const allPromise = Promise.all(promises);
+			await allPromise;
+			setShowSuccess(true);
+			const doc = await getUserDoc(currentUser.uid).get();
+			setUser(doc.data());
+			setTimeout(() => {
+				setLoading(false);
+				setShowSuccess(false);
+			}, 1000);
+		} catch (err) {
+			console.error(err);
+			setError('Failed to update');
+		}
 	};
 
 	return (

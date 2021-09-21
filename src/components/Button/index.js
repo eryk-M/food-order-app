@@ -16,6 +16,7 @@ const ButtonMain = styled.button`
 	margin-bottom: ${(props) => props.marginbottom};
 	border-radius: 5px;
 	box-shadow: 0 0.2rem 1.5rem rgba(0, 0, 0, 0.2);
+	display: ${(props) => props.display ?? ''};
 	&:hover {
 		background-color: var(--color-secondary);
 		color: var(--color-grey-dark);

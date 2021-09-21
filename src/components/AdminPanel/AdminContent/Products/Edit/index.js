@@ -9,6 +9,7 @@ import {
 	FormGroup,
 	FormCheckbox,
 	FormError,
+	FormTextArea,
 } from 'components/Form/FormElements';
 
 import {
@@ -19,16 +20,21 @@ import {
 import {
 	EditImage,
 	EditImageWrapper,
-	EditHeading,
 	IngredientList,
 	IngredientItem,
 } from './EditElements';
 
-import { EditContainer } from 'components/AdminPanel/Containers';
+import { AdminPanelHeading } from 'components/Typography';
+
+import {
+	EditContainer,
+	ProgressContainer,
+} from 'components/AdminPanel/Containers';
 import { MinusIcon, EditBigIcon } from 'components/AdminPanel/Icons';
 
 import Button from 'components/Button';
 
+import { Line } from 'rc-progress';
 import { Alert } from 'components/Alert';
 import { storage } from 'firebase';
 
@@ -51,7 +57,8 @@ const Edit = (props) => {
 	const [ingredientToAdd, setIngredientToAdd] = useState('');
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	//"image/jpeg"
+	const [imageURI, setImageURI] = useState(null);
+	const [uploadPercentage, setUploadPercentage] = useState(0);
 
 	const FILE_SIZE = 5242880;
 	const SUPPORTED_FORMATS = ['image/jpeg', 'image/png'];
@@ -62,7 +69,6 @@ const Edit = (props) => {
 			.test('fileSize', 'File too large. Max 5 MB', (value) => {
 				if (!value.length) return true;
 				return value[0].size <= FILE_SIZE;
-				// console.log(value);
 			})
 			.test(
 				'fileFormat',
@@ -86,6 +92,14 @@ const Edit = (props) => {
 			)
 			.trim()
 			.max(20, 'Name must have maximum of 20 characters'),
+		description: Yup.string()
+			.test(
+				'description',
+				'Description must be at least 10 characters',
+				(value) => (value ? value.length > 20 : true)
+			)
+			.trim()
+			.max(200, 'Maximum of 200 characters'),
 		price: Yup.number().test(
 			'price',
 			'Format: e.g. 11.00, 12.99',
@@ -124,35 +138,61 @@ const Edit = (props) => {
 		setIngredientToAdd('');
 	};
 
-	const handleKeyPress = (e) => {
-		if (e.key === 'Enter') {
-			addToIngredients();
-		}
-	};
-
-	//  TODO: SKONCZYLEM TUTAJ
 	const onSubmit = async (data) => {
 		let imageSrc;
 		setIsLoading(true);
 		if (data.file.length !== 0) {
-			const fileData = await storage
-				.ref(`images/${data.file[0].name}`)
-				.put(data.file[0]);
-			imageSrc = await fileData.ref.getDownloadURL();
+			const fileDataRef = storage.ref(`images/${data.file[0].name}`);
+			await fileDataRef
+				.put(data.file[0])
+				.on('state_changed', function progress(snapshot) {
+					let percentage =
+						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					setUploadPercentage(percentage);
+				});
+			imageSrc = await fileDataRef.getDownloadURL();
 		}
-		updateAdminProduct(
+		await updateAdminProduct(
 			props.match.params.id,
 			data,
 			ingredients,
 			imageSrc
-		).then(() => {
-			setShowSuccess(true);
-			setTimeout(() => {
-				setIsLoading(false);
-				setShowSuccess(false);
-			}, 3000);
-		});
+		);
+		setShowSuccess(true);
+		setTimeout(() => {
+			setIsLoading(false);
+			setShowSuccess(false);
+			setUploadPercentage(0);
+		}, 3000);
 	};
+
+	const checkKeyDown = (e) => {
+		if (e.code === 'Enter') {
+			e.preventDefault();
+			addToIngredients();
+		}
+	};
+
+	const buildImgTag = () => {
+		let imgTag = null;
+		if (imageURI !== null)
+			imgTag = <EditImage alt="Temporary image" src={imageURI} />;
+		return imgTag;
+	};
+
+	const readURI = (e) => {
+		if (e.target.files && e.target.files[0]) {
+			let reader = new FileReader();
+			reader.onload = (e) => setImageURI(e.target.result);
+			reader.readAsDataURL(e.target.files[0]);
+		}
+	};
+
+	const handleChangeFile = (e) => {
+		readURI(e);
+	};
+
+	const imgTag = buildImgTag();
 
 	return (
 		<>
@@ -164,12 +204,25 @@ const Edit = (props) => {
 							Product updated
 						</Alert>
 					)}
-					<EditHeading>{data[0].name}</EditHeading>
-					<EditImageWrapper>
-						<EditImage src={data[0].img} />
-					</EditImageWrapper>
-
-					<Form onSubmit={handleSubmit(onSubmit)}>
+					<AdminPanelHeading>{data[0].name}</AdminPanelHeading>
+					{imgTag || (
+						<EditImageWrapper>
+							<EditImage src={data[0].img} />
+						</EditImageWrapper>
+					)}
+					{uploadPercentage > 0 && (
+						<ProgressContainer>
+							<Line
+								percent={`${uploadPercentage}`}
+								strokeWidth="1"
+								strokeColor="#60dc64"
+							/>
+						</ProgressContainer>
+					)}
+					<Form
+						onKeyDown={(e) => checkKeyDown(e)}
+						onSubmit={handleSubmit(onSubmit)}
+					>
 						<FormElement>
 							<FormLabel className="file-label" htmlFor="file">
 								Select image
@@ -179,6 +232,7 @@ const Edit = (props) => {
 								{...register('file')}
 								type="file"
 								accept="image/jpeg, image/png"
+								onChange={(e) => handleChangeFile(e)}
 							/>
 							{errors.file && (
 								<FormError>{errors.file.message}</FormError>
@@ -226,7 +280,7 @@ const Edit = (props) => {
 								</FormElement>
 							</FormGroup>
 							<FormGroup>
-								<FormElement marginleft="2rem">
+								<FormElement>
 									<FormLabel>Price</FormLabel>
 									<FormInput
 										{...register('price')}
@@ -237,7 +291,7 @@ const Edit = (props) => {
 										<FormError>{errors.price.message}</FormError>
 									)}
 								</FormElement>
-								<FormElement marginleft="2rem">
+								<FormElement>
 									<FormLabel>Discount (without %)</FormLabel>
 									<FormInput
 										{...register('discount')}
@@ -255,7 +309,7 @@ const Edit = (props) => {
 							<FormElement marginleft="2rem">
 								<FormLabel>Ingredients</FormLabel>
 								<IngredientList>
-									{errors.ingredients && (
+									{errors.ingredients && ingredients.length === 0 && (
 										<FormError>
 											{errors.ingredients.message}
 										</FormError>
@@ -274,17 +328,28 @@ const Edit = (props) => {
 									onChange={(e) => setIngredientToAdd(e.target.value)}
 									display="inline"
 									width="20rem"
-									onKeyPress={(e) => handleKeyPress(e)}
 								/>
 								<Button
+									display="block"
+									width="100%"
 									type="button"
-									marginleft="2rem"
 									onClick={(e) => addToIngredients(e)}
 								>
 									Add
 								</Button>
 							</FormElement>
 						</FormGroup>
+						<FormElement>
+							<FormLabel>Description</FormLabel>
+							<FormTextArea
+								{...register('description')}
+								defaultValue={data[0].desc}
+								error={errors.description}
+							/>
+							{errors.description && (
+								<FormError>{errors.description.message}</FormError>
+							)}
+						</FormElement>
 
 						<FormButton
 							loading={isLoading}

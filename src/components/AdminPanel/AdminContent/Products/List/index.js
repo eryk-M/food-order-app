@@ -50,7 +50,7 @@ const List = () => {
 									<TableCell>{el.id}</TableCell>
 									<TableCell>
 										<img
-											style={{ height: '6rem' }}
+											style={{ height: '6rem', width: '6rem' }}
 											src={el.img}
 											alt={el.alt}
 										/>
@@ -66,8 +66,13 @@ const List = () => {
 									<TableCell width="8rem">${el.price}</TableCell>
 									<TableCell>
 										<Link to={`/admin/products/${el.id}`}>
-											<TableButton>Edit</TableButton>
+											<TableButton secondary>Edit</TableButton>
 										</Link>
+
+										{/* TODO: MODAL ARE YOU SURE?? */}
+										<TableButton primary marginleft="1rem">
+											Delete
+										</TableButton>
 									</TableCell>
 								</TableRow>
 							))}

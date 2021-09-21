@@ -4,11 +4,13 @@ import { Switch, Route } from 'react-router-dom';
 
 import List from './List';
 import Edit from './Edit';
+import Add from './Add';
+
 const Products = () => {
 	return (
 		<Switch>
 			<Route path="/admin/products" exact component={List} />
-			{/* <Route path="/admin/products/add" exact component={Add} /> */}
+			<Route path="/admin/products/add" exact component={Add} />
 			<Route path="/admin/products/:id" exact component={Edit} />
 		</Switch>
 	);

@@ -26,6 +26,7 @@ const Overall = ({ el }) => {
 				<TableCell>${el.totalPrice}</TableCell>
 				<TableCell>
 					<TableButton
+						primary
 						onClick={() => setOpen((currOpen) => !currOpen)}
 					>
 						View

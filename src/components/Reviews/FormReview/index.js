@@ -49,25 +49,24 @@ const FormReview = ({
 			displayName: currentUser?.displayName,
 		},
 	});
-	const onSubmit = (data) => {
+	const onSubmit = async (data) => {
 		if (!rating) {
 			return setStarError('You need to rate the product!');
 		}
 		const date = Date.now();
 
 		try {
-			addReview(
+			await addReview(
 				productId,
 				currentUser.uid,
 				currentUser.displayName,
 				date,
 				data.body,
 				rating
-			).then(() => {
-				sectionReviewRef.current.scrollIntoView();
-				setStarError('');
-				setIsAdded(true);
-			});
+			);
+			sectionReviewRef.current.scrollIntoView();
+			setStarError('');
+			setIsAdded(true);
 		} catch (err) {
 			console.error(err);
 		}

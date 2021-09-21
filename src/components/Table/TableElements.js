@@ -38,8 +38,15 @@ export const TableCell = styled.td`
 
 export const TableButton = styled.button`
 	padding: 0.6rem 0.8rem;
-	background-color: var(--color-primary);
+	background-color: ${(props) => {
+		if (props.primary) {
+			return 'var(--color-primary)';
+		} else if (props.secondary) {
+			return 'var(--color-secondary)';
+		}
+	}};
 	color: var(--color-white);
+	margin-left: ${(props) => props.marginleft};
 	border-radius: 50%;
 	border-radius: 5px;
 	border: none;
@@ -49,9 +56,5 @@ export const TableButton = styled.button`
 	& svg {
 		vertical-align: middle;
 		margin-left: 0.8rem;
-	}
-	&:hover {
-		background-color: var(--color-secondary);
-		color: var(--color-black);
 	}
 `;

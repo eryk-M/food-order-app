@@ -34,12 +34,8 @@ const TrackerForm = () => {
 			.required('Order ID is required')
 			.matches(/[0-9]{10}/, 'Order ID must be in 10 digits format')
 			.test('orderId', 'Order ID does not exist', async (value) => {
-				let response = await getOrder(value)
-					.get()
-					.then((snapshot) => {
-						return snapshot.empty;
-					});
-				return !response;
+				const response = await getOrder(value).get();
+				return !response.empty;
 			}),
 	});
 
@@ -53,14 +49,11 @@ const TrackerForm = () => {
 
 	const onSubmit = async (data) => {
 		setLoading(true);
-		await getOrder(data.orderId)
-			.get()
-			.then((snapshot) => {
-				history.push({
-					pathname: '/food-tracker/order',
-					order: snapshot.docs[0].data(),
-				});
-			});
+		const response = await getOrder(data.orderId).get();
+		history.push({
+			pathname: '/food-tracker/order',
+			order: response.docs[0].data(),
+		});
 		setLoading(false);
 	};
 

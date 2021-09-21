@@ -4,8 +4,7 @@ import { TiTick } from 'react-icons/ti';
 import { BiDollarCircle } from 'react-icons/bi';
 import { ImCross } from 'react-icons/im';
 import { HiOutlineMinusCircle } from 'react-icons/hi';
-import { FiEdit } from 'react-icons/fi';
-
+import { FiEdit, FiPlus } from 'react-icons/fi';
 export const TickIcon = styled(TiTick)`
 	font-size: 1.8rem;
 	fill: var(--color-green);
@@ -32,7 +31,19 @@ export const EditBigIcon = styled(FiEdit)`
 	position: absolute;
 	font-size: 12rem;
 	top: 1rem;
-	left: 1rem;
+	right: 1rem;
 	transform: rotate(0deg);
-	opacity: 0.1;
+	color: var(--color-grey-light);
+	background-color: white;
+	/* z-index: 3; */
+`;
+
+export const PlusBigIcon = styled(FiPlus)`
+	position: absolute;
+	font-size: 12rem;
+	top: -1rem;
+	right: -1rem;
+	transform: rotate(0deg);
+	color: var(--color-grey-light);
+	background-color: white;
 `;

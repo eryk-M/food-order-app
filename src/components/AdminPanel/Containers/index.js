@@ -18,3 +18,7 @@ export const EditContainer = styled.div`
 	box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
 	overflow: hidden;
 `;
+
+export const ProgressContainer = styled.div`
+	margin: 1rem 0;
+`;

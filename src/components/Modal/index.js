@@ -24,7 +24,7 @@ const Modal = ({ open, children, onClose, item }) => {
 	return ReactDOM.createPortal(
 		<ModalContainer>
 			<ModalClose onClick={onClose}>X</ModalClose>
-			<ModalLeft></ModalLeft>
+			{/* <ModalLeft></ModalLeft>
 			<ModalImg src={item.img} />
 			<ModalRight>
 				<ModalTitle>{item.name}</ModalTitle>
@@ -44,7 +44,8 @@ const Modal = ({ open, children, onClose, item }) => {
 						{item.button}
 					</ModalButton>
 				</ModalForm>
-			</ModalRight>
+			</ModalRight> */}
+			{children}
 		</ModalContainer>,
 		document.getElementById('portal')
 	);

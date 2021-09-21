@@ -116,6 +116,9 @@ export const FormTextArea = styled.textarea`
 	color: #666;
 	outline: 0;
 	font-size: 1.6rem;
+	margin-top: 1rem;
+	border: ${(props) =>
+		props.error ? '1px solid var(--color-red)' : ''};
 `;
 
 export const FormBtn = styled.button`

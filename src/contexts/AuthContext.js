@@ -18,71 +18,66 @@ export function AuthProvider({ children }) {
 	const [admin, setAdmin] = useState();
 	// const userRef = db.collection('users');
 
-	async function signup(email, password, username, history) {
-		return auth
-			.createUserWithEmailAndPassword(email, password)
-			.then((createdUser) => {
-				db.collection('users').doc(createdUser.user.uid).set({
-					email: email,
-					username: username,
-					isAdmin: false,
-					name: '',
-					address: '',
-					phone: '',
-					city: '',
-					zip: '',
-					orders: [],
-				});
-			})
-			.then(() => {
-				const user = auth.currentUser;
-
-				user.updateProfile({ displayName: username }).then(() => {
-					history.push({
-						pathname: '/user',
-						query: history.location.query,
-					});
-				});
-			})
-			.catch((err) => {
-				throw new Error(err.code);
-			});
-	}
-
-	function login(email, password, history, query) {
-		return auth
-			.signInWithEmailAndPassword(email, password)
-			.then((snapshot) => {
-				db.collection('users')
-					.doc(snapshot.user.uid)
-					.get()
-					.then((doc) => {
-						const user = doc.data();
-						if (user.isAdmin) {
-							history.push('/admin');
-							setAdmin(true);
-						} else {
-							history.push({ pathname: '/user', query: query });
-						}
-					});
-			});
-	}
-
-	function logout(email, password) {
-		return auth.signOut();
-	}
-
-	function resetPassword(email) {
-		return auth.sendPasswordResetEmail(email);
-	}
-
-	function updateEmail(email) {
-		return currentUser.updateEmail(email).then((user) => {
-			db.collection('users').doc(user.user.uid).update({
+	const signup = async (email, password, username, history) => {
+		try {
+			const createdUser = await auth.createUserWithEmailAndPassword(
+				email,
+				password
+			);
+			await db.collection('users').doc(createdUser.user.uid).set({
 				email: email,
+				username: username,
+				isAdmin: false,
+				name: '',
+				address: '',
+				phone: '',
+				city: '',
+				zip: '',
+				orders: [],
 			});
+			const user = auth.currentUser;
+			await user.updateProfile({ displayName: username });
+			history.push({
+				pathname: '/user',
+				query: history.location.query,
+			});
+		} catch (err) {
+			throw new Error(err.code);
+		}
+	};
+
+	const login = async (email, password, history, query) => {
+		try {
+			const response = await auth.signInWithEmailAndPassword(
+				email,
+				password
+			);
+			const doc = await db
+				.collection('users')
+				.doc(response.user.uid)
+				.get();
+			const user = doc.data();
+			if (user.isAdmin) {
+				history.push('/admin');
+				setAdmin(true);
+			} else {
+				history.push({ pathname: '/user', query: query });
+			}
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	const logout = () => auth.signOut();
+
+	const resetPassword = (email) => auth.sendPasswordResetEmail(email);
+
+	const updateEmail = async (email) => {
+		await currentUser.updateEmail(email);
+		db.collection('users').doc(currentUser.uid).update({
+			email: email,
 		});
-	}
+	};
 
 	function updatePassword(password) {
 		return currentUser.updatePassword(password);

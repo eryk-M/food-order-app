@@ -32,10 +32,5 @@ export const treeProducts = {
 			icon: BsPlusCircle,
 			text: 'Add product',
 		},
-		{
-			path: '/admin/products/add',
-			icon: HiMenuAlt2,
-			text: 'Menu',
-		},
 	],
 };

@@ -58,36 +58,34 @@ const CartSummary = ({ step, onChangeStep, currentUserId }) => {
 
 	if (step === 0) return <Redirect to="/cart" />;
 
-	const pushOrder = (e) => {
+	const pushOrder = async (e) => {
 		setLoading(true);
 		let orderId = '';
 		for (let i = 0; i < 10; i++) {
 			let rndInt = Math.floor(Math.random() * 9) + 1;
 			orderId += rndInt;
 		}
-
-		addOrder(
-			address,
-			importantInfo,
-			Number(totalPrice),
-			orderId,
-			currentUserId ?? ''
-		)
-			.then(() => {
-				setLoading(false);
-				dispatch({
-					type: 'RESET_CART',
-				});
-				localStorage.removeItem('cart');
-				onChangeStep(e, 'push', orderId);
-			})
-			.catch(() => {
-				alert('Something went wrong! Please try again!');
-				setLoading(false);
-				if (window.confirm) {
-					history.push('/cart');
-				}
+		try {
+			await addOrder(
+				address,
+				importantInfo,
+				Number(totalPrice),
+				orderId,
+				currentUserId ?? ''
+			);
+			setLoading(false);
+			dispatch({
+				type: 'RESET_CART',
 			});
+			localStorage.removeItem('cart');
+			onChangeStep(e, 'push', orderId);
+		} catch {
+			alert('Something went wrong! Please try again!');
+			setLoading(false);
+			if (window.confirm) {
+				history.push('/cart');
+			}
+		}
 	};
 
 	return (

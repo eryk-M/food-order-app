@@ -27,7 +27,7 @@ export const validateUsername = (username) =>
 
 // ADMIN PANEL //
 export const getAdminAllProducts = () =>
-	db.collection('adminProducts');
+	db.collection('adminProducts').orderBy('id');
 
 export const getAdminOneProduct = (id) =>
 	db.collection('adminProducts').where('id', '==', id);

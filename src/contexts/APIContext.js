@@ -17,7 +17,7 @@ export function APIProvider({ children }) {
 	const ordersRef = db.collection('orders');
 	// HELPER AT START TO SET COLLECTION OF PRODUCTS
 
-	function setItems(data, admin) {
+	const setItems = (data, admin) => {
 		data.forEach((el) => {
 			const storageRef = storage.ref(`images/${el.img}.jpg`);
 			storageRef.getDownloadURL().then((url) => {
@@ -78,105 +78,98 @@ export function APIProvider({ children }) {
 				}
 			});
 		});
-	}
+	};
 
-	async function updateUserInfo(
+	const updateUserInfo = async (
 		uid,
 		name,
 		address,
 		phone,
 		city,
 		zip
-	) {
-		await usersRef
-			.doc(uid)
-			.update({
+	) => {
+		try {
+			await usersRef.doc(uid).update({
 				name: name,
 				address: address,
 				phone: phone,
 				city: city,
 				zip: zip,
-			})
-			.catch((err) => {
-				console.error(err);
-				throw new Error('Error updating user!');
 			});
-	}
+		} catch (err) {
+			console.error(err);
+			throw new Error('Error updating user!');
+		}
+	};
 
-	async function addReview(
+	const addReview = async (
 		productId,
 		userId,
 		userName,
 		date,
 		body,
 		rating
-	) {
-		await reviewsRef
-			.doc(productId.toString())
-			.collection('reviews')
-			.add({
-				userId: userId,
-				userName: userName,
-				date: date,
-				body: body,
-				rating: rating,
-			})
-			.then(() => {
-				const reviews = [];
-				let avgRating = 0;
-				let size;
-				reviewsRef
-					.doc(productId.toString())
-					.collection('reviews')
-					.get()
-					.then((snapshot) => {
-						snapshot.docs.forEach((doc) => {
-							reviews.push(doc.data());
-						});
-						reviews.forEach((el) => {
-							avgRating += el.rating;
-						});
-						size = snapshot.size;
-						avgRating = avgRating / snapshot.docs.length;
-						return [avgRating, size];
-					})
-					.then((rating) => {
-						reviewsRef.doc(productId.toString()).set({
-							avgRating: rating[0],
-							ratingCount: rating[1],
-						});
-						productsRef.doc(productId.toString()).update({
-							avgRating: rating[0],
-							ratingCount: rating[1],
-						});
-					});
-			})
-			.catch((err) => {
-				console.error(err);
-				throw new Error('Something went wrong! Try again');
+	) => {
+		try {
+			await reviewsRef
+				.doc(productId.toString())
+				.collection('reviews')
+				.add({
+					userId: userId,
+					userName: userName,
+					date: date,
+					body: body,
+					rating: rating,
+				});
+			const reviews = [];
+			let avgRating = 0;
+			let size;
+			const response = await reviewsRef
+				.doc(productId.toString())
+				.collection('reviews')
+				.get();
+			response.docs.forEach((doc) => {
+				reviews.push(doc.data());
 			});
-	}
+			reviews.forEach((el) => {
+				avgRating += el.rating;
+			});
+			size = response.size;
+			avgRating = avgRating / response.docs.length;
+			reviewsRef.doc(productId.toString()).set({
+				avgRating: avgRating,
+				ratingCount: size,
+			});
+			productsRef.doc(productId.toString()).update({
+				avgRating: avgRating,
+				ratingCount: size,
+			});
+		} catch (err) {
+			console.error(err);
+			throw new Error('Something went wrong! Try again');
+		}
+	};
 
-	async function addOrder(
+	const addOrder = async (
 		userInfo,
 		orderInfo,
 		totalPrice,
 		orderId,
 		userId
-	) {
-		await ordersRef
-			.add({
+	) => {
+		try {
+			await ordersRef.add({
 				orderId: orderId,
 				userId: userId ?? '',
 				totalPrice: totalPrice,
 				step: 0,
 				userInfo: userInfo,
 				orderInfo: orderInfo,
-			})
-			.catch((err) => {
-				return err;
 			});
-	}
+		} catch (err) {
+			return err;
+		}
+	};
 
 	const value = {
 		setItems,

@@ -36,12 +36,8 @@ const Signup = () => {
 				'userName',
 				'Username is already taken',
 				async (value) => {
-					let response = await validateUsername(value)
-						.get()
-						.then((snapshot) => {
-							return snapshot.empty;
-						});
-					return response;
+					const response = await validateUsername(value).get();
+					return response.empty;
 				}
 			),
 		email: Yup.string()
