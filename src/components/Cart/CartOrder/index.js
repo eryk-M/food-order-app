@@ -104,7 +104,7 @@ const CartOrder = ({
 								>
 									-
 								</CartQuantity>
-								{el.quantity}{' '}
+								{el.quantity}
 								<CartQuantity
 									onClick={(e) => onChangeQuantity(e, el.id)}
 								>

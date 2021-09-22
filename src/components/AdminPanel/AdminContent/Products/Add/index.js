@@ -22,6 +22,8 @@ import { useHistory } from 'react-router-dom';
 import { Alert } from 'components/Alert';
 import { storage } from 'firebase';
 
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+
 import { useAdminApi } from 'contexts/AdminAPIContext';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -129,24 +131,34 @@ const Add = () => {
 
 	const onSubmit = async (data) => {
 		try {
+			let imageId = '';
+			for (let i = 0; i < 12; i++) {
+				let rndInt = Math.floor(Math.random() * 9) + 1;
+				imageId += rndInt;
+			}
 			setIsLoading(true);
-			const fileDataRef = storage.ref(`images/${data.file[0].name}`);
+			const fileDataRef = storage.ref(`images/${imageId}`);
 			await fileDataRef.put(data.file[0]).on(
 				'state_changed',
-				await function progress(snapshot) {
+				function progress(snapshot) {
 					let percentage =
 						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 					setUploadPercentage(percentage);
+				},
+				(error) => {
+					//TODO: TODO ERRORY
+				},
+				async () => {
+					const imageSrc = await fileDataRef.getDownloadURL();
+
+					await addAdminProduct(data, imageSrc, ingredients);
+					setShowSuccess(true);
+					setTimeout(() => {
+						setIsLoading(false);
+						history.push('/admin/products');
+					}, 3000);
 				}
 			);
-			const imageSrc = await fileDataRef.getDownloadURL();
-
-			await addAdminProduct(data, imageSrc, ingredients);
-			setShowSuccess(true);
-			setTimeout(() => {
-				setIsLoading(false);
-				history.push('/admin/products');
-			}, 3000);
 		} catch (err) {
 			console.error(err);
 		}
@@ -176,6 +188,7 @@ const Add = () => {
 
 	const handleChangeFile = (e) => {
 		readURI(e);
+		if (errors.file) return (errors.file = '');
 	};
 
 	const imgTag = buildImgTag();

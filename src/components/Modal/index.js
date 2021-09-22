@@ -3,49 +3,21 @@ import ReactDOM from 'react-dom';
 
 import {
 	ModalContainer,
-	ModalClose,
-	ModalLeft,
-	ModalImg,
-	ModalRight,
-	ModalTitle,
-	ModalDesc,
-	ModalIngredients,
-	ModalButton,
-	ModalIngredientsItem,
-	ModalCartIcon,
-	ModalForm,
-	ModalQuantity,
-	ModalQuantityLabel,
+	ModalOverlay,
+	ModalContent,
 } from './ModalElements';
 
 //only for testing
-const Modal = ({ open, children, onClose, item }) => {
+const Modal = ({ open, children, item, setOpen }) => {
 	if (!open) return null;
 	return ReactDOM.createPortal(
 		<ModalContainer>
-			<ModalClose onClick={onClose}>X</ModalClose>
-			{/* <ModalLeft></ModalLeft>
-			<ModalImg src={item.img} />
-			<ModalRight>
-				<ModalTitle>{item.name}</ModalTitle>
-				<ModalDesc>{item.desc}</ModalDesc>
-				<ModalIngredients>
-					{item.ingredients.map((el) => (
-						<ModalIngredientsItem>{el}</ModalIngredientsItem>
-					))}
-				</ModalIngredients>
-				<ModalForm>
-					<ModalQuantityLabel htmlFor="quantity">
-						Quantity:
-					</ModalQuantityLabel>
-					<ModalQuantity name="quantity" type="number" />
-					<ModalButton>
-						<ModalCartIcon />
-						{item.button}
-					</ModalButton>
-				</ModalForm>
-			</ModalRight> */}
-			{children}
+			<ModalOverlay
+				onClick={() => {
+					setOpen((currOpen) => !currOpen);
+				}}
+			/>
+			<ModalContent>{children}</ModalContent>
 		</ModalContainer>,
 		document.getElementById('portal')
 	);

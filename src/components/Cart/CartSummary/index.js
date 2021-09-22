@@ -131,7 +131,8 @@ const CartSummary = ({ step, onChangeStep, currentUserId }) => {
 								Quantity: <span>{el.quantity}</span>
 							</CartSummaryOrderInfo>
 							<CartSummaryOrderInfo>
-								Total: <span>${el.quantity * el.price}</span>
+								Total:{' '}
+								<span>${(el.quantity * el.price).toFixed(2)}</span>
 							</CartSummaryOrderInfo>
 						</CartSummaryOrder>
 					</CartSummaryItem>

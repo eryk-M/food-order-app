@@ -47,7 +47,7 @@ import { useAdminApi } from 'contexts/AdminAPIContext';
 import { getAdminOneProduct } from 'utils/firebaseGetters';
 
 const Edit = (props) => {
-	const { data, loading } = useFirestoreQuery(
+	const { data } = useFirestoreQuery(
 		getAdminOneProduct(Number(props.match.params.id))
 	);
 	const { updateAdminProduct } = useAdminApi();
@@ -142,28 +142,52 @@ const Edit = (props) => {
 		let imageSrc;
 		setIsLoading(true);
 		if (data.file.length !== 0) {
-			const fileDataRef = storage.ref(`images/${data.file[0].name}`);
-			await fileDataRef
-				.put(data.file[0])
-				.on('state_changed', function progress(snapshot) {
+			let imageId = '';
+			for (let i = 0; i < 12; i++) {
+				let rndInt = Math.floor(Math.random() * 9) + 1;
+				imageId += rndInt;
+			}
+			const fileDataRef = storage.ref(`images/${imageId}`);
+			await fileDataRef.put(data.file[0]).on(
+				'state_changed',
+				function progress(snapshot) {
 					let percentage =
 						(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 					setUploadPercentage(percentage);
-				});
-			imageSrc = await fileDataRef.getDownloadURL();
+				},
+				(error) => {
+					//TODO: TODO ERRORY
+				},
+				async () => {
+					imageSrc = await fileDataRef.getDownloadURL();
+					await updateAdminProduct(
+						props.match.params.id,
+						data,
+						ingredients,
+						imageSrc
+					);
+					setShowSuccess(true);
+					setTimeout(() => {
+						setIsLoading(false);
+						setShowSuccess(false);
+						setUploadPercentage(0);
+					}, 3000);
+				}
+			);
+		} else {
+			await updateAdminProduct(
+				props.match.params.id,
+				data,
+				ingredients,
+				imageSrc
+			);
+			setShowSuccess(true);
+			setTimeout(() => {
+				setIsLoading(false);
+				setShowSuccess(false);
+				setUploadPercentage(0);
+			}, 3000);
 		}
-		await updateAdminProduct(
-			props.match.params.id,
-			data,
-			ingredients,
-			imageSrc
-		);
-		setShowSuccess(true);
-		setTimeout(() => {
-			setIsLoading(false);
-			setShowSuccess(false);
-			setUploadPercentage(0);
-		}, 3000);
 	};
 
 	const checkKeyDown = (e) => {

@@ -8,14 +8,16 @@ const ButtonMain = styled.button`
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-size: 1.4rem;
-	background-color: var(--color-primary);
-	color: var(--color-grey-light);
-	border: none;
+	background-color: ${(props) =>
+		props.secondary ? '#fff' : 'var(--color-primary)'};
+	color: ${(props) =>
+		props.secondary ? '#000' : 'var(--color-grey-light)'};
+	border: ${(props) =>
+		props.secondary ? '1px solid var(--color-primary)' : 'none'};
 	cursor: pointer;
 	transition: all 0.2s;
 	margin-bottom: ${(props) => props.marginbottom};
 	border-radius: 5px;
-	box-shadow: 0 0.2rem 1.5rem rgba(0, 0, 0, 0.2);
 	display: ${(props) => props.display ?? ''};
 	&:hover {
 		background-color: var(--color-secondary);

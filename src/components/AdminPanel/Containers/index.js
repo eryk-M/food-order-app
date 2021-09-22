@@ -7,6 +7,7 @@ export const MainContainer = styled.div`
 	min-width: 80%;
 	margin-right: 2rem;
 	box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
+	position: relative;
 `;
 
 export const EditContainer = styled.div`

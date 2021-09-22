@@ -56,9 +56,22 @@ export function AdminAPIProvider({ children }) {
 		});
 	};
 
+	const deleteAdminProduct = async (id) => {
+		const response = await adminProductsRef
+			.where('id', '==', id)
+			.get();
+		const data = response.docs[0].data();
+		const pictureRef = storage.refFromURL(data.img);
+		await pictureRef.delete();
+		response.forEach(async (doc) => {
+			await doc.ref.delete();
+		});
+	};
+
 	const value = {
 		updateAdminProduct,
 		addAdminProduct,
+		deleteAdminProduct,
 	};
 
 	return (
