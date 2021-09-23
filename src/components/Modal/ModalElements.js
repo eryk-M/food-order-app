@@ -20,7 +20,11 @@ export const ModalContainer = styled.div`
 	z-index: 1000;
 	justify-content: center;
 	align-items: center;
-	display: flex;
+	display: none;
+
+	&.show {
+		display: flex;
+	}
 `;
 
 export const ModalOverlay = styled.div`

@@ -8,6 +8,7 @@
 		"@testing-library/react": "^11.2.7",
 		"@testing-library/user-event": "^12.8.3",
 		"firebase": "^9.0.1",
+		"gsap": "^3.7.1",
 		"npm": "^7.23.0",
 		"ra-data-firebase-client": "^3.0.0",
 		"rc-progress": "^3.1.4",
