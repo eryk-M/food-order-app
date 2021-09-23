@@ -58,7 +58,6 @@ const Delete = ({ setOpen, open, id, setShowSuccess }) => {
 	const handleCancel = () => {
 		setError('');
 		setInputValue('');
-		console.log(open);
 		setOpen(false);
 		setIsInitiallyChanged(false);
 	};

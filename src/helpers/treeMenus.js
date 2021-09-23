@@ -1,5 +1,5 @@
 import { GiHamburger } from 'react-icons/gi';
-import { FiUsers } from 'react-icons/fi';
+import { FiUsers, FiTruck } from 'react-icons/fi';
 import { BsPlusCircle } from 'react-icons/bs';
 import { HiMenuAlt2 } from 'react-icons/hi';
 export const treeUsers = {
@@ -34,3 +34,15 @@ export const treeProducts = {
 		},
 	],
 };
+
+// export const treeOrders = {
+// 	text: 'Products',
+// 	mainIcon: FiTruck,
+// 	list: [
+// 		{
+// 			path: '/admin/orders',
+// 			icon: HiMenuAlt2,
+// 			text: 'Products list',
+// 		},
+// 	],
+// };
