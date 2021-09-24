@@ -10,6 +10,18 @@ export const MainContainer = styled.div`
 	position: relative;
 `;
 
+export const FullWidthContainer = styled.div`
+	border-radius: 5px;
+	/* padding: 1.5rem; */
+	overflow: hidden;
+	margin-right: 2rem;
+	box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
+	background-color: var(--color-white);
+	margin-bottom: 2rem;
+	display: flex;
+	/* align-items: center; */
+`;
+
 export const EditContainer = styled.div`
 	position: relative;
 	background-color: var(--color-white);
@@ -51,6 +63,7 @@ export const LineChartContainer = styled.div`
 	padding: 1.8rem;
 	background-color: #fff;
 	/* width: 25%; */
+
 	border-bottom: 3px solid ${(props) => props.color};
 	display: flex;
 	flex-direction: column;
@@ -62,7 +75,7 @@ export const LineChartsContainer = styled.div`
 	margin-right: 2rem;
 	display: grid;
 	width: 49%;
-	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 	grid-column-gap: 2rem;
 	grid-row-gap: 2rem;
 `;

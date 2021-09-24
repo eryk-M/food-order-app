@@ -2,6 +2,8 @@ import React, { createContext, useContext } from 'react';
 
 import { db, storage } from '../firebase';
 
+import { capitalizeEachWord } from 'utils/capitalizeEachWord';
+
 const AdminAPIContext = createContext();
 
 export function useAdminApi() {
@@ -12,12 +14,6 @@ export function AdminAPIProvider({ children }) {
 	const adminProductsRef = db.collection('adminProducts');
 	const adminUsersRef = db.collection('adminUsers');
 	const adminReviewsRef = db.collection('adminReviews');
-
-	const capitalizeEachWord = (string) =>
-		string
-			.split(' ')
-			.map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-			.join(' ');
 
 	async function updateAdminProduct(id, data, ingredients, imageSrc) {
 		await adminProductsRef.doc(id).update({

@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
 			);
 			await db.collection('users').doc(createdUser.user.uid).set({
 				email: email,
-				username: username,
+				username: username.toLowerCase(),
 				isAdmin: false,
 				name: '',
 				address: '',

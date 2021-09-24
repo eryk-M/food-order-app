@@ -86,8 +86,6 @@ const List = () => {
 											<Link to={`/admin/products/${el.id}`}>
 												<TableButton secondary>Edit</TableButton>
 											</Link>
-
-											{/* TODO: MODAL ARE YOU SURE?? */}
 											<TableButton
 												primary
 												marginleft="1rem"

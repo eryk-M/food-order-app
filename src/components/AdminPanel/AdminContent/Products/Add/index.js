@@ -21,9 +21,7 @@ import { PlusBigIcon, MinusIcon } from 'components/AdminPanel/Icons';
 import { useHistory } from 'react-router-dom';
 import { Alert } from 'components/Alert';
 import { storage } from 'firebase';
-
-import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-
+import { capitalizeEachWord } from 'utils/capitalizeEachWord';
 import { useAdminApi } from 'contexts/AdminAPIContext';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -59,8 +57,6 @@ const Add = () => {
 
 	const FILE_SIZE = 5242880;
 	const SUPPORTED_FORMATS = ['image/jpeg', 'image/png'];
-
-	//TODO: Ingredients capitalize
 
 	const validationSchema = Yup.object().shape({
 		dummy: Yup.string(),
@@ -124,7 +120,11 @@ const Add = () => {
 	};
 
 	const addToIngredients = () => {
-		let ings = [...ingredients, ingredientToAdd];
+		if (!ingredientToAdd.replace(/\s/g, '').length) return;
+		let ings = [
+			...ingredients,
+			capitalizeEachWord(ingredientToAdd).trim(),
+		];
 		setIngredients(ings);
 		setIngredientToAdd('');
 	};

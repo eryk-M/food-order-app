@@ -22,8 +22,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { validateUsername } from 'utils/firebaseGetters';
 
 const Signup = () => {
-	//TODO: username musi sie zgadzac teraz nie wazne czy mala czy duza to sie nie zgadza
-
 	const { signup } = useAuth();
 
 	const validationSchema = Yup.object().shape({
@@ -36,7 +34,9 @@ const Signup = () => {
 				'userName',
 				'Username is already taken',
 				async (value) => {
-					const response = await validateUsername(value).get();
+					const response = await validateUsername(
+						value.toLowerCase()
+					).get();
 					return response.empty;
 				}
 			),

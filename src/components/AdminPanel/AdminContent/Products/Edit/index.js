@@ -37,7 +37,7 @@ import Button from 'components/Button';
 import { Line } from 'rc-progress';
 import { Alert } from 'components/Alert';
 import { storage } from 'firebase';
-
+import { capitalizeEachWord } from 'utils/capitalizeEachWord';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -96,7 +96,7 @@ const Edit = (props) => {
 			.test(
 				'description',
 				'Description must be at least 10 characters',
-				(value) => (value ? value.length > 20 : true)
+				(value) => (value ? value.length >= 10 : true)
 			)
 			.trim()
 			.max(200, 'Maximum of 200 characters'),
@@ -133,7 +133,11 @@ const Edit = (props) => {
 	};
 
 	const addToIngredients = () => {
-		let ings = [...ingredients, ingredientToAdd];
+		if (!ingredientToAdd.replace(/\s/g, '').length) return;
+		let ings = [
+			...ingredients,
+			capitalizeEachWord(ingredientToAdd).trim(),
+		];
 		setIngredients(ings);
 		setIngredientToAdd('');
 	};

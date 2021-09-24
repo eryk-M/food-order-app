@@ -31,8 +31,6 @@ const Item = ({ el }) => {
 	} = useContext(CartContext);
 
 	const [isAdded, setIsAdded] = useState(false);
-
-	//TODO: WARTO WRZUCIC TO DO WSPOLNEJ FUNKCJI ... /helpers??
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart]);

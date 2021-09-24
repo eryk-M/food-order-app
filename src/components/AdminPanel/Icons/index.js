@@ -5,6 +5,7 @@ import { BiDollarCircle } from 'react-icons/bi';
 import { ImCross } from 'react-icons/im';
 import { HiOutlineMinusCircle } from 'react-icons/hi';
 import { FiEdit, FiPlus, FiAlertTriangle } from 'react-icons/fi';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
 
 export const TickIcon = styled(TiTick)`
 	font-size: 1.8rem;
@@ -53,4 +54,10 @@ export const AlertIcon = styled(FiAlertTriangle)`
 	vertical-align: middle;
 	margin-right: 1rem;
 	font-size: 2.4rem;
+`;
+
+export const InfoIcon = styled(AiOutlineInfoCircle)`
+	font-size: 5.4rem;
+	color: #fff;
+	vertical-align: middle;
 `;

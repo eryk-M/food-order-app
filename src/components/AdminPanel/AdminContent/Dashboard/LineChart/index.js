@@ -11,7 +11,6 @@ import {
 } from './LineChartElements';
 const LineChart = ({ array, days, color, text, span }) => {
 	const [data] = useState(array);
-	console.log(days);
 	const options = {
 		chart: {
 			height: 350,
