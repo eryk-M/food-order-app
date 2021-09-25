@@ -11,9 +11,10 @@ export function useApi() {
 export function APIProvider({ children }) {
 	const productsRef = db.collection('products');
 	const adminProductsRef = db.collection('adminProducts');
-
+	const adminOrdersRef = db.collection('adminOrders');
 	const usersRef = db.collection('users');
 	const reviewsRef = db.collection('reviews');
+	const couponsRef = db.collection('coupons');
 	const ordersRef = db.collection('orders');
 	// HELPER AT START TO SET COLLECTION OF PRODUCTS
 
@@ -155,20 +156,28 @@ export function APIProvider({ children }) {
 		orderInfo,
 		totalPrice,
 		orderId,
-		userId
+		userId,
+		date,
+		payment
 	) => {
 		try {
-			await ordersRef.add({
+			await adminOrdersRef.add({
 				orderId: orderId,
 				userId: userId ?? '',
 				totalPrice: totalPrice,
 				step: 0,
 				userInfo: userInfo,
 				orderInfo: orderInfo,
+				date: date,
+				payment: payment,
 			});
 		} catch (err) {
-			return err;
+			console.error(err);
 		}
+	};
+
+	const validateDiscountCode = async (code) => {
+		return await couponsRef.where('code', '==', code).get();
 	};
 
 	const value = {
@@ -176,6 +185,7 @@ export function APIProvider({ children }) {
 		updateUserInfo,
 		addReview,
 		addOrder,
+		validateDiscountCode,
 	};
 
 	return (

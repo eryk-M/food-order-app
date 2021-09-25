@@ -48,8 +48,6 @@ export const Form = styled.form`
 
 export const FormElement = styled.div`
 	margin-left: ${(props) => props.marginleft};
-	/* margin: 0 auto; */
-	/* text-align: center; */
 	& .search-icon {
 		position: absolute;
 		font-size: 1.8rem;
@@ -70,12 +68,8 @@ export const FormLabel = styled.label`
 `;
 
 export const FormCheckbox = styled.input`
-	/* vertical-align: middle; */
 	margin-left: 1rem;
 	font-size: 2.3rem;
-	/* margin-top: 1rem;
-    margin-bottom: 1rem; */
-	/* margin: 2rem 0 2rem 1rem; */
 `;
 
 export const FormInput = styled.input`
@@ -134,11 +128,9 @@ export const FormBtn = styled.button`
 		props.secondary
 			? 'var(--color-grey-dark)'
 			: 'var(--color-grey-light)'};
-	/* margin: auto; */
 	vertical-align: middle;
 	cursor: pointer;
 	margin-top: 1.5rem;
-	/* position: relative; */
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -191,6 +183,7 @@ export const FormErr = styled.p`
 	margin: 1rem 0;
 	animation: ${fadeIn} 0.1s ease-in;
 	opacity: 100%;
+	display: ${(props) => props.display};
 `;
 
 export const FormErrIcon = styled(MdErrorOutline)`

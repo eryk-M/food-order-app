@@ -26,11 +26,11 @@ const CartAddress = ({ onChangeStep, userData, step, dispatch }) => {
 		name: Yup.string()
 			.required('Name is required')
 			.min(3, 'Name must be at least 3 characters')
-			.max(20, 'Name must have maximum of 20 characters'),
+			.max(30, 'Name must have maximum of 30 characters'),
 		address: Yup.string()
 			.required('Address is required')
 			.min(3, 'Address must be at least 3 characters')
-			.max(30, 'Address must have maximum of 20 characters'),
+			.max(40, 'Address must have maximum of 40 characters'),
 		phone: Yup.string()
 			.required('Phone is required')
 			.matches(/[0-9]{9}/, 'Phone must be in 9 digits format'),

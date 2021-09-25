@@ -9,6 +9,7 @@ import TopBar from './TopBar';
 const AdminContentContainer = styled.div`
 	margin-top: 6rem;
 	margin-left: 25rem;
+	padding-bottom: 2rem;
 	padding-top: 2rem;
 	padding-left: 2rem;
 	transition: margin-left 0.2s ease-in-out;

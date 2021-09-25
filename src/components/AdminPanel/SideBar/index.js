@@ -14,7 +14,7 @@ import {
 import { useAuth } from 'contexts/AuthContext';
 
 import { AiFillDashboard, AiOutlinePoweroff } from 'react-icons/ai';
-
+import { FiTruck } from 'react-icons/fi';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import logo from 'images/logo.png';
 import TreeMenu from './TreeMenu';
@@ -34,6 +34,17 @@ const SideBar = ({ hidden }) => {
 					<SideBarLink to="/admin" exact activeClassName="is-active">
 						<AiFillDashboard className="icon-left" />
 						<SideBarP>Dashboard</SideBarP>
+						<MdKeyboardArrowRight className="icon-arrow" />
+					</SideBarLink>
+				</SideBarItem>
+				<SideBarItem>
+					<SideBarLink
+						to="/admin/orders"
+						exact
+						activeClassName="is-active"
+					>
+						<FiTruck className="icon-left" />
+						<SideBarP>Orders</SideBarP>
 						<MdKeyboardArrowRight className="icon-arrow" />
 					</SideBarLink>
 				</SideBarItem>

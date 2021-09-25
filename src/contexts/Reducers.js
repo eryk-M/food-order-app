@@ -52,6 +52,11 @@ export const cartReducer = (state, action) => {
 				...state,
 				address: action.payload,
 			};
+		case 'SET_METHOD':
+			return {
+				...state,
+				payment: action.payload,
+			};
 		case 'SET_TOTAL_PRICE':
 			return {
 				...state,

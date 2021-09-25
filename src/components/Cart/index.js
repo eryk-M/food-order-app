@@ -33,6 +33,9 @@ const Cart = () => {
 	const { currentUser } = useAuth();
 	const [step, setStep] = useState(0);
 	const [totalPrice, setTotalPrice] = useState(0);
+	const [payment, setPayment] = useState(null);
+	const [discount, setDiscount] = useState(null);
+	const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
 	const history = useHistory();
 
 	const { data } = useFirestoreQuery(
@@ -51,6 +54,7 @@ const Cart = () => {
 			0
 		);
 		setTotalPrice(totalCartPrice);
+		setPriceBeforeDiscount(totalCartPrice);
 	}, [cart]);
 
 	useEffect(() => {
@@ -105,6 +109,11 @@ const Cart = () => {
 								step={step}
 								onChangeStep={onChangeStep}
 								totalPrice={totalPrice}
+								payment={payment}
+								setPayment={setPayment}
+								setDiscount={setDiscount}
+								discount={discount}
+								setTotalPrice={setTotalPrice}
 							/>
 						)}
 					/>
@@ -128,6 +137,8 @@ const Cart = () => {
 								currentUserId={currentUser?.uid}
 								step={step}
 								onChangeStep={onChangeStep}
+								discount={discount}
+								priceBeforeDiscount={priceBeforeDiscount}
 							/>
 						)}
 					/>

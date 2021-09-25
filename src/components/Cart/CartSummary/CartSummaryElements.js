@@ -66,6 +66,7 @@ export const CartSummaryOrderImage = styled.img`
 	display: block;
 	height: 15rem;
 	width: 15rem;
+	object-fit: cover;
 `;
 export const CartSummaryOrder = styled.div`
 	margin-left: 1rem;

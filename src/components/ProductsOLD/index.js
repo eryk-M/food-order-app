@@ -16,7 +16,7 @@ import {
 
 import { useApi } from 'contexts/APIContext';
 
-import { dummyData } from '../ProductsOLD/dummyData';
+import { dummyData } from 'utils/dummyData';
 
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAllProducts } from 'utils/firebaseGetters';
@@ -29,11 +29,8 @@ const Products = () => {
 	const onSetItems = (admin) => {
 		try {
 			console.log('Wrzucam...');
-			if (admin) {
-				setItems(dummyData, true);
-			} else {
-				setItems(dummyData);
-			}
+			setItems(dummyData, true);
+			setItems(dummyData);
 		} catch (err) {
 			console.log(err);
 		}

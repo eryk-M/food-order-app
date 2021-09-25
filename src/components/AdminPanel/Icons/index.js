@@ -1,10 +1,20 @@
 import styled from 'styled-components/macro';
 
 import { TiTick } from 'react-icons/ti';
-import { BiDollarCircle } from 'react-icons/bi';
+import { BiDollarCircle, BiCreditCardAlt } from 'react-icons/bi';
 import { ImCross } from 'react-icons/im';
-import { HiOutlineMinusCircle } from 'react-icons/hi';
-import { FiEdit, FiPlus, FiAlertTriangle } from 'react-icons/fi';
+import { HiOutlineMinusCircle, HiOutlineCash } from 'react-icons/hi';
+import {
+	RiArrowUpDownLine,
+	RiArrowUpLine,
+	RiArrowDownLine,
+} from 'react-icons/ri';
+import {
+	FiEdit,
+	FiPlus,
+	FiAlertTriangle,
+	FiSettings,
+} from 'react-icons/fi';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 
 export const TickIcon = styled(TiTick)`
@@ -37,7 +47,6 @@ export const EditBigIcon = styled(FiEdit)`
 	transform: rotate(0deg);
 	color: var(--color-grey-light);
 	background-color: white;
-	/* z-index: 3; */
 `;
 
 export const PlusBigIcon = styled(FiPlus)`
@@ -59,5 +68,47 @@ export const AlertIcon = styled(FiAlertTriangle)`
 export const InfoIcon = styled(AiOutlineInfoCircle)`
 	font-size: 5.4rem;
 	color: #fff;
+	vertical-align: middle;
+`;
+
+export const SettingsIcon = styled(FiSettings)`
+	font-size: 2.4rem;
+	vertical-align: middle;
+	color: var(--color-grey-dark);
+	cursor: pointer;
+	transition: 0.5s transform;
+	backface-visibility: hidden;
+	&:hover {
+		transform: rotate(180deg);
+	}
+`;
+
+export const ArrowsFilterIcon = styled(RiArrowUpDownLine)`
+	vertical-align: middle;
+	margin-left: 0.5rem;
+	font-size: 1.8rem;
+`;
+
+export const ArrowDownFilterIcon = styled(RiArrowDownLine)`
+	vertical-align: middle;
+	margin-right: 0.5rem;
+	font-size: 1.8rem;
+`;
+
+export const ArrowUpFilterIcon = styled(RiArrowUpLine)`
+	vertical-align: middle;
+	margin-right: 0.5rem;
+	font-size: 1.8rem;
+`;
+
+export const CreditCardIcon = styled(BiCreditCardAlt)`
+	font-size: 3rem;
+	vertical-align: middle;
+	color: var(--color-secondary);
+`;
+
+export const CashIcon = styled(HiOutlineCash)`
+	color: var(--color-green);
+	font-size: 3rem;
 	vertical-align: middle;
 `;

@@ -9,6 +9,7 @@ export const CartProvider = ({ children }) => {
 		address: {},
 		cart: [],
 		totalPrice: 0,
+		payment: 0,
 	});
 
 	return (

@@ -17,6 +17,8 @@ export const ItemImageWrapper = styled.div`
 	position: relative;
 	width: 20rem;
 	height: 20rem;
+
+	object-fit: cover;
 	&::before {
 		content: '';
 		position: absolute;
@@ -32,6 +34,8 @@ export const ItemImageWrapper = styled.div`
 export const ItemImage = styled.img`
 	display: block;
 	height: 20rem;
+	width: 20rem;
+	object-fit: cover;
 `;
 
 export const ItemInfo = styled.div`

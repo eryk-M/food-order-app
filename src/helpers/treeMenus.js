@@ -1,7 +1,8 @@
 import { GiHamburger } from 'react-icons/gi';
-import { FiUsers, FiTruck } from 'react-icons/fi';
+import { FiUsers } from 'react-icons/fi';
 import { BsPlusCircle } from 'react-icons/bs';
 import { HiMenuAlt2 } from 'react-icons/hi';
+
 export const treeUsers = {
 	text: 'Users',
 	mainIcon: FiUsers,

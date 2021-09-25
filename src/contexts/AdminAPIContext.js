@@ -12,6 +12,7 @@ export function useAdminApi() {
 
 export function AdminAPIProvider({ children }) {
 	const adminProductsRef = db.collection('adminProducts');
+	const adminOrdersRef = db.collection('adminOrders');
 	const adminUsersRef = db.collection('adminUsers');
 	const adminReviewsRef = db.collection('adminReviews');
 
@@ -30,12 +31,12 @@ export function AdminAPIProvider({ children }) {
 	}
 
 	const addAdminProduct = async (data, imageSrc, ingredients) => {
-		const abc = await adminProductsRef
+		const response = await adminProductsRef
 			.orderBy('id', 'desc')
 			.limit(1)
 			.get();
-		adminProductsRef.doc(`${abc.docs[0].data().id + 1}`).set({
-			id: abc.docs[0].data().id + 1,
+		adminProductsRef.doc(`${response.docs[0].data().id + 1}`).set({
+			id: response.docs[0].data().id + 1,
 			img: imageSrc,
 			name: capitalizeEachWord(data.name),
 			desc: data.description,
@@ -64,10 +65,21 @@ export function AdminAPIProvider({ children }) {
 		});
 	};
 
+	const deleteAdminOrders = async (orders) => {
+		orders.forEach(async (order) => {
+			await adminOrdersRef.doc(order.value).delete();
+		});
+	};
+
+	const updateAdminOrderStatus = async (step, id) => {
+		await adminOrdersRef.doc(id).update({ step: step });
+	};
 	const value = {
 		updateAdminProduct,
 		addAdminProduct,
 		deleteAdminProduct,
+		deleteAdminOrders,
+		updateAdminOrderStatus,
 	};
 
 	return (

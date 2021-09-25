@@ -28,9 +28,15 @@ import { useApi } from 'contexts/APIContext';
 
 import { useHistory } from 'react-router-dom';
 
-const CartSummary = ({ step, onChangeStep, currentUserId }) => {
+const CartSummary = ({
+	step,
+	onChangeStep,
+	currentUserId,
+	discount,
+	priceBeforeDiscount,
+}) => {
 	const {
-		state: { cart, address, totalPrice },
+		state: { cart, address, totalPrice, payment },
 		dispatch,
 	} = useContext(CartContext);
 
@@ -66,12 +72,15 @@ const CartSummary = ({ step, onChangeStep, currentUserId }) => {
 			orderId += rndInt;
 		}
 		try {
+			const date = Date.now();
 			await addOrder(
 				address,
 				importantInfo,
 				Number(totalPrice),
 				orderId,
-				currentUserId ?? ''
+				currentUserId ?? '',
+				date,
+				payment
 			);
 			setLoading(false);
 			dispatch({
@@ -145,7 +154,7 @@ const CartSummary = ({ step, onChangeStep, currentUserId }) => {
 						button
 						loading={loading}
 						disabled={loading}
-						text="Accept and pay!"
+						text="Order now!"
 						onClick={(e) => pushOrder(e)}
 					/>
 				</CartSummaryButtonWrapper>
@@ -156,11 +165,13 @@ const CartSummary = ({ step, onChangeStep, currentUserId }) => {
 				</CartSummaryTotalHeading>
 				{/* TODO: DO ZROBIENIA CENA PRZED OBNIZKA*/}
 				<CartSummaryTotalItem>
-					<span>Price:</span> <span>$49.00</span>
+					<span>Price:</span>{' '}
+					<span>${priceBeforeDiscount.toFixed(2)}</span>
 				</CartSummaryTotalItem>
 				{/* TODO: DO ZROBIENIA CENA PO OBNIZCE*/}
 				<CartSummaryTotalItem>
-					<span>Discount:</span> <span>- ???</span>
+					<span>Discount:</span>{' '}
+					<span>{discount ? `${discount}%` : 'None'}</span>
 				</CartSummaryTotalItem>
 				<CartSummaryTotalItem>
 					<span>Delivery:</span>{' '}

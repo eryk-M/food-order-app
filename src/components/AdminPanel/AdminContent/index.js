@@ -5,7 +5,8 @@ import { Switch, Route } from 'react-router-dom';
 import Products from './Products';
 import Users from './Users';
 import Dashboard from './Dashboard';
-// import Info from './';
+import Orders from './Orders';
+
 import Info from './Info';
 const AdminContent = () => {
 	return (
@@ -15,6 +16,7 @@ const AdminContent = () => {
 				<Route path="/admin" exact component={Dashboard} />
 				<Route path="/admin/products" component={Products} />
 				<Route path="/admin/users" exact component={Users} />
+				<Route path="/admin/orders" component={Orders} />
 			</Switch>
 		</>
 	);

@@ -1,13 +1,15 @@
 import styled from 'styled-components/macro';
 
 export const MainContainer = styled.div`
+	display: ${(props) => props.display};
 	background-color: var(--color-white);
 	padding: 1.5rem;
 	border-radius: 5px;
-	min-width: 80%;
+	min-width: ${(props) => props.minwidth ?? '80%'};
 	margin-right: 2rem;
 	box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
 	position: relative;
+	width: ${(props) => props.width};
 `;
 
 export const FullWidthContainer = styled.div`
@@ -51,9 +53,15 @@ export const TotalContainer = styled.div`
 
 export const FlexCenterContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: ${(props) =>
+		props.center ? 'center' : 'space-between'};
 	align-items: center;
 	margin-right: 2rem;
+`;
+
+export const JustifyCenterContainer = styled.div`
+	display: flex;
+	justify-content: center;
 `;
 
 export const LineChartContainer = styled.div`
@@ -62,8 +70,6 @@ export const LineChartContainer = styled.div`
 	box-shadow: 0 0.1rem 1rem rgb(0 0 0 / 10%);
 	padding: 1.8rem;
 	background-color: #fff;
-	/* width: 25%; */
-
 	border-bottom: 3px solid ${(props) => props.color};
 	display: flex;
 	flex-direction: column;
@@ -71,11 +77,82 @@ export const LineChartContainer = styled.div`
 `;
 
 export const LineChartsContainer = styled.div`
-	margin-top: 2rem;
 	margin-right: 2rem;
 	display: grid;
 	width: 49%;
 	grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 	grid-column-gap: 2rem;
 	grid-row-gap: 2rem;
+	@media only screen and (max-width: 1353px) {
+		width: 100%;
+		grid-template-columns: repeat(auto-fit, minmax(50rem, 2fr));
+	}
+	@media only screen and (max-width: 1130px) {
+		/* width: 100%; */
+		grid-template-columns: repeat(auto-fit, minmax(35rem, 2fr));
+	}
+`;
+
+export const DonutChartContainer = styled.div`
+	border-radius: 5px;
+	box-shadow: 0 0.1rem 1rem rgb(0 0 0 / 10%);
+	padding: 1.8rem;
+	background-color: #fff;
+	height: 100%;
+	@media only screen and (max-width: 1575px) {
+		margin-top: -2rem;
+	}
+`;
+export const ChartsWrapper = styled.div`
+	display: flex;
+	margin-top: 2rem;
+	margin-right: 2rem;
+	@media only screen and (max-width: 1353px) {
+		flex-direction: column;
+	}
+`;
+
+export const DashBoardGridContainer = styled.div`
+	margin-top: 2rem;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr) 0;
+	grid-template-rows: repeat(2, 1fr) repeat(3, 0);
+	grid-gap: 2rem;
+	@media only screen and (max-width: 1575px) {
+		grid-template-rows: repeat(2, 1fr) 0 repeat(2, 1fr);
+		grid-gap: 2rem;
+	}
+`;
+
+export const GridLine1 = styled.div`
+	grid-area: 1 / 1 / 2 / 2;
+	@media only screen and (max-width: 1575px) {
+		grid-area: 1 / 1 / 2 / 3;
+	}
+`;
+export const GridLine2 = styled.div`
+	grid-area: 1 / 2 / 2 / 3;
+	@media only screen and (max-width: 1575px) {
+		grid-area: 1 / 3 / 2 / 5;
+	}
+`;
+export const GridLine3 = styled.div`
+	grid-area: 2 / 1 / 3 / 2;
+	@media only screen and (max-width: 1575px) {
+		grid-area: 2 / 1 / 3 / 3;
+	}
+`;
+
+export const GridLine4 = styled.div`
+	grid-area: 2 / 2 / 3 / 3;
+	@media only screen and (max-width: 1575px) {
+		grid-area: 2 / 3 / 3 / 5;
+	}
+`;
+
+export const GridDonut = styled.div`
+	grid-area: 1 / 3 / 3 / 5;
+	@media only screen and (max-width: 1575px) {
+		grid-area: 4 / 1 / 6 / 5;
+	}
 `;

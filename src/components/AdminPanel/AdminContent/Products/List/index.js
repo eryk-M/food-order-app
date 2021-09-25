@@ -45,7 +45,11 @@ const List = () => {
 						Product ID: {id} deleted!
 					</Alert>
 				)}
-				<Search setQuery={setQuery} width="20rem" />
+				<Search
+					setQuery={setQuery}
+					width="20rem"
+					placeholder="Search by name"
+				/>
 				<Table>
 					<TableBody>
 						<TableRow backgroundColor="#93949417" fontW="bold">
@@ -68,7 +72,11 @@ const List = () => {
 										<TableCell>{el.id}</TableCell>
 										<TableCell>
 											<img
-												style={{ height: '6rem', width: '6rem' }}
+												style={{
+													height: '6rem',
+													width: '6rem',
+													objectFit: 'cover',
+												}}
 												src={el.img}
 												alt={el.alt}
 											/>

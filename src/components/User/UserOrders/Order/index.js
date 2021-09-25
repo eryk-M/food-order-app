@@ -19,7 +19,7 @@ const Order = ({ el, open }) => {
 					{el.orderInfo.map((order, i) => (
 						<OrderInfo key={i}>
 							{order.quantity}x {order.name} $
-							{order.quantity * order.price}
+							{(order.quantity * order.price).toFixed(2)}
 						</OrderInfo>
 					))}
 				</OrderContent>
@@ -41,7 +41,7 @@ const Order = ({ el, open }) => {
 				<OrderContent>
 					<OrderHeading>Payment:</OrderHeading>
 					<br />
-					<p>Cash on delivery??</p>
+					{el.payment}
 				</OrderContent>
 			</OrderWrapper>
 		</SlideDown>

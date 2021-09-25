@@ -9,7 +9,7 @@ import Select from 'components/FilterGroup/Select';
 const SearchForm = ({ price, setQuery, setSort }) => {
 	return (
 		<SearchFormContainer>
-			<Search setQuery={setQuery} />
+			<Search setQuery={setQuery} placeholder="Search by name" />
 			<Select setSort={setSort} />
 			<PriceFilter price={price} />
 		</SearchFormContainer>

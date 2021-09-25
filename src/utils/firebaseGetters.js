@@ -31,3 +31,8 @@ export const getAdminAllProducts = () =>
 
 export const getAdminOneProduct = (id) =>
 	db.collection('adminProducts').where('id', '==', id);
+
+export const getAdminAllOrders = () => db.collection('adminOrders');
+
+export const getAdminOneOrder = (id) =>
+	db.collection('adminOrders').where('orderId', '==', id);

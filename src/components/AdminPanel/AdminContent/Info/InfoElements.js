@@ -16,6 +16,7 @@ export const InfoNote = styled.div`
 
 export const InfoNoteHeading = styled.h3`
 	font-size: 1.8rem;
+	color: #52b7ff;
 	font-family: 'Rubik', sans-serif;
 `;
 
