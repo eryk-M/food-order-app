@@ -154,8 +154,12 @@ export const ProductPrice = styled.p`
 	line-height: 1.4;
 	margin-top: 1rem;
 	text-align: center;
-	color: var(--color-primary);
-	/* padding: 1rem; */
+	text-decoration: ${(props) =>
+		props.discount ? 'line-through' : 'none'};
+	color: ${(props) =>
+		props.discount
+			? 'var(--color-grey-light-2)'
+			: 'var(--color-primary)'}; ;
 `;
 
 export const ProductBackground = styled.div`

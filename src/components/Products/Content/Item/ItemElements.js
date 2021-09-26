@@ -29,6 +29,19 @@ export const ItemImageWrapper = styled.div`
 		background-color: var(--color-primary);
 		z-index: -1;
 	}
+	&::after {
+		content: 'SALE';
+		position: absolute;
+		right: 1rem;
+		top: 1rem;
+		background-color: var(--color-green);
+		font-size: 1.4rem;
+		color: var(--color-white);
+		padding: 0.5rem;
+		border-radius: 5px;
+		z-index: 1;
+		visibility: ${(props) => (props.discount ? 'visible' : 'hidden')};
+	}
 `;
 
 export const ItemImage = styled.img`
@@ -69,8 +82,15 @@ export const ItemButton = styled.div`
 export const ItemPrice = styled.span`
 	font-family: 'Arvo', sans-serif;
 	font-weight: 700;
-	color: var(--color-primary);
+	color: ${(props) =>
+		props.discount
+			? 'var(--color-grey-light-2)'
+			: 'var(--color-primary)'};
 	font-size: 2rem;
 	display: block;
 	margin-top: 1rem;
+	text-decoration: ${(props) =>
+		props.discount ? 'line-through' : 'none'};
+	display: inline-block;
+	margin-right: ${(props) => (props.discount ? '1rem' : '')};
 `;

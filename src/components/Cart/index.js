@@ -36,6 +36,8 @@ const Cart = () => {
 	const [payment, setPayment] = useState(null);
 	const [discount, setDiscount] = useState(null);
 	const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
+	const [discountCalcFlag, setDiscountCalcFlag] = useState(false);
+	const [discountAdded, setDiscountAdded] = useState(false);
 	const history = useHistory();
 
 	const { data } = useFirestoreQuery(
@@ -49,13 +51,25 @@ const Cart = () => {
 		});
 	};
 	const getTotalPrice = useCallback(() => {
-		const totalCartPrice = cart.reduce(
-			(total, item) => total + item.price * item.quantity,
-			0
+		let cartWithDiscount = 0;
+		let cartBeforeDiscount = 0;
+		cart.map((el) => {
+			if (el.discountPrice !== 0) {
+				return (cartBeforeDiscount += el.discountPrice * el.quantity);
+			} else {
+				return (cartBeforeDiscount += el.price * el.quantity);
+			}
+		});
+		if (discount) {
+			cartWithDiscount =
+				cartBeforeDiscount - cartBeforeDiscount * (discount / 100);
+		}
+		setTotalPrice(
+			cartWithDiscount !== 0 ? cartWithDiscount : cartBeforeDiscount
 		);
-		setTotalPrice(totalCartPrice);
-		setPriceBeforeDiscount(totalCartPrice);
-	}, [cart]);
+		setPriceBeforeDiscount(cartBeforeDiscount);
+		setDiscountCalcFlag(true);
+	}, [cart, discount]);
 
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
@@ -114,6 +128,10 @@ const Cart = () => {
 								setDiscount={setDiscount}
 								discount={discount}
 								setTotalPrice={setTotalPrice}
+								setDiscountCalcFlag={setDiscountCalcFlag}
+								discountCalcFlag={discountCalcFlag}
+								discountAdded={discountAdded}
+								setDiscountAdded={setDiscountAdded}
 							/>
 						)}
 					/>

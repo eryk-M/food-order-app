@@ -141,7 +141,12 @@ const CartSummary = ({
 							</CartSummaryOrderInfo>
 							<CartSummaryOrderInfo>
 								Total:{' '}
-								<span>${(el.quantity * el.price).toFixed(2)}</span>
+								<span>
+									$
+									{el.discountPrice !== 0
+										? el.discountPrice.toFixed(2) * el.quantity
+										: el.price.toFixed(2) * el.quantity}
+								</span>
 							</CartSummaryOrderInfo>
 						</CartSummaryOrder>
 					</CartSummaryItem>
@@ -163,12 +168,10 @@ const CartSummary = ({
 				<CartSummaryTotalHeading>
 					Order details
 				</CartSummaryTotalHeading>
-				{/* TODO: DO ZROBIENIA CENA PRZED OBNIZKA*/}
 				<CartSummaryTotalItem>
 					<span>Price:</span>{' '}
 					<span>${priceBeforeDiscount.toFixed(2)}</span>
 				</CartSummaryTotalItem>
-				{/* TODO: DO ZROBIENIA CENA PO OBNIZCE*/}
 				<CartSummaryTotalItem>
 					<span>Discount:</span>{' '}
 					<span>{discount ? `${discount}%` : 'None'}</span>

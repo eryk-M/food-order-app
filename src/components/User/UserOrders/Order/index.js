@@ -8,8 +8,22 @@ import {
 	OrderInfo,
 	OrderContent,
 } from './OrderElements';
-
+import {
+	CashIcon,
+	CreditCardIcon,
+} from 'components/AdminPanel/Icons';
 const Order = ({ el, open }) => {
+	const returnUserStatus = (step) => {
+		const text = [
+			'Order placed',
+			'Prepairing',
+			'Cooking',
+			'Delivery',
+			'Done',
+			'Cancelled',
+		];
+		return text[step];
+	};
 	return (
 		<SlideDown className="my-dropdown-slidedown" closed={open}>
 			<OrderWrapper>
@@ -18,8 +32,7 @@ const Order = ({ el, open }) => {
 					<br />
 					{el.orderInfo.map((order, i) => (
 						<OrderInfo key={i}>
-							{order.quantity}x {order.name} $
-							{(order.quantity * order.price).toFixed(2)}
+							{order.quantity}x {order.name}
 						</OrderInfo>
 					))}
 				</OrderContent>
@@ -41,7 +54,25 @@ const Order = ({ el, open }) => {
 				<OrderContent>
 					<OrderHeading>Payment:</OrderHeading>
 					<br />
-					{el.payment}
+					{el.payment === 2 ? (
+						<>
+							{' '}
+							<CashIcon /> Cash{' '}
+						</>
+					) : (
+						<>
+							<CreditCardIcon /> Card{' '}
+						</>
+					)}
+				</OrderContent>
+				<OrderContent>
+					<OrderHeading>Total price:</OrderHeading>
+					<br />${el.totalPrice}
+				</OrderContent>
+				<OrderContent>
+					<OrderHeading>Detailed status:</OrderHeading>
+					<br />
+					{returnUserStatus(el.step)}
 				</OrderContent>
 			</OrderWrapper>
 		</SlideDown>

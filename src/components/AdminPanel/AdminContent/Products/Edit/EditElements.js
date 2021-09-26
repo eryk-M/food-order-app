@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 export const EditImage = styled.img`
 	height: 15rem;
 	width: 15rem;
+	object-fit: cover;
 	margin: 2rem auto;
 	display: block;
 	border: 1px solid rgba(0, 0, 0, 0.4);

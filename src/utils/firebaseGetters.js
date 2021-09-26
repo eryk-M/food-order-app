@@ -14,7 +14,9 @@ export const getReviews = (productId) =>
 export const getAllProducts = () => db.collection('products');
 
 export const getOrder = (orderId) =>
-	db.collection('orders').where('orderId', '==', orderId);
+	orderId
+		? db.collection('orders').where('orderId', '==', orderId)
+		: null;
 
 export const getUserOrders = (uid) =>
 	db.collection('orders').where('userId', '==', uid);
@@ -25,6 +27,11 @@ export const getOneProduct = (id) =>
 export const validateUsername = (username) =>
 	db.collection('users').where('username', '==', username);
 
+export const validateCouponCode = (code) =>
+	db.collection('coupons').where('code', '==', code);
+
+export const getCoupons = () => db.collection('coupons');
+
 // ADMIN PANEL //
 export const getAdminAllProducts = () =>
 	db.collection('adminProducts').orderBy('id');
@@ -32,7 +39,8 @@ export const getAdminAllProducts = () =>
 export const getAdminOneProduct = (id) =>
 	db.collection('adminProducts').where('id', '==', id);
 
-export const getAdminAllOrders = () => db.collection('adminOrders');
+//CHANGED FROM COLLECTION ADMIN TO ALL ORDERS
+export const getAdminAllOrders = () => db.collection('orders');
 
 export const getAdminOneOrder = (id) =>
 	db.collection('adminOrders').where('orderId', '==', id);

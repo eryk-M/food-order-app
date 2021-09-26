@@ -35,9 +35,9 @@ const Item = ({ el }) => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart]);
 
-	async function addToCart(e) {
+	const addToCart = (e) => {
 		e.preventDefault();
-		await dispatch({
+		dispatch({
 			type: 'ADD_TO_CART',
 			payload: el,
 		});
@@ -45,8 +45,7 @@ const Item = ({ el }) => {
 		setTimeout(() => {
 			setIsAdded(false);
 		}, 4000);
-	}
-
+	};
 	return (
 		<ItemWrapper>
 			{isAdded && (
@@ -55,7 +54,7 @@ const Item = ({ el }) => {
 				</Alert>
 			)}
 
-			<ItemImageWrapper>
+			<ItemImageWrapper discount={el.discountPrice !== 0}>
 				<Link to={`/product/${el.id}`}>
 					<LazyLoad offset={100}>
 						<ItemImage src={el.img} alt={el.alt} />
@@ -66,7 +65,12 @@ const Item = ({ el }) => {
 				<Link to={`/product/${el.id}`}>
 					<ItemHeading>{el.name}</ItemHeading>
 				</Link>
-				<ItemPrice>${el.price}</ItemPrice>
+				<ItemPrice discount={el.discountPrice !== 0}>
+					${el.price}
+				</ItemPrice>
+				{el.discountPrice !== 0 && (
+					<ItemPrice>${el.discountPrice}</ItemPrice>
+				)}
 				<StarRating rating={el.avgRating} size={15} show />
 				<ItemDesc>{el.desc}</ItemDesc>
 				<ItemButton>

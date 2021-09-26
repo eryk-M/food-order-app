@@ -111,3 +111,13 @@ export const UserOrderStatus = styled.span`
 export const LoaderWrapper = styled.div`
 	position: absolute;
 `;
+
+export const PrintButton = styled.button`
+	position: absolute;
+	right: 2.5rem;
+	top: 2rem;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+	/* outline: none; */
+	text-transform: uppercase;
+`;

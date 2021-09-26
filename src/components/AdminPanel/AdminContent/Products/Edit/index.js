@@ -107,12 +107,10 @@ const Edit = (props) => {
 				(value + '').match(/^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/)
 		),
 		discount: Yup.string().test(
-			'discount',
-			'Value from 0 - 99',
+			'price',
+			'Format: e.g. 11.00, 12.99 or 0',
 			(value) =>
-				value
-					? value >= 0 && value < 100 && /[0-9]/.test(value)
-					: true
+				(value + '').match(/^[0-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/)
 		),
 	});
 
@@ -320,12 +318,11 @@ const Edit = (props) => {
 									)}
 								</FormElement>
 								<FormElement>
-									<FormLabel>Discount (without %)</FormLabel>
+									<FormLabel>Discount price</FormLabel>
 									<FormInput
 										{...register('discount')}
 										defaultValue={data[0].discountPrice}
 										type="number"
-										placeholder="How many percentage"
 										error={errors.discount}
 									/>
 									{errors.discount && (

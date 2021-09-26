@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-green: #11c454;
     --color-red: #f81212;
     --color-blue: #52b7ff;
+    --color-grey-light-2: rgb(189, 189, 188);
 }
 
 * {
@@ -76,7 +77,6 @@ input[type=file]{
 		padding: 1rem 1.5rem;
 		border-radius: 5px;
 		cursor: pointer;
-		box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.2);
         border: none;
         margin-right: 1rem;
 	}

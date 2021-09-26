@@ -13,7 +13,7 @@ import {
 import { MainContainer } from 'components/AdminPanel/Containers';
 
 import Search from 'components/FilterGroup/Search';
-import Delete from '../Delete';
+import DeleteModal from 'components/DeleteModal';
 import {
 	TickIcon,
 	SaleIcon,
@@ -23,9 +23,10 @@ import {
 import { Alert } from 'components/Alert';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAdminAllProducts } from 'utils/firebaseGetters';
-
+import { useAdminApi } from 'contexts/AdminAPIContext';
 const List = () => {
 	const { data } = useFirestoreQuery(getAdminAllProducts());
+	const { deleteAdminProduct } = useAdminApi();
 	const [query, setQuery] = useState('');
 	const [open, setOpen] = useState(false);
 	const [id, setId] = useState('');
@@ -33,11 +34,16 @@ const List = () => {
 
 	return (
 		<>
-			<Delete
-				id={id}
+			<DeleteModal
+				input={id}
+				toDelete={id}
 				open={open}
 				setOpen={setOpen}
 				setShowSuccess={setShowSuccess}
+				asyncFunction={deleteAdminProduct}
+				mainText="Delete this product?"
+				secondText="PRODUCT ID"
+				description="this product"
 			/>
 			<MainContainer>
 				{showSuccess && (
@@ -83,7 +89,7 @@ const List = () => {
 										</TableCell>
 										<TableCell>{el.name}</TableCell>
 										<TableCell center>
-											{el.sale ? <SaleIcon /> : 'No'}
+											{el.discountPrice !== 0 ? <SaleIcon /> : 'No'}
 										</TableCell>
 										<TableCell center>
 											{el.availability ? <TickIcon /> : <CrossIcon />}

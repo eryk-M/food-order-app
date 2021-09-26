@@ -54,6 +54,8 @@ const TrackerDetails = () => {
 				return 'Your order is on its way to you!';
 			case 4:
 				return 'Your order has been delivered';
+			case 5:
+				return 'You order has been cancelled';
 			default:
 				break;
 		}
@@ -70,17 +72,19 @@ const TrackerDetails = () => {
 						Do not refresh! This page refresh automatically!
 					</TrackerDetailsRefresh>
 				</TrackerDetailsContent>
-				<StepsContainer>
-					<Steps
-						current={step}
-						vertical={size.width < 610 ? true : false}
-					>
-						<Steps.Item title="Order placed" />
-						<Steps.Item title="Preparing" />
-						<Steps.Item title="Cooking" />
-						<Steps.Item title="Delivery" />
-					</Steps>
-				</StepsContainer>
+				{step !== 5 && (
+					<StepsContainer>
+						<Steps
+							current={step}
+							vertical={size.width < 610 ? true : false}
+						>
+							<Steps.Item title="Order placed" />
+							<Steps.Item title="Preparing" />
+							<Steps.Item title="Cooking" />
+							<Steps.Item title="Delivery" />
+						</Steps>
+					</StepsContainer>
+				)}
 			</TrackerDetailsContainer>
 
 			<TrackerDetailsSummaryContainer>

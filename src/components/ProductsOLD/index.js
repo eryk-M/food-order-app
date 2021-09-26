@@ -24,8 +24,7 @@ import { getAllProducts } from 'utils/firebaseGetters';
 const Products = () => {
 	const { data } = useFirestoreQuery(getAllProducts());
 	//API
-	const { setItems, setAdminItems } = useApi();
-	console.log(dummyData);
+	const { setItems } = useApi();
 	const onSetItems = (admin) => {
 		try {
 			console.log('Wrzucam...');

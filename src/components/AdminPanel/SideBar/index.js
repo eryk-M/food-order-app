@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import {
 	SideBarLogo,
@@ -13,7 +13,11 @@ import {
 
 import { useAuth } from 'contexts/AuthContext';
 
-import { AiFillDashboard, AiOutlinePoweroff } from 'react-icons/ai';
+import {
+	AiFillDashboard,
+	AiOutlinePoweroff,
+	AiOutlinePercentage,
+} from 'react-icons/ai';
 import { FiTruck } from 'react-icons/fi';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import logo from 'images/logo.png';
@@ -48,11 +52,22 @@ const SideBar = ({ hidden }) => {
 						<MdKeyboardArrowRight className="icon-arrow" />
 					</SideBarLink>
 				</SideBarItem>
+
 				<SideBarTree>
 					<TreeMenu {...treeProducts} hidden={hidden} />
 					<TreeMenu {...treeUsers} hidden={hidden} />
 				</SideBarTree>
-
+				<SideBarItem>
+					<SideBarLink
+						to="/admin/coupons"
+						exact
+						activeClassName="is-active"
+					>
+						<AiOutlinePercentage className="icon-left" />
+						<SideBarP>Coupons</SideBarP>
+						<MdKeyboardArrowRight className="icon-arrow" />
+					</SideBarLink>
+				</SideBarItem>
 				<SideBarItem>
 					<SideBarLink to="#" onClick={() => logout()}>
 						<AiOutlinePoweroff className="icon-left" />

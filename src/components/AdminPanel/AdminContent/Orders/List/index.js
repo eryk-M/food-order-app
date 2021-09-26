@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAdminAllOrders } from 'utils/firebaseGetters';
+import { useApi } from 'contexts/APIContext';
 
 import { MainContainer } from 'components/AdminPanel/Containers';
 import Search from 'components/FilterGroup/Search';
 import Button from 'components/Button';
-import Delete from '../Delete';
+import DeleteModal from 'components/DeleteModal';
 import { Alert } from 'components/Alert';
 import Status from 'components/Status';
 import {
@@ -31,6 +32,7 @@ import {
 import { AnimatePresence } from 'framer-motion';
 const List = () => {
 	const { data } = useFirestoreQuery(getAdminAllOrders());
+	const { deleteOrders } = useApi();
 	const history = useHistory();
 	const [query, setQuery] = useState('');
 	const [showSuccess, setShowSuccess] = useState(false);
@@ -38,6 +40,7 @@ const List = () => {
 	const [showDialogBox, setShowDialogBox] = useState(false);
 	const [amountToDelete, setAmountToDelete] = useState(0);
 	const [open, setOpen] = useState(false);
+	const [ordersToDelete, setOrdersToDelete] = useState([]);
 
 	const giveDateSpan = (timestamp) => {
 		const a = new Date(timestamp);
@@ -77,6 +80,7 @@ const List = () => {
 	const onCheckboxChange = (checkboxes) => {
 		const checked = checkboxes.filter((el) => el.checked);
 		setAmountToDelete(checkboxes.filter((el) => el.checked).length);
+		setOrdersToDelete(checked);
 		if (checked.length > 0) {
 			setShowDialogBox(true);
 		} else {
@@ -95,16 +99,21 @@ const List = () => {
 	};
 	return (
 		<>
-			<Delete
-				amountToDelete={amountToDelete}
+			<DeleteModal
+				input={amountToDelete}
+				toDelete={ordersToDelete}
 				open={open}
 				setOpen={setOpen}
 				setShowSuccess={setShowSuccess}
+				asyncFunction={deleteOrders}
+				mainText="Delete these orders?"
+				secondText="Orders amount"
+				description="these orders"
 			/>
 			<MainContainer display="inline-block" minwidth="">
 				{showSuccess && (
 					<Alert success right="1rem" top="1rem">
-						Delete function here is only to show possibilities
+						Order deleted!
 					</Alert>
 				)}
 

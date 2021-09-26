@@ -13,8 +13,8 @@ export function useAdminApi() {
 export function AdminAPIProvider({ children }) {
 	const adminProductsRef = db.collection('adminProducts');
 	const adminOrdersRef = db.collection('adminOrders');
-	const adminUsersRef = db.collection('adminUsers');
-	const adminReviewsRef = db.collection('adminReviews');
+	// const adminUsersRef = db.collection('adminUsers');
+	// const adminReviewsRef = db.collection('adminReviews');
 
 	async function updateAdminProduct(id, data, ingredients, imageSrc) {
 		await adminProductsRef.doc(id).update({

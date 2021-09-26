@@ -10,6 +10,8 @@ export const MainContainer = styled.div`
 	box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
 	position: relative;
 	width: ${(props) => props.width};
+	max-width: ${(props) => props.maxwidth ?? ''};
+	min-height: ${(props) => props.minheight ?? ''};
 `;
 
 export const FullWidthContainer = styled.div`

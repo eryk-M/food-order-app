@@ -38,6 +38,9 @@ export const TableRow = styled.tr`
 			return '&:hover {background-color: #93949417;cursor: pointer;}';
 		}
 	}}
+	&:hover {
+		background-color: #93949417;
+	}
 `;
 
 export const TableCell = styled.td`

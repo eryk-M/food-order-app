@@ -89,7 +89,16 @@ const ProductItem = ({ props }) => {
 
 						<ProductRight>
 							<ProductTitle>{currentItem.name}</ProductTitle>
-							<ProductPrice>${currentItem.price}</ProductPrice>
+							{currentItem.discountPrice !== 0 && (
+								<ProductPrice>
+									${currentItem.discountPrice}
+								</ProductPrice>
+							)}
+							<ProductPrice
+								discount={currentItem.discountPrice !== 0}
+							>
+								${currentItem.price}
+							</ProductPrice>
 							<ProductStarIcons>
 								<StarRating
 									rating={currentItem.avgRating.toFixed()}

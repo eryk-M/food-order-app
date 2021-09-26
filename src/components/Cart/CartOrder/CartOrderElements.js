@@ -90,6 +90,7 @@ export const CartTotalContent = styled.p`
 export const CartCouponForm = styled.form`
 	margin-top: 2rem;
 	position: relative;
+	display: inline-block;
 `;
 
 export const CartCouponInput = styled.input`
@@ -164,8 +165,23 @@ export const CartPaymentInput = styled.input`
 	}
 `;
 
-export const CartTotalDiscount = styled.div`
-	/* display: block; */
+export const CartTotalDiscount = styled.span`
+	display: block;
 	color: var(--color-green);
 	margin-bottom: 2rem;
+`;
+
+export const CartCouponNote = styled.p`
+	font-size: 1.4rem;
+	line-height: 1.5;
+`;
+
+export const CartCodeAdded = styled.span`
+	display: block;
+	font-size: 1.4rem;
+	padding: 1rem;
+	width: 10rem;
+	border-radius: 5px;
+	color: var(--color-white);
+	background-color: var(--color-green);
 `;

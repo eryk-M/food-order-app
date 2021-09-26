@@ -15,7 +15,10 @@ import {
 	FiAlertTriangle,
 	FiSettings,
 } from 'react-icons/fi';
-import { AiOutlineInfoCircle } from 'react-icons/ai';
+import {
+	AiOutlineInfoCircle,
+	AiOutlinePrinter,
+} from 'react-icons/ai';
 
 export const TickIcon = styled(TiTick)`
 	font-size: 1.8rem;
@@ -78,6 +81,7 @@ export const SettingsIcon = styled(FiSettings)`
 	cursor: pointer;
 	transition: 0.5s transform;
 	backface-visibility: hidden;
+	margin-right: 1rem;
 	&:hover {
 		transform: rotate(180deg);
 	}
@@ -111,4 +115,11 @@ export const CashIcon = styled(HiOutlineCash)`
 	color: var(--color-green);
 	font-size: 3rem;
 	vertical-align: middle;
+`;
+
+export const PrinterIcon = styled(AiOutlinePrinter)`
+	font-size: 3rem;
+	vertical-align: middle;
+	margin-right: 1rem;
+	cursor: pointer;
 `;

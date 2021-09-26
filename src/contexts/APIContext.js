@@ -11,7 +11,7 @@ export function useApi() {
 export function APIProvider({ children }) {
 	const productsRef = db.collection('products');
 	const adminProductsRef = db.collection('adminProducts');
-	const adminOrdersRef = db.collection('adminOrders');
+	// const adminOrdersRef = db.collection('adminOrders');
 	const usersRef = db.collection('users');
 	const reviewsRef = db.collection('reviews');
 	const couponsRef = db.collection('coupons');
@@ -161,7 +161,7 @@ export function APIProvider({ children }) {
 		payment
 	) => {
 		try {
-			await adminOrdersRef.add({
+			await ordersRef.add({
 				orderId: orderId,
 				userId: userId ?? '',
 				totalPrice: totalPrice,
@@ -180,12 +180,40 @@ export function APIProvider({ children }) {
 		return await couponsRef.where('code', '==', code).get();
 	};
 
+	const updateOrderStatus = async (step, id) => {
+		await ordersRef.doc(id).update({ step: step });
+	};
+
+	const addCoupon = async (code, discount) => {
+		await couponsRef.add({
+			code: code.toUpperCase(),
+			discount: Number(discount),
+		});
+	};
+
+	const deleteCoupon = async (code) => {
+		const response = await couponsRef.where('code', '==', code).get();
+		response.forEach(async (doc) => {
+			await doc.ref.delete();
+		});
+	};
+
+	const deleteOrders = async (orders) => {
+		orders.forEach(async (order) => {
+			await ordersRef.doc(order.value).delete();
+		});
+	};
+
 	const value = {
 		setItems,
 		updateUserInfo,
 		addReview,
 		addOrder,
 		validateDiscountCode,
+		updateOrderStatus,
+		addCoupon,
+		deleteCoupon,
+		deleteOrders,
 	};
 
 	return (

@@ -9,7 +9,7 @@ import {
 	DeleteBody,
 	DeleteElement,
 	DeleteActions,
-} from 'components/AdminPanel/AdminContent/Products/Delete/DeleteElements';
+} from './DeleteModalElements';
 
 import { FormInput, FormError } from 'components/Form/FormElements';
 
@@ -19,13 +19,18 @@ import Loader from 'components/Loader';
 import { AlertIcon } from 'components/AdminPanel/Icons';
 // import { useAdminApi } from 'contexts/AdminAPIContext';
 
-const Delete = ({
+const DeleteModal = ({
 	setOpen,
 	open,
-	amountToDelete,
+	input,
+	toDelete,
 	setShowSuccess,
+	asyncFunction,
+	mainText,
+	secondText,
+	description,
 }) => {
-	// const { deleteAdminOrders } = useAdminApi();
+	// const { deleteAdminProduct } = useAdminApi();
 	const [error, setError] = useState('');
 	const [inputValue, setInputValue] = useState('');
 	const [isInitiallyChanged, setIsInitiallyChanged] = useState(false);
@@ -39,27 +44,24 @@ const Delete = ({
 	useEffect(() => {
 		setError('');
 		if (inputValue === '' && isInitiallyChanged) {
-			setError('Number is required');
-		} else if (
-			inputValue !== String(amountToDelete) &&
-			isInitiallyChanged
-		) {
-			setError("You didn't enter the number correctly");
+			setError('ID is required');
+		} else if (inputValue !== String(input) && isInitiallyChanged) {
+			setError("You didn't enter the product ID correctly");
 		} else {
 			setError('');
 		}
-	}, [inputValue, setError, amountToDelete, isInitiallyChanged]);
+	}, [inputValue, setError, input, isInitiallyChanged]);
 
 	const handleDelete = async () => {
 		try {
 			setLoading(true);
-			// await deleteAdminOrders(itemsToDelete);
+			await asyncFunction(toDelete);
 			handleCancel();
 			setLoading(false);
 			setShowSuccess(true);
 			setTimeout(() => {
 				setShowSuccess(false);
-			}, 5000);
+			}, 3000);
 		} catch {}
 	};
 
@@ -74,27 +76,27 @@ const Delete = ({
 			<DeleteQuestionContainer>
 				<DeleteQuestionH1>
 					<AlertIcon />
-					Delete these orders?
+					{mainText}
 				</DeleteQuestionH1>
 				<DeleteQuestionP>
-					Are you sure you want to delete these orders? Doing so will
+					Are you sure you want to delete {description}? Doing so will
 					permamently delete the data.
 				</DeleteQuestionP>
 			</DeleteQuestionContainer>
 			<DeleteBody>
-				<DeleteElement>Orders checked</DeleteElement>
+				<DeleteElement>{secondText}</DeleteElement>
 				<DeleteElement>
-					<strong>{amountToDelete}</strong>
+					<strong>{input}</strong>
 				</DeleteElement>
 				<DeleteElement>
-					Confirm you want to delete these orders by typing amount:{' '}
-					<strong>{amountToDelete}</strong>
+					Confirm you want to delete {description} by typing:{' '}
+					<strong>{input}</strong>
 				</DeleteElement>
 				<DeleteElement>
 					<FormInput
 						value={inputValue}
 						onChange={(e) => handleChange(e)}
-						placeholder={amountToDelete}
+						placeholder={input}
 						error={error}
 					/>
 					{error && <FormError>{error}</FormError>}
@@ -107,7 +109,7 @@ const Delete = ({
 					Cancel
 				</Button>
 				<Button
-					disabled={loading || inputValue !== String(amountToDelete)}
+					disabled={loading || inputValue !== String(input)}
 					marginleft="2rem"
 					onClick={handleDelete}
 				>
@@ -118,4 +120,4 @@ const Delete = ({
 	);
 };
 
-export default Delete;
+export default DeleteModal;

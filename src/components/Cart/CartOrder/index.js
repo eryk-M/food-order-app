@@ -21,6 +21,7 @@ import {
 	CartPaymentImage,
 	CartPaymentIcon,
 	CartTotalDiscount,
+	CartCouponNote,
 } from './CartOrderElements';
 
 import { FormError, FormInput } from 'components/Form/FormElements';
@@ -48,12 +49,13 @@ const CartOrder = ({
 	setDiscount,
 	discount,
 	setTotalPrice,
+	discountCalcFlag,
+	setDiscountCalcFlag,
+	discountAdded,
+	setDiscountAdded,
 }) => {
 	const { validateDiscountCode } = useApi();
 	const [loading, setLoading] = useState(false);
-	const [discountAdded, setDiscountAdded] = useState(false);
-	const [showSuccess, setShowSuccess] = useState(false);
-
 	const validationSchema = Yup.object().shape({
 		discount: Yup.string().test(
 			'discount',
@@ -85,7 +87,7 @@ const CartOrder = ({
 
 	useEffect(() => {
 		if (step !== 0) onChangeStep(undefined, 'begin');
-		if (discount && !discountAdded) {
+		if (discount && !discountAdded && !discountCalcFlag) {
 			const discountPrice =
 				totalPrice - totalPrice * (discount / 100);
 			setTotalPrice(discountPrice);
@@ -98,6 +100,8 @@ const CartOrder = ({
 		discountAdded,
 		setTotalPrice,
 		totalPrice,
+		discountCalcFlag,
+		setDiscountAdded,
 	]);
 
 	const onDeleteItem = (id) => {
@@ -137,11 +141,8 @@ const CartOrder = ({
 		const response = await validateDiscountCode(data.discount);
 		const docs = response.docs[0].data();
 		setDiscount(docs.discount);
+		setDiscountAdded(true);
 		setLoading(false);
-		setShowSuccess(true);
-		setTimeout(() => {
-			setShowSuccess(false);
-		}, 3000);
 	};
 	return (
 		<>
@@ -174,7 +175,12 @@ const CartOrder = ({
 									{el.name}
 								</CartLink>
 							</CartColumn>
-							<CartColumn>${el.price.toFixed(2)}</CartColumn>
+							<CartColumn>
+								$
+								{el.discountPrice !== 0
+									? el.discountPrice.toFixed(2)
+									: el.price.toFixed(2)}
+							</CartColumn>
 							<CartColumn>
 								<CartQuantity
 									onClick={(e) => onChangeQuantity(e, el.id)}
@@ -189,7 +195,10 @@ const CartOrder = ({
 								</CartQuantity>
 							</CartColumn>
 							<CartColumn display="none">
-								${(el.price * el.quantity).toFixed(2)}
+								$
+								{el.discountPrice !== 0
+									? (el.discountPrice * el.quantity).toFixed(2)
+									: (el.price * el.quantity).toFixed(2)}
 							</CartColumn>
 							<CartColumn>
 								<CartDelete onClick={() => onDeleteItem(el.id)} />
@@ -199,13 +208,18 @@ const CartOrder = ({
 				</CartList>
 			</CartTable>
 			<CartCouponForm onSubmit={handleSubmit(onSubmit)}>
+				{discountAdded && (
+					<Alert success right="-17rem" top="1rem">
+						Coupon added!
+					</Alert>
+				)}
 				<FormInput
 					display="inline-block"
 					width="20rem"
 					error={errors.discount}
 					{...register('discount')}
 					disabled={!cart.length >= 1 || discountAdded || loading}
-					placeholder="Type DISCOUNT20"
+					placeholder="Type code"
 					autoComplete="off"
 				/>
 
@@ -215,13 +229,9 @@ const CartOrder = ({
 				>
 					Apply coupon
 				</Button>
+
 				{loading && (
 					<Loader primary display="inline-block" marginleft="2rem" />
-				)}
-				{showSuccess && (
-					<Alert success bottom="0" left="0">
-						Coupon added!
-					</Alert>
 				)}
 			</CartCouponForm>
 			{errors.discount && (
@@ -229,6 +239,10 @@ const CartOrder = ({
 					{errors.discount.message}
 				</FormError>
 			)}
+			<CartCouponNote>
+				Example coupon code: <strong>DISCOUNT20</strong> <br />
+				You can add and delete coupons in ADMIN PANEL
+			</CartCouponNote>
 			{!(cart.length === 0) && (
 				<CartPayment>
 					<CartPaymentP>Payment method:</CartPaymentP>
@@ -269,8 +283,9 @@ const CartOrder = ({
 					disabled={!cart.length >= 1 || !payment}
 					width="100%"
 					onClick={(e) => {
-						setDispatchMethod();
 						setDispatchTotalPrice();
+						setDispatchMethod();
+						setDiscountCalcFlag(true);
 						onChangeStep(e, 'push');
 					}}
 				>

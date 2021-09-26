@@ -1,14 +1,14 @@
-import burgerClassic from 'images/burger-classic_cut.jpg';
-import burgerDouble from 'images/burger-double_cut.jpg';
-import burgerChicken from 'images/burger-chicken_cut.jpg';
-import chickenCrispy from 'images/chicken-crispy_cut.jpg';
-import chickenSalad from 'images/chicken-salad_cut.jpg';
-import chickenShashlik from 'images/chicken-shashlik_cut.jpg';
-import lemonade from 'images/lemonade.jpg';
-import orangeJuice from 'images/orange_juice.jpg';
-import iceShake from 'images/ice_shake.jpg';
-import belgianFries from 'images/belgian_fries.jpg';
-import fries from 'images/fries.jpg';
+// import burgerClassic from 'images/burger-classic_cut.jpg';
+// import burgerDouble from 'images/burger-double_cut.jpg';
+// import burgerChicken from 'images/burger-chicken_cut.jpg';
+// import chickenCrispy from 'images/chicken-crispy_cut.jpg';
+// import chickenSalad from 'images/chicken-salad_cut.jpg';
+// import chickenShashlik from 'images/chicken-shashlik_cut.jpg';
+// import lemonade from 'images/lemonade.jpg';
+// import orangeJuice from 'images/orange_juice.jpg';
+// import iceShake from 'images/ice_shake.jpg';
+// import belgianFries from 'images/belgian_fries.jpg';
+// import fries from 'images/fries.jpg';
 
 export const dummyData = [
 	{
@@ -30,7 +30,7 @@ export const dummyData = [
 		category: 'Burgers',
 		quantity: 1,
 		sale: true,
-		discountPrice: 0,
+		discountPrice: 15.99,
 		availability: true,
 		avgRating: 0,
 		popularity: 0,

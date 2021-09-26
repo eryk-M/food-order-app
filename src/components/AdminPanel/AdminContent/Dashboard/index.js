@@ -2,8 +2,6 @@ import React from 'react';
 
 import {
 	FlexCenterContainer,
-	LineChartsContainer,
-	ChartsWrapper,
 	DashBoardGridContainer,
 	GridLine1,
 	GridLine2,
