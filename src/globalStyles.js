@@ -99,15 +99,7 @@ input[type=file]{
         width: 5rem;
         }
     }
-    & li {
-        /* width: 5rem; */
-        /* display: none; */
-        & li {
-            
-            /* width: 5rem; */
-        }
-    }
-    
+
     
     & img {
         height: 4rem;

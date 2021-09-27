@@ -16,7 +16,7 @@ import { FormInput, FormError } from 'components/Form/FormElements';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
 
-import { AlertIcon } from 'components/AdminPanel/Icons';
+import { AlertIcon } from 'components/Admin/Icons';
 // import { useAdminApi } from 'contexts/AdminAPIContext';
 
 const DeleteModal = ({

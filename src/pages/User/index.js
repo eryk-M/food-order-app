@@ -1,10 +1,10 @@
 import React from 'react';
 import PrivateRoute from 'components/PrivateRoute';
 
-import UserAccount from 'components/User/UserAccount';
-import UserPassword from 'components/User/UserPassword';
-import UserOrders from 'components/User/UserOrders';
-import UserNav from 'components/User/UserNav';
+import UserAccount from 'pages/User/UserAccount';
+import UserPassword from 'pages/User/UserPassword';
+import UserOrders from 'pages/User/UserOrders';
+import UserNav from 'pages/User/UserNav';
 
 import {
 	UserContainer,

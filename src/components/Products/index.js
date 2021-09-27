@@ -37,7 +37,7 @@ const Products = () => {
 			<ProductsSearchWrapper className="products">
 				<SideBar setCategory={setCategory} />
 				{loading ? (
-					<Loader />
+					<Loader primary />
 				) : (
 					<Content
 						data={data}
