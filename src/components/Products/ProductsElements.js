@@ -4,6 +4,7 @@ export const ProductsContainer = styled.div`
 	max-width: 120rem;
 	padding: 2rem;
 	margin: 0 auto;
+	min-height: 100rem;
 `;
 
 export const ProductsSearchWrapper = styled.div`

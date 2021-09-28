@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components/macro';
+import styled, { keyframes, css } from 'styled-components/macro';
 
 import { GiConfirmed } from 'react-icons/gi';
 const fadeIn = keyframes`
@@ -19,18 +19,21 @@ export const AlertContainer = styled.div`
 	left: ${(props) => props.left};
 	font-size: 1.6rem;
 	color: #fff;
-	background-color: ${(props) => {
-		if (props.success) {
-			return 'var(--color-green)';
-		}
-	}};
+	background-color: ${(props) =>
+		props.success ? 'var(--color-green)' : ''};
 	padding: 1rem;
 	display: flex;
 	align-items: center;
 	opacity: 100%;
 	font-weight: 100;
 	border-radius: 0.5rem;
-	animation: ${fadeIn} 0.71s cubic-bezier(0.075, 0.82, 0.165, 1);
+	/* animation: ; */
+	animation: ${(props) =>
+		props.noanimate
+			? 'none'
+			: css`
+					${fadeIn} 0.71s cubic-bezier(0.075, 0.82, 0.165, 1)
+			  `};
 `;
 export const AlertSuccessIcon = styled(GiConfirmed)`
 	margin-right: 0.5rem;

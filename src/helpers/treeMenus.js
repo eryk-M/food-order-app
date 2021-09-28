@@ -2,6 +2,7 @@ import { GiHamburger } from 'react-icons/gi';
 import { FiUsers } from 'react-icons/fi';
 import { BsPlusCircle } from 'react-icons/bs';
 import { HiMenuAlt2 } from 'react-icons/hi';
+import { AiOutlineQuestionCircle } from 'react-icons/ai';
 
 export const treeUsers = {
 	text: 'Users',
@@ -32,6 +33,23 @@ export const treeProducts = {
 			path: '/admin/products/add',
 			icon: BsPlusCircle,
 			text: 'Add product',
+		},
+	],
+};
+
+export const treeQuiz = {
+	text: 'Quiz',
+	mainIcon: AiOutlineQuestionCircle,
+	list: [
+		{
+			path: '/admin/quiz',
+			icon: HiMenuAlt2,
+			text: 'Quiz list',
+		},
+		{
+			path: '/admin/quiz/add',
+			icon: BsPlusCircle,
+			text: 'Add quiz',
 		},
 	],
 };

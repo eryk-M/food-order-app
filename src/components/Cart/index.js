@@ -3,6 +3,7 @@ import React, {
 	useContext,
 	useEffect,
 	useCallback,
+	useRef,
 } from 'react';
 
 import { Switch, Route, useHistory } from 'react-router-dom';
@@ -39,7 +40,7 @@ const Cart = () => {
 	const [discountCalcFlag, setDiscountCalcFlag] = useState(false);
 	const [discountAdded, setDiscountAdded] = useState(false);
 	const history = useHistory();
-
+	const scrollRef = useRef();
 	const { data } = useFirestoreQuery(
 		currentUser ? getUserDoc(currentUser.uid) : null
 	);
@@ -50,6 +51,8 @@ const Cart = () => {
 			payload: totalPrice.toFixed(2),
 		});
 	};
+
+	//TODO: MEMO THIS \/
 	const getTotalPrice = useCallback(() => {
 		let cartWithDiscount = 0;
 		let cartBeforeDiscount = 0;
@@ -76,36 +79,40 @@ const Cart = () => {
 		getTotalPrice();
 	}, [cart, getTotalPrice]);
 
-	const onChangeStep = (e, where, orderId) => {
-		const { pathname } = history.location;
-		if (e !== undefined) e.preventDefault();
+	const onChangeStep = useCallback(
+		(e, where, orderId) => {
+			const { pathname } = history.location;
+			if (e !== undefined) e.preventDefault();
 
-		if (where === 'back') {
-			setStep(step - 1);
-			if (pathname === '/cart/address') {
-				history.push('/cart');
-			} else if (pathname === '/cart/summary') {
-				history.push('/cart/address');
+			if (where === 'back') {
+				setStep(step - 1);
+				if (pathname === '/cart/address') {
+					history.push('/cart');
+				} else if (pathname === '/cart/summary') {
+					history.push('/cart/address');
+				}
+			} else if (where === 'begin') {
+				setStep(0);
+			} else if (where === 'push') {
+				setStep(step + 1);
+				if (pathname === '/cart') {
+					history.push('/cart/address');
+				} else if (pathname === '/cart/address') {
+					history.push('/cart/summary');
+				} else if (pathname === '/cart/summary') {
+					history.push({
+						pathname: '/cart/complete',
+						order: orderId,
+					});
+				}
 			}
-		} else if (where === 'begin') {
-			setStep(0);
-		} else if (where === 'push') {
-			setStep(step + 1);
-			if (pathname === '/cart') {
-				history.push('/cart/address');
-			} else if (pathname === '/cart/address') {
-				history.push('/cart/summary');
-			} else if (pathname === '/cart/summary') {
-				history.push({
-					pathname: '/cart/complete',
-					order: orderId,
-				});
-			}
-		}
-	};
+		},
+		[history, step]
+	);
 
+	scrollRef.current?.scrollIntoView();
 	return (
-		<CartWrapper>
+		<CartWrapper ref={scrollRef}>
 			<Steps current={step}>
 				<Steps.Item title="Details" />
 				<Steps.Item title="Address" />

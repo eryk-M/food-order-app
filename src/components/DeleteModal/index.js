@@ -17,7 +17,6 @@ import Button from 'components/Button';
 import Loader from 'components/Loader';
 
 import { AlertIcon } from 'components/Admin/Icons';
-// import { useAdminApi } from 'contexts/AdminAPIContext';
 
 const DeleteModal = ({
 	setOpen,
@@ -30,7 +29,6 @@ const DeleteModal = ({
 	secondText,
 	description,
 }) => {
-	// const { deleteAdminProduct } = useAdminApi();
 	const [error, setError] = useState('');
 	const [inputValue, setInputValue] = useState('');
 	const [isInitiallyChanged, setIsInitiallyChanged] = useState(false);

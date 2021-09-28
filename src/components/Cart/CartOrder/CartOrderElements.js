@@ -59,14 +59,6 @@ export const CartImage = styled.img`
 	object-fit: cover;
 `;
 
-export const CartQuantity = styled.button`
-	padding: 0.5rem;
-	margin: 0 0.5rem;
-	background-color: unset;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-	cursor: pointer;
-`;
-
 export const CartDelete = styled(ImBin)`
 	cursor: pointer;
 	font-size: 2rem;
@@ -184,4 +176,37 @@ export const CartCodeAdded = styled.span`
 	border-radius: 5px;
 	color: var(--color-white);
 	background-color: var(--color-green);
+`;
+
+export const CartQuantity = styled.input`
+	padding: 0.7rem;
+	margin: 0 0.5rem;
+	/* vertical-align: middle; */
+	background-color: unset;
+	/* border: 1px solid rgba(0, 0, 0, 0.2); */
+	cursor: pointer;
+
+	/* border: none; */
+	/* margin-bottom: 0.5rem; */
+`;
+
+export const CartQuantityInput = styled.input`
+	/* max-width: 5rem; */
+	max-width: 3rem;
+	text-align: center;
+	font-size: 1.6rem;
+	padding: 0.5rem;
+	border: none;
+	&:disabled {
+		background-color: inherit;
+		color: inherit;
+	}
+`;
+
+export const CartQuantityWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	/* border: 1px solid rgba(0, 0, 0, 0.1); */
+	display: inline-block;
+	padding: 0.2rem;
 `;

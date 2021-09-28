@@ -22,6 +22,8 @@ import {
 	CartPaymentIcon,
 	CartTotalDiscount,
 	CartCouponNote,
+	CartQuantityInput,
+	CartQuantityWrapper,
 } from './CartOrderElements';
 
 import { FormError, FormInput } from 'components/Form/FormElements';
@@ -93,15 +95,15 @@ const CartOrder = ({
 			setTotalPrice(discountPrice);
 			setDiscountAdded(true);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [
-		step,
-		onChangeStep,
 		discount,
 		discountAdded,
-		setTotalPrice,
-		totalPrice,
 		discountCalcFlag,
 		setDiscountAdded,
+		setTotalPrice,
+		step,
+		totalPrice,
 	]);
 
 	const onDeleteItem = (id) => {
@@ -111,7 +113,7 @@ const CartOrder = ({
 		});
 	};
 	const onChangeQuantity = (e, id) => {
-		const sign = e.currentTarget.innerText;
+		const sign = e.currentTarget.value;
 		switch (sign) {
 			case '+':
 				dispatch({
@@ -149,12 +151,12 @@ const CartOrder = ({
 			<CartTable>
 				<CartList>
 					{cart.length >= 1 && (
-						<CartItem backgroundColor="#93949417" fontW="bold">
+						<CartItem backgroundColor="#93949417">
 							<CartColumn></CartColumn>
 							<CartColumn>Name</CartColumn>
 							<CartColumn>Price</CartColumn>
 							<CartColumn>Quantity</CartColumn>
-							<CartColumn display="none">Total</CartColumn>
+							<CartColumn display="none">Subtotal</CartColumn>
 							<CartColumn>Delete</CartColumn>
 						</CartItem>
 					)}
@@ -182,17 +184,27 @@ const CartOrder = ({
 									: el.price.toFixed(2)}
 							</CartColumn>
 							<CartColumn>
-								<CartQuantity
-									onClick={(e) => onChangeQuantity(e, el.id)}
-								>
-									-
-								</CartQuantity>
-								{el.quantity}
-								<CartQuantity
-									onClick={(e) => onChangeQuantity(e, el.id)}
-								>
-									+
-								</CartQuantity>
+								<CartQuantityWrapper>
+									<CartQuantity
+										type="button"
+										value="-"
+										onClick={(e) => onChangeQuantity(e, el.id)}
+									/>
+									<CartQuantityInput
+										type="text"
+										step="1"
+										min="0"
+										size="4"
+										value={el.quantity}
+										disabled={true}
+										inputMode="numeric"
+									/>
+									<CartQuantity
+										type="button"
+										value="+"
+										onClick={(e) => onChangeQuantity(e, el.id)}
+									/>
+								</CartQuantityWrapper>
 							</CartColumn>
 							<CartColumn display="none">
 								$
@@ -209,7 +221,7 @@ const CartOrder = ({
 			</CartTable>
 			<CartCouponForm onSubmit={handleSubmit(onSubmit)}>
 				{discountAdded && (
-					<Alert success right="-17rem" top="1rem">
+					<Alert success right="-17rem" top="1rem" noanimate>
 						Coupon added!
 					</Alert>
 				)}
@@ -274,10 +286,10 @@ const CartOrder = ({
 				<CartTotalContent>
 					{discount && !loading && (
 						<CartTotalDiscount>
-							<strong>Discount:</strong>&nbsp; {discount}%
+							Discount:&nbsp; {discount}%
 						</CartTotalDiscount>
 					)}
-					<strong>Total price:</strong>&nbsp; ${totalPrice.toFixed(2)}
+					Total price:&nbsp; ${totalPrice.toFixed(2)}
 				</CartTotalContent>
 				<Button
 					disabled={!cart.length >= 1 || !payment}

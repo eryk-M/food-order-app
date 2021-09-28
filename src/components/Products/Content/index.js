@@ -8,16 +8,22 @@ const Content = ({
 	data,
 	searchQuery: { sort, query, category, minPrice, maxPrice },
 }) => {
-	//TODO: SORT BY POPULARITY
+	//SORTING BY POPULARITY:
+	//Popularity of product is incrementing when user order product or add review
 	const sortFunction = (a, b) => {
-		if (sort === 'default') {
-			return true;
-		} else if (sort === 'low') {
-			return a.price - b.price;
-		} else if (sort === 'high') {
-			return b.price - a.price;
-		} else if (sort === 'average') {
-			return b.avgRating - a.avgRating;
+		switch (sort) {
+			case 'default':
+				return;
+			case 'low':
+				return a.price - b.price;
+			case 'high':
+				return b.price - a.price;
+			case 'average':
+				return b.avgRating - a.avgRating;
+			case 'popularity':
+				return b.popularity - a.popularity;
+			default:
+				break;
 		}
 	};
 

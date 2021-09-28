@@ -10,6 +10,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import NavBar from './components/NavBar';
 import NavBarBurger from './components/NavBurger';
+import Footer from './components/Footer';
 
 import Login from './pages/Login';
 import User from './pages/User';
@@ -64,6 +65,7 @@ function App() {
 						<NavBarBurger hidden={hidden} toggle={toggleClass} />
 						<GlobalStyle />
 						<Switch>{routes}</Switch>
+						<Footer />
 					</Router>
 				</APIProvider>
 			</CartProvider>

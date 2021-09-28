@@ -4,6 +4,7 @@ export const TrackerFormContainer = styled.div`
 	max-width: 80rem;
 	margin: 0 auto;
 	padding: 0 2rem;
+	margin-bottom: 10rem;
 `;
 export const TrackerFormWrapper = styled.div`
 	max-width: 50rem;

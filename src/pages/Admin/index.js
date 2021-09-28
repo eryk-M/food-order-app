@@ -19,7 +19,6 @@ const AdminContentContainer = styled.div`
 
 const AdminPage = () => {
 	const [hidden, setHidden] = useState(false);
-
 	return (
 		<>
 			<TopBar setHidden={setHidden} hidden={hidden} />

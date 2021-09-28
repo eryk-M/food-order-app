@@ -1,15 +1,12 @@
 import styled from 'styled-components/macro';
 
-import ImgBg from '../../images/header-burger-2.jpg';
+import { motion } from 'framer-motion';
 
-export const HeroContainer = styled.header`
-	background-image: url(${ImgBg});
-	background-position: center;
-	background-size: cover;
+export const HeroImageWrapper = styled(motion.div)`
 	height: 100vh;
 	width: 100%;
-	position: relative;
-
+	position: absolute;
+	z-index: 0;
 	&::after {
 		content: '';
 		position: absolute;
@@ -19,6 +16,22 @@ export const HeroContainer = styled.header`
 		right: 0;
 		bottom: 0;
 	}
+`;
+
+export const HeroIMG = styled.img`
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	z-index: 0;
+	position: absolute;
+	top: 0;
+`;
+
+export const HeroContainer = styled.header`
+	background-position: center;
+	background-size: cover;
+	height: 100vh;
+	background-color: black;
 `;
 
 export const HeroContent = styled.div`
@@ -61,4 +74,12 @@ export const HeroP = styled.p`
 	margin-bottom: 2rem;
 	color: ${(props) => props.color};
 	font-weight: 400;
+`;
+
+export const HeroShape = styled.img`
+	position: absolute;
+	z-index: 3;
+	width: 100%;
+	bottom: 0rem;
+	left: 0;
 `;

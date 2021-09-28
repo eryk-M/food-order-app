@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 
-import { db, storage } from '../firebase';
+import { db, storage, increment } from '../firebase';
 
 const APIContext = createContext();
 
@@ -112,8 +112,11 @@ export function APIProvider({ children }) {
 		rating
 	) => {
 		try {
+			await productsRef
+				.doc(String(productId))
+				.update({ popularity: increment });
 			await reviewsRef
-				.doc(productId.toString())
+				.doc(String(productId))
 				.collection('reviews')
 				.add({
 					userId: userId,
@@ -126,7 +129,7 @@ export function APIProvider({ children }) {
 			let avgRating = 0;
 			let size;
 			const response = await reviewsRef
-				.doc(productId.toString())
+				.doc(String(productId))
 				.collection('reviews')
 				.get();
 			response.docs.forEach((doc) => {
@@ -137,16 +140,15 @@ export function APIProvider({ children }) {
 			});
 			size = response.size;
 			avgRating = avgRating / response.docs.length;
-			reviewsRef.doc(productId.toString()).set({
+			reviewsRef.doc(String(productId)).set({
 				avgRating: avgRating,
 				ratingCount: size,
 			});
-			productsRef.doc(productId.toString()).update({
+			productsRef.doc(String(productId)).update({
 				avgRating: avgRating,
 				ratingCount: size,
 			});
 		} catch (err) {
-			console.error(err);
 			throw new Error('Something went wrong! Try again');
 		}
 	};
@@ -161,6 +163,11 @@ export function APIProvider({ children }) {
 		payment
 	) => {
 		try {
+			orderInfo.forEach(async (el) => {
+				await productsRef
+					.doc(String(el.id))
+					.update({ popularity: increment });
+			});
 			await ordersRef.add({
 				orderId: orderId,
 				userId: userId ?? '',
@@ -261,7 +268,7 @@ export function APIProvider({ children }) {
 // async function getReviews(productId) {
 // 	let reviews = [];
 // 	await reviewsRef
-// 		.doc(productId.toString())
+// 		.doc(productId)
 // 		.collection('reviews')
 // 		.orderBy('date', 'desc')
 // 		.get()

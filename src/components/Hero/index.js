@@ -6,12 +6,23 @@ import {
 	HeroP,
 	HeroContent,
 	HeroWrapper,
+	HeroShape,
+	HeroImageWrapper,
+	HeroIMG,
 } from './HeroElements';
 import ButtonLink from '../ButtonLink';
-
+import Shape from 'images/shape.png';
+import ImgBg from '../../images/header-burger-2.jpg';
 const Hero = () => {
+	const height = window.outerHeight;
 	return (
-		<HeroContainer>
+		<HeroContainer height={height}>
+			<HeroImageWrapper
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1, transition: { duration: 0.5 } }}
+			>
+				<HeroIMG src={ImgBg} />
+			</HeroImageWrapper>
 			<HeroWrapper>
 				<HeroContent>
 					<HeroP
@@ -25,6 +36,7 @@ const Hero = () => {
 					<ButtonLink to="/products">Order now!</ButtonLink>
 				</HeroContent>
 			</HeroWrapper>
+			<HeroShape src={Shape} alt="Shape" />
 		</HeroContainer>
 	);
 };

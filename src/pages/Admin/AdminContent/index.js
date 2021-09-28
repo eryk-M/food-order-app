@@ -7,6 +7,7 @@ import Users from './Users';
 import Dashboard from './Dashboard';
 import Orders from './Orders';
 import Coupons from './Coupons';
+import Quiz from './Quiz';
 
 import Info from '../../../components/Admin/Info';
 const AdminContent = () => {
@@ -19,6 +20,7 @@ const AdminContent = () => {
 				<Route path="/admin/users" exact component={Users} />
 				<Route path="/admin/orders" component={Orders} />
 				<Route path="/admin/coupons" component={Coupons} />
+				<Route path="/admin/quiz" component={Quiz} />
 			</Switch>
 		</>
 	);

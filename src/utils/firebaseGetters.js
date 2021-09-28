@@ -32,6 +32,9 @@ export const validateCouponCode = (code) =>
 
 export const getCoupons = () => db.collection('coupons');
 
+export const getTopProducts = () =>
+	db.collection('products').orderBy('popularity', 'desc').limit(3);
+
 // ADMIN PANEL //
 export const getAdminAllProducts = () =>
 	db.collection('adminProducts').orderBy('id');
