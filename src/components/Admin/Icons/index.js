@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 
-import { TiTick } from 'react-icons/ti';
+import { TiTick, TiDeleteOutline } from 'react-icons/ti';
 import { BiDollarCircle, BiCreditCardAlt } from 'react-icons/bi';
 import { ImCross } from 'react-icons/im';
 import { HiOutlineMinusCircle, HiOutlineCash } from 'react-icons/hi';
@@ -8,6 +8,7 @@ import {
 	RiArrowUpDownLine,
 	RiArrowUpLine,
 	RiArrowDownLine,
+	RiDragMove2Fill,
 } from 'react-icons/ri';
 import {
 	FiEdit,
@@ -19,6 +20,7 @@ import {
 	AiOutlineInfoCircle,
 	AiOutlinePrinter,
 } from 'react-icons/ai';
+import { MdDragHandle } from 'react-icons/md';
 
 export const TickIcon = styled(TiTick)`
 	font-size: 1.8rem;
@@ -122,4 +124,27 @@ export const PrinterIcon = styled(AiOutlinePrinter)`
 	vertical-align: middle;
 	margin-right: 1rem;
 	cursor: pointer;
+`;
+
+export const DragIcon = styled(RiDragMove2Fill)`
+	font-size: 8rem;
+	opacity: 0.3;
+`;
+
+export const CrossDeleteIcon = styled(TiDeleteOutline)`
+	font-size: 4rem;
+	cursor: pointer;
+	vertical-align: middle;
+	/* margin-left: auto; */
+	color: var(--color-red);
+	display: inline-block;
+	position: absolute;
+	right: 1rem;
+	top: 0.5rem;
+`;
+
+export const DragLinesIcon = styled(MdDragHandle)`
+	font-size: 2rem;
+	margin-right: 1rem;
+	vertical-align: middle;
 `;

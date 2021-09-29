@@ -5,6 +5,9 @@ import UserAccount from 'pages/User/UserAccount';
 import UserPassword from 'pages/User/UserPassword';
 import UserOrders from 'pages/User/UserOrders';
 import UserNav from 'pages/User/UserNav';
+import UserQuizes from 'pages/User/UserQuizes';
+import Quiz from 'components/Quiz';
+import Summary from 'components/Quiz/Summary';
 
 import {
 	UserContainer,
@@ -56,6 +59,21 @@ const User = () => {
 						path="/user/orders"
 						exact
 						component={UserOrders}
+					/>
+					<PrivateRoute
+						path="/user/quizes"
+						exact
+						component={UserQuizes}
+					/>
+					<PrivateRoute
+						path="/user/quizes/:id"
+						exact
+						component={Quiz}
+					/>
+					<PrivateRoute
+						path="/user/quizes/:id/summary"
+						exact
+						component={Summary}
 					/>
 				</UserContent>
 			</UserContainer>

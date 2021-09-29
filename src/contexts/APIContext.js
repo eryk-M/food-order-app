@@ -16,6 +16,7 @@ export function APIProvider({ children }) {
 	const reviewsRef = db.collection('reviews');
 	const couponsRef = db.collection('coupons');
 	const ordersRef = db.collection('orders');
+	const quizRef = db.collection('quizes');
 	// HELPER AT START TO SET COLLECTION OF PRODUCTS
 
 	const setItems = (data, admin) => {
@@ -183,7 +184,7 @@ export function APIProvider({ children }) {
 		}
 	};
 
-	const validateDiscountCode = async (code) => {
+	const validateDiscountCode = async (code, totalPrice) => {
 		return await couponsRef.where('code', '==', code).get();
 	};
 
@@ -191,10 +192,11 @@ export function APIProvider({ children }) {
 		await ordersRef.doc(id).update({ step: step });
 	};
 
-	const addCoupon = async (code, discount) => {
+	const addCoupon = async (code, discount, fromPrice) => {
 		await couponsRef.add({
 			code: code.toUpperCase(),
 			discount: Number(discount),
+			fromPrice: Number(fromPrice),
 		});
 	};
 
@@ -211,6 +213,18 @@ export function APIProvider({ children }) {
 		});
 	};
 
+	const addQuiz = async (questions, data) => {
+		await quizRef.add({
+			title: data.title,
+			questions: questions,
+			coupon: {
+				code: data.code,
+				discount: data.discount,
+				fromPrice: data.fromPrice,
+			},
+		});
+	};
+
 	const value = {
 		setItems,
 		updateUserInfo,
@@ -221,6 +235,7 @@ export function APIProvider({ children }) {
 		addCoupon,
 		deleteCoupon,
 		deleteOrders,
+		addQuiz,
 	};
 
 	return (

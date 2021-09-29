@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 
 import { Droppable } from 'react-beautiful-dnd';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { QuestionList } from './ColumnElements';
+import { QuestionList, IconWrapper } from './ColumnElements';
 
 import Question from 'components/Admin/Question';
-
-const Column = ({ initialData, setInitialData }) => {
+import { DragIcon } from 'components/Admin/Icons';
+const Column = ({ initialData, setInitialData, onDelete }) => {
 	// const [state, setState] = useState(initialData);
 
 	const onDragEnd = (result) => {
@@ -43,7 +43,6 @@ const Column = ({ initialData, setInitialData }) => {
 
 		setInitialData(newState);
 	};
-	console.log(initialData);
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			{initialData.columnOrder.map((columnId) => {
@@ -59,8 +58,11 @@ const Column = ({ initialData, setInitialData }) => {
 								ref={provided.innerRef}
 								isDraggingOver={snapshot.isDraggingOver}
 							>
-								<Question questions={questions} />
+								<Question questions={questions} onDelete={onDelete} />
 								{provided.placeholder}
+								<IconWrapper>
+									<DragIcon />
+								</IconWrapper>
 							</QuestionList>
 						)}
 					</Droppable>

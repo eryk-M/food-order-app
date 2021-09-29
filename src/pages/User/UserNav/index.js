@@ -9,6 +9,7 @@ import {
 	UserNavIconBriefcase,
 	UserNavIconUser,
 	UserNavIconLogout,
+	UserNavQuestionMark,
 } from './UserNavElements';
 
 import Button from 'components/Button';
@@ -64,6 +65,15 @@ const UserNav = () => {
 					>
 						<UserNavIconBriefcase />
 						My orders
+					</UserNavLink>
+				</UserNavItem>
+				<UserNavItem>
+					<UserNavLink
+						to="/user/quizes"
+						activeClassName="active-user-nav"
+					>
+						<UserNavQuestionMark />
+						Quizes
 					</UserNavLink>
 				</UserNavItem>
 			</UserNavList>

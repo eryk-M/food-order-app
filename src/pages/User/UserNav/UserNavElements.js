@@ -8,7 +8,7 @@ import {
 	BiLogOutCircle,
 } from 'react-icons/bi';
 import { RiLockPasswordLine } from 'react-icons/ri';
-
+import { AiOutlineQuestionCircle } from 'react-icons/ai';
 export const UserSideNav = styled.nav`
 	display: flex;
 	flex-direction: column;
@@ -27,6 +27,8 @@ export const UserNavIconUser = styled(BiUser)``;
 export const UserNavIconBriefcase = styled(BiBriefcaseAlt)``;
 
 export const UserNavIconPassword = styled(RiLockPasswordLine)``;
+
+export const UserNavQuestionMark = styled(AiOutlineQuestionCircle)``;
 
 export const UserNavIconLogout = styled(BiLogOutCircle)`
 	margin-right: 1rem;

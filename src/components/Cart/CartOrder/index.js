@@ -78,6 +78,7 @@ const CartOrder = ({
 		register,
 		handleSubmit,
 		formState: { errors },
+		setError,
 	} = useForm({
 		resolver: yupResolver(validationSchema),
 	});
@@ -142,6 +143,12 @@ const CartOrder = ({
 		setLoading(true);
 		const response = await validateDiscountCode(data.discount);
 		const docs = response.docs[0].data();
+		if (docs.fromPrice > totalPrice) {
+			setLoading(false);
+			return setError('discount', {
+				message: `This code is available from $${docs.fromPrice}`,
+			});
+		}
 		setDiscount(docs.discount);
 		setDiscountAdded(true);
 		setLoading(false);
@@ -247,7 +254,7 @@ const CartOrder = ({
 				)}
 			</CartCouponForm>
 			{errors.discount && (
-				<FormError display="inline-block">
+				<FormError display="block">
 					{errors.discount.message}
 				</FormError>
 			)}

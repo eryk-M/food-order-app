@@ -35,13 +35,8 @@ const routes = (
 		<Route path="/food-tracker" component={Tracker} />
 		<Route path="/products" component={ProductsFilter} />
 
-		<PrivateRoute path="/user" exact component={User} />
-		<PrivateRoute
-			path="/user/change-password"
-			exact
-			component={User}
-		/>
-		<PrivateRoute path="/user/orders" exact component={User} />
+		<PrivateRoute path="/user" component={User} />
+
 		<AdminAPIProvider>
 			<PrivateRoute path="/admin" component={AdminPage} />
 		</AdminAPIProvider>

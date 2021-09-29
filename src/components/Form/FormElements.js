@@ -104,13 +104,14 @@ export const FormInput = styled.input`
 export const FormTextArea = styled.textarea`
 	resize: none;
 	padding: 1rem;
-	height: 20rem;
+	height: ${(props) => props.height ?? '20rem'};
 	width: 100%;
 	border-radius: 0.5rem;
 	color: #666;
 	outline: 0;
 	font-size: 1.6rem;
 	margin-top: 1rem;
+	margin-bottom: ${(props) => props.marginbottom};
 	border: ${(props) =>
 		props.error ? '1px solid var(--color-red)' : ''};
 `;

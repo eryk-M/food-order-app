@@ -36,6 +36,7 @@ import { useApi } from 'contexts/APIContext';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Discount from 'components/Form/Discount';
 const Coupons = () => {
 	const { data, loading } = useFirestoreQuery(getCoupons());
 	const { addCoupon, deleteCoupon } = useApi();
@@ -50,6 +51,13 @@ const Coupons = () => {
 				'Number must be from 1 to 99',
 				(value) => value > 0 && value < 100
 			),
+		fromPrice: Yup.string()
+			.required('Price is required')
+			.test(
+				'fromPrice',
+				'Number must be from 1 to 200',
+				(value) => value > 0 && value < 200
+			),
 		code: Yup.string()
 			.required('Code is required')
 			.min(5, 'Minimum 5 characters')
@@ -58,7 +66,8 @@ const Coupons = () => {
 				const response = await validateCouponCode(
 					value.toUpperCase()
 				).get();
-				return response.empty;
+
+				return response?.empty;
 			}),
 	});
 
@@ -69,10 +78,10 @@ const Coupons = () => {
 		reset,
 	} = useForm({ resolver: yupResolver(validationSchema) });
 
-	const onSubmit = async (data) => {
+	const onSubmit = async ({ code, discount, fromPrice }) => {
 		setIsLoading(true);
 		reset();
-		await addCoupon(data.code, data.discount);
+		await addCoupon(code, discount, fromPrice);
 		setIsLoading(false);
 		setShowSuccess(true);
 
@@ -83,7 +92,6 @@ const Coupons = () => {
 
 	const onDelete = async (code) => {
 		await deleteCoupon(code);
-		console.log('deleted');
 	};
 	return (
 		<MainContainer maxwidth="70rem" minwidth="none" minheight="65rem">
@@ -99,11 +107,13 @@ const Coupons = () => {
 						<TableRow backgroundColor="#93949417" fontW="bold">
 							<TableCell>Code</TableCell>
 							<TableCell>Percentage</TableCell>
+							<TableCell>From</TableCell>
 							<TableCell>Actions</TableCell>
 						</TableRow>
 						<TableRow>
 							<TableCell>DISCOUNT20</TableCell>
 							<TableCell>20%</TableCell>
+							<TableCell>$1</TableCell>
 							<TableCell></TableCell>
 						</TableRow>
 						{data &&
@@ -113,6 +123,7 @@ const Coupons = () => {
 										<TableRow key={i}>
 											<TableCell>{el.code}</TableCell>
 											<TableCell>{el.discount}%</TableCell>
+											<TableCell>${el.fromPrice}</TableCell>
 											<TableCell>
 												<TableButton
 													primary
@@ -135,7 +146,7 @@ const Coupons = () => {
 				)}
 				<CouponFormWrapper>
 					<Form onSubmit={handleSubmit(onSubmit)}>
-						<FormGroup flex>
+						{/* <FormGroup flex>
 							<FormElement>
 								<FormLabel>Coupon code</FormLabel>
 								<FormInput
@@ -159,7 +170,24 @@ const Coupons = () => {
 									<FormError>{errors.discount.message}</FormError>
 								)}
 							</FormElement>
-						</FormGroup>
+							<FormElement marginleft="2rem">
+								<FormLabel>From price</FormLabel>
+								<FormInput
+									{...register('fromPrice')}
+									type="number"
+									error={errors.fromPrice}
+									disabled={isLoading}
+								/>
+								{errors.fromPrice && (
+									<FormError>{errors.fromPrice.message}</FormError>
+								)}
+							</FormElement>
+						</FormGroup> */}
+						<Discount
+							isLoading={isLoading}
+							register={register}
+							errors={errors}
+						/>
 						<FormButton loading={isLoading} text="Add coupon" />
 					</Form>
 				</CouponFormWrapper>

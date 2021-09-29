@@ -35,6 +35,8 @@ export const getCoupons = () => db.collection('coupons');
 export const getTopProducts = () =>
 	db.collection('products').orderBy('popularity', 'desc').limit(3);
 
+export const getQuizes = () => db.collection('quizes');
+
 // ADMIN PANEL //
 export const getAdminAllProducts = () =>
 	db.collection('adminProducts').orderBy('id');

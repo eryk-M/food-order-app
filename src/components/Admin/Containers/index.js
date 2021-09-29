@@ -7,6 +7,7 @@ export const MainContainer = styled.div`
 	border-radius: 5px;
 	min-width: ${(props) => props.minwidth ?? '80%'};
 	margin-right: 2rem;
+	margin: ${(props) => (props.center ? '0 auto' : '0 2rem 0 0')};
 	box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
 	position: relative;
 	width: ${(props) => props.width};
