@@ -14,7 +14,6 @@ import {
 } from './QuizElements';
 import { useApi } from 'contexts/APIContext';
 import { useAuth } from 'contexts/AuthContext';
-
 import Loader from 'components/Loader';
 import { LoaderWrapper } from 'pages/Admin/AdminContent/Orders/Order/OrderElements';
 
@@ -144,7 +143,7 @@ const Quiz = (props) => {
 					{mixAnswers &&
 						mixAnswers.map((el, i) => (
 							<AnswerButton
-								key={i}
+								key={el.id}
 								elementId={el.id}
 								selectedAnswer={selectedAnswer}
 								onClick={() => handleSelect(el.id)}

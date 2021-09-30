@@ -34,6 +34,9 @@ export function AuthProvider({ children }) {
 				city: '',
 				zip: '',
 				orders: [],
+				quizes: [],
+				usedCoupons: [],
+				coupons: [],
 			});
 			const user = auth.currentUser;
 			await user.updateProfile({ displayName: username });

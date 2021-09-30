@@ -10,6 +10,6 @@ export const TopProductsContainer = styled.section`
 export const TopProductsWrapper = styled.div`
 	display: flex;
 	justify-content: ${(props) =>
-		props.loading ? 'center' : 'space-between'};
+		props.loading === 'true' ? 'center' : 'space-between'};
 	margin-top: 5rem;
 `;

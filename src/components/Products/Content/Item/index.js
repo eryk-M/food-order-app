@@ -56,9 +56,7 @@ const Item = ({ el }) => {
 
 			<ItemImageWrapper discount={el.discountPrice !== 0}>
 				<Link to={`/product/${el.id}`}>
-					<LazyLoad offset={100}>
-						<ItemImage src={el.img} alt={el.alt} />
-					</LazyLoad>
+					<ItemImage src={el.img} alt={el.alt} />
 				</Link>
 			</ItemImageWrapper>
 			<ItemInfo>

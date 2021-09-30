@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-
+import { motion } from 'framer-motion';
 import quizBg from 'images/quiz_bg.jpg';
 
 export const QuizContainer = styled.div`
@@ -45,7 +45,7 @@ export const AnswerP = styled.p`
 	text-align: center;
 `;
 
-export const AnswersContainer = styled.div`
+export const AnswersContainer = styled(motion.div)`
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 	grid-gap: 3rem;
@@ -66,7 +66,6 @@ export const AnswerButton = styled.button`
 	cursor: pointer;
 	white-space: normal;
 	word-wrap: break-word;
-
 	&:disabled {
 		opacity: 0.5;
 	}

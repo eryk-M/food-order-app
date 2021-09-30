@@ -69,6 +69,7 @@ const Add = () => {
 		formState: { errors },
 		reset,
 		watch,
+		clearErrors,
 	} = useForm({ resolver: yupResolver(validationSchema) });
 
 	const validationDiscount = Yup.object().shape({
@@ -79,10 +80,14 @@ const Add = () => {
 			.trim(),
 		discount: Yup.string()
 			.required('Discount is required')
+			.trim()
 			.test(
 				'discount',
 				'Number must be from 1 to 99',
 				(value) => value > 0 && value < 100
+			)
+			.test('numbers', 'Only digits are allowed', (value) =>
+				value ? /[0-9]/.test(value) : true
 			),
 		fromPrice: Yup.string()
 			.required('Price is required')
@@ -90,6 +95,10 @@ const Add = () => {
 				'fromPrice',
 				'Number must be from 1 to 200',
 				(value) => value > 0 && value < 200
+			)
+			.trim()
+			.test('numbers', 'Only digits are allowed', (value) =>
+				value ? /[0-9]/.test(value) : true
 			),
 		code: Yup.string()
 			.required('Code is required')
@@ -155,9 +164,11 @@ const Add = () => {
 			};
 		});
 		reset();
+		clearErrors();
 	};
 	const onDelete = (id) => {
-		delete initialData.questions[`${id}`];
+		const clonedQuestions = initialData.questions;
+		delete clonedQuestions[`${id}`];
 		let questions = initialData.columns[
 			'column-1'
 		].questionIds.filter((el) => el !== id);
@@ -171,6 +182,7 @@ const Add = () => {
 						questionIds: questions,
 					},
 				},
+				questions: { ...clonedQuestions },
 			};
 		});
 	};
@@ -183,6 +195,7 @@ const Add = () => {
 			try {
 				setIsLoading(true);
 				await addQuiz(initialData.questions, data);
+
 				await addCoupon(
 					data.code,
 					data.discount,
@@ -341,7 +354,7 @@ const Add = () => {
 					<Form onSubmit={handleSubmitDiscount(onSubmitDiscount)}>
 						<FormLabel>Short title</FormLabel>
 						<FormInput
-							loading={isLoading}
+							loading={String(isLoading)}
 							error={errorsDiscount.title}
 							{...registerDiscount('title')}
 						/>

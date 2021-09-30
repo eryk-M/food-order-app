@@ -21,7 +21,7 @@ const TopProducts = () => {
 				Top products
 			</MainPageHeading>
 
-			<TopProductsWrapper loading={loading}>
+			<TopProductsWrapper loading={String(loading)}>
 				{data && data.map((el) => <TopProduct key={el.id} el={el} />)}
 				{loading && (
 					<LoaderContainer height="15rem">

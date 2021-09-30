@@ -8,16 +8,8 @@ import {
 	FormGroup,
 } from 'components/Form/FormElements';
 const Discount = ({ isLoading, register, errors }) => {
-	const preventKeys = (e) => {
-		if (
-			(e.which !== 8 && e.which !== 0 && e.which < 48) ||
-			e.which > 57
-		) {
-			e.preventDefault();
-		}
-	};
 	return (
-		<FormGroup flex>
+		<FormGroup flex justify="space-between">
 			<FormElement>
 				<FormLabel>Coupon code</FormLabel>
 				<FormInput
@@ -31,10 +23,9 @@ const Discount = ({ isLoading, register, errors }) => {
 				<FormLabel>Discount percent</FormLabel>
 				<FormInput
 					{...register('discount')}
-					type="number"
+					type="text"
 					error={errors.discount}
 					disabled={isLoading}
-					onKeyDown={(e) => preventKeys(e)}
 				/>
 				{errors.discount && (
 					<FormError>{errors.discount.message}</FormError>
@@ -44,10 +35,9 @@ const Discount = ({ isLoading, register, errors }) => {
 				<FormLabel>From price</FormLabel>
 				<FormInput
 					{...register('fromPrice')}
-					type="number"
+					type="text"
 					error={errors.fromPrice}
 					disabled={isLoading}
-					onKeyDown={(e) => preventKeys(e)}
 				/>
 				{errors.fromPrice && (
 					<FormError>{errors.fromPrice.message}</FormError>

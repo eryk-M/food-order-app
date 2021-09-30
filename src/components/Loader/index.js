@@ -9,7 +9,12 @@ const LoaderWrapper = styled.div`
 	align-items: center;
 	/* display: inline-block; */
 	vertical-align: middle;
+	margin: ${(props) => (props.margincenter ? '4rem 0' : '')};
 	margin-left: ${(props) => props.marginleft ?? ''};
+	min-height: ${(props) => {
+		if (props.high) return '20rem';
+		else if (props.veryhigh) return '50rem';
+	}};
 	& .lds-ring div {
 		border-color: ${(props) =>
 			props.primary

@@ -33,7 +33,9 @@ const Question = ({ questions, onDelete }) => {
 									- {el.correct.answer}
 								</QuestionAnswerP>
 								{el.incorrect.map((el) => (
-									<QuestionAnswerP>- {el.answer}</QuestionAnswerP>
+									<QuestionAnswerP key={el.id}>
+										- {el.answer}
+									</QuestionAnswerP>
 								))}
 							</QuestionAswers>
 						</QuestionElement>

@@ -11,7 +11,7 @@ export const TopBarNav = styled.nav`
 	border-bottom: 1px solid #dee2e6;
 	padding: 2rem;
 	transition: margin-left 0.2s ease-in-out;
-	z-index: 5;
+	z-index: 5001;
 `;
 
 export const TopBarList = styled.ul`

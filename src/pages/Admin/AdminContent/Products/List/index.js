@@ -22,7 +22,7 @@ import {
 	SaleIcon,
 	CrossIcon,
 } from 'components/Admin/Icons';
-
+import Pagination from 'components/Pagination';
 import { Alert } from 'components/Alert';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAdminAllProducts } from 'utils/firebaseGetters';
@@ -34,6 +34,18 @@ const List = () => {
 	const [open, setOpen] = useState(false);
 	const [id, setId] = useState('');
 	const [showSuccess, setShowSuccess] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [itemsPerPage, setItemsPerPage] = useState(10);
+
+	const indexOfLastItem = currentPage * itemsPerPage;
+	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+	// Change page
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+	if (query.length >= 3) {
+		setItemsPerPage(1000);
+	}
 
 	return (
 		<>
@@ -55,12 +67,21 @@ const List = () => {
 					</Alert>
 				)}
 				<Search
+					query={query}
 					setQuery={setQuery}
 					width="20rem"
 					placeholder="Search by name"
 				/>
+				<Pagination
+					top="1.3rem"
+					itemsPerPage={itemsPerPage}
+					totalItems={data?.length}
+					paginate={paginate}
+					currentPage={currentPage}
+				/>
 				<Table>
 					<TableBody>
+						{console.log(data?.length)}
 						<TableRow backgroundColor="#93949417" fontW="bold">
 							<TableCell width="8rem">ID</TableCell>
 							<TableCell width="12rem">Image</TableCell>
@@ -71,13 +92,15 @@ const List = () => {
 							<TableCell width="10rem">Price</TableCell>
 							<TableCell>Actions</TableCell>
 						</TableRow>
+						{console.log(data)}
 						{data &&
 							data
+								.slice(indexOfFirstItem, indexOfLastItem)
 								.filter((el) =>
 									el.name.toLowerCase().includes(query.toLowerCase())
 								)
 								.map((el, i) => (
-									<TableRow key={i}>
+									<TableRow key={el.id}>
 										<TableCell>{el.id}</TableCell>
 										<TableCell>
 											<img

@@ -55,7 +55,7 @@ const CartOrder = ({
 	setDiscountCalcFlag,
 	discountAdded,
 	setDiscountAdded,
-	setDiscountCode,
+	setQuizCode,
 }) => {
 	const { validateDiscountCode, validateQuizCode } = useApi();
 	const { currentUser } = useAuth();
@@ -181,7 +181,11 @@ const CartOrder = ({
 				});
 			}
 			// await setCouponAsUsed(currentUser.uid, data.discount);
-			setDiscountCode(data.discount);
+
+			if (docs.quiz) {
+				setQuizCode(data.discount);
+			}
+
 			setDiscount(docs.discount);
 			setDiscountAdded(true);
 			setLoading(false);

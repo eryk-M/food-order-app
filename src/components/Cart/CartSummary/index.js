@@ -34,7 +34,10 @@ const CartSummary = ({
 	currentUserId,
 	discount,
 	priceBeforeDiscount,
-	discountCode,
+	quizCode,
+	setDiscountAdded,
+	setQuizCode,
+	setDiscount,
 }) => {
 	const {
 		state: { cart, address, totalPrice, payment },
@@ -85,14 +88,20 @@ const CartSummary = ({
 				date,
 				payment
 			);
-			await setCouponAsUsed(currentUser.uid, discountCode);
+			if (quizCode) {
+				await setCouponAsUsed(currentUser.uid, quizCode);
+			}
+			setDiscountAdded(false);
+			setQuizCode('');
 			setLoading(false);
+			setDiscount(null);
 			dispatch({
 				type: 'RESET_CART',
 			});
 			localStorage.removeItem('cart');
 			onChangeStep(e, 'push', orderId);
-		} catch {
+		} catch (error) {
+			console.error(error);
 			alert('Something went wrong! Please try again!');
 			setLoading(false);
 			if (window.confirm) {

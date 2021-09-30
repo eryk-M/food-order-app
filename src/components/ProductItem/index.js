@@ -20,7 +20,7 @@ import {
 } from './ProductItemElements';
 
 import { Alert } from '../Alert';
-
+import Loader from 'components/Loader';
 import { CartContext } from 'contexts/CartContext';
 import StarRating from '../Reviews/FormReview/StarRating';
 
@@ -34,7 +34,7 @@ const ProductItem = ({ props }) => {
 		state: { cart },
 		dispatch,
 	} = useContext(CartContext);
-	const { data } = useFirestoreQuery(
+	const { data, loading } = useFirestoreQuery(
 		getOneProduct(Number(props.match.params.id))
 	);
 
@@ -80,6 +80,7 @@ const ProductItem = ({ props }) => {
 
 	return (
 		<>
+			{loading && <Loader margincenter veryhigh primary />}
 			{currentItem && (
 				<>
 					<ProductContainer>

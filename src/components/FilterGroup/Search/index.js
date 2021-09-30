@@ -6,10 +6,10 @@ import {
 	FormElement,
 } from 'components/Form/FormElements';
 import { BsSearch } from 'react-icons/bs';
-import { SearchContainer } from './SearchElements';
-const Search = ({ setQuery, width, placeholder }) => {
+import { SearchContainer, SearchHint } from './SearchElements';
+const Search = ({ query, setQuery, width, placeholder }) => {
 	return (
-		<SearchContainer width={width}>
+		<SearchContainer width={width} query={query}>
 			<Form onSubmit={(e) => e.preventDefault()}>
 				<FormElement>
 					<BsSearch className="search-icon" />
@@ -20,6 +20,9 @@ const Search = ({ setQuery, width, placeholder }) => {
 							setQuery(e.currentTarget.value);
 						}}
 					/>
+					<SearchHint query={query}>
+						Type at least 3 letters
+					</SearchHint>
 				</FormElement>
 			</Form>
 		</SearchContainer>

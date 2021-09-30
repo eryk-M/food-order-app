@@ -1,7 +1,7 @@
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import React from 'react';
 import { getQuizes } from 'utils/firebaseGetters';
-import { UserAccountHeading } from '../UserAccount/UserAccountElements';
+// import { UserAccountHeading } from '../UserAccount/UserAccountElements';
 import { useHistory } from 'react-router';
 import {
 	QuizCard,
@@ -17,16 +17,61 @@ import {
 	QuizList,
 } from './UserQuizesElements';
 
-const UserQuizes = () => {
+const UserQuizes = ({ userData }) => {
 	const { data } = useFirestoreQuery(getQuizes());
 	const history = useHistory();
 	const handleStartQuiz = (id, el) => {
 		history.push({ pathname: `/user/quizes/${id}`, data: el });
 	};
-	console.log(data);
+	const checkAvailableQuizes = () => {
+		return data.filter(
+			({ id: id1 }) =>
+				!userData.quizes.some(({ id: id2 }) => id2 === id1)
+		);
+	};
+
+	// FRAMER-MOTION //
+	const containerAndHeading = {
+		hidden: { opacity: 0 },
+		show: {
+			opacity: 1,
+			transition: {
+				duration: 0.3,
+			},
+		},
+	};
+	const list = {
+		hidden: { opacity: 0 },
+		show: {
+			opacity: 1,
+			transition: {
+				staggerChildren: 0.2,
+				delayChildren: 0.5,
+			},
+		},
+	};
+	const item = {
+		hidden: {
+			opacity: 0,
+			y: 50,
+		},
+		show: {
+			opacity: 1,
+			y: 0,
+			transition: {
+				duration: 0.2,
+				ease: 'easeInOut',
+			},
+		},
+	};
 	return (
 		<UserQuizContainer>
-			<QuizUpperContent>
+			{console.log(data && userData && checkAvailableQuizes())}
+			<QuizUpperContent
+				variants={containerAndHeading}
+				initial="hidden"
+				animate="show"
+			>
 				<QuizHeading>Welcome to Quiz App</QuizHeading>
 				<QuizHint>
 					You have only one chance to participate in each quiz. You
@@ -36,14 +81,35 @@ const UserQuizes = () => {
 				</QuizHint>
 			</QuizUpperContent>
 			<QuizDownerContent>
-				<QuizDownerHeading>
-					Available quizes for you
+				<QuizDownerHeading
+					variants={containerAndHeading}
+					initial="hidden"
+					animate="show"
+				>
+					{data && userData && checkAvailableQuizes().length === 0
+						? 'There isnt any available quiz for now'
+						: ' Available quizes for you'}
 				</QuizDownerHeading>
 			</QuizDownerContent>
-			<QuizList>
+			<QuizList
+				variants={list}
+				initial="hidden"
+				animate={
+					data &&
+					userData &&
+					checkAvailableQuizes().length > 0 &&
+					'show'
+				}
+				items={data && userData && checkAvailableQuizes()}
+			>
 				{data &&
-					data.map((el, i) => (
-						<QuizCard key={i}>
+					userData &&
+					checkAvailableQuizes().map((el, i) => (
+						<QuizCard
+							variants={item}
+							items={checkAvailableQuizes()}
+							key={i}
+						>
 							<QuizCardHeading>{el.title}</QuizCardHeading>
 							<QuizCardNote>
 								{Object.keys(el.questions).length} questions
@@ -53,41 +119,6 @@ const UserQuizes = () => {
 							</QuizButton>
 						</QuizCard>
 					))}
-				<QuizCard>
-					<QuizCardHeading>Dummy</QuizCardHeading>
-					<QuizCardNote>5 questions</QuizCardNote>
-					<QuizButton>Start quiz</QuizButton>
-				</QuizCard>
-				<QuizCard>
-					<QuizCardHeading>Dummy</QuizCardHeading>
-					<QuizCardNote>5 questions</QuizCardNote>
-					<QuizButton>Start quiz</QuizButton>
-				</QuizCard>
-				<QuizCard>
-					<QuizCardHeading>Dummy</QuizCardHeading>
-					<QuizCardNote>5 questions</QuizCardNote>
-					<QuizButton>Start quiz</QuizButton>
-				</QuizCard>
-				<QuizCard>
-					<QuizCardHeading>Dummy</QuizCardHeading>
-					<QuizCardNote>5 questions</QuizCardNote>
-					<QuizButton>Start quiz</QuizButton>
-				</QuizCard>
-				<QuizCard>
-					<QuizCardHeading>Dummy</QuizCardHeading>
-					<QuizCardNote>5 questions</QuizCardNote>
-					<QuizButton>Start quiz</QuizButton>
-				</QuizCard>
-				<QuizCard>
-					<QuizCardHeading>Dummy</QuizCardHeading>
-					<QuizCardNote>5 questions</QuizCardNote>
-					<QuizButton>Start quiz</QuizButton>
-				</QuizCard>
-				<QuizCard>
-					<QuizCardHeading>Dummy</QuizCardHeading>
-					<QuizCardNote>5 questions</QuizCardNote>
-					<QuizButton>Start quiz</QuizButton>
-				</QuizCard>
 			</QuizList>
 		</UserQuizContainer>
 	);

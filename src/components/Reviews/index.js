@@ -1,13 +1,22 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, {
+	useEffect,
+	useState,
+	useRef,
+	lazy,
+	Suspense,
+} from 'react';
 
 import FormReview from './FormReview';
-import UserReviews from './UserReviews';
+// import UserReviews from './UserReviews';
 
 import { useAuth } from 'contexts/AuthContext';
 import styled from 'styled-components/macro';
-
+import Loader from 'components/Loader';
+import { LoaderWrapper } from 'pages/Admin/AdminContent/Orders/Order/OrderElements';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getReviews } from 'utils/firebaseGetters';
+
+const UserReviews = lazy(() => import('./UserReviews'));
 
 const ReviewsContainer = styled.section`
 	background-color: #93949417;
@@ -38,7 +47,11 @@ const Reviews = ({ productId }) => {
 	return (
 		<ReviewsContainer ref={sectionReviewRef}>
 			<ReviewsHeading>Reviews</ReviewsHeading>
-			<UserReviews reviews={data} loading={loading} />
+
+			<Suspense fallback={<Loader margincenter primary />}>
+				<UserReviews reviews={data} loading={loading} />
+			</Suspense>
+
 			<FormReview
 				setIsAdded={setIsAdded}
 				isAdded={isAdded}

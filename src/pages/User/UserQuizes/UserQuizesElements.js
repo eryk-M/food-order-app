@@ -2,18 +2,24 @@ import styled from 'styled-components/macro';
 
 import quizBg from 'images/quiz_bg.jpg';
 
-export const QuizCard = styled.div`
+import { motion } from 'framer-motion';
+
+export const QuizCard = styled(motion.div)`
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
 	background-color: #fff;
+	width: 15rem;
+	@media (max-width: 844px) {
+		width: unset;
+	}
 `;
-export const QuizList = styled.div`
-	display: grid;
+export const QuizList = styled(motion.div)`
+	display: ${(props) => (props.items > 3 ? 'grid' : 'flex')};
 	grid-template-columns: repeat(auto-fit, minmax(150px, 4fr));
-	grid-gap: 1rem;
+	grid-gap: 2rem;
 	margin: 0 1rem;
 `;
 export const QuizCardHeading = styled.h3`
@@ -60,7 +66,7 @@ export const UserQuizContainer = styled.div`
 	/* height: 50rem; */
 `;
 
-export const QuizUpperContent = styled.div`
+export const QuizUpperContent = styled(motion.div)`
 	text-align: center;
 	padding-top: 3rem;
 `;
@@ -87,7 +93,7 @@ export const QuizDownerContent = styled.div`
 	justify-content: center;
 `;
 
-export const QuizDownerHeading = styled.h3`
+export const QuizDownerHeading = styled(motion.h3)`
 	font-size: 1.6rem;
 	color: #fff;
 	text-align: center;

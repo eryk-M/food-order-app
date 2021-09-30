@@ -73,6 +73,7 @@ const User = () => {
 						path="/user/quizes"
 						exact
 						component={UserQuizes}
+						userData={data}
 					/>
 					<PrivateRoute
 						path="/user/quizes/:id"

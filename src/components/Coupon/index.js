@@ -17,48 +17,6 @@ const Coupon = ({ el }) => {
 				<CouponP>{el.discount}%</CouponP>
 				<CouponP>From: ${el.fromPrice}</CouponP>
 			</CouponCard>
-			<CouponCard>
-				<CouponTitle>Coupon</CouponTitle>
-				<CouponCode>{el.code}</CouponCode>
-				<CouponP>{el.discount}%</CouponP>
-				<CouponP>From: ${el.fromPrice}</CouponP>
-			</CouponCard>
-			<CouponCard>
-				<CouponTitle>Coupon</CouponTitle>
-				<CouponCode>{el.code}</CouponCode>
-				<CouponP>{el.discount}%</CouponP>
-				<CouponP>From: ${el.fromPrice}</CouponP>
-			</CouponCard>
-			<CouponCard>
-				<CouponTitle>Coupon</CouponTitle>
-				<CouponCode>{el.code}</CouponCode>
-				<CouponP>{el.discount}%</CouponP>
-				<CouponP>From: ${el.fromPrice}</CouponP>
-			</CouponCard>
-			<CouponCard>
-				<CouponTitle>Coupon</CouponTitle>
-				<CouponCode>{el.code}</CouponCode>
-				<CouponP>{el.discount}%</CouponP>
-				<CouponP>From: ${el.fromPrice}</CouponP>
-			</CouponCard>
-			<CouponCard>
-				<CouponTitle>Coupon</CouponTitle>
-				<CouponCode>{el.code}</CouponCode>
-				<CouponP>{el.discount}%</CouponP>
-				<CouponP>From: ${el.fromPrice}</CouponP>
-			</CouponCard>
-			<CouponCard>
-				<CouponTitle>Coupon</CouponTitle>
-				<CouponCode>{el.code}</CouponCode>
-				<CouponP>{el.discount}%</CouponP>
-				<CouponP>From: ${el.fromPrice}</CouponP>
-			</CouponCard>
-			<CouponCard>
-				<CouponTitle>Coupon</CouponTitle>
-				<CouponCode>{el.code}</CouponCode>
-				<CouponP>{el.discount}%</CouponP>
-				<CouponP>From: ${el.fromPrice}</CouponP>
-			</CouponCard>
 		</>
 	);
 };

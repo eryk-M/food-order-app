@@ -15,10 +15,9 @@ export const ItemWrapper = styled.li`
 
 export const ItemImageWrapper = styled.div`
 	position: relative;
-	width: 20rem;
+	max-width: 20rem;
 	height: 20rem;
-
-	object-fit: cover;
+	display: block;
 	&::before {
 		content: '';
 		position: absolute;
@@ -46,8 +45,13 @@ export const ItemImageWrapper = styled.div`
 
 export const ItemImage = styled.img`
 	display: block;
-	height: 20rem;
+	/* height: 20rem; */
+	/* min-height: 20rem; */
+	/* max-height: 20rem; */
+	/* max-width: 20rem; */
 	width: 20rem;
+	height: 20rem;
+	/* object-fit: contain; */
 	object-fit: cover;
 `;
 

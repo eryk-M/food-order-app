@@ -39,7 +39,8 @@ const Cart = () => {
 	const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
 	const [discountCalcFlag, setDiscountCalcFlag] = useState(false);
 	const [discountAdded, setDiscountAdded] = useState(false);
-	const [discountCode, setDiscountCode] = useState('');
+	const [quizCode, setQuizCode] = useState('');
+
 	const history = useHistory();
 	const scrollRef = useRef();
 	const { data } = useFirestoreQuery(
@@ -140,7 +141,7 @@ const Cart = () => {
 								discountCalcFlag={discountCalcFlag}
 								discountAdded={discountAdded}
 								setDiscountAdded={setDiscountAdded}
-								setDiscountCode={setDiscountCode}
+								setQuizCode={setQuizCode}
 							/>
 						)}
 					/>
@@ -166,7 +167,10 @@ const Cart = () => {
 								onChangeStep={onChangeStep}
 								discount={discount}
 								priceBeforeDiscount={priceBeforeDiscount}
-								discoutnCode={discountCode}
+								quizCode={quizCode}
+								setDiscountAdded={setDiscountAdded}
+								setQuizCode={setQuizCode}
+								setDiscount={setDiscount}
 							/>
 						)}
 					/>
