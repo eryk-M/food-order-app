@@ -39,6 +39,7 @@ const Cart = () => {
 	const [priceBeforeDiscount, setPriceBeforeDiscount] = useState(0);
 	const [discountCalcFlag, setDiscountCalcFlag] = useState(false);
 	const [discountAdded, setDiscountAdded] = useState(false);
+	const [discountCode, setDiscountCode] = useState('');
 	const history = useHistory();
 	const scrollRef = useRef();
 	const { data } = useFirestoreQuery(
@@ -110,7 +111,7 @@ const Cart = () => {
 		[history, step]
 	);
 
-	scrollRef.current?.scrollIntoView();
+	// scrollRef.current?.scrollIntoView();
 	return (
 		<CartWrapper ref={scrollRef}>
 			<Steps current={step}>
@@ -139,6 +140,7 @@ const Cart = () => {
 								discountCalcFlag={discountCalcFlag}
 								discountAdded={discountAdded}
 								setDiscountAdded={setDiscountAdded}
+								setDiscountCode={setDiscountCode}
 							/>
 						)}
 					/>
@@ -164,6 +166,7 @@ const Cart = () => {
 								onChangeStep={onChangeStep}
 								discount={discount}
 								priceBeforeDiscount={priceBeforeDiscount}
+								discoutnCode={discountCode}
 							/>
 						)}
 					/>

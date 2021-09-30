@@ -1,5 +1,7 @@
 import { db } from 'firebase';
 
+// GETTERS TO CUSTOM HOOK USE FIRESTORE QUERY
+
 // MAIN PAGE //
 
 export const getUserDoc = (uid) => db.collection('users').doc(uid);

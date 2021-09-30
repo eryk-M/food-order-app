@@ -8,6 +8,7 @@ import UserNav from 'pages/User/UserNav';
 import UserQuizes from 'pages/User/UserQuizes';
 import Quiz from 'components/Quiz';
 import Summary from 'components/Quiz/Summary';
+import UserCoupons from 'pages/User/UserCoupons';
 
 import {
 	UserContainer,
@@ -32,6 +33,8 @@ const User = () => {
 
 	if (admin) return <Redirect to="/admin" />;
 
+	const subtrPathQuiz = pathname.substr(0, 12);
+
 	return (
 		<UserWrapper className="user">
 			<UserHeading>Hello, {currentUser.displayName}!</UserHeading>
@@ -42,7 +45,13 @@ const User = () => {
 				<GlobalStyle backgroundColor="#93949417" />
 				<UserNav />
 				<UserContent
-					margin={pathname === '/user/orders' ? '0' : '5rem'}
+					margin={
+						pathname === '/user/orders' ||
+						subtrPathQuiz === '/user/quizes'
+							? '0'
+							: '5rem'
+					}
+					pathname={subtrPathQuiz}
 				>
 					<PrivateRoute
 						path="/user"
@@ -74,6 +83,11 @@ const User = () => {
 						path="/user/quizes/:id/summary"
 						exact
 						component={Summary}
+					/>
+					<PrivateRoute
+						path="/user/coupons"
+						exact
+						component={UserCoupons}
 					/>
 				</UserContent>
 			</UserContainer>

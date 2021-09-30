@@ -36,10 +36,10 @@ const CartComplete = ({ step }) => {
 			);
 		});
 		setOrderId(order);
-		return () => {
-			setOrderId('');
-		};
-	}, [order, history]);
+		// return () => {
+		// 	setOrderId('');
+		// };
+	}, [order]);
 
 	if (step === 0) return <Redirect to="/cart" />;
 

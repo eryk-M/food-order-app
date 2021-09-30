@@ -11,15 +11,7 @@ import {
 } from './CouponsElements';
 import Loader from 'components/Loader';
 import { Alert } from 'components/Alert';
-import {
-	Form,
-	FormElement,
-	FormInput,
-	FormLabel,
-	FormError,
-	FormButton,
-	FormGroup,
-} from 'components/Form/FormElements';
+import { Form, FormButton } from 'components/Form/FormElements';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import {
 	getCoupons,
@@ -62,6 +54,12 @@ const Coupons = () => {
 			.required('Code is required')
 			.min(5, 'Minimum 5 characters')
 			.max(12, 'Maximum 12 characters')
+			.trim()
+			.test(
+				'discount',
+				'Code cannot contain any space',
+				(value) => !/\s/.test(value)
+			)
 			.test('discount', 'Code already exists', async (value) => {
 				const response = await validateCouponCode(
 					value.toUpperCase()

@@ -6,7 +6,7 @@ export const UserContainer = styled.div`
 	margin: 3rem auto;
 	background-color: white;
 	display: flex;
-
+	/* position: relative; */
 	@media screen and (max-width: 570px) {
 		flex-direction: column;
 	}
@@ -14,6 +14,8 @@ export const UserContainer = styled.div`
 
 export const UserContent = styled.div`
 	margin: ${(props) => props.margin};
+	width: ${(props) =>
+		props.pathname === '/user/quizes' ? '100%' : ''};
 	@media screen and (max-width: 570px) {
 		width: 60%;
 		margin: 2rem auto;

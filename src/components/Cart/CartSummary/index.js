@@ -25,7 +25,7 @@ import {
 import Button from 'components/Button';
 import { FormButton } from 'components/Form/FormElements';
 import { useApi } from 'contexts/APIContext';
-
+import { useAuth } from 'contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
 
 const CartSummary = ({
@@ -34,6 +34,7 @@ const CartSummary = ({
 	currentUserId,
 	discount,
 	priceBeforeDiscount,
+	discountCode,
 }) => {
 	const {
 		state: { cart, address, totalPrice, payment },
@@ -42,7 +43,8 @@ const CartSummary = ({
 
 	const [importantInfo, setImportantInfo] = useState([]);
 	const [loading, setLoading] = useState(false);
-	const { addOrder } = useApi();
+	const { addOrder, setCouponAsUsed } = useApi();
+	const { currentUser } = useAuth();
 	const history = useHistory();
 
 	useEffect(() => {
@@ -64,6 +66,7 @@ const CartSummary = ({
 
 	if (step === 0) return <Redirect to="/cart" />;
 
+	//TODO: KUPON MUSI BYC DODANY TUTAJ JAKO ZROBIONY
 	const pushOrder = async (e) => {
 		setLoading(true);
 		let orderId = '';
@@ -82,6 +85,7 @@ const CartSummary = ({
 				date,
 				payment
 			);
+			await setCouponAsUsed(currentUser.uid, discountCode);
 			setLoading(false);
 			dispatch({
 				type: 'RESET_CART',

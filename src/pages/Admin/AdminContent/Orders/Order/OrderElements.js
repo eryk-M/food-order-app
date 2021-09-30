@@ -110,6 +110,8 @@ export const UserOrderStatus = styled.span`
 
 export const LoaderWrapper = styled.div`
 	position: absolute;
+	top: ${(props) => props.top};
+	right: ${(props) => props.right};
 `;
 
 export const PrintButton = styled.button`

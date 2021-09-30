@@ -16,6 +16,8 @@ to {
 export const CartCompleteOrderId = styled.p`
 	margin: 1rem 0;
 	font-size: 2.4rem;
+
+	display: inline;
 `;
 
 export const CartCompleteOrderContainer = styled.div`
@@ -25,6 +27,8 @@ export const CartCompleteOrderContainer = styled.div`
 	padding: 0 1rem;
 	padding-right: 0;
 	position: relative;
+
+	display: inline-block;
 `;
 
 export const ShowCopyMessage = styled.span`
@@ -49,6 +53,10 @@ export const CopyIconContainer = styled.span`
 	border-left: 1px solid rgba(0, 0, 0, 0.2);
 	cursor: pointer;
 	transition: all 0.2s;
+	/* display: flex; */
+	display: inline;
+	display: inline-flex;
+
 	&:hover {
 		background-color: #65ff6578;
 	}

@@ -8,7 +8,10 @@ import {
 	BiLogOutCircle,
 } from 'react-icons/bi';
 import { RiLockPasswordLine } from 'react-icons/ri';
-import { AiOutlineQuestionCircle } from 'react-icons/ai';
+import {
+	AiOutlineQuestionCircle,
+	AiOutlinePercentage,
+} from 'react-icons/ai';
 export const UserSideNav = styled.nav`
 	display: flex;
 	flex-direction: column;
@@ -29,6 +32,8 @@ export const UserNavIconBriefcase = styled(BiBriefcaseAlt)``;
 export const UserNavIconPassword = styled(RiLockPasswordLine)``;
 
 export const UserNavQuestionMark = styled(AiOutlineQuestionCircle)``;
+
+export const UserNavPercentIcon = styled(AiOutlinePercentage)``;
 
 export const UserNavIconLogout = styled(BiLogOutCircle)`
 	margin-right: 1rem;
@@ -60,11 +65,13 @@ export const UserNavLink = styled(NavLink)`
 	&:link,
 	&:visited {
 		text-decoration: none;
-		color: var(--color-grey-dark);
+		color: ${(props) =>
+			props.logout ? '#fff' : 'var(--color-grey-dark)'};
 		text-transform: capitalize;
+		background-color: ${(props) =>
+			props.logout ? 'var(--color-red)' : ''};
 		display: block;
 		padding: 1.5rem 3rem;
-		/* background-color: #e2e2e2; */
 		@media screen and (max-width: 412px) {
 			padding: 1rem 1rem;
 		}

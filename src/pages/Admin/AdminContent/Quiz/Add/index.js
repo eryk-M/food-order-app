@@ -41,7 +41,7 @@ const data = {
 const Add = () => {
 	const [initialData, setInitialData] = useState(data);
 	const [isLoading, setIsLoading] = useState(false);
-	const { addQuiz } = useApi();
+	const { addQuiz, addCoupon } = useApi();
 	const [showSuccess, setShowSuccess] = useState(false);
 	const quizContainerRef = useRef();
 
@@ -75,7 +75,8 @@ const Add = () => {
 		title: Yup.string()
 			.required('Title is required')
 			.min(3, 'Minimum 3 characters')
-			.max(20, 'Maximum 20 characters'),
+			.max(20, 'Maximum 20 characters')
+			.trim(),
 		discount: Yup.string()
 			.required('Discount is required')
 			.test(
@@ -94,6 +95,12 @@ const Add = () => {
 			.required('Code is required')
 			.min(5, 'Minimum 5 characters')
 			.max(12, 'Maximum 12 characters')
+			.trim()
+			.test(
+				'discount',
+				'Code cannot contain any space',
+				(value) => !/\s/.test(value)
+			)
 			.test('discount', 'Code already exists', async (value) => {
 				const response = await validateCouponCode(
 					value.toUpperCase()
@@ -176,6 +183,12 @@ const Add = () => {
 			try {
 				setIsLoading(true);
 				await addQuiz(initialData.questions, data);
+				await addCoupon(
+					data.code,
+					data.discount,
+					data.fromPrice,
+					true
+				);
 				setIsLoading(false);
 				quizContainerRef.current.scrollIntoView();
 				setShowSuccess(true);

@@ -10,9 +10,10 @@ import {
 	UserNavIconUser,
 	UserNavIconLogout,
 	UserNavQuestionMark,
+	UserNavPercentIcon,
 } from './UserNavElements';
 
-import Button from 'components/Button';
+// import Button from 'components/Button';
 
 import { useHistory } from 'react-router-dom';
 
@@ -76,12 +77,27 @@ const UserNav = () => {
 						Quizes
 					</UserNavLink>
 				</UserNavItem>
+				<UserNavItem>
+					<UserNavLink
+						to="/user/coupons"
+						activeClassName="active-user-nav"
+					>
+						<UserNavPercentIcon />
+						Coupons
+					</UserNavLink>
+				</UserNavItem>
+				<UserNavItem>
+					<UserNavLink logout="true" to="#" onClick={handleLogout}>
+						<UserNavIconLogout />
+						Log Out
+					</UserNavLink>
+				</UserNavItem>
 			</UserNavList>
 			{error && <FormAlert>{error}</FormAlert>}
-			<Button onClick={handleLogout} marginbottom="5rem">
+			{/* <Button onClick={handleLogout} marginbottom="5rem">
 				<UserNavIconLogout />
 				Log Out
-			</Button>
+			</Button> */}
 		</UserSideNav>
 	);
 };

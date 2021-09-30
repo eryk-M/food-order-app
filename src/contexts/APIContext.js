@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from 'react';
 
-import { db, storage, increment } from '../firebase';
+import { db, storage, increment, firestore } from '../firebase';
 
 const APIContext = createContext();
 
@@ -188,15 +188,28 @@ export function APIProvider({ children }) {
 		return await couponsRef.where('code', '==', code).get();
 	};
 
+	const validateQuizCode = async (uid) => {
+		return await usersRef.doc(uid).get();
+	};
+
 	const updateOrderStatus = async (step, id) => {
 		await ordersRef.doc(id).update({ step: step });
 	};
 
-	const addCoupon = async (code, discount, fromPrice) => {
+	const addCoupon = async (code, discount, fromPrice, quiz) => {
 		await couponsRef.add({
 			code: code.toUpperCase(),
 			discount: Number(discount),
 			fromPrice: Number(fromPrice),
+			quiz: quiz ?? 'false',
+		});
+	};
+
+	const setCouponAsUsed = async (uid, code) => {
+		await usersRef.doc(uid).update({
+			usedCoupons: firestore.FieldValue.arrayUnion({
+				code: code,
+			}),
 		});
 	};
 
@@ -225,6 +238,28 @@ export function APIProvider({ children }) {
 		});
 	};
 
+	const addQuizAndCouponToUser = async (uid, quizId, coupon, won) => {
+		if (won) {
+			await usersRef.doc(uid).update({
+				quizes: firestore.FieldValue.arrayUnion({
+					id: quizId,
+				}),
+				coupons: firestore.FieldValue.arrayUnion({
+					code: coupon.code,
+					used: false,
+					discount: coupon.discount,
+					fromPrice: Number(coupon.fromPrice),
+				}),
+			});
+		} else {
+			await usersRef.doc(uid).update({
+				quizes: firestore.FieldValue.arrayUnion({
+					id: quizId,
+				}),
+			});
+		}
+	};
+
 	const value = {
 		setItems,
 		updateUserInfo,
@@ -236,6 +271,9 @@ export function APIProvider({ children }) {
 		deleteCoupon,
 		deleteOrders,
 		addQuiz,
+		addQuizAndCouponToUser,
+		validateQuizCode,
+		setCouponAsUsed,
 	};
 
 	return (
