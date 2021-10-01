@@ -15,37 +15,22 @@ const Pagination = ({
 	paginate,
 	currentPage,
 	top,
+	query,
 }) => {
-	const [show, setShow] = useState(true);
+	const pageNumbers = [];
 
-	const pageNumbers = useMemo(() => [], []);
-
-	//TODO: PAGINATION
-	// JAK WKLEPIE 3 LITERY MUSI ZNIKNAC PAGINACJA I ZACZAC FILTROWAC, AKTUALNIE WYPIERDALA BLAD PRZY 3 LITERACH
-	useEffect(() => {
-		if (pageNumbers < 100) {
-			setShow(true);
-			for (
-				let i = 1;
-				i <= Math.ceil(totalItems / itemsPerPage);
-				i++
-			) {
-				pageNumbers.push(i);
-			}
-		} else {
-			setShow(false);
-		}
-	}, [itemsPerPage, pageNumbers, totalItems, show]);
-
+	for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
+		pageNumbers.push(i);
+	}
 	return (
 		<>
-			{show && (
+			{query.length < 3 && (
 				<PaginationContainer top={top}>
 					<PaginationP>Pages</PaginationP>
 					<PaginationNav>
-						<PaginationList className="pagination">
+						<PaginationList>
 							{pageNumbers.map((number) => (
-								<PaginationItem key={number} className="page-item">
+								<PaginationItem key={number}>
 									<PaginationLink
 										currentPage={currentPage}
 										number={number}
@@ -54,7 +39,6 @@ const Pagination = ({
 											paginate(number);
 										}}
 										href="!#"
-										className="page-link"
 									>
 										{number}
 									</PaginationLink>

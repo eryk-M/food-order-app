@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -27,6 +27,7 @@ import { Alert } from 'components/Alert';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAdminAllProducts } from 'utils/firebaseGetters';
 import { useAdminApi } from 'contexts/AdminAPIContext';
+
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllProducts());
 	const { deleteAdminProduct } = useAdminApi();
@@ -35,17 +36,24 @@ const List = () => {
 	const [id, setId] = useState('');
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [itemsPerPage, setItemsPerPage] = useState(10);
+	const [itemsPerPage] = useState(10);
 
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-	// Change page
+	//TODO: SKOCNZYLEM TUTAJ
+	//PAGINATE
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-	if (query.length >= 3) {
-		setItemsPerPage(1000);
-	}
+	const onHandleSearch = () => {
+		if (query.length >= 3) {
+			return data.filter((el) =>
+				el.name.toLowerCase().includes(query.toLowerCase())
+			);
+		} else {
+			return data.slice(indexOfFirstItem, indexOfLastItem);
+		}
+	};
 
 	return (
 		<>
@@ -78,6 +86,7 @@ const List = () => {
 					totalItems={data?.length}
 					paginate={paginate}
 					currentPage={currentPage}
+					query={query}
 				/>
 				<Table>
 					<TableBody>
@@ -94,51 +103,46 @@ const List = () => {
 						</TableRow>
 						{console.log(data)}
 						{data &&
-							data
-								.slice(indexOfFirstItem, indexOfLastItem)
-								.filter((el) =>
-									el.name.toLowerCase().includes(query.toLowerCase())
-								)
-								.map((el, i) => (
-									<TableRow key={el.id}>
-										<TableCell>{el.id}</TableCell>
-										<TableCell>
-											<img
-												style={{
-													height: '6rem',
-													width: '6rem',
-													objectFit: 'cover',
-												}}
-												src={el.img}
-												alt={el.alt}
-											/>
-										</TableCell>
-										<TableCell>{el.name}</TableCell>
-										<TableCell center>
-											{el.discountPrice !== 0 ? <SaleIcon /> : 'No'}
-										</TableCell>
-										<TableCell center>
-											{el.availability ? <TickIcon /> : <CrossIcon />}
-										</TableCell>
-										<TableCell>{el.category}</TableCell>
-										<TableCell width="8rem">${el.price}</TableCell>
-										<TableCell>
-											<Link to={`/admin/products/${el.id}`}>
-												<TableButton secondary>Edit</TableButton>
-											</Link>
-											<TableButton
-												primary
-												marginleft="1rem"
-												onClick={() => {
-													setOpen((currOpen) => !currOpen);
-													setId(el.id);
-												}}
-											>
-												Delete
-											</TableButton>
-										</TableCell>
-									</TableRow>
-								))}
+							onHandleSearch().map((el, i) => (
+								<TableRow key={el.id}>
+									<TableCell>{el.id}</TableCell>
+									<TableCell>
+										<img
+											style={{
+												height: '6rem',
+												width: '6rem',
+												objectFit: 'cover',
+											}}
+											src={el.img}
+											alt={el.alt}
+										/>
+									</TableCell>
+									<TableCell>{el.name}</TableCell>
+									<TableCell center>
+										{el.discountPrice !== 0 ? <SaleIcon /> : 'No'}
+									</TableCell>
+									<TableCell center>
+										{el.availability ? <TickIcon /> : <CrossIcon />}
+									</TableCell>
+									<TableCell>{el.category}</TableCell>
+									<TableCell width="8rem">${el.price}</TableCell>
+									<TableCell>
+										<Link to={`/admin/products/${el.id}`}>
+											<TableButton secondary>Edit</TableButton>
+										</Link>
+										<TableButton
+											primary
+											marginleft="1rem"
+											onClick={() => {
+												setOpen((currOpen) => !currOpen);
+												setId(el.id);
+											}}
+										>
+											Delete
+										</TableButton>
+									</TableCell>
+								</TableRow>
+							))}
 					</TableBody>
 				</Table>
 				{loading && (

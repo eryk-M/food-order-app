@@ -36,6 +36,7 @@ import {
 	CreditCardIcon,
 } from 'components/Admin/Icons';
 import { AnimatePresence } from 'framer-motion';
+import Pagination from 'components/Pagination';
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllOrders());
 	const { deleteOrders } = useApi();
@@ -47,6 +48,8 @@ const List = () => {
 	const [amountToDelete, setAmountToDelete] = useState(0);
 	const [open, setOpen] = useState(false);
 	const [ordersToDelete, setOrdersToDelete] = useState([]);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [itemsPerPage] = useState(10);
 
 	const giveDateSpan = (timestamp) => {
 		const a = new Date(timestamp);
@@ -103,6 +106,22 @@ const List = () => {
 			return React.createElement(ArrowDownFilterIcon);
 		}
 	};
+	//PAGINATE
+	const indexOfLastItem = currentPage * itemsPerPage;
+	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+	const onHandleSearch = () => {
+		if (query.length >= 3) {
+			return data.filter((el) =>
+				el.name.toLowerCase().includes(query.toLowerCase())
+			);
+		} else {
+			return data.slice(indexOfFirstItem, indexOfLastItem);
+		}
+	};
+
 	return (
 		<>
 			<DeleteModal
@@ -132,7 +151,14 @@ const List = () => {
 					width="20rem"
 					placeholder="Search by ID"
 				/>
-
+				<Pagination
+					top="1.3rem"
+					itemsPerPage={itemsPerPage}
+					totalItems={data?.length}
+					paginate={paginate}
+					currentPage={currentPage}
+					query={query}
+				/>
 				<AnimatePresence>
 					{showDialogBox && (
 						<ListDialogBox
