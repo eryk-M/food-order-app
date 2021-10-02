@@ -20,9 +20,28 @@ import {
 
 import { Alert } from 'components/Alert';
 import { CartContext } from 'contexts/CartContext';
-
-import LazyLoad from 'react-lazyload';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 import StarRating from 'components/Reviews/FormReview/StarRating';
+
+const Image = ({ el }) => {
+	const [loaded, setLoaded] = useState(false);
+
+	return (
+		<ItemImageWrapper
+			loaded={loaded}
+			discount={el.discountPrice !== 0}
+		>
+			<Link to={`/product/${el.id}`}>
+				<ItemImage
+					effect="opacity"
+					afterLoad={() => setLoaded(true)}
+					src={el.img}
+					alt={el.alt}
+				/>
+			</Link>
+		</ItemImageWrapper>
+	);
+};
 
 const Item = ({ el }) => {
 	const {
@@ -54,11 +73,7 @@ const Item = ({ el }) => {
 				</Alert>
 			)}
 
-			<ItemImageWrapper discount={el.discountPrice !== 0}>
-				<Link to={`/product/${el.id}`}>
-					<ItemImage src={el.img} alt={el.alt} />
-				</Link>
-			</ItemImageWrapper>
+			<Image el={el} />
 			<ItemInfo>
 				<Link to={`/product/${el.id}`}>
 					<ItemHeading>{el.name}</ItemHeading>

@@ -69,7 +69,6 @@ const CartSummary = ({
 
 	if (step === 0) return <Redirect to="/cart" />;
 
-	//TODO: KUPON MUSI BYC DODANY TUTAJ JAKO ZROBIONY
 	const pushOrder = async (e) => {
 		setLoading(true);
 		let orderId = '';

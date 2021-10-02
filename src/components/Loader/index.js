@@ -7,7 +7,6 @@ const LoaderWrapper = styled.div`
 	display: ${(props) => props.display ?? 'flex'};
 	justify-content: center;
 	align-items: center;
-	/* display: inline-block; */
 	vertical-align: middle;
 	margin: ${(props) => (props.margincenter ? '4rem 0' : '')};
 	margin-left: ${(props) => props.marginleft ?? ''};
@@ -24,11 +23,6 @@ const LoaderWrapper = styled.div`
 `;
 
 const Loader = ({ primary, ...rest }) => {
-	// const styles = {
-	// 	display: 'flex',
-	// 	justifyContent: 'center',
-	// 	alignItems: 'center',
-	// };
 	return (
 		<LoaderWrapper
 			className="loader-wrapper"

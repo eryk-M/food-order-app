@@ -27,7 +27,8 @@ import { Alert } from 'components/Alert';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAdminAllProducts } from 'utils/firebaseGetters';
 import { useAdminApi } from 'contexts/AdminAPIContext';
-
+import { ListImage } from './ListElements';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllProducts());
 	const { deleteAdminProduct } = useAdminApi();
@@ -41,7 +42,6 @@ const List = () => {
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-	//TODO: SKOCNZYLEM TUTAJ
 	//PAGINATE
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -75,6 +75,7 @@ const List = () => {
 					</Alert>
 				)}
 				<Search
+					tooltip={true}
 					query={query}
 					setQuery={setQuery}
 					width="20rem"
@@ -107,14 +108,10 @@ const List = () => {
 								<TableRow key={el.id}>
 									<TableCell>{el.id}</TableCell>
 									<TableCell>
-										<img
-											style={{
-												height: '6rem',
-												width: '6rem',
-												objectFit: 'cover',
-											}}
+										<ListImage
 											src={el.img}
 											alt={el.alt}
+											effect="opacity"
 										/>
 									</TableCell>
 									<TableCell>{el.name}</TableCell>

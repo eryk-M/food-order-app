@@ -20,7 +20,6 @@ const CartComplete = ({ step }) => {
 	const [copied, setCopied] = useState(false);
 
 	const { order } = useLocation();
-	const history = useHistory();
 
 	useEffect(() => {
 		window.history.pushState(
@@ -36,9 +35,6 @@ const CartComplete = ({ step }) => {
 			);
 		});
 		setOrderId(order);
-		// return () => {
-		// 	setOrderId('');
-		// };
 	}, [order]);
 
 	if (step === 0) return <Redirect to="/cart" />;

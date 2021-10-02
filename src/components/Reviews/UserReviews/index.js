@@ -19,7 +19,7 @@ const UserReviews = ({ reviews, loading }) => {
 
 	return (
 		<UserReviewsContainer className="user">
-			{loading && <Loader />}
+			{loading && <Loader margincenter primary high="true" />}
 			{reviews &&
 				reviews.map((review, i) => (
 					<UserReview key={i}>

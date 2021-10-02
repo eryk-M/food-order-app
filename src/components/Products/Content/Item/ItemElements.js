@@ -1,4 +1,17 @@
-import styled from 'styled-components/macro';
+import styled, { keyframes, css } from 'styled-components/macro';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+const moveRightDown = keyframes`
+from {
+    transform: translate(0, 0);
+    opacity: 0
+}
+
+to {
+    transform: translate(0.6rem, 0.6rem);
+        opacity: 1;
+}
+`;
 
 export const ItemWrapper = styled.li`
 	display: flex;
@@ -21,12 +34,18 @@ export const ItemImageWrapper = styled.div`
 	&::before {
 		content: '';
 		position: absolute;
-		top: 0.6rem;
-		right: -0.6rem;
+		transform: translate(0.6rem, 0.6rem);
 		height: 20rem;
 		width: 20rem;
 		background-color: var(--color-primary);
 		z-index: -1;
+		opacity: ${(props) => (props.loaded ? '1' : '0')};
+		animation: ${(props) =>
+			props.loaded
+				? css`
+						${moveRightDown} .3s ease-in-out
+				  `
+				: ''};
 	}
 	&::after {
 		content: 'SALE';
@@ -43,15 +62,10 @@ export const ItemImageWrapper = styled.div`
 	}
 `;
 
-export const ItemImage = styled.img`
+export const ItemImage = styled(LazyLoadImage)`
 	display: block;
-	/* height: 20rem; */
-	/* min-height: 20rem; */
-	/* max-height: 20rem; */
-	/* max-width: 20rem; */
 	width: 20rem;
 	height: 20rem;
-	/* object-fit: contain; */
 	object-fit: cover;
 `;
 

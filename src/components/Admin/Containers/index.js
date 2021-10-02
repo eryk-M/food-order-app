@@ -89,7 +89,6 @@ export const LineChartsContainer = styled.div`
 		grid-template-columns: repeat(auto-fit, minmax(50rem, 2fr));
 	}
 	@media only screen and (max-width: 1130px) {
-		/* width: 100%; */
 		grid-template-columns: repeat(auto-fit, minmax(35rem, 2fr));
 	}
 `;

@@ -54,7 +54,6 @@ const Cart = () => {
 		});
 	};
 
-	//TODO: MEMO THIS \/
 	const getTotalPrice = useCallback(() => {
 		let cartWithDiscount = 0;
 		let cartBeforeDiscount = 0;
@@ -87,7 +86,7 @@ const Cart = () => {
 			if (e !== undefined) e.preventDefault();
 
 			if (where === 'back') {
-				setStep(step - 1);
+				setStep((prevStep) => prevStep - 1);
 				if (pathname === '/cart/address') {
 					history.push('/cart');
 				} else if (pathname === '/cart/summary') {
@@ -96,7 +95,7 @@ const Cart = () => {
 			} else if (where === 'begin') {
 				setStep(0);
 			} else if (where === 'push') {
-				setStep(step + 1);
+				setStep((prevStep) => prevStep + 1);
 				if (pathname === '/cart') {
 					history.push('/cart/address');
 				} else if (pathname === '/cart/address') {
@@ -109,7 +108,7 @@ const Cart = () => {
 				}
 			}
 		},
-		[history, step]
+		[history]
 	);
 
 	// scrollRef.current?.scrollIntoView();

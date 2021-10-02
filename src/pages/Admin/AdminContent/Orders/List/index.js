@@ -78,7 +78,7 @@ const List = () => {
 
 	const filterStatus = (a, b) => {
 		if (sortStatus === 1) {
-			return true;
+			return b.date - a.date;
 		} else if (sortStatus === 2) {
 			return a.step - b.step;
 		} else if (sortStatus === 3) {
@@ -106,6 +106,8 @@ const List = () => {
 			return React.createElement(ArrowDownFilterIcon);
 		}
 	};
+
+	//TODO: SKOCNZYLEM TUTAJ
 	//PAGINATE
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -114,11 +116,13 @@ const List = () => {
 
 	const onHandleSearch = () => {
 		if (query.length >= 3) {
-			return data.filter((el) =>
-				el.name.toLowerCase().includes(query.toLowerCase())
-			);
+			return data
+				.filter((el) => el.orderId.includes(query))
+				.sort((a, b) => filterStatus(a, b));
 		} else {
-			return data.slice(indexOfFirstItem, indexOfLastItem);
+			return data
+				.sort((a, b) => filterStatus(a, b))
+				.slice(indexOfFirstItem, indexOfLastItem);
 		}
 	};
 
@@ -147,6 +151,8 @@ const List = () => {
 				)}
 
 				<Search
+					tooltip={true}
+					query={query}
 					setQuery={setQuery}
 					width="20rem"
 					placeholder="Search by ID"
@@ -220,48 +226,45 @@ const List = () => {
 							</TableRow>
 
 							{data &&
-								data
-									.filter((el) => el.orderId.includes(query))
-									.sort((a, b) => filterStatus(a, b))
-									.map((el, i) => (
-										<TableRow key={i}>
-											<TableCell>
-												<Checkbox
-													className="checkbox-group"
-													value={`${el.id}`}
-												/>
-												{el.orderId}
-											</TableCell>
-											<TableCell center>
-												{giveDateSpan(el.date)}
-											</TableCell>
-											<TableCell center>
-												<Status step={el.step} />
-											</TableCell>
-											<TableCell width="8rem" center>
-												{el.payment === 1 ? (
-													<CreditCardIcon />
-												) : (
-													<CashIcon />
-												)}
-											</TableCell>
-											<TableCell center>
-												{' '}
-												{el.orderInfo.reduce((a, b) => {
-													return a + b.quantity;
-												}, 0)}
-											</TableCell>
+								onHandleSearch().map((el, i) => (
+									<TableRow key={i}>
+										<TableCell>
+											<Checkbox
+												className="checkbox-group"
+												value={`${el.id}`}
+											/>
+											{el.orderId}
+										</TableCell>
+										<TableCell center>
+											{giveDateSpan(el.date)}
+										</TableCell>
+										<TableCell center>
+											<Status step={el.step} />
+										</TableCell>
+										<TableCell width="8rem" center>
+											{el.payment === 1 ? (
+												<CreditCardIcon />
+											) : (
+												<CashIcon />
+											)}
+										</TableCell>
+										<TableCell center>
+											{' '}
+											{el.orderInfo.reduce((a, b) => {
+												return a + b.quantity;
+											}, 0)}
+										</TableCell>
 
-											<TableCell width="8rem" center>
-												${el.totalPrice}
-											</TableCell>
-											<TableCell center>
-												<SettingsIcon
-													onClick={() => linkToOrder(el.orderId)}
-												/>
-											</TableCell>
-										</TableRow>
-									))}
+										<TableCell width="8rem" center>
+											${el.totalPrice}
+										</TableCell>
+										<TableCell center>
+											<SettingsIcon
+												onClick={() => linkToOrder(el.orderId)}
+											/>
+										</TableCell>
+									</TableRow>
+								))}
 						</TableBody>
 					</CheckboxGroup>
 				</Table>

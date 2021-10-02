@@ -57,11 +57,6 @@ const ContentToPrint = React.forwardRef(
 			<>
 				{data && (
 					<>
-						{loading && (
-							<LoaderWrapper>
-								<Loader primary />
-							</LoaderWrapper>
-						)}
 						<div ref={ref} style={{ padding: '1rem' }}>
 							<AdminPanelHeading>Order ID: {id}</AdminPanelHeading>
 							<JustifyCenterContainer>
@@ -151,9 +146,11 @@ const ContentToPrint = React.forwardRef(
 );
 
 const Order = (props) => {
-	const { data } = useFirestoreQuery(getOrder(props.match.params.id));
+	const { data, loading } = useFirestoreQuery(
+		getOrder(props.match.params.id)
+	);
 	const { updateOrderStatus } = useApi();
-	const [loading, setLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [showSuccess, setShowSuccess] = useState(false);
 	const componentRef = useRef();
 	const [error, setError] = useState('');
@@ -184,14 +181,14 @@ const Order = (props) => {
 	const handleChangeStatus = async (step) => {
 		setShowSuccess(false);
 		clearAlert();
-		setLoading(true);
+		setIsLoading(true);
 		try {
 			await updateOrderStatus(step, data[0].id);
-			setLoading(false);
+			setIsLoading(false);
 			setShowSuccess(true);
 			showAlert();
 		} catch {
-			setLoading(false);
+			setIsLoading(false);
 			setError('Something went wrong. Please try again!');
 		}
 	};
@@ -216,6 +213,7 @@ const Order = (props) => {
 	};
 	return (
 		<MainContainer display="inline-block" minwidth="50%">
+			{loading && <Loader primary veryhigh margincenter />}
 			{error && <FormAlert variant="danger">{error}</FormAlert>}
 			<PrintButton onClick={handlePrint}>
 				<PrinterIcon />
@@ -227,7 +225,7 @@ const Order = (props) => {
 				handleChangeStatus={handleChangeStatus}
 				giveDateSpan={giveDateSpan}
 				steps={steps}
-				loading={loading}
+				loading={isLoading}
 				showSuccess={showSuccess}
 				data={data}
 				id={props.match.params.id}

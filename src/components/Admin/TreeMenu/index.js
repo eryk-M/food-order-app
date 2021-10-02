@@ -10,7 +10,6 @@ import {
 	Tree,
 	TreeItemMain,
 } from './TreeMenuElements';
-
 import { SlideDown } from 'react-slidedown';
 
 const TreeMenu = ({ text, mainIcon, list, hidden }) => {

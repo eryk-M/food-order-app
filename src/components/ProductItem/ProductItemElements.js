@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro';
 import { FaCartPlus } from 'react-icons/fa';
-
+import { IoIosResize } from 'react-icons/io';
 import { FaStar } from 'react-icons/fa';
 
 export const ProductContainer = styled.section`
 	display: flex;
 	border-radius: 5px;
-	overflow: hidden;
+	/* overflow: hidden; */
 	max-width: 136rem;
 	margin: 5rem auto;
 
@@ -17,15 +17,76 @@ export const ProductContainer = styled.section`
 	}
 `;
 
-export const ProductLeft = styled.div`
-	background-color: #e7272de5;
-	clip-path: polygon(14% 0, 100% 0, 85% 100%, 0% 100%);
+export const SliderContainer = styled.div`
+	max-width: 50rem;
+	overflow: hidden;
+	margin: 0 auto;
+	position: relative;
+	border: 10px solid transparent;
 
-	width: 50%;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+	border-radius: 24px;
+	&:before {
+		content: 'SALE';
+		position: absolute;
+		left: 1rem;
+		top: 1rem;
+		background-color: var(--color-green);
+		font-size: 1.4rem;
+		color: var(--color-white);
+		padding: 0.5rem;
+		border-radius: 5px;
+		z-index: 1;
+		visibility: ${(props) => (props.discount ? 'visible' : 'hidden')};
+	}
+`;
+
+export const SlideShow = styled.img`
+	min-width: 100%;
+	object-fit: cover;
+	transition: transform 0.3s ease;
+`;
+
+export const SliderShowcase = styled.div`
 	display: flex;
-	justify-content: center;
+	width: 50rem;
+	height: 35rem;
+	transition: all 0.5s ease;
+
+	&:hover {
+		cursor: -webkit-zoom-in;
+		cursor: zoom-in;
+	}
+`;
+
+export const SliderSelect = styled.div`
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0.8rem;
+`;
+
+export const SlideItem = styled.div`
+	width: 32%;
+
+	&:hover {
+		opacity: 0.8;
+		cursor: pointer;
+	}
+
+	img {
+		object-fit: cover;
+	}
+`;
+
+export const ProductLeft = styled.div`
+	width: 50%;
 	@media screen and (max-width: 840px) {
 		width: 90%;
+	}
+
+	img {
+		width: 100%;
+		display: block;
 	}
 `;
 
@@ -168,23 +229,11 @@ export const ProductBackground = styled.div`
 	width: 100%;
 `;
 
-// export const ProductAdded = styled.div`
-// 	position: absolute;
-// 	top: -5rem;
-// 	right: 0;
-
-// 	font-size: 1.6rem;
-// 	color: #fff;
-// 	background-color: var(--color-green);
-// 	padding: 1rem;
-// 	display: flex;
-// 	align-items: center;
-// 	opacity: 100%;
-// 	font-weight: 100;
-// 	border-radius: 0.5rem;
-// 	animation: ${fadeInRight} 0.71s cubic-bezier(0.075, 0.82, 0.165, 1);
-// `;
-// export const ProductAddedIcon = styled(GiConfirmed)`
-// 	margin-right: 0.5rem;
-// 	font-size: 2rem;
-// `;
+export const ResizeIcon = styled(IoIosResize)`
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	font-size: 3rem;
+	color: var(--color-grey-light);
+	z-index: 1;
+`;

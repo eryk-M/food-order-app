@@ -34,8 +34,10 @@ const TrackerForm = () => {
 			.required('Order ID is required')
 			.matches(/[0-9]{10}/, 'Order ID must be in 10 digits format')
 			.test('orderId', 'Order ID does not exist', async (value) => {
-				const response = await getOrder(value).get();
-				return !response.empty;
+				if (value.length === 10) {
+					const response = await getOrder(value).get();
+					return !response.empty;
+				}
 			}),
 	});
 

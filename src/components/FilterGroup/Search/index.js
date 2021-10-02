@@ -7,7 +7,7 @@ import {
 } from 'components/Form/FormElements';
 import { BsSearch } from 'react-icons/bs';
 import { SearchContainer, SearchHint } from './SearchElements';
-const Search = ({ query, setQuery, width, placeholder }) => {
+const Search = ({ query, setQuery, width, placeholder, tooltip }) => {
 	return (
 		<SearchContainer width={width} query={query}>
 			<Form onSubmit={(e) => e.preventDefault()}>
@@ -20,9 +20,11 @@ const Search = ({ query, setQuery, width, placeholder }) => {
 							setQuery(e.currentTarget.value);
 						}}
 					/>
-					<SearchHint query={query}>
-						Type at least 3 letters
-					</SearchHint>
+					{tooltip && (
+						<SearchHint query={query}>
+							Type at least 3 letters
+						</SearchHint>
+					)}
 				</FormElement>
 			</Form>
 		</SearchContainer>

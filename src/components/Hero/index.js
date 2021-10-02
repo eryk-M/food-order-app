@@ -10,11 +10,13 @@ import {
 	HeroImageWrapper,
 	HeroIMG,
 } from './HeroElements';
+
 import ButtonLink from '../ButtonLink';
 import Shape from 'images/shape.png';
-import ImgBg from '../../images/header-burger-2.jpg';
+import ImgBg from 'images/header-burger-2.jpg';
 const Hero = () => {
 	const height = window.outerHeight;
+
 	return (
 		<HeroContainer height={height}>
 			<HeroImageWrapper

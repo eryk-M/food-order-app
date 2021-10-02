@@ -21,9 +21,9 @@ import {
 import { FiTruck } from 'react-icons/fi';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import logo from 'images/logo.png';
-import TreeMenu from '../../../components/Admin/TreeMenu';
+import TreeMenu from 'components/Admin/TreeMenu';
 
-import { treeUsers, treeProducts, treeQuiz } from 'helpers/treeMenus';
+import { treeProducts, treeQuiz } from 'helpers/treeMenus';
 
 const SideBar = ({ hidden }) => {
 	const { logout } = useAuth();
@@ -55,7 +55,6 @@ const SideBar = ({ hidden }) => {
 
 				<SideBarTree>
 					<TreeMenu {...treeProducts} hidden={hidden} />
-					<TreeMenu {...treeUsers} hidden={hidden} />
 					<TreeMenu {...treeQuiz} hidden={hidden} />
 				</SideBarTree>
 				<SideBarItem>

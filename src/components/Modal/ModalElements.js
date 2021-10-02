@@ -7,7 +7,7 @@ export const ModalContainer = styled.div`
 	left: 0;
 	height: 100%;
 	width: 100%;
-	z-index: 1000;
+	z-index: 5006;
 	justify-content: center;
 	align-items: center;
 	display: flex;
@@ -15,7 +15,7 @@ export const ModalContainer = styled.div`
 
 export const ModalOverlay = styled(motion.div)`
 	position: absolute;
-	z-index: 1000;
+	z-index: 5005;
 	top: 0;
 	left: 0;
 	bottom: 0;
@@ -27,7 +27,7 @@ export const ModalOverlay = styled(motion.div)`
 
 export const ModalContent = styled(motion.div)`
 	background-color: #fff;
-	z-index: 1000;
+	z-index: 5006;
 	display: flex;
 	flex-direction: column;
 	position: relative;

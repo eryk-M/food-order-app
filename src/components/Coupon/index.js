@@ -8,7 +8,6 @@ import {
 } from './CouponElements.js';
 
 const Coupon = ({ el }) => {
-	console.log(el);
 	return (
 		<>
 			<CouponCard>

@@ -6,7 +6,7 @@ export const SideBarContainer = styled.aside`
 	color: rgba(255, 255, 255, 0.8);
 	position: fixed;
 	height: 100vh;
-	z-index: 1000;
+	z-index: 5002;
 	background-color: #323940;
 	width: 25rem;
 	box-shadow: 0 1.4rem 2.8rem rgba(0, 0, 0, 0.25),

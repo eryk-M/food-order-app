@@ -32,6 +32,7 @@ const Products = () => {
 					setMaxPrice,
 					setMinPrice,
 				}}
+				query={query}
 				setQuery={setQuery}
 				setSort={setSort}
 			/>
