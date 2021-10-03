@@ -118,6 +118,12 @@
 	padding-right: 10px;
 	display: inline-block;
 }
+@media only screen and (max-width: 460px) {
+	.rs-steps-item-title {
+		display: none;
+	}
+}
+
 .rs-steps-item-title:empty {
 	padding-right: 0;
 }
@@ -252,5 +258,11 @@
 @media only screen and (max-width: 830px) {
 	.rs-steps-item-title {
 		font-size: 14px;
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	.rs-steps-horizontal .rs-steps-item-title::after {
+		display: none;
 	}
 }

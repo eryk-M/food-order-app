@@ -47,7 +47,7 @@ const UserNav = () => {
 						activeClassName="active-user-nav"
 					>
 						<UserNavIconUser />
-						Account
+						<span>Account</span>
 					</UserNavLink>
 				</UserNavItem>
 				<UserNavItem>
@@ -56,7 +56,7 @@ const UserNav = () => {
 						activeClassName="active-user-nav"
 					>
 						<UserNavIconPassword />
-						Password
+						<span>Password</span>
 					</UserNavLink>
 				</UserNavItem>
 				<UserNavItem>
@@ -65,7 +65,7 @@ const UserNav = () => {
 						activeClassName="active-user-nav"
 					>
 						<UserNavIconBriefcase />
-						My orders
+						<span>My orders</span>
 					</UserNavLink>
 				</UserNavItem>
 				<UserNavItem>
@@ -74,7 +74,7 @@ const UserNav = () => {
 						activeClassName="active-user-nav"
 					>
 						<UserNavQuestionMark />
-						Quizes
+						<span>Quizes</span>
 					</UserNavLink>
 				</UserNavItem>
 				<UserNavItem>
@@ -83,13 +83,13 @@ const UserNav = () => {
 						activeClassName="active-user-nav"
 					>
 						<UserNavPercentIcon />
-						Coupons
+						<span>Coupons</span>
 					</UserNavLink>
 				</UserNavItem>
 				<UserNavItem>
 					<UserNavLink logout="true" to="#" onClick={handleLogout}>
 						<UserNavIconLogout />
-						Log Out
+						<span>Log Out</span>
 					</UserNavLink>
 				</UserNavItem>
 			</UserNavList>

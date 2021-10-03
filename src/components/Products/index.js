@@ -6,11 +6,14 @@ import SearchForm from './SearchForm';
 import {
 	ProductsContainer,
 	ProductsSearchWrapper,
+	SearchContainer,
 } from './ProductsElements';
 
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useWindowSize } from 'hooks/useWindowSize';
 import { getAllProducts } from 'utils/firebaseGetters';
-
+import Search from 'components/FilterGroup/Search';
+import Select from 'components/FilterGroup/Select';
 import Loader from 'components/Loader';
 
 const Content = lazy(() => import('./Content'));
@@ -21,8 +24,12 @@ const Products = () => {
 	const [category, setCategory] = useState('All');
 	const [query, setQuery] = useState('');
 	const [sort, setSort] = useState('');
+	const size = useWindowSize();
 
 	const { data } = useFirestoreQuery(getAllProducts());
+
+	const { width } = size;
+
 	return (
 		<ProductsContainer>
 			<SearchForm
@@ -39,6 +46,17 @@ const Products = () => {
 			<ProductsSearchWrapper className="products">
 				<SideBar setCategory={setCategory} />
 
+				{width <= 640 && (
+					<SearchContainer>
+						<Search
+							query={query}
+							tooltip={false}
+							setQuery={setQuery}
+							placeholder="Search by name"
+						/>
+						<Select setSort={setSort} />
+					</SearchContainer>
+				)}
 				<Suspense fallback={<Loader primary margincenter veryhigh />}>
 					<Content
 						data={data}

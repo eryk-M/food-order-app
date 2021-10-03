@@ -54,8 +54,10 @@ const NavBar = (props) => {
 
 	const { pathname } = props.location;
 	const { toggle } = props;
+	const { width } = size;
+
 	const switchMenu = () => {
-		if (size.width > 840) {
+		if (width > 840) {
 			return (
 				<>
 					<NavList>

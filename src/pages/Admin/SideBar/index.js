@@ -9,6 +9,7 @@ import {
 	SideBarLink,
 	SideBarTree,
 	SideBarP,
+	SideBarClose,
 } from './SideBarElements';
 
 import { useAuth } from 'contexts/AuthContext';
@@ -25,10 +26,26 @@ import TreeMenu from 'components/Admin/TreeMenu';
 
 import { treeProducts, treeQuiz } from 'helpers/treeMenus';
 
-const SideBar = ({ hidden }) => {
+const SideBar = ({ width, hidden, setHidden }) => {
 	const { logout } = useAuth();
+
 	return (
-		<SideBarContainer className={hidden ? 'is-hidden-menu' : ''}>
+		<SideBarContainer
+			className={
+				hidden && width > 1024
+					? 'is-hidden-menu-desktop'
+					: hidden && width <= 1024
+					? 'is-hidden-menu-mobile'
+					: ''
+			}
+		>
+			{width <= 1024 && (
+				<SideBarClose
+					onClick={() => setHidden((prevHidden) => !prevHidden)}
+				>
+					X
+				</SideBarClose>
+			)}
 			<SideBarLogo to="/">
 				<SideBarLogoImage src={logo} />
 			</SideBarLogo>
@@ -54,8 +71,8 @@ const SideBar = ({ hidden }) => {
 				</SideBarItem>
 
 				<SideBarTree>
-					<TreeMenu {...treeProducts} hidden={hidden} />
-					<TreeMenu {...treeQuiz} hidden={hidden} />
+					<TreeMenu width={width} {...treeProducts} hidden={hidden} />
+					<TreeMenu width={width} {...treeQuiz} hidden={hidden} />
 				</SideBarTree>
 				<SideBarItem>
 					<SideBarLink

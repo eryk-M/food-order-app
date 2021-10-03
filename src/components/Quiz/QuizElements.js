@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
 import { motion } from 'framer-motion';
 import quizBg from 'images/quiz_bg.jpg';
+import { device } from 'utils/breakpoints';
 
 export const QuizContainer = styled.div`
 	height: 100%;
@@ -16,6 +17,9 @@ export const QuizContent = styled.div`
 	margin: 0 auto;
 	padding-top: 3rem;
 	padding-bottom: 4rem;
+	@media ${device.mobileM} {
+		max-width: 90%;
+	}
 `;
 
 export const QuizHeading = styled.h2`

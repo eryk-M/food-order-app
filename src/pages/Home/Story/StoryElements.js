@@ -1,16 +1,27 @@
 import styled from 'styled-components/macro';
 
+import { device } from 'utils/breakpoints';
+
 export const StoryContainer = styled.section`
 	max-width: 116rem;
 	margin: 10rem auto;
 	display: flex;
 	padding: 0 1rem;
+	@media ${device.mobileL} {
+		flex-direction: column;
+	}
 `;
 
 export const StoryContent = styled.div`
 	margin-right: 10rem;
 	display: flex;
 	flex-direction: column;
+	@media ${device.tablet} {
+		margin-right: 5rem;
+	}
+	@media ${device.mobileL} {
+		margin: 2rem auto;
+	}
 `;
 
 export const StoryP = styled.p`
@@ -28,9 +39,14 @@ export const StoryDesc = styled.p`
 export const StoryImage = styled.img`
 	display: inline-block;
 	height: 500px;
+
+	@media ${device.tablet} {
+		height: 400px;
+	}
 `;
 export const StoryImageWrapper = styled.div`
 	position: relative;
+	height: 500px;
 	&:before {
 		content: '';
 		position: absolute;
@@ -40,6 +56,19 @@ export const StoryImageWrapper = styled.div`
 		right: -1rem;
 		background-color: var(--color-primary);
 		z-index: -1;
+
+		@media ${device.tablet} {
+			height: 400px;
+		}
+	}
+	@media ${device.tablet} {
+		height: 400px;
+	}
+	@media ${device.mobileL} {
+		display: inline-block;
+		width: 33.3rem;
+		margin: 0 auto;
+		margin-top: 2rem;
 	}
 `;
 

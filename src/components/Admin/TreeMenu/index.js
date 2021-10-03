@@ -12,7 +12,7 @@ import {
 } from './TreeMenuElements';
 import { SlideDown } from 'react-slidedown';
 
-const TreeMenu = ({ text, mainIcon, list, hidden }) => {
+const TreeMenu = ({ width, text, mainIcon, list, hidden }) => {
 	const [closed, setClosed] = useState(true);
 
 	const rotateArrowList = {
@@ -20,18 +20,22 @@ const TreeMenu = ({ text, mainIcon, list, hidden }) => {
 	};
 
 	return (
-		<Tree className={hidden ? 'is-hidden-menu' : ''}>
+		<Tree
+			className={
+				hidden && width > 1024 ? 'is-hidden-menu-desktop' : ''
+			}
+		>
 			<TreeItemMain
 				activeClassName="is-active"
 				onClick={() => setClosed((currClosed) => !currClosed)}
-				hidden={hidden}
+				hidden={hidden && width > 1024}
 			>
 				{React.createElement(mainIcon, { className: 'icon-left' })}
-				<TreeP hidden={hidden}>{text}</TreeP>
+				<TreeP hidden={hidden && width > 1024}>{text}</TreeP>
 				<MdKeyboardArrowDown
 					style={closed ? null : rotateArrowList}
 					className="icon-arrow"
-					hidden={hidden}
+					hidden={hidden && width > 1024}
 				/>
 			</TreeItemMain>
 			<SlideDown className="my-dropdown-slidedown" closed={closed}>
@@ -42,7 +46,7 @@ const TreeMenu = ({ text, mainIcon, list, hidden }) => {
 								exact
 								to={el.path}
 								activeClassName="is-active"
-								hidden={hidden}
+								hidden={hidden && width > 1024}
 							>
 								{React.createElement(el.icon)}
 								<TreeP>{el.text}</TreeP>

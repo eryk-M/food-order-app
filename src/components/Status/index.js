@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
+import { device } from 'utils/breakpoints';
+
 const StatusNote = styled.p`
 	display: inline-block;
 	font-size: 1.6rem;
@@ -39,6 +41,9 @@ const StatusNote = styled.p`
 	margin: 0 auto;
 	border-radius: 1rem;
 	padding: 0.4rem 1rem;
+	@media ${device.mobileM} {
+		margin: 0;
+	}
 `;
 
 const Status = ({ step }) => {

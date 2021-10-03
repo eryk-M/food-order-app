@@ -42,11 +42,7 @@ export const ProductsImg = styled.img`
 	width: 100%;
 	min-height: 12rem;
 	height: 25rem;
-	/* width: 15rem; */
 	object-fit: cover;
-	/* transform: scale(0); */
-	/* height: 30%; */
-	/* width: auto; */
 `;
 export const ProductsLink = styled(Link)`
 	color: #000;

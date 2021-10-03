@@ -5,7 +5,7 @@ import { useLocation, Redirect } from 'react-router-dom';
 import { Steps } from 'rsuite';
 
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
-import { useWindowSize } from 'hooks/useWindowSize';
+
 import 'components/Cart/steps.css';
 
 import { getOrder } from 'utils/firebaseGetters';
@@ -26,7 +26,6 @@ import {
 
 const TrackerDetails = () => {
 	const { order } = useLocation();
-	const size = useWindowSize();
 	const [step, setStep] = useState(null);
 	const { data } = useFirestoreQuery(getOrder(order?.orderId));
 
@@ -74,10 +73,7 @@ const TrackerDetails = () => {
 				</TrackerDetailsContent>
 				{step !== 5 && (
 					<StepsContainer>
-						<Steps
-							current={step}
-							vertical={size.width < 610 ? true : false}
-						>
+						<Steps current={step}>
 							<Steps.Item title="Order placed" />
 							<Steps.Item title="Preparing" />
 							<Steps.Item title="Cooking" />

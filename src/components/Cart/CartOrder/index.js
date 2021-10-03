@@ -60,6 +60,7 @@ const CartOrder = ({
 	const { validateDiscountCode, validateQuizCode } = useApi();
 	const { currentUser } = useAuth();
 	const [loading, setLoading] = useState(false);
+
 	const validationSchema = Yup.object().shape({
 		discount: Yup.string()
 			.test(
@@ -283,13 +284,18 @@ const CartOrder = ({
 					autoComplete="off"
 				/>
 
-				<Button
-					disabled={!cart.length >= 1 || discountAdded || loading}
-					marginleft="2rem"
-				>
-					Apply coupon
-				</Button>
-
+				{discountAdded ? (
+					<Alert success right="-17rem" top="1rem" noanimate>
+						Coupon added!
+					</Alert>
+				) : (
+					<Button
+						disabled={!cart.length >= 1 || discountAdded || loading}
+						marginleft="2rem"
+					>
+						Apply coupon
+					</Button>
+				)}
 				{loading && (
 					<Loader primary display="inline-block" marginleft="2rem" />
 				)}

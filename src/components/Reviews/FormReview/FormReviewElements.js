@@ -16,7 +16,6 @@ export const FormReviewForm = styled.form`
 `;
 
 export const FormReviewNote = styled.p`
-	/* margin: 0 0 1em; */
 	margin: 1rem 0;
 	text-align: center;
 	font-size: 1.6rem;
@@ -50,4 +49,19 @@ export const FormReviewFormCommentBottom = styled.div`
 	justify-content: space-between;
 `;
 
-export const FormReviewNotLoggedIn = styled.div``;
+export const FormReviewNotLoggedIn = styled.p`
+	font-size: 1.8rem;
+	padding: 5rem;
+	text-align: center;
+
+	& a {
+		color: var(--color-primary);
+		font-weight: bold;
+	}
+`;
+
+export const AlreadyReviewed = styled.p`
+	font-size: 1.8rem;
+	padding: 5rem;
+	text-align: center;
+`;

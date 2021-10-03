@@ -63,7 +63,6 @@ export const UserQuizContainer = styled.div`
 	padding-bottom: 3rem;
 	overflow-y: scroll;
 	height: 50rem;
-	/* height: 50rem; */
 `;
 
 export const QuizUpperContent = styled(motion.div)`

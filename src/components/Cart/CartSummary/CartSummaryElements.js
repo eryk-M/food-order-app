@@ -3,13 +3,19 @@ import styled from 'styled-components/macro';
 import { FiShoppingCart } from 'react-icons/fi';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 
+import { device } from 'utils/breakpoints';
+
 export const CartSummaryContainer = styled.div`
 	max-width: 90rem;
 	display: flex;
 	justify-content: space-between;
-
 	margin: 0 auto;
 	padding: 3rem;
+
+	@media ${device.mobileM} {
+		flex-direction: column-reverse;
+		padding: 0 1rem;
+	}
 `;
 export const CartSummaryDetails = styled.div``;
 export const CartSummaryDetailsHeading = styled.h2`
@@ -18,9 +24,7 @@ export const CartSummaryDetailsHeading = styled.h2`
 	font-family: 'Rubik', sans-serif;
 `;
 export const CartSummaryItem = styled.div`
-	/* border: 1px solid var(--color-green); */
 	margin-top: 1rem;
-	/* padding-left: 2rem; */
 	margin-left: 7rem;
 	padding-bottom: 2rem;
 	display: ${(props) => (props.flex ? 'flex' : 'block')};
@@ -67,6 +71,10 @@ export const CartSummaryOrderImage = styled.img`
 	height: 15rem;
 	width: 15rem;
 	object-fit: cover;
+	@media ${device.mobileM} {
+		height: 10rem;
+		width: 10rem;
+	}
 `;
 export const CartSummaryOrder = styled.div`
 	margin-left: 1rem;
@@ -86,10 +94,12 @@ export const CartSummaryOrderInfo = styled.p`
 export const CartSummaryButton = styled.button``;
 export const CartSummaryTotal = styled.div`
 	max-height: 30rem;
-	/* background-color: #e2e2e2; */
 	padding: 2rem;
 	width: 25rem;
 	border-top: 5px solid var(--color-primary);
+	@media ${device.mobileM} {
+		width: 100%;
+	}
 `;
 export const CartSummaryTotalHeading = styled.h2`
 	font-size: 1.6rem;

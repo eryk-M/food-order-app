@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro';
 
+import { device } from 'utils/breakpoints';
+
 export const TableWrapper = styled.div`
 	background-color: var(--color-white);
 	padding: 1.5rem;
@@ -28,7 +30,7 @@ export const TableRow = styled.tr`
 	font-weight: ${(props) => props.fontW};
 
 	&:not(:last-of-type) {
-		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+		/* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
 	}
 	& .cell-word-wrap {
 		word-wrap: break-word;
@@ -38,9 +40,45 @@ export const TableRow = styled.tr`
 			return '&:hover {background-color: #93949417;cursor: pointer;}';
 		}
 	}}
-	&:hover {
-		background-color: #93949417;
+	@media (min-width: 768px) {
+		&:hover {
+			background-color: #93949417;
+		}
 	}
+
+	@media ${device.mobileM} {
+		border-bottom: 1px solid #ddd;
+		display: block;
+		/* border-top: 1px solid rgba(0, 0, 0, 0.1);
+         */
+		border: 1px solid var(--color-primary);
+		&:nth-child(even) {
+			margin-bottom: 2rem;
+			border: none;
+		}
+	}
+`;
+
+export const TableHead = styled.thead`
+	padding: 1rem 3rem;
+	clip: rect(0 0 0 0);
+	/* width: 100%; */
+	background-color: #93949417;
+	@media ${device.mobileM} {
+		border-top: none;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+	}
+`;
+export const TableCellHead = styled.th`
+	padding: 1rem 3rem;
+	text-align: left;
+	width: ${(props) => props.width};
 `;
 
 export const TableCell = styled.td`
@@ -49,6 +87,23 @@ export const TableCell = styled.td`
 	width: ${(props) => props.width};
 	text-align: ${(props) => (props.center ? 'center' : null)};
 	cursor: ${(props) => (props.pointer ? 'pointer' : '')};
+
+	@media ${device.mobileM} {
+		/* display: block; */
+		font-size: 1.4rem;
+		text-align: right;
+		display: block;
+		&::before {
+			content: attr(data-label);
+			float: left;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+
+		&:not(:last-of-type) {
+			border-bottom: 1px solid #ddd;
+		}
+	}
 `;
 
 export const TableButton = styled.button`

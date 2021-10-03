@@ -1,16 +1,22 @@
 import styled from 'styled-components/macro';
 
+import { device } from 'utils/breakpoints';
+
 export const SideBarContainer = styled.div`
 	width: 22%;
 	margin-right: 5rem;
+
+	@media ${device.mobileL} {
+		width: 90%;
+		margin: 0 auto;
+		display: flex;
+	}
 `;
 
 export const SideBarItem = styled.li`
 	padding: 1rem 2rem;
 	font-size: 1.4rem;
 	color: var(--color-grey-dark);
-	/* font-weight: 700; */
-	/* background-color: var(--color-primary); */
 	position: relative;
 	.icon-arrow {
 		fill: black;
@@ -37,6 +43,9 @@ export const SideBarItem = styled.li`
 	}
 	&:not(:last-of-type) {
 		border-bottom: 1px solid #ccc;
+		@media ${device.mobileL} {
+			border: none;
+		}
 	}
 
 	& svg {
@@ -44,6 +53,12 @@ export const SideBarItem = styled.li`
 		vertical-align: middle;
 		margin-right: 1rem;
 		fill: rgb(164 163 162);
+		@media ${device.mobileL} {
+			min-width: 3.5rem;
+		}
+		@media ${device.mobileM} {
+			margin-right: 0;
+		}
 	}
 	&:hover {
 		background-color: var(--color-primary);
@@ -58,14 +73,30 @@ export const SideBarItem = styled.li`
 	&:hover:after,
 	&:hover .icon-arrow {
 		visibility: visible;
+		@media ${device.mobileL} {
+			visibility: hidden;
+		}
+	}
+
+	& span {
+		@media ${device.mobileM} {
+			display: none;
+		}
+	}
+	@media ${device.mobileL} {
+		/* flex-grow: 20%; */
+		width: 20%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 `;
 
 export const SideBarList = styled.ul`
 	background-color: #f7f7f7;
+
 	border-radius: 1rem;
 	margin: 3rem 0;
-	/* padding: 1rem 0; */
 	.active {
 		background-color: var(--color-primary);
 		color: var(--color-white);
@@ -77,6 +108,21 @@ export const SideBarList = styled.ul`
 		}
 		&:after {
 			visibility: visible;
+			@media ${device.mobileL} {
+				visibility: hidden;
+			}
 		}
+		& .icon-arrow {
+			@media ${device.mobileL} {
+				visibility: hidden;
+			}
+		}
+	}
+	@media ${device.mobileL} {
+		display: inline-flex;
+		/* margin: 0 0.5rem; */
+		width: 92%;
+		border-radius: 0;
+		margin: 0 auto;
 	}
 `;

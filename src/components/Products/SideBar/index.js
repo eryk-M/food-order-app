@@ -60,7 +60,7 @@ const Sidebar = ({ setCategory }) => {
 						className={toggleActiveStyles(i)}
 					>
 						{React.createElement(icon)}
-						{name}
+						<span>{name}</span>
 						<MdKeyboardArrowRight className="icon-arrow" />
 					</SideBarItem>
 				))}

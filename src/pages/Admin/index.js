@@ -6,6 +6,8 @@ import SideBar from './SideBar';
 import AdminContent from './AdminContent';
 import TopBar from './TopBar';
 
+import { useWindowSize } from 'hooks/useWindowSize';
+
 const AdminContentContainer = styled.div`
 	margin-top: 6rem;
 	margin-left: 25rem;
@@ -15,16 +17,26 @@ const AdminContentContainer = styled.div`
 	transition: margin-left 0.2s ease-in-out;
 	min-height: calc(100vh - 6rem);
 	background-color: #93949417;
+
+	@media only screen and (max-width: 1024px) {
+		margin-left: 0;
+	}
 `;
 
 const AdminPage = () => {
 	const [hidden, setHidden] = useState(false);
+	const size = useWindowSize();
+
+	const { width } = size;
+
 	return (
 		<>
-			<TopBar setHidden={setHidden} hidden={hidden} />
-			<SideBar hidden={hidden} />
+			<TopBar width={width} setHidden={setHidden} hidden={hidden} />
+			<SideBar width={width} hidden={hidden} setHidden={setHidden} />
 			<AdminContentContainer
-				className={hidden ? 'is-hidden-content' : ''}
+				className={
+					hidden && width > 1024 ? 'is-hidden-content-desktop' : ''
+				}
 			>
 				<AdminContent hidden={hidden} />
 			</AdminContentContainer>

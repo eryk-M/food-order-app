@@ -3,10 +3,11 @@ import { FaCartPlus } from 'react-icons/fa';
 import { IoIosResize } from 'react-icons/io';
 import { FaStar } from 'react-icons/fa';
 
+import { device } from 'utils/breakpoints';
+
 export const ProductContainer = styled.section`
 	display: flex;
 	border-radius: 5px;
-	/* overflow: hidden; */
 	max-width: 136rem;
 	margin: 5rem auto;
 
@@ -39,6 +40,10 @@ export const SliderContainer = styled.div`
 		z-index: 1;
 		visibility: ${(props) => (props.discount ? 'visible' : 'hidden')};
 	}
+
+	@media ${device.mobileM} {
+		max-width: 40rem;
+	}
 `;
 
 export const SlideShow = styled.img`
@@ -52,10 +57,13 @@ export const SliderShowcase = styled.div`
 	width: 50rem;
 	height: 35rem;
 	transition: all 0.5s ease;
-
+	object-position: 60% top;
 	&:hover {
 		cursor: -webkit-zoom-in;
 		cursor: zoom-in;
+	}
+	@media ${device.mobileM} {
+		width: 40rem;
 	}
 `;
 
@@ -93,6 +101,8 @@ export const ProductLeft = styled.div`
 export const ProductImg = styled.img`
 	width: auto;
 	padding: 4rem;
+
+	object-fit: cover;
 `;
 
 export const ProductRight = styled.div`
@@ -103,6 +113,7 @@ export const ProductRight = styled.div`
 	flex-direction: column;
 	@media screen and (max-width: 840px) {
 		width: 90%;
+		padding: 1rem;
 	}
 `;
 
@@ -171,6 +182,10 @@ export const ProductForm = styled.form`
 	align-items: center;
 	margin-left: auto;
 	position: relative;
+
+	@media ${device.mobileM} {
+		margin-top: 2rem;
+	}
 `;
 
 export const ProductQuantityLabel = styled.label`

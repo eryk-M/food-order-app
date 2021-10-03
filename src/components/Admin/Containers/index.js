@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro';
 
+import { device } from 'utils/breakpoints';
+
 export const MainContainer = styled.div`
 	display: ${(props) => props.display};
 	background-color: var(--color-white);
@@ -50,6 +52,20 @@ export const TotalContainer = styled.div`
 	color: var(--color-grey-dark);
 	border-radius: 5px;
 	box-shadow: 0 0.1rem 1rem rgb(0 0 0 / 10%);
+
+	@media ${device.mobileL} {
+		flex-direction: column;
+	}
+	@media ${device.mobileM} {
+		flex-direction: row;
+		flex: 0 0 100%;
+		max-width: unset;
+		width: 100%;
+
+		&:not(:first-of-type) {
+			margin-top: 2rem;
+		}
+	}
 `;
 
 export const FlexCenterContainer = styled.div`
@@ -58,6 +74,11 @@ export const FlexCenterContainer = styled.div`
 		props.center ? 'center' : 'space-between'};
 	align-items: center;
 	margin-right: 2rem;
+
+	@media ${device.mobileM} {
+		flex-direction: column;
+		/* width: 100%; */
+	}
 `;
 
 export const JustifyCenterContainer = styled.div`
@@ -75,6 +96,8 @@ export const LineChartContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	@media only screen and (max-width: 420px) {
+	}
 `;
 
 export const LineChartsContainer = styled.div`
@@ -122,6 +145,12 @@ export const DashBoardGridContainer = styled.div`
 		grid-template-rows: repeat(2, 1fr) 0 repeat(2, 1fr);
 		grid-gap: 2rem;
 	}
+
+	@media only screen and (max-width: 420px) {
+		grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+		grid-template-rows: unset;
+		margin-right: 2rem;
+	}
 `;
 
 export const GridLine1 = styled.div`
@@ -129,17 +158,26 @@ export const GridLine1 = styled.div`
 	@media only screen and (max-width: 1575px) {
 		grid-area: 1 / 1 / 2 / 3;
 	}
+	@media only screen and (max-width: 420px) {
+		grid-area: unset;
+	}
 `;
 export const GridLine2 = styled.div`
 	grid-area: 1 / 2 / 2 / 3;
 	@media only screen and (max-width: 1575px) {
 		grid-area: 1 / 3 / 2 / 5;
 	}
+	@media only screen and (max-width: 420px) {
+		grid-area: unset;
+	}
 `;
 export const GridLine3 = styled.div`
 	grid-area: 2 / 1 / 3 / 2;
 	@media only screen and (max-width: 1575px) {
 		grid-area: 2 / 1 / 3 / 3;
+	}
+	@media only screen and (max-width: 420px) {
+		grid-area: unset;
 	}
 `;
 
@@ -148,12 +186,19 @@ export const GridLine4 = styled.div`
 	@media only screen and (max-width: 1575px) {
 		grid-area: 2 / 3 / 3 / 5;
 	}
+	@media only screen and (max-width: 420px) {
+		grid-area: unset;
+	}
 `;
 
 export const GridDonut = styled.div`
 	grid-area: 1 / 3 / 3 / 5;
 	@media only screen and (max-width: 1575px) {
 		grid-area: 4 / 1 / 6 / 5;
+	}
+	@media only screen and (max-width: 420px) {
+		grid-area: unset;
+		margin-top: 2rem;
 	}
 `;
 

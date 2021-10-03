@@ -11,6 +11,7 @@ import {
 import { IoIosArrowDown } from 'react-icons/io';
 
 import Status from 'components/Status';
+
 const Overall = ({ el }) => {
 	const [open, setOpen] = useState(true);
 
@@ -21,13 +22,13 @@ const Overall = ({ el }) => {
 	return (
 		<>
 			<TableRow>
-				<TableCell>{el.orderId}</TableCell>
-				<TableCell>17.09.2021</TableCell>
-				<TableCell>
+				<TableCell data-label="ID">{el.orderId}</TableCell>
+				<TableCell data-label="Date">17.09.2021</TableCell>
+				<TableCell data-label="Status">
 					<Status step={el.step} />
 				</TableCell>
-				<TableCell>${el.totalPrice}</TableCell>
-				<TableCell>
+				<TableCell data-label="Price">${el.totalPrice}</TableCell>
+				<TableCell data-label="Actions">
 					<TableButton
 						primary
 						onClick={() => setOpen((currOpen) => !currOpen)}
@@ -38,9 +39,7 @@ const Overall = ({ el }) => {
 				</TableCell>
 			</TableRow>
 			<TableRow>
-				<TableCell colSpan={5} className="cell-word-wrap" padding={0}>
-					<Order el={el} open={open} />
-				</TableCell>
+				<Order el={el} open={open} />
 			</TableRow>
 		</>
 	);

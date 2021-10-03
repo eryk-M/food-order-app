@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { ImBin } from 'react-icons/im';
 import { AiFillCheckCircle } from 'react-icons/ai';
 
+import { device } from 'utils/breakpoints';
+
 export const CartWrapper = styled.div`
 	max-width: 136rem;
 	margin: 0 auto;
@@ -42,14 +44,18 @@ export const CartColumn = styled.div`
 	display: table-cell;
 	vertical-align: middle;
 	padding: 2rem;
+
 	@media only screen and (max-width: 840px) {
 		width: ${(props) => props.mobileWidth};
 	}
 
-	@media only screen and (max-width: 630px) {
+	@media only screen and (max-width: 640px) {
 		display: ${(props) => props.display};
 		flex-direction: ${(props) => props.flexDirection};
 		align-items: ${(props) => props.alignItems};
+		text-align: center;
+		justify-content: ${(props) => props.justifyContent};
+		padding: 1rem 0.5rem;
 	}
 `;
 
@@ -57,6 +63,16 @@ export const CartImage = styled.img`
 	height: 15rem;
 	width: 15rem;
 	object-fit: cover;
+
+	@media ${device.mobileL} {
+		height: 10rem;
+		width: 10rem;
+	}
+
+	@media ${device.mobileM} {
+		height: 5rem;
+		width: 5rem;
+	}
 `;
 
 export const CartDelete = styled(ImBin)`
@@ -68,8 +84,12 @@ export const CartTotal = styled.div`
 	margin-top: 3rem;
 	width: 40%;
 	margin-left: auto;
-	background-color: grey;
+	/* background-color: grey; */
 	background-color: #93949417;
+	@media ${device.MobileL} {
+		width: 33rem;
+		margin-right: 2rem;
+	}
 `;
 
 export const CartTotalContent = styled.p`
@@ -83,6 +103,10 @@ export const CartCouponForm = styled.form`
 	margin-top: 2rem;
 	position: relative;
 	display: inline-block;
+
+	@media ${device.mobileL} {
+		margin-left: 0.5rem;
+	}
 `;
 
 export const CartCouponInput = styled.input`
@@ -106,6 +130,13 @@ export const CartNoItems = styled.p`
 export const CartPayment = styled.div`
 	width: 40%;
 	margin-left: auto;
+
+	@media ${device.tablet} {
+		width: 35rem;
+	}
+	@media ${device.MobileL} {
+		margin-top: 2rem;
+	}
 `;
 
 export const CartPaymentWrapper = styled.div`
@@ -166,6 +197,10 @@ export const CartTotalDiscount = styled.span`
 export const CartCouponNote = styled.p`
 	font-size: 1.4rem;
 	line-height: 1.5;
+
+	@media ${device.mobileL} {
+		margin-left: 0.5rem;
+	}
 `;
 
 export const CartCodeAdded = styled.span`
@@ -206,7 +241,10 @@ export const CartQuantityInput = styled.input`
 export const CartQuantityWrapper = styled.div`
 	display: flex;
 	align-items: center;
-	/* border: 1px solid rgba(0, 0, 0, 0.1); */
-	display: inline-block;
+	/* display: inline-block; */
 	padding: 0.2rem;
+
+	@media ${device.mobileL} {
+		flex-direction: column;
+	}
 `;

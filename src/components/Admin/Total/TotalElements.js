@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro';
 
+import { device } from 'utils/breakpoints';
+
 export const TotalLeft = styled.div`
 	line-height: 1.7;
 `;
@@ -11,11 +13,19 @@ export const TotalH = styled.h3`
 	font-family: 'Rubik', sans-serif;
 `;
 
-export const TotalP = styled.p``;
+export const TotalP = styled.p`
+	@media ${device.mobileL} {
+		text-align: center;
+	}
+`;
 
 export const TotalNumber = styled.span`
 	display: block;
 	font-size: 2.6rem;
 	font-weight: bold;
 	color: ${(props) => props.spanColor};
+
+	@media only screen and (max-width: 1132px) {
+		font-size: 2rem;
+	}
 `;

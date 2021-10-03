@@ -1,8 +1,6 @@
 import styled from 'styled-components/macro';
 
-export const SelectForm = styled.form`
-	/* margin-left: 2rem; */
-`;
+export const SelectForm = styled.form``;
 
 export const SelectContent = styled.select`
 	font-size: 1.6rem;

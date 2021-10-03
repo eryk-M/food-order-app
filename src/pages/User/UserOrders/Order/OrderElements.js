@@ -4,10 +4,13 @@ export const OrderWrapper = styled.div`
 	display: flex;
 	background-color: #93949417;
 	padding: 2rem;
+	text-align: left;
 	justify-content: space-around;
+	width: 100%;
 `;
 
 export const OrderContent = styled.div`
+	margin-left: -2rem;
 	&:not(:first-of-type) {
 		margin-left: 2rem;
 	}

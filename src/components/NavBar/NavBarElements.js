@@ -2,6 +2,7 @@ import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart, FiUser } from 'react-icons/fi';
 import { FaBars } from 'react-icons/fa';
+import { device } from 'utils/breakpoints';
 export const Nav = styled.nav`
 	position: absolute;
 	height: 20rem;
@@ -22,6 +23,10 @@ export const NavLogo = styled(Link)``;
 
 export const NavLogoImage = styled.img`
 	height: 17rem;
+
+	@media ${device.mobileM} {
+		height: 10rem;
+	}
 `;
 
 export const NavList = styled.ul`

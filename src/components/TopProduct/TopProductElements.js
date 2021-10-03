@@ -2,6 +2,8 @@ import styled from 'styled-components/macro';
 
 import { Link } from 'react-router-dom';
 
+import { device } from 'utils/breakpoints';
+
 export const TopProductContainer = styled.figure`
 	min-height: 48rem;
 	position: relative;
@@ -12,6 +14,13 @@ export const TopProductContainer = styled.figure`
 		transform: translateY(-1.3rem);
 		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 	}
+	@media ${device.mobileL} {
+		width: 80%;
+		min-height: 55rem;
+		&:not(:first-of-type) {
+			margin-top: 2rem;
+		}
+	}
 `;
 
 export const TopProductImage = styled.img`
@@ -20,6 +29,12 @@ export const TopProductImage = styled.img`
 	width: 100%;
 	object-fit: cover;
 	clip-path: polygon(0 85%, 0 0, 100% 0, 100% 85%, 50% 100%);
+	@media ${device.mobileL} {
+		height: 40rem;
+	}
+	@media ${device.mobileM} {
+		height: 35rem;
+	}
 `;
 
 export const TopProductInfo = styled.div`
@@ -29,6 +44,10 @@ export const TopProductInfo = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: calc(100% - 26rem);
+	@media ${device.mobileL} {
+		/* height: calc(100% - 34rem); */
+		height: 20rem;
+	}
 `;
 
 export const TopProductHeading = styled.h4`

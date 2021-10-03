@@ -11,6 +11,8 @@ import {
 	FormReviewFormComment,
 	FormReviewFormCommentLabel,
 	FormReviewFormCommentBottom,
+	AlreadyReviewed,
+	FormReviewNotLoggedIn,
 } from './FormReviewElements';
 
 import Button from 'components/Button';
@@ -74,9 +76,12 @@ const FormReview = ({
 
 	return (
 		<FormReviewContainer>
-			{isAdded && 'You already review this product'}
-			{/* TODO: DODAJ !isAdded na dole jak zrobisz!! */}
-			{currentUser && (
+			{isAdded && (
+				<AlreadyReviewed>
+					You already reviewed this product
+				</AlreadyReviewed>
+			)}
+			{currentUser && !isAdded && (
 				<FormReviewForm onSubmit={handleSubmit(onSubmit)}>
 					<FormReviewNote>
 						Add review and let us know what you think!
@@ -122,7 +127,9 @@ const FormReview = ({
 				</FormReviewForm>
 			)}
 			{!currentUser && (
-				<div style={{ fontSize: '3rem' }}>
+				<FormReviewNotLoggedIn>
+					{' '}
+					You need to login first! Go to{' '}
 					<Link
 						to={{
 							pathname: '/login',
@@ -131,7 +138,7 @@ const FormReview = ({
 					>
 						Login page
 					</Link>
-				</div>
+				</FormReviewNotLoggedIn>
 			)}
 		</FormReviewContainer>
 	);

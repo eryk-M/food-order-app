@@ -12,6 +12,7 @@ import {
 	AiOutlineQuestionCircle,
 	AiOutlinePercentage,
 } from 'react-icons/ai';
+
 export const UserSideNav = styled.nav`
 	display: flex;
 	flex-direction: column;
@@ -21,7 +22,7 @@ export const UserSideNav = styled.nav`
 	@media screen and (max-width: 570px) {
 		flex-direction: row;
 		width: 100%;
-		/* align-items: center; */
+		border-right: none;
 	}
 `;
 
@@ -48,6 +49,8 @@ export const UserNavList = styled.ul`
 	/* margin-top: 3.5rem; */
 	@media screen and (max-width: 570px) {
 		margin-top: 0;
+		display: flex;
+		width: 100%;
 	}
 `;
 
@@ -75,11 +78,25 @@ export const UserNavLink = styled(NavLink)`
 		@media screen and (max-width: 412px) {
 			padding: 1rem 1rem;
 		}
+		@media screen and (max-width: 570px) {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
 	}
 
 	& svg {
 		margin-right: 1rem;
 		font-size: 1.8rem;
 		vertical-align: -3px;
+		@media screen and (max-width: 570px) {
+			font-size: 2.2rem;
+			margin-right: 0;
+		}
+	}
+	& span {
+		@media screen and (max-width: 570px) {
+			display: none;
+		}
 	}
 `;

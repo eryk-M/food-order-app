@@ -1,6 +1,8 @@
 import styled, { keyframes, css } from 'styled-components/macro';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
+import { device } from 'utils/breakpoints';
+
 const moveRightDown = keyframes`
 from {
     transform: translate(0, 0);
@@ -23,6 +25,11 @@ export const ItemWrapper = styled.li`
 	}
 	&:not(:first-of-type) {
 		padding-top: 3rem;
+	}
+
+	@media (max-width: 360px) {
+		flex-direction: column;
+		align-items: center;
 	}
 `;
 
@@ -71,10 +78,15 @@ export const ItemImage = styled(LazyLoadImage)`
 
 export const ItemInfo = styled.div`
 	margin: 1rem 0 0 2rem;
+	@media (max-width: 360px) {
+		margin: 2rem auto;
+		text-align: center;
+	}
 `;
 
 export const ItemHeading = styled.h2`
 	font-size: 2rem;
+	display: inline-block;
 `;
 
 export const ItemDesc = styled.p`
@@ -95,6 +107,13 @@ export const ItemButton = styled.div`
 	&:disabled {
 		opacity: 0.2;
 	}
+	@media (max-width: 360px) {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		/* margin: 2rem 0; */
+		margin-top: 3rem;
+	}
 `;
 
 export const ItemPrice = styled.span`
@@ -109,6 +128,6 @@ export const ItemPrice = styled.span`
 	margin-top: 1rem;
 	text-decoration: ${(props) =>
 		props.discount ? 'line-through' : 'none'};
-	display: inline-block;
+	display: block;
 	margin-right: ${(props) => (props.discount ? '1rem' : '')};
 `;

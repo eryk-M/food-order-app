@@ -2,9 +2,15 @@ import styled from 'styled-components/macro';
 
 import { FaShippingFast } from 'react-icons/fa';
 
+import { device } from 'utils/breakpoints';
+
 export const CartAddressContainer = styled.div`
 	max-width: 50rem;
 	margin: 0 auto;
+	padding: 0 1rem;
+	@media ${device.mobileM} {
+		/* margin: 0 1rem; */
+	}
 `;
 
 export const CartAddressSteps = styled.div`

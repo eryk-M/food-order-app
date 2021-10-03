@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro';
 
+import { device } from 'utils/breakpoints';
+
 export const TrackerDetailsContainer = styled.section`
 	max-width: 110rem;
 	margin: 0 auto;
@@ -9,6 +11,9 @@ export const TrackerDetailsContainer = styled.section`
 export const TrackerDetailsRefresh = styled.p`
 	font-size: 1.6rem;
 	margin-top: 2rem;
+	@media (max-width: 360px) {
+		font-size: 1.3rem;
+	}
 `;
 
 export const TrackerDetailsContent = styled.div`
@@ -28,13 +33,24 @@ export const TrackerDetailsHeading = styled.h2`
 	font-weight: 400;
 	font-size: 3.2rem;
 	font-family: 'Rubik', sans-serif;
+	@media ${device.mobileM} {
+		font-size: 2.6rem;
+	}
+	@media (max-width: 360px) {
+		font-size: 2rem;
+	}
 `;
 
 export const TrackerDetailsNote = styled.p`
 	font-weight: bold;
-	/* text-align: right; */
 	font-size: 3.2rem;
 	margin-top: 2rem;
+	@media ${device.mobileM} {
+		font-size: 2.6rem;
+	}
+	@media (max-width: 360px) {
+		font-size: 2rem;
+	}
 `;
 
 export const TrackerDetailsSummary = styled.div`
@@ -54,7 +70,6 @@ export const TrackerDetailsSummaryHeading = styled.h3`
 `;
 
 export const TrackerDetailsSummaryDesc = styled.p`
-	/* margin-top: ${(props) => props.nomargin ?? '1rem'}; */
 	line-height: 1.5;
 	font-size: 1.5rem;
 `;
@@ -67,8 +82,11 @@ export const TrackerDetailsSummaryContainer = styled.div`
 `;
 
 export const StepsContainer = styled.div`
-	@media screen and (max-width: 609px) {
+	@media ${device.mobileL} {
 		display: flex;
 		justify-content: center;
 	}
+	/* @media screen and (max-width: 609px) {
+		
+	} */
 `;

@@ -47,8 +47,8 @@ const NavBarBurger = ({ hidden, toggle }) => {
 				</NavBurgerIcons>
 				<NavBurgerList>
 					<NavBurgerItem>
-						<NavBurgerLink to="/" onClick={toggle}>
-							Menu1
+						<NavBurgerLink to="/admin" onClick={toggle}>
+							Admin demo
 						</NavBurgerLink>
 					</NavBurgerItem>
 					<NavBurgerItem>

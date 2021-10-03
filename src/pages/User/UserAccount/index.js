@@ -16,7 +16,10 @@ import { Redirect, useLocation } from 'react-router-dom';
 
 import Loader from 'components/Loader';
 
-import { UserAccountHeading } from './UserAccountElements';
+import {
+	UserAccountHeading,
+	UserAccountWrapper,
+} from './UserAccountElements';
 
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -134,7 +137,7 @@ const UserAccount = ({ userData }) => {
 	};
 
 	return (
-		<>
+		<UserAccountWrapper>
 			<UserAccountHeading>General Info</UserAccountHeading>
 			{!user && <Loader />}
 			{user && (
@@ -146,6 +149,7 @@ const UserAccount = ({ userData }) => {
 					)}
 
 					{error && <Alert error>{error}</Alert>}
+
 					<FormGroup flex>
 						<FormElement id="email">
 							<FormLabel>Email</FormLabel>
@@ -200,7 +204,7 @@ const UserAccount = ({ userData }) => {
 							<FormError>{errors.phone.message}</FormError>
 						)}
 					</FormElement>
-					<FormGroup flex>
+					<FormGroup flex justify="space-between">
 						<FormElement id="city">
 							<FormLabel>City</FormLabel>
 							<FormInput
@@ -230,7 +234,7 @@ const UserAccount = ({ userData }) => {
 					<FormButton loading={loading} text="Update" />
 				</Form>
 			)}
-		</>
+		</UserAccountWrapper>
 	);
 };
 

@@ -13,6 +13,7 @@ import { Steps } from 'rsuite';
 import './steps.css';
 
 import { CartWrapper, CartContainer } from './CartElements';
+import { StepsContainer } from 'components/Tracker/TrackerDetails/TrackerDetailsElements';
 
 import CartOrder from './CartOrder';
 import CartAddress from './CartAddress';
@@ -114,12 +115,14 @@ const Cart = () => {
 	// scrollRef.current?.scrollIntoView();
 	return (
 		<CartWrapper ref={scrollRef}>
-			<Steps current={step}>
-				<Steps.Item title="Details" />
-				<Steps.Item title="Address" />
-				<Steps.Item title="Summary" />
-				<Steps.Item title="Complete" />
-			</Steps>
+			<StepsContainer>
+				<Steps current={step}>
+					<Steps.Item title="Details" />
+					<Steps.Item title="Address" />
+					<Steps.Item title="Summary" />
+					<Steps.Item title="Complete" />
+				</Steps>
+			</StepsContainer>
 			<CartContainer>
 				<Switch>
 					<Route

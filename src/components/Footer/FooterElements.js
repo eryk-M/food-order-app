@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro';
 
+import { device } from 'utils/breakpoints';
+
 export const FooterContainer = styled.footer`
 	background-color: var(--color-footer);
 	padding: 5rem 0;
@@ -57,6 +59,11 @@ export const FooterAddress = styled.ul`
 	display: flex;
 	color: var(--color-grey-light);
 	font-size: 1.3rem;
+
+	@media ${device.mobileM} {
+		flex-direction: column;
+		align-items: center;
+	}
 `;
 
 export const FooterDetail = styled.li`
@@ -64,6 +71,13 @@ export const FooterDetail = styled.li`
 	font-weight: 100;
 	&:not(:last-of-type) {
 		border-right: 2px solid var(--color-primary);
+
+		@media ${device.mobileM} {
+			border-right: none;
+		}
+	}
+	@media ${device.mobileM} {
+		line-height: 1.7;
 	}
 `;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
 	FooterContainer,
@@ -19,7 +19,13 @@ import {
 
 import Logo from 'images/logo.png';
 
-const Footer = () => {
+import { withRouter } from 'react-router-dom';
+
+const Footer = (props) => {
+	const { location } = props;
+	if (location.pathname.match(/admin/)) {
+		return null;
+	}
 	return (
 		<FooterContainer>
 			<FooterMedia>
@@ -50,4 +56,4 @@ const Footer = () => {
 	);
 };
 
-export default Footer;
+export default withRouter(Footer);

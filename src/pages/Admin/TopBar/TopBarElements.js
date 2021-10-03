@@ -2,6 +2,8 @@ import styled from 'styled-components/macro';
 
 import { NavLink } from 'react-router-dom';
 
+import { device } from 'utils/breakpoints';
+
 export const TopBarNav = styled.nav`
 	position: fixed;
 	top: 0;
@@ -12,6 +14,9 @@ export const TopBarNav = styled.nav`
 	padding: 2rem;
 	transition: margin-left 0.2s ease-in-out;
 	z-index: 5001;
+	@media only screen and (max-width: 1024px) {
+		margin-left: 0;
+	}
 `;
 
 export const TopBarList = styled.ul`
@@ -19,6 +24,10 @@ export const TopBarList = styled.ul`
 	align-items: center;
 	font-size: 1.8rem;
 	font-weight: 100;
+
+	@media ${device.mobileM} {
+		font-size: 1.5rem;
+	}
 `;
 
 export const TopBarItem = styled.li``;
@@ -37,5 +46,8 @@ export const TopBarNavLink = styled(NavLink)`
 
 	&:hover {
 		color: var(--color-black);
+	}
+	@media ${device.mobileM} {
+		padding: 2rem 1rem;
 	}
 `;

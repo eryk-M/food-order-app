@@ -24,6 +24,9 @@ import AdminPage from './pages/Admin';
 import { CartProvider } from './contexts/CartContext';
 import { APIProvider } from './contexts/APIContext';
 import { AdminAPIProvider } from 'contexts/AdminAPIContext';
+
+import { ScrollToTop } from 'utils/scrollToTop';
+
 const routes = (
 	<Route>
 		<Route path="/" exact component={Home} />
@@ -59,7 +62,9 @@ function App() {
 						<NavBar toggle={toggleClass} />
 						<NavBarBurger hidden={hidden} toggle={toggleClass} />
 						<GlobalStyle />
-						<Switch>{routes}</Switch>
+						<ScrollToTop>
+							<Switch>{routes}</Switch>
+						</ScrollToTop>
 						<Footer />
 					</Router>
 				</APIProvider>

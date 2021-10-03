@@ -10,7 +10,11 @@ import {
 } from '../LineChart/LineChartElements';
 
 import { DonutChartWrapper } from './DonutChartElements.js';
+import { useWindowSize } from 'hooks/useWindowSize';
+
 const DonutChart = () => {
+	const size = useWindowSize();
+
 	const options = {
 		labels: ['Burgers', 'Chicken', 'Fries', 'Drinks'],
 		chart: {
@@ -19,12 +23,27 @@ const DonutChart = () => {
 		},
 		plotOptions: {
 			pie: {
-				// size: 1100,
+				size: size.width <= 640 ? 100 : '',
 			},
 		},
 	};
 
 	const series = [44, 55, 41, 17];
+
+	// documentation on responsive option on apexcharts site not working!!!!!!!!!!!!!!!
+	const donutWidth = (width) => {
+		if (width > 640) {
+			return '600';
+		} else if (width > 520 && width <= 640) {
+			return '500';
+		} else if (width > 460 && width <= 520) {
+			return '450';
+		} else if (width > 360 && width <= 460) {
+			return '350';
+		} else if (width <= 360) {
+			return '300';
+		}
+	};
 
 	return (
 		<DonutChartContainer>
@@ -37,7 +56,7 @@ const DonutChart = () => {
 					options={options}
 					series={series}
 					type="pie"
-					width="600"
+					width={donutWidth(size.width)}
 					height="700"
 				/>
 			</DonutChartWrapper>

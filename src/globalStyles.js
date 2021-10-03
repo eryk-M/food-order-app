@@ -29,9 +29,6 @@ html {
     @media only screen and (max-width: 840px) {
 		font-size: 50%;
 	}
-    @media only screen and (max-width: 600px) {
-      font-size: 37.5%;
-  }
 }
 
 h1, h2, h3 {
@@ -83,7 +80,7 @@ input[type=file]{
         margin-right: 1rem;
 	}
 
-.is-hidden-menu {
+.is-hidden-menu-desktop {
     width: 5rem !important;
     & a {
         width: 5rem;
@@ -111,9 +108,14 @@ input[type=file]{
         padding: 0;
     }
 }
-.is-hidden-content{
+.is-hidden-content-desktop{
     margin-left: 5rem !important;
     padding-left: 1rem;
    
+}
+
+
+.is-hidden-menu-mobile {
+    transform: translateX(0) !important
 }
 `;

@@ -2,6 +2,8 @@ import styled from 'styled-components/macro';
 
 import { NavLink, Link } from 'react-router-dom';
 
+import { device } from 'utils/breakpoints';
+
 export const SideBarContainer = styled.aside`
 	color: rgba(255, 255, 255, 0.8);
 	position: fixed;
@@ -15,6 +17,7 @@ export const SideBarContainer = styled.aside`
 	left: 0;
 	bottom: 0;
 	font-weight: 100;
+	transition: transform 0.2s ease-in-out;
 	.is-active {
 		background-color: var(--color-primary);
 		& .icon-arrow {
@@ -22,6 +25,10 @@ export const SideBarContainer = styled.aside`
 			margin-left: auto;
 			font-size: 2rem;
 		}
+	}
+
+	@media ${device.laptopS} {
+		transform: translateX(-26rem);
 	}
 `;
 
@@ -89,4 +96,15 @@ export const SideBarTreeLink = styled(Link)`
 		font-size: 2.2rem;
 		margin-right: 1.2rem;
 	}
+`;
+
+export const SideBarClose = styled.p`
+	font-size: 2.6rem;
+	font-weight: bold;
+	padding: 1rem 0;
+	margin-left: auto;
+	max-width: 100%;
+	text-align: center;
+	border-bottom: 1px solid #4b545c;
+	cursor: pointer;
 `;

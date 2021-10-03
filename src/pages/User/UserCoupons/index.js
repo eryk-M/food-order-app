@@ -10,6 +10,7 @@ import {
 	UserCouponsContainer,
 	UserCouponsNotAvailable,
 	SadIcon,
+	UserCouponsWrapper,
 } from './UserCouponsElements';
 
 const UserCoupons = () => {
@@ -26,7 +27,7 @@ const UserCoupons = () => {
 	};
 
 	return (
-		<>
+		<UserCouponsWrapper>
 			<UserAccountHeading>Available coupons</UserAccountHeading>
 			<UserCouponsContainer>
 				{data &&
@@ -37,7 +38,7 @@ const UserCoupons = () => {
 					<SadIcon /> 0 available coupons
 				</UserCouponsNotAvailable>
 			)}
-		</>
+		</UserCouponsWrapper>
 	);
 };
 

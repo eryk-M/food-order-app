@@ -3,6 +3,8 @@ import { CgCheckO } from 'react-icons/cg';
 import { RiFileCopyLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
+import { device } from 'utils/breakpoints';
+
 const fadeIn = keyframes`
 from {
     opacity: 0%;
@@ -18,6 +20,10 @@ export const CartCompleteOrderId = styled.p`
 	font-size: 2.4rem;
 
 	display: inline;
+
+	@media ${device.mobileL} {
+		font-size: 2rem;
+	}
 `;
 
 export const CartCompleteOrderContainer = styled.div`
@@ -53,7 +59,6 @@ export const CopyIconContainer = styled.span`
 	border-left: 1px solid rgba(0, 0, 0, 0.2);
 	cursor: pointer;
 	transition: all 0.2s;
-	/* display: flex; */
 	display: inline;
 	display: inline-flex;
 
@@ -68,7 +73,6 @@ export const CopyIconContainer = styled.span`
 
 export const CopyIcon = styled(RiFileCopyLine)`
 	font-size: 2.4rem;
-	/* padding: 1rem; */
 `;
 
 export const CartCompleteContainer = styled.div`
@@ -84,6 +88,10 @@ export const CartCompleteIcon = styled(CgCheckO)`
 	font-size: 24rem;
 	color: var(--color-primary);
 	margin-bottom: 1rem;
+
+	@media ${device.mobileL} {
+		font-size: 16rem;
+	}
 `;
 
 export const CartCompleteNote = styled.p`

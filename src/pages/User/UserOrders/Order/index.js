@@ -9,7 +9,14 @@ import {
 	OrderContent,
 } from './OrderElements';
 import { CashIcon, CreditCardIcon } from 'components/Admin/Icons';
+
+import { TableCell } from 'components/Table/TableElements';
+
+import { useWindowSize } from 'hooks/useWindowSize';
+
 const Order = ({ el, open }) => {
+	const size = useWindowSize();
+
 	const returnUserStatus = (step) => {
 		const text = [
 			'Order placed',
@@ -21,22 +28,21 @@ const Order = ({ el, open }) => {
 		];
 		return text[step];
 	};
-	return (
-		<SlideDown className="my-dropdown-slidedown" closed={open}>
-			<OrderWrapper>
-				<OrderContent>
-					<OrderHeading>Order Info:</OrderHeading>
-					<br />
-					{el.orderInfo.map((order, i) => (
-						<OrderInfo key={i}>
-							{order.quantity}x {order.name}
-						</OrderInfo>
-					))}
-				</OrderContent>
-				<OrderContent>
-					<OrderHeading>Address:</OrderHeading>
-					<br />
-					<OrderInfo>
+
+	const { width } = size;
+
+	if (width <= 460) {
+		return (
+			<div style={{ backgroundColor: '#93949417' }}>
+				<SlideDown className="my-dropdown-slidedown" closed={open}>
+					<TableCell data-label="Order info">
+						{el.orderInfo.map((order, i) => (
+							<OrderInfo key={i}>
+								{order.quantity}x {order.name}
+							</OrderInfo>
+						))}
+					</TableCell>
+					<TableCell data-label="Address:">
 						{el.userInfo.name}
 						<br />
 						{el.userInfo.address}
@@ -46,33 +52,84 @@ const Order = ({ el, open }) => {
 						{el.userInfo.zip}
 						<br />
 						{el.userInfo.phone}
-					</OrderInfo>
-				</OrderContent>
-				<OrderContent>
-					<OrderHeading>Payment:</OrderHeading>
-					<br />
-					{el.payment === 2 ? (
-						<>
-							{' '}
-							<CashIcon /> Cash{' '}
-						</>
-					) : (
-						<>
-							<CreditCardIcon /> Card{' '}
-						</>
-					)}
-				</OrderContent>
-				<OrderContent>
-					<OrderHeading>Total price:</OrderHeading>
-					<br />${el.totalPrice}
-				</OrderContent>
-				<OrderContent>
-					<OrderHeading>Detailed status:</OrderHeading>
-					<br />
-					{returnUserStatus(el.step)}
-				</OrderContent>
-			</OrderWrapper>
-		</SlideDown>
+					</TableCell>
+					<TableCell data-label="Payment">
+						{el.payment === 2 ? (
+							<>
+								{' '}
+								<CashIcon /> Cash{' '}
+							</>
+						) : (
+							<>
+								<CreditCardIcon /> Card{' '}
+							</>
+						)}
+					</TableCell>
+					<TableCell data-label="Total price:">
+						${el.totalPrice}
+					</TableCell>
+					<TableCell data-label="Detailed status:">
+						{returnUserStatus(el.step)}
+					</TableCell>
+				</SlideDown>
+			</div>
+		);
+	}
+
+	return (
+		<TableCell colSpan={5} className="cell-word-wrap" padding={0}>
+			<SlideDown className="my-dropdown-slidedown" closed={open}>
+				<OrderWrapper>
+					<OrderContent>
+						<OrderHeading>Order Info:</OrderHeading>
+						<br />
+						{el.orderInfo.map((order, i) => (
+							<OrderInfo key={i}>
+								{order.quantity}x {order.name}
+							</OrderInfo>
+						))}
+					</OrderContent>
+					<OrderContent>
+						<OrderHeading>Address:</OrderHeading>
+						<br />
+						<OrderInfo>
+							{el.userInfo.name}
+							<br />
+							{el.userInfo.address}
+							<br />
+							{el.userInfo.city}
+							<br />
+							{el.userInfo.zip}
+							<br />
+							{el.userInfo.phone}
+						</OrderInfo>
+					</OrderContent>
+					<OrderContent>
+						<OrderHeading>Payment:</OrderHeading>
+						<br />
+						{el.payment === 2 ? (
+							<>
+								{' '}
+								<CashIcon /> Cash{' '}
+							</>
+						) : (
+							<>
+								<CreditCardIcon /> Card{' '}
+							</>
+						)}
+					</OrderContent>
+					<OrderContent>
+						<OrderHeading>Total price:</OrderHeading>
+						<br />${el.totalPrice}
+					</OrderContent>
+					<OrderContent>
+						<OrderHeading>Detailed status:</OrderHeading>
+						<br />
+						{returnUserStatus(el.step)}
+					</OrderContent>
+				</OrderWrapper>
+			</SlideDown>
+		</TableCell>
 	);
 };
 

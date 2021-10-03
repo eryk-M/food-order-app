@@ -10,6 +10,8 @@ import {
 	TableBody,
 	TableRow,
 	TableCell,
+	TableHead,
+	TableCellHead,
 } from 'components/Table/TableElements';
 
 import { OrdersTableWrapper } from './UserOrdersElements';
@@ -22,14 +24,16 @@ const UserOrders = () => {
 	return (
 		<OrdersTableWrapper>
 			<Table>
-				<TableBody>
-					<TableRow backgroundColor="#93949417" fontW="bold">
-						<TableCell>ID</TableCell>
-						<TableCell>Date</TableCell>
-						<TableCell>Status</TableCell>
-						<TableCell>Total</TableCell>
-						<TableCell>Details</TableCell>
+				<TableHead>
+					<TableRow fontW="bold">
+						<TableCellHead>ID</TableCellHead>
+						<TableCellHead>Date</TableCellHead>
+						<TableCellHead>Status</TableCellHead>
+						<TableCellHead>Total</TableCellHead>
+						<TableCellHead width="15rem">Details</TableCellHead>
 					</TableRow>
+				</TableHead>
+				<TableBody>
 					{data && data.map((el, i) => <Overall key={i} el={el} />)}
 				</TableBody>
 			</Table>

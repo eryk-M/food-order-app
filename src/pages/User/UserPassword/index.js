@@ -13,7 +13,7 @@ import {
 	FormSpan,
 } from 'components/Form/FormElements';
 import { Alert } from 'components/Alert';
-
+import { UserAccountWrapper } from '../UserAccount/UserAccountElements';
 const UserPassword = () => {
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
@@ -51,7 +51,7 @@ const UserPassword = () => {
 	}
 
 	return (
-		<>
+		<UserAccountWrapper>
 			<UserAccountHeading>Change password</UserAccountHeading>
 
 			<Form onSubmit={handleSubmit}>
@@ -95,7 +95,7 @@ const UserPassword = () => {
 				</FormButton> */}
 				<FormButton loading={loading} text="Update" />
 			</Form>
-		</>
+		</UserAccountWrapper>
 	);
 };
 

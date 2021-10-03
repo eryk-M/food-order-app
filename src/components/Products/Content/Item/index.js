@@ -23,6 +23,8 @@ import { CartContext } from 'contexts/CartContext';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import StarRating from 'components/Reviews/FormReview/StarRating';
 
+import { useWindowSize } from 'hooks/useWindowSize';
+
 const Image = ({ el }) => {
 	const [loaded, setLoaded] = useState(false);
 
@@ -48,8 +50,9 @@ const Item = ({ el }) => {
 		state: { cart },
 		dispatch,
 	} = useContext(CartContext);
-
+	const size = useWindowSize();
 	const [isAdded, setIsAdded] = useState(false);
+
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
 	}, [cart]);
@@ -65,10 +68,17 @@ const Item = ({ el }) => {
 			setIsAdded(false);
 		}, 4000);
 	};
+
+	const { width } = size;
+
 	return (
 		<ItemWrapper>
 			{isAdded && (
-				<Alert top="2rem" right="2rem" success>
+				<Alert
+					top={width <= 460 ? '95%' : '2rem'}
+					right={width <= 460 ? '23%' : '2rem'}
+					success
+				>
 					Product added to cart
 				</Alert>
 			)}

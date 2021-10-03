@@ -20,8 +20,11 @@ import Button from 'components/Button';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useWindowSize } from 'hooks/useWindowSize';
 
 const CartAddress = ({ onChangeStep, userData, step, dispatch }) => {
+	const size = useWindowSize();
+
 	const validationSchema = Yup.object().shape({
 		name: Yup.string()
 			.required('Name is required')
@@ -70,6 +73,9 @@ const CartAddress = ({ onChangeStep, userData, step, dispatch }) => {
 		});
 		onChangeStep(undefined, 'push');
 	};
+
+	const { width } = size;
+
 	return (
 		<>
 			<CartAddressHeading>
@@ -148,10 +154,12 @@ const CartAddress = ({ onChangeStep, userData, step, dispatch }) => {
 							type="button"
 							onClick={(e) => onChangeStep(e, 'back')}
 						>
-							&#8592; Back to order{' '}
+							{width <= 360 ? '\u2190 Order' : '\u2190 Back to order'}
 						</Button>
 						<Button marginleft="auto" type="submit">
-							Proceed to summary &#10141;
+							{width <= 360
+								? 'Summary \u279D'
+								: 'Proceed to summary \u279D'}
 						</Button>
 					</CartAddressSteps>
 				</Form>

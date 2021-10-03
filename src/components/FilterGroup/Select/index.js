@@ -10,7 +10,6 @@ import {
 const Select = ({ setSort }) => {
 	return (
 		<SelectForm>
-			<SelectLabel>Sort by: </SelectLabel>
 			<SelectContent
 				onChange={(e) => {
 					setSort(e.currentTarget.value);

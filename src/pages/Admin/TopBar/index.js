@@ -9,9 +9,13 @@ import {
 
 import { FcMenu } from 'react-icons/fc';
 
-const TopBar = ({ setHidden, hidden }) => {
+const TopBar = ({ width, setHidden, hidden }) => {
 	return (
-		<TopBarNav className={hidden ? 'is-hidden-content' : ''}>
+		<TopBarNav
+			className={
+				hidden && width > 1024 ? 'is-hidden-content-desktop' : ''
+			}
+		>
 			<TopBarList>
 				<TopBarItem>
 					<TopBarNavLink
@@ -31,9 +35,6 @@ const TopBar = ({ setHidden, hidden }) => {
 					<TopBarNavLink to="/food-tracker">
 						Food Tracker
 					</TopBarNavLink>
-				</TopBarItem>
-				<TopBarItem>
-					<TopBarNavLink to="/">Menu4</TopBarNavLink>
 				</TopBarItem>
 			</TopBarList>
 		</TopBarNav>

@@ -17,7 +17,7 @@ export const UserContent = styled.div`
 	width: ${(props) =>
 		props.pathname === '/user/quizes' ? '100%' : ''};
 	@media screen and (max-width: 570px) {
-		width: 60%;
+		width: 100%;
 		margin: 2rem auto;
 	}
 `;
