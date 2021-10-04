@@ -2,6 +2,8 @@ import styled, { keyframes } from 'styled-components/macro';
 
 import { Link } from 'react-router-dom';
 import { MdErrorOutline } from 'react-icons/md';
+
+import { device } from 'utils/breakpoints';
 import Loader from '../Loader';
 
 const fadeIn = keyframes`
@@ -201,3 +203,17 @@ export const FormError = ({ children, ...rest }) => {
 		</FormErr>
 	);
 };
+export const FormGroupWrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+	@media only screen and (max-width: 580px) {
+		display: flex;
+		flex-direction: column;
+	}
+
+	& ${FormInput} {
+		@media only screen and (max-width: 580px) {
+			max-width: 40rem;
+		}
+	}
+`;

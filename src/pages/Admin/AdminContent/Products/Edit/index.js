@@ -11,6 +11,7 @@ import {
 	FormError,
 	FormTextArea,
 	FormAlert,
+	FormGroupWrapper,
 } from 'components/Form/FormElements';
 
 import {
@@ -23,6 +24,7 @@ import {
 	EditImageWrapper,
 	IngredientList,
 	IngredientItem,
+	EditButton,
 } from './EditElements';
 
 import { AdminPanelHeading } from 'components/Typography';
@@ -33,8 +35,6 @@ import {
 } from 'components/Admin/Containers';
 import { MinusIcon, EditBigIcon } from 'components/Admin/Icons';
 
-import Button from 'components/Button';
-
 import { Line } from 'rc-progress';
 import { Alert } from 'components/Alert';
 import { storage } from 'firebase';
@@ -43,15 +43,16 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
-
 import { useAdminApi } from 'contexts/AdminAPIContext';
 import { getAdminOneProduct } from 'utils/firebaseGetters';
+import { useWindowSize } from 'hooks/useWindowSize';
 
 const Edit = (props) => {
 	const { data } = useFirestoreQuery(
 		getAdminOneProduct(Number(props.match.params.id))
 	);
 	const { updateAdminProduct } = useAdminApi();
+	const size = useWindowSize();
 
 	const [ingredients, setIngredients] = useState([]);
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
@@ -227,17 +228,22 @@ const Edit = (props) => {
 	};
 
 	const imgTag = buildImgTag();
-
+	const { width } = size;
 	return (
 		<>
 			{data && (
 				<EditContainer>
 					<EditBigIcon />
 					{showSuccess && (
-						<Alert right="1rem" top="1rem" success>
-							Product updated
+						<Alert
+							right={width <= 580 ? '1.5rem' : '1rem'}
+							top={width <= 580 ? '70%' : '1rem'}
+							success
+						>
+							Updated
 						</Alert>
 					)}
+
 					{error && <FormAlert variant="danger">{error}</FormAlert>}
 					<AdminPanelHeading>{data[0].name}</AdminPanelHeading>
 					{imgTag || (
@@ -281,7 +287,7 @@ const Edit = (props) => {
 								defaultChecked={data[0].availability}
 							/>
 						</FormGroup>
-						<FormGroup flex justify="space-between">
+						<FormGroupWrapper>
 							<FormGroup>
 								<FormElement>
 									<FormLabel>Name</FormLabel>
@@ -340,7 +346,7 @@ const Edit = (props) => {
 								</FormElement>
 							</FormGroup>
 
-							<FormElement marginleft="2rem">
+							<FormElement>
 								<FormLabel>Ingredients</FormLabel>
 								<IngredientList>
 									{errors.ingredients && ingredients.length === 0 && (
@@ -363,7 +369,7 @@ const Edit = (props) => {
 									display="inline"
 									width="20rem"
 								/>
-								<Button
+								<EditButton
 									display="block"
 									width="100%"
 									type="button"
@@ -371,9 +377,9 @@ const Edit = (props) => {
 									secondary
 								>
 									Add
-								</Button>
+								</EditButton>
 							</FormElement>
-						</FormGroup>
+						</FormGroupWrapper>
 						<FormElement>
 							<FormLabel>Description</FormLabel>
 							<FormTextArea

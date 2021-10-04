@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro';
 
+import Button from 'components/Button';
+
 export const EditImage = styled.img`
 	height: 15rem;
 	width: 15rem;
@@ -26,4 +28,9 @@ export const IngredientList = styled.ul`
 export const IngredientItem = styled.li`
 	margin-top: 0.5rem;
 	margin-left: 2rem;
+`;
+
+export const EditButton = styled(Button)`
+	background-color: var(--color-secondary);
+	border: none;
 `;

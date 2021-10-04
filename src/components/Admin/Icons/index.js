@@ -22,6 +22,8 @@ import {
 } from 'react-icons/ai';
 import { MdDragHandle } from 'react-icons/md';
 
+import { device } from 'utils/breakpoints';
+
 export const TickIcon = styled(TiTick)`
 	font-size: 1.8rem;
 	fill: var(--color-green);
@@ -52,6 +54,9 @@ export const EditBigIcon = styled(FiEdit)`
 	transform: rotate(0deg);
 	color: var(--color-grey-light);
 	background-color: white;
+	@media only screen and (max-width: 580px) {
+		font-size: 8rem;
+	}
 `;
 
 export const PlusBigIcon = styled(FiPlus)`
@@ -124,6 +129,9 @@ export const PrinterIcon = styled(AiOutlinePrinter)`
 	vertical-align: middle;
 	margin-right: 1rem;
 	cursor: pointer;
+	@media ${device.mobileM} {
+		margin-right: 0;
+	}
 `;
 
 export const DragIcon = styled(RiDragMove2Fill)`

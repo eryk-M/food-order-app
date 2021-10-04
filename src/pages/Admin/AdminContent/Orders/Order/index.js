@@ -19,8 +19,8 @@ import {
 	OrderChangeButton,
 	UserStatus,
 	UserOrderStatus,
-	LoaderWrapper,
 	PrintButton,
+	OrderContainer,
 } from './OrderElements';
 import Loader from 'components/Loader';
 
@@ -36,7 +36,7 @@ import Status from 'components/Status';
 
 import { useReactToPrint } from 'react-to-print';
 import { useApi } from 'contexts/APIContext';
-
+import { useWindowSize } from 'hooks/useWindowSize';
 import { FormAlert } from 'components/Form/FormElements';
 
 const ContentToPrint = React.forwardRef(
@@ -53,15 +53,22 @@ const ContentToPrint = React.forwardRef(
 		},
 		ref
 	) => {
+		const size = useWindowSize();
+
+		const { width } = size;
 		return (
 			<>
 				{data && (
 					<>
-						<div ref={ref} style={{ padding: '1rem' }}>
+						<OrderContainer ref={ref}>
 							<AdminPanelHeading>Order ID: {id}</AdminPanelHeading>
 							<JustifyCenterContainer>
 								{showSuccess && (
-									<Alert success top="9rem" right="2rem">
+									<Alert
+										success
+										top={width <= 400 ? '22rem' : '9rem'}
+										right={width <= 400 ? '39%' : '2rem'}
+									>
 										Updated
 									</Alert>
 								)}
@@ -122,7 +129,7 @@ const ContentToPrint = React.forwardRef(
 									<OrderP medium>${data[0].totalPrice}</OrderP>
 								</OrderInfo>
 							</OrderWrapper>
-						</div>
+						</OrderContainer>
 						<MiddleWrapper>
 							<OrderHeading>Change status:</OrderHeading>
 						</MiddleWrapper>
@@ -217,7 +224,7 @@ const Order = (props) => {
 			{error && <FormAlert variant="danger">{error}</FormAlert>}
 			<PrintButton onClick={handlePrint}>
 				<PrinterIcon />
-				Print
+				<span>Print</span>
 			</PrintButton>
 			<ContentToPrint
 				ref={componentRef}

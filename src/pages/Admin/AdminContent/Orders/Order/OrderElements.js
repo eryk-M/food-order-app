@@ -1,6 +1,10 @@
 import styled from 'styled-components/macro';
 
-export const OrderContainer = styled.div``;
+import { device } from 'utils/breakpoints';
+
+export const OrderContainer = styled.div`
+	padding: 1rem;
+`;
 
 export const MiddleWrapper = styled.div`
 	text-align: center;
@@ -33,21 +37,30 @@ export const OrderWrapper = styled.div`
 	font-size: 1.4rem;
 	background-color: #fff;
 	padding: 2rem;
+
+	@media ${device.mobileM} {
+		flex-wrap: wrap;
+		padding: 2rem 0;
+		justify-content: space-around;
+	}
 `;
 
 export const OrderShipping = styled.div``;
 
 export const OrderInfo = styled.div`
-	/* border-right: 1px solid red; */
-	/* width: 33.3%; */
 	margin: 0 auto;
-	/* padding-right: 10%; */
+	@media ${device.mobileM} {
+		width: 50%;
+		text-align: center;
+	}
+	@media only screen and (max-width: 360px) {
+		width: 100%;
+	}
 `;
 
 export const OrderTotal = styled.p`
 	display: inline-block;
 	margin-left: auto;
-	/* width: 30rem; */
 `;
 
 export const OrderSteps = styled.div`
@@ -55,6 +68,14 @@ export const OrderSteps = styled.div`
 	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 	grid-gap: 5rem;
 	margin-top: 2rem;
+
+	@media ${device.tablet} {
+		grid-gap: 1rem;
+		grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+	}
+	@media ${device.mobileM} {
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	}
 `;
 
 export const OrderChangeButton = styled.button`
@@ -122,4 +143,14 @@ export const PrintButton = styled.button`
 	cursor: pointer;
 	/* outline: none; */
 	text-transform: uppercase;
+	& span {
+		@media ${device.mobileM} {
+			display: none;
+		}
+	}
+
+	@media ${device.mobileM} {
+		top: 0;
+		right: 0;
+	}
 `;

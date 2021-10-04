@@ -15,6 +15,10 @@ export const MainContainer = styled.div`
 	width: ${(props) => props.width};
 	max-width: ${(props) => props.maxwidth ?? ''};
 	min-height: ${(props) => props.minheight ?? ''};
+
+	@media ${device.laptopS} {
+		display: block;
+	}
 `;
 
 export const FullWidthContainer = styled.div`
@@ -35,6 +39,16 @@ export const EditContainer = styled.div`
 	max-width: 80rem;
 	box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
 	overflow: hidden;
+
+	@media ${device.laptopS} {
+		max-width: 100%;
+		margin-right: 2rem;
+	}
+	& div:nth-child(4) {
+		@media only screen and (max-width: 580px) {
+			margin-top: 1rem;
+		}
+	}
 `;
 
 export const ProgressContainer = styled.div`

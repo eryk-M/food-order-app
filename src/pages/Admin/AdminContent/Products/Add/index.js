@@ -11,11 +11,10 @@ import {
 	EditImage,
 	IngredientList,
 	IngredientItem,
+	EditButton,
 } from '../Edit/EditElements';
 
 import { AdminPanelHeading } from 'components/Typography';
-
-import Button from 'components/Button';
 
 import { PlusBigIcon, MinusIcon } from 'components/Admin/Icons';
 import { useHistory } from 'react-router-dom';
@@ -26,6 +25,7 @@ import { useAdminApi } from 'contexts/AdminAPIContext';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useWindowSize } from 'hooks/useWindowSize';
 
 import {
 	Form,
@@ -38,6 +38,7 @@ import {
 	FormError,
 	FormTextArea,
 	FormAlert,
+	FormGroupWrapper,
 } from 'components/Form/FormElements';
 
 import {
@@ -48,6 +49,7 @@ import {
 const Add = () => {
 	const { addAdminProduct } = useAdminApi();
 	const history = useHistory();
+	const size = useWindowSize();
 
 	const [ingredients, setIngredients] = useState([]);
 	const [ingredientToAdd, setIngredientToAdd] = useState('');
@@ -201,13 +203,18 @@ const Add = () => {
 	};
 
 	const imgTag = buildImgTag();
+	const { width } = size;
 
 	return (
 		<EditContainer>
 			<PlusBigIcon />
 			{showSuccess && (
-				<Alert right="1rem" top="1rem" success>
-					Product added
+				<Alert
+					right={width <= 580 ? '1.5rem' : '1rem'}
+					top={width <= 580 ? '70%' : '1rem'}
+					success
+				>
+					Added
 				</Alert>
 			)}
 			{error && <FormAlert variant="danger">{error}</FormAlert>}
@@ -241,6 +248,7 @@ const Add = () => {
 						<FormError>{errors.file.message}</FormError>
 					)}
 				</FormElement>
+
 				<FormGroup flex align="center" margin="2rem 0">
 					<FormLabel>Available?</FormLabel>
 					<FormCheckbox
@@ -249,7 +257,7 @@ const Add = () => {
 						defaultChecked={true}
 					/>
 				</FormGroup>
-				<FormGroup flex justify="space-between">
+				<FormGroupWrapper>
 					<FormGroup>
 						<FormElement>
 							<FormLabel>Name</FormLabel>
@@ -322,18 +330,17 @@ const Add = () => {
 							display="inline"
 							width="20rem"
 						/>
-						<Button
+						<EditButton
 							display="block"
 							type="button"
 							width="100%"
-							// marginleft="2rem"
 							onClick={(e) => addToIngredients(e)}
 							secondary
 						>
 							Add
-						</Button>
+						</EditButton>
 					</FormElement>
-				</FormGroup>
+				</FormGroupWrapper>
 				<FormElement>
 					<FormLabel>Description</FormLabel>
 					<FormTextArea
