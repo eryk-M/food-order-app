@@ -28,6 +28,7 @@ const DeleteModal = ({
 	mainText,
 	secondText,
 	description,
+	setToDelete,
 }) => {
 	const [error, setError] = useState('');
 	const [inputValue, setInputValue] = useState('');
@@ -57,6 +58,9 @@ const DeleteModal = ({
 			handleCancel();
 			setLoading(false);
 			setShowSuccess(true);
+			if (setToDelete) {
+				setToDelete(0);
+			}
 			setTimeout(() => {
 				setShowSuccess(false);
 			}, 3000);

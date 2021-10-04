@@ -1,4 +1,6 @@
-import styled, { keyframes } from 'styled-components/macro';
+import styled from 'styled-components/macro';
+
+import { device } from 'utils/breakpoints';
 
 export const SearchHint = styled.span`
 	position: absolute;
@@ -14,6 +16,10 @@ export const SearchHint = styled.span`
 		} else return 1;
 	}};
 	transition: opacity 0.1s;
+
+	@media ${device.tablet} {
+		font-size: 1.4rem;
+	}
 `;
 export const SearchContainer = styled.div`
 	width: ${(props) => props.width ?? ''};

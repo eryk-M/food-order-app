@@ -9,7 +9,6 @@ import {
 	Table,
 	TableBody,
 	TableRow,
-	TableCell,
 	TableHead,
 	TableCellHead,
 } from 'components/Table/TableElements';

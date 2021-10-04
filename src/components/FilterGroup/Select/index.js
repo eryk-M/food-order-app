@@ -2,7 +2,6 @@ import React from 'react';
 
 import {
 	SelectForm,
-	SelectLabel,
 	SelectContent,
 	SelectOption,
 } from './SelectElements';

@@ -2,6 +2,8 @@ import styled from 'styled-components/macro';
 
 import { NavLink } from 'react-router-dom';
 
+import { device } from 'utils/breakpoints';
+
 export const TreeP = styled.p`
 	transition: all 0.1s ease-in-out;
 `;
@@ -24,6 +26,9 @@ export const TreeItemMain = styled.li`
 
 	&:hover {
 		background-color: var(--color-primary);
+		@media ${device.laptopS} {
+			background-color: transparent;
+		}
 	}
 	& .icon-arrow {
 		display: ${(props) => (props.hidden ? 'none' : 'block')};
@@ -32,7 +37,7 @@ export const TreeItemMain = styled.li`
 		margin-right: 0;
 	}
 	.is-active {
-		background-color: var(--color-primary);
+		background-color: var(--color-primary) !important;
 		& .icon-arrow {
 			display: block;
 			margin-left: auto;

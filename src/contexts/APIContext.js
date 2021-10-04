@@ -222,7 +222,7 @@ export function APIProvider({ children }) {
 
 	const deleteOrders = async (orders) => {
 		orders.forEach(async (order) => {
-			await ordersRef.doc(order.value).delete();
+			await ordersRef.doc(order.id).delete();
 		});
 	};
 

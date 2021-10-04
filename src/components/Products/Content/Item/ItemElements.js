@@ -1,8 +1,6 @@
 import styled, { keyframes, css } from 'styled-components/macro';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import { device } from 'utils/breakpoints';
-
 const moveRightDown = keyframes`
 from {
     transform: translate(0, 0);

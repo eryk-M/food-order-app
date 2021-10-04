@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Droppable } from 'react-beautiful-dnd';
 import { DragDropContext } from 'react-beautiful-dnd';
@@ -7,8 +7,6 @@ import { QuestionList, IconWrapper } from './ColumnElements';
 import Question from 'components/Admin/Question';
 import { DragIcon } from 'components/Admin/Icons';
 const Column = ({ initialData, setInitialData, onDelete }) => {
-	// const [state, setState] = useState(initialData);
-
 	const onDragEnd = (result) => {
 		const { destination, source, draggableId } = result;
 

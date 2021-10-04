@@ -64,6 +64,9 @@ export const TableHead = styled.thead`
 	clip: rect(0 0 0 0);
 	/* width: 100%; */
 	background-color: #93949417;
+	&:hover {
+		background-color: inherit;
+	}
 	@media ${device.mobileM} {
 		border-top: none;
 		clip: rect(0 0 0 0);

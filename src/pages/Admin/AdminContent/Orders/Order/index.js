@@ -219,7 +219,7 @@ const Order = (props) => {
 		return text[step];
 	};
 	return (
-		<MainContainer display="inline-block" minwidth="50%">
+		<MainContainer>
 			{loading && <Loader primary veryhigh margincenter />}
 			{error && <FormAlert variant="danger">{error}</FormAlert>}
 			<PrintButton onClick={handlePrint}>

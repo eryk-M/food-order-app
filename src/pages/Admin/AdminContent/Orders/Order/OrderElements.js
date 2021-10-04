@@ -95,10 +95,13 @@ export const OrderChangeButton = styled.button`
 	color: ${(props) =>
 		props.step === 5 ? 'var(--color-black)' : '#fff'};
 	transition: 0.1s all ease-in-out;
-	&:hover {
-		transform: translateY(-6px);
-		box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.5);
+	@media only screen and (min-width: 1024px) {
+		&:hover {
+			transform: translateY(-6px);
+			box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.5);
+		}
 	}
+
 	&:active {
 		transform: translateY(-2px);
 		box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.5);
@@ -143,6 +146,8 @@ export const PrintButton = styled.button`
 	cursor: pointer;
 	/* outline: none; */
 	text-transform: uppercase;
+	border: none;
+	border-radius: 5px;
 	& span {
 		@media ${device.mobileM} {
 			display: none;

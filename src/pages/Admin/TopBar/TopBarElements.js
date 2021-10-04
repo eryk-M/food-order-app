@@ -26,7 +26,7 @@ export const TopBarList = styled.ul`
 	font-weight: 100;
 
 	@media ${device.mobileM} {
-		font-size: 1.5rem;
+		font-size: 1.8rem;
 	}
 `;
 

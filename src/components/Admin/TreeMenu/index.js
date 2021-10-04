@@ -12,7 +12,14 @@ import {
 } from './TreeMenuElements';
 import { SlideDown } from 'react-slidedown';
 
-const TreeMenu = ({ width, text, mainIcon, list, hidden }) => {
+const TreeMenu = ({
+	width,
+	text,
+	mainIcon,
+	list,
+	hidden,
+	setHidden,
+}) => {
 	const [closed, setClosed] = useState(true);
 
 	const rotateArrowList = {
@@ -47,6 +54,11 @@ const TreeMenu = ({ width, text, mainIcon, list, hidden }) => {
 								to={el.path}
 								activeClassName="is-active"
 								hidden={hidden && width > 1024}
+								onClick={
+									width <= 1024
+										? () => setHidden((prevHidden) => !prevHidden)
+										: undefined
+								}
 							>
 								{React.createElement(el.icon)}
 								<TreeP>{el.text}</TreeP>

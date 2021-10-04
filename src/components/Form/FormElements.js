@@ -3,7 +3,6 @@ import styled, { keyframes } from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 import { MdErrorOutline } from 'react-icons/md';
 
-import { device } from 'utils/breakpoints';
 import Loader from '../Loader';
 
 const fadeIn = keyframes`

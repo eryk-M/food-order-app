@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAdminAllOrders } from 'utils/firebaseGetters';
 import { useApi } from 'contexts/APIContext';
 
-import {
-	MainContainer,
-	LoaderContainer,
-} from 'components/Admin/Containers';
 import Loader from 'components/Loader';
 import Search from 'components/FilterGroup/Search';
 import Button from 'components/Button';
@@ -15,18 +11,23 @@ import DeleteModal from 'components/DeleteModal';
 import { Alert } from 'components/Alert';
 import Status from 'components/Status';
 import {
-	AllCheckerCheckbox,
-	Checkbox,
-	CheckboxGroup,
-} from '@createnl/grouped-checkboxes';
-import {
 	Table,
 	TableBody,
 	TableRow,
 	TableCell,
+	TableHead,
+	TableCellHead,
 } from 'components/Table/TableElements';
 import { useHistory } from 'react-router-dom';
-import { ListDialogBox, ListDialogBoxNote } from './ListElements';
+import {
+	ListDialogBox,
+	ListDialogBoxNote,
+	ListContainer,
+	MobileFilter,
+	AllCheckerMobile,
+	StatusMobile,
+	ListCheckbox,
+} from './ListElements';
 import {
 	SettingsIcon,
 	ArrowsFilterIcon,
@@ -40,16 +41,36 @@ import Pagination from 'components/Pagination';
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllOrders());
 	const { deleteOrders } = useApi();
+
 	const history = useHistory();
 	const [query, setQuery] = useState('');
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [sortStatus, setSortStatus] = useState(1);
-	const [showDialogBox, setShowDialogBox] = useState(false);
-	const [amountToDelete, setAmountToDelete] = useState(0);
 	const [open, setOpen] = useState(false);
 	const [ordersToDelete, setOrdersToDelete] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [itemsPerPage] = useState(10);
+
+	const [orderState, setOrderState] = useState([]);
+
+	useEffect(() => {
+		if (data) {
+			setOrderState(
+				data.map((el) => {
+					return {
+						select: false,
+						id: el.id,
+						orderId: el.orderId,
+						date: el.date,
+						step: el.step,
+						payment: el.payment,
+						orderInfo: el.orderInfo,
+						totalPrice: el.totalPrice,
+					};
+				})
+			);
+		}
+	}, [data]);
 
 	const giveDateSpan = (timestamp) => {
 		const a = new Date(timestamp);
@@ -86,15 +107,27 @@ const List = () => {
 		}
 	};
 
-	const onCheckboxChange = (checkboxes) => {
-		const checked = checkboxes.filter((el) => el.checked);
-		setAmountToDelete(checkboxes.filter((el) => el.checked).length);
-		setOrdersToDelete(checked);
-		if (checked.length > 0) {
-			setShowDialogBox(true);
+	const onCheckboxChange = (e, el) => {
+		let checked = e.target.checked;
+		if (el) {
+			setOrderState(
+				orderState.map((data) => {
+					if (el.id === data.id) {
+						data.select = checked;
+					}
+					return data;
+				})
+			);
 		} else {
-			setShowDialogBox(false);
+			setOrderState(
+				orderState.map((el) => {
+					el.select = checked;
+					return el;
+				})
+			);
 		}
+		const checkedItems = orderState.filter((el) => el.select);
+		setOrdersToDelete(checkedItems);
 	};
 
 	const renderIcon = () => {
@@ -107,8 +140,6 @@ const List = () => {
 		}
 	};
 
-	//TODO: SKOCNZYLEM TUTAJ
-	//PAGINATE
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
@@ -116,11 +147,11 @@ const List = () => {
 
 	const onHandleSearch = () => {
 		if (query.length >= 3) {
-			return data
+			return orderState
 				.filter((el) => el.orderId.includes(query))
 				.sort((a, b) => filterStatus(a, b));
 		} else {
-			return data
+			return orderState
 				.sort((a, b) => filterStatus(a, b))
 				.slice(indexOfFirstItem, indexOfLastItem);
 		}
@@ -129,7 +160,7 @@ const List = () => {
 	return (
 		<>
 			<DeleteModal
-				input={amountToDelete}
+				input={ordersToDelete.length}
 				toDelete={ordersToDelete}
 				open={open}
 				setOpen={setOpen}
@@ -138,8 +169,9 @@ const List = () => {
 				mainText="Delete these orders?"
 				secondText="Orders amount"
 				description="these orders"
+				setToDelete={setOrdersToDelete}
 			/>
-			<MainContainer
+			<ListContainer
 				display="inline-block"
 				minwidth=""
 				minheight="40rem"
@@ -166,7 +198,7 @@ const List = () => {
 					query={query}
 				/>
 				<AnimatePresence>
-					{showDialogBox && (
+					{ordersToDelete.length > 0 && (
 						<ListDialogBox
 							initial={{
 								opacity: 0,
@@ -185,7 +217,8 @@ const List = () => {
 							}}
 						>
 							<ListDialogBoxNote>
-								Orders checked: <strong>{amountToDelete}</strong>
+								Orders checked:{' '}
+								<strong>{ordersToDelete.length}</strong>
 							</ListDialogBoxNote>
 							<Button
 								marginleft="auto"
@@ -196,84 +229,89 @@ const List = () => {
 						</ListDialogBox>
 					)}
 				</AnimatePresence>
-
+				<MobileFilter>
+					<AllCheckerMobile>
+						<ListCheckbox
+							type="checkbox"
+							onChange={(e) => onCheckboxChange(e)}
+						/>
+						Check all
+					</AllCheckerMobile>
+					<StatusMobile onClick={handleStatus}>
+						{renderIcon()}
+						Status
+						<ArrowsFilterIcon />
+					</StatusMobile>
+				</MobileFilter>
 				<Table display="inline-block">
-					<CheckboxGroup onChange={onCheckboxChange}>
-						<TableBody>
-							<TableRow backgroundColor="#93949417" fontW="bold">
-								<TableCell width="20rem">
-									<AllCheckerCheckbox className="checkbox-group" />
-									ID
-								</TableCell>
-								<TableCell width="20rem" center>
-									Date
-								</TableCell>
-								<TableCell center pointer onClick={handleStatus}>
-									{renderIcon()}
-									Status
-									<ArrowsFilterIcon />
-								</TableCell>
-								<TableCell width="14rem" center>
-									Payment
-								</TableCell>
-								<TableCell width="14rem" center>
-									Quantity
-								</TableCell>
-								<TableCell width="13rem" center>
-									Total
-								</TableCell>
-								<TableCell>Actions</TableCell>
-							</TableRow>
+					<TableHead>
+						<TableRow fontW="bold">
+							<TableCellHead>
+								<ListCheckbox
+									type="checkbox"
+									onChange={(e) => onCheckboxChange(e)}
+								/>
+								ID
+							</TableCellHead>
+							<TableCellHead center>Date</TableCellHead>
+							<TableCellHead center pointer onClick={handleStatus}>
+								{renderIcon()}
+								Status
+								<ArrowsFilterIcon />
+							</TableCellHead>
+							<TableCellHead center>Payment</TableCellHead>
+							<TableCellHead center>Quantity</TableCellHead>
+							<TableCellHead center>Total</TableCellHead>
+							<TableCellHead>Actions</TableCellHead>
+						</TableRow>
+					</TableHead>
 
-							{data &&
-								onHandleSearch().map((el, i) => (
-									<TableRow key={i}>
-										<TableCell>
-											<Checkbox
-												className="checkbox-group"
-												value={`${el.id}`}
-											/>
-											{el.orderId}
-										</TableCell>
-										<TableCell center>
-											{giveDateSpan(el.date)}
-										</TableCell>
-										<TableCell center>
-											<Status step={el.step} />
-										</TableCell>
-										<TableCell width="8rem" center>
-											{el.payment === 1 ? (
-												<CreditCardIcon />
-											) : (
-												<CashIcon />
-											)}
-										</TableCell>
-										<TableCell center>
-											{' '}
-											{el.orderInfo.reduce((a, b) => {
-												return a + b.quantity;
-											}, 0)}
-										</TableCell>
+					<TableBody>
+						{orderState &&
+							onHandleSearch().map((el, i) => (
+								<TableRow key={el.id}>
+									<TableCell data-label="ID">
+										<ListCheckbox
+											onChange={(e) => onCheckboxChange(e, el)}
+											type="checkbox"
+											checked={el.select}
+										/>
+										{el.orderId}
+									</TableCell>
+									<TableCell data-label="Date" center>
+										{giveDateSpan(el.date)}
+									</TableCell>
+									<TableCell data-label="Status" center>
+										<Status step={el.step} />
+									</TableCell>
+									<TableCell data-label="Payment" center>
+										{el.payment === 1 ? (
+											<CreditCardIcon />
+										) : (
+											<CashIcon />
+										)}
+									</TableCell>
+									<TableCell data-label="Quantity" center>
+										{' '}
+										{el.orderInfo.reduce((a, b) => {
+											return a + b.quantity;
+										}, 0)}
+									</TableCell>
 
-										<TableCell width="8rem" center>
-											${el.totalPrice}
-										</TableCell>
-										<TableCell center>
-											<SettingsIcon
-												onClick={() => linkToOrder(el.orderId)}
-											/>
-										</TableCell>
-									</TableRow>
-								))}
-						</TableBody>
-					</CheckboxGroup>
+									<TableCell data-label="Total" center>
+										${el.totalPrice}
+									</TableCell>
+									<TableCell data-label="Actions" center>
+										<SettingsIcon
+											onClick={() => linkToOrder(el.orderId)}
+										/>
+									</TableCell>
+								</TableRow>
+							))}
+					</TableBody>
 				</Table>
-				{loading && (
-					<LoaderContainer height="30rem">
-						<Loader primary />
-					</LoaderContainer>
-				)}
-			</MainContainer>
+				{loading && <Loader primary veryhigh margincenter />}
+			</ListContainer>
 		</>
 	);
 };

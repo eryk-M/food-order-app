@@ -16,6 +16,7 @@ export const TotalH = styled.h3`
 export const TotalP = styled.p`
 	@media ${device.mobileL} {
 		text-align: center;
+		font-size: 1.4rem;
 	}
 `;
 

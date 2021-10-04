@@ -5,7 +5,6 @@ import UserReviews from './UserReviews';
 
 import { useAuth } from 'contexts/AuthContext';
 import styled from 'styled-components/macro';
-import Loader from 'components/Loader';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getReviews } from 'utils/firebaseGetters';
 

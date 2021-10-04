@@ -19,7 +19,7 @@ export const SideBarContainer = styled.aside`
 	font-weight: 100;
 	transition: transform 0.2s ease-in-out;
 	.is-active {
-		background-color: var(--color-primary);
+		background-color: var(--color-primary) !important;
 		& .icon-arrow {
 			display: block;
 			margin-left: auto;
@@ -63,6 +63,9 @@ export const SideBarLink = styled(NavLink)`
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
+	@media ${device.mobileM} {
+		font-size: 1.8rem;
+	}
 	& .icon-left {
 		font-size: 2.2rem;
 		margin-right: 1.2rem;
@@ -73,6 +76,9 @@ export const SideBarLink = styled(NavLink)`
 	}
 	&:hover {
 		background-color: var(--color-primary);
+		@media ${device.laptopS} {
+			background-color: transparent;
+		}
 	}
 `;
 export const SideBarTree = styled.ul``;
@@ -92,6 +98,9 @@ export const SideBarTreeLink = styled(Link)`
 	border-radius: 5px;
 	display: flex;
 	align-items: center;
+	@media ${device.mobileM} {
+		font-size: 1.8rem;
+	}
 	& svg {
 		font-size: 2.2rem;
 		margin-right: 1.2rem;

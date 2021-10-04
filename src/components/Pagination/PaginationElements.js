@@ -30,14 +30,14 @@ export const PaginationLink = styled(Link)`
 	padding: 0.5rem 1rem;
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	background-color: ${(props) => {
-		if (props.number === props.currentPage) {
+		if (props.number === props.currentpage) {
 			return 'var(--color-primary)';
 		} else {
 			return 'var(--color-white)';
 		}
 	}};
 	color: ${(props) => {
-		if (props.number === props.currentPage) {
+		if (props.number === props.currentpage) {
 			return 'var(--color-white)';
 		} else {
 			return '#000';

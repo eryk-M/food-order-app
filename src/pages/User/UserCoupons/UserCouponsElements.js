@@ -17,7 +17,6 @@ export const UserCouponsContainer = styled.div`
 export const UserCouponsNotAvailable = styled.p`
 	font-size: 3rem;
 	display: block;
-	/* width: 30rem; */
 	opacity: 0.1;
 `;
 

@@ -47,12 +47,21 @@ const SideBar = ({ width, hidden, setHidden }) => {
 				</SideBarClose>
 			)}
 			<SideBarLogo to="/">
-				<SideBarLogoImage src={logo} />
+				<SideBarLogoImage src={logo} alt="logo" />
 			</SideBarLogo>
 
 			<SideBarList>
 				<SideBarItem>
-					<SideBarLink to="/admin" exact activeClassName="is-active">
+					<SideBarLink
+						to="/admin"
+						exact
+						activeClassName="is-active"
+						onClick={
+							width <= 1024
+								? () => setHidden((prevHidden) => !prevHidden)
+								: undefined
+						}
+					>
 						<AiFillDashboard className="icon-left" />
 						<SideBarP>Dashboard</SideBarP>
 						<MdKeyboardArrowRight className="icon-arrow" />
@@ -63,6 +72,11 @@ const SideBar = ({ width, hidden, setHidden }) => {
 						to="/admin/orders"
 						exact
 						activeClassName="is-active"
+						onClick={
+							width <= 1024
+								? () => setHidden((prevHidden) => !prevHidden)
+								: undefined
+						}
 					>
 						<FiTruck className="icon-left" />
 						<SideBarP>Orders</SideBarP>
@@ -71,14 +85,29 @@ const SideBar = ({ width, hidden, setHidden }) => {
 				</SideBarItem>
 
 				<SideBarTree>
-					<TreeMenu width={width} {...treeProducts} hidden={hidden} />
-					<TreeMenu width={width} {...treeQuiz} hidden={hidden} />
+					<TreeMenu
+						setHidden={setHidden}
+						width={width}
+						{...treeProducts}
+						hidden={hidden}
+					/>
+					<TreeMenu
+						setHidden={setHidden}
+						width={width}
+						{...treeQuiz}
+						hidden={hidden}
+					/>
 				</SideBarTree>
 				<SideBarItem>
 					<SideBarLink
 						to="/admin/coupons"
 						exact
 						activeClassName="is-active"
+						onClick={
+							width <= 1024
+								? () => setHidden((prevHidden) => !prevHidden)
+								: undefined
+						}
 					>
 						<AiOutlinePercentage className="icon-left" />
 						<SideBarP>Coupons</SideBarP>

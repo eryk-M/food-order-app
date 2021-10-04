@@ -11,7 +11,7 @@ import {
 	ShowCopyMessage,
 } from './CartCompleteElements';
 
-import { useLocation, useHistory, Redirect } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 
 import ButtonLink from 'components/ButtonLink';
 

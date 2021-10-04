@@ -15,9 +15,7 @@ import {
 
 const UserCoupons = () => {
 	const { currentUser } = useAuth();
-	const { data, loading } = useFirestoreQuery(
-		getUserDoc(currentUser.uid)
-	);
+	const { data } = useFirestoreQuery(getUserDoc(currentUser.uid));
 
 	const findAvailableCoupons = () => {
 		return data.coupons.filter(

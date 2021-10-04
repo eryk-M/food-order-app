@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React from 'react';
 
 import {
 	PaginationNav,
@@ -32,13 +32,13 @@ const Pagination = ({
 							{pageNumbers.map((number) => (
 								<PaginationItem key={number}>
 									<PaginationLink
-										currentPage={currentPage}
+										currentpage={currentPage}
 										number={number}
 										onClick={(e) => {
 											e.preventDefault();
 											paginate(number);
 										}}
-										href="!#"
+										to="!#"
 									>
 										{number}
 									</PaginationLink>
