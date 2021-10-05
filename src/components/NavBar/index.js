@@ -62,7 +62,14 @@ const NavBar = (props) => {
 				<>
 					<NavList>
 						<NavItem>
-							<NavLink to="/admin">Admin</NavLink>
+							<NavLink
+								to={{
+									pathname: '/admin',
+									query: '/admin',
+								}}
+							>
+								Admin
+							</NavLink>
 						</NavItem>
 						<NavItem>
 							<NavLink to="/products">Products</NavLink>

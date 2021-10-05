@@ -20,6 +20,9 @@ const DonutChart = () => {
 		chart: {
 			width: '100%',
 			type: 'pie',
+			animations: {
+				enabled: false,
+			},
 		},
 		plotOptions: {
 			pie: {

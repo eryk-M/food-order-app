@@ -10,8 +10,6 @@ import {
 } from './QuestionElements';
 
 const Question = ({ answer, question }) => {
-	// console.log(answer, question);
-
 	const { content, correct, incorrect } = question;
 	return (
 		<QuestionContainer>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import Modal from 'components/Modal';
 
@@ -35,6 +35,8 @@ const DeleteModal = ({
 	const [isInitiallyChanged, setIsInitiallyChanged] = useState(false);
 	const [loading, setLoading] = useState(false);
 
+	const timeoutRef = useRef();
+
 	const handleChange = async (e) => {
 		setInputValue(e.target.value);
 		setIsInitiallyChanged(true);
@@ -45,10 +47,14 @@ const DeleteModal = ({
 		if (inputValue === '' && isInitiallyChanged) {
 			setError('ID is required');
 		} else if (inputValue !== String(input) && isInitiallyChanged) {
-			setError("You didn't enter the product ID correctly");
+			setError("You didn't enter number correctly");
 		} else {
 			setError('');
 		}
+
+		return () => {
+			clearTimeout(timeoutRef.current);
+		};
 	}, [inputValue, setError, input, isInitiallyChanged]);
 
 	const handleDelete = async () => {
@@ -61,9 +67,11 @@ const DeleteModal = ({
 			if (setToDelete) {
 				setToDelete(0);
 			}
-			setTimeout(() => {
+
+			const timeout = setTimeout(() => {
 				setShowSuccess(false);
 			}, 3000);
+			timeoutRef.current = timeout;
 		} catch {}
 	};
 
@@ -106,7 +114,7 @@ const DeleteModal = ({
 			</DeleteBody>
 
 			<DeleteActions>
-				{loading && <Loader primary loading={loading} />}
+				{loading && <Loader primary />}
 				<Button disabled={loading} secondary onClick={handleCancel}>
 					Cancel
 				</Button>

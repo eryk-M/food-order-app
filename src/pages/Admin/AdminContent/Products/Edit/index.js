@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import {
 	Form,
@@ -53,6 +53,7 @@ const Edit = (props) => {
 	);
 	const { updateAdminProduct } = useAdminApi();
 	const size = useWindowSize();
+	const timeoutRef = useRef();
 
 	const [ingredients, setIngredients] = useState([]);
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
@@ -123,6 +124,13 @@ const Edit = (props) => {
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(validationSchema) });
 
+	//clearing timeout function on unmount
+	useEffect(() => {
+		return () => {
+			clearTimeout(timeoutRef.current);
+		};
+	}, []);
+
 	if (ingredients.length === 0 && data && !isInitiallyFetched) {
 		setIngredients(data[0].ingredients);
 		setIsInitiallyFetched(true);
@@ -174,11 +182,13 @@ const Edit = (props) => {
 							imageSrc
 						);
 						setShowSuccess(true);
-						setTimeout(() => {
+
+						const timeout = setTimeout(() => {
 							setIsLoading(false);
 							setShowSuccess(false);
 							setUploadPercentage(0);
 						}, 3000);
+						timeoutRef.current = timeout;
 					}
 				);
 			} else {
@@ -189,11 +199,12 @@ const Edit = (props) => {
 					imageSrc
 				);
 				setShowSuccess(true);
-				setTimeout(() => {
+				const timeout = setTimeout(() => {
 					setIsLoading(false);
 					setShowSuccess(false);
 					setUploadPercentage(0);
 				}, 3000);
+				timeoutRef.current = timeout;
 			}
 		} catch {
 			setIsLoading(false);

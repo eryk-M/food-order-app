@@ -17,11 +17,6 @@ to {
 
 export const FormContainer = styled.div`
 	min-width: 40%;
-
-	@media screen and (max-width: 840px) {
-		margin-top: 3rem;
-		min-width: 60%;
-	}
 `;
 
 export const FormAlert = styled.div`
@@ -38,10 +33,31 @@ export const FormAlert = styled.div`
 
 export const FormHeading = styled.h2`
 	text-align: center;
-	margin-bottom: 5rem;
+	margin-bottom: 2rem;
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 2.4rem;
+	position: relative;
+	width: ${(props) => (props.block ? '' : '11rem')};
+	margin-left: auto;
+	margin-right: auto;
+	&:before {
+		content: '${(props) => props.upper}';
+		position: absolute;
+		top: -3rem;
+		left: 0;
+		font-size: 1.8rem;
+		font-family: 'Shadows Into Light Two', handwriting;
+		color: var(--color-primary);
+		font-weight: 100;
+		text-transform: none;
+		margin: 0 auto;
+	}
+`;
+
+export const FormSpanSign = styled.span`
+	color: var(--color-primary);
+	font-weight: bold;
 `;
 
 export const Form = styled.form`

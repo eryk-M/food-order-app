@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import { useHistory } from 'react-router-dom';
 import {
-	FormContainer,
 	FormHeading,
 	Form,
 	FormElement,
@@ -13,8 +12,9 @@ import {
 	FormLink,
 	FormError,
 	FormAlert,
+	FormSpanSign,
 } from 'components/Form/FormElements';
-
+import { SignInContainer } from '../SignIn/SignInElements';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -67,7 +67,6 @@ const Signup = () => {
 			clearErrors();
 			setLoading(true);
 			await signup(data.email, data.password, data.userName, history);
-			setLoading(false);
 		} catch (e) {
 			setLoading(false);
 			if (e.message === 'auth/email-already-in-use') {
@@ -84,8 +83,8 @@ const Signup = () => {
 
 	return (
 		<>
-			<FormContainer>
-				<FormHeading>Sign Up</FormHeading>
+			<SignInContainer>
+				<FormHeading upper="Start journey">Sign Up</FormHeading>
 				{errors.fatal && (
 					<FormAlert variant="danger">
 						{errors.fatal.message}
@@ -147,10 +146,12 @@ const Signup = () => {
 					</FormElement>
 					<FormButton loading={loading} text="Sign Up" />
 				</Form>
-			</FormContainer>
+			</SignInContainer>
 			<FormAlternative>
 				Already have an account?{' '}
-				<FormLink to="/login">Log In</FormLink>
+				<FormLink to="/login">
+					<FormSpanSign>Login</FormSpanSign>
+				</FormLink>
 			</FormAlternative>
 		</>
 	);

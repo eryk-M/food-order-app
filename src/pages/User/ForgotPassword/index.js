@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 
 import {
-	FormContainer,
 	FormHeading,
 	Form,
 	FormElement,
@@ -12,8 +11,9 @@ import {
 	FormAlternative,
 	FormLink,
 	FormAlert,
+	FormSpanSign,
 } from 'components/Form/FormElements';
-
+import { SignInContainer } from '../SignIn/SignInElements';
 const ForgotPassword = () => {
 	const emailRef = useRef();
 	const { resetPassword } = useAuth();
@@ -39,8 +39,8 @@ const ForgotPassword = () => {
 
 	return (
 		<>
-			<FormContainer>
-				<FormHeading>Reset Password</FormHeading>
+			<SignInContainer>
+				<FormHeading block>Reset Password</FormHeading>
 				{error && <FormAlert variant="danger">{error}</FormAlert>}
 				{message && (
 					<FormAlert variant="success">{message}</FormAlert>
@@ -58,11 +58,16 @@ const ForgotPassword = () => {
 					<FormButton loading={loading} text="Reset Password" />
 				</Form>
 				<FormAlternative>
-					<FormLink to="/login">Login again</FormLink>
+					<FormLink to="/login">
+						<FormSpanSign>Login</FormSpanSign>
+					</FormLink>
 				</FormAlternative>
-			</FormContainer>
+			</SignInContainer>
 			<FormAlternative>
-				Need and account? <FormLink to="/signup">Sign up</FormLink>
+				Need and account?{' '}
+				<FormLink to="/signup">
+					<FormSpanSign>Sign up</FormSpanSign>
+				</FormLink>
 			</FormAlternative>
 		</>
 	);

@@ -15,8 +15,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
 	const [currentUser, setCurrentUser] = useState();
 	const [loading, setLoading] = useState(true);
-	const [admin, setAdmin] = useState();
-	// const userRef = db.collection('users');
 
 	const signup = async (email, password, username, history) => {
 		try {
@@ -51,21 +49,8 @@ export function AuthProvider({ children }) {
 
 	const login = async (email, password, history, query) => {
 		try {
-			const response = await auth.signInWithEmailAndPassword(
-				email,
-				password
-			);
-			const doc = await db
-				.collection('users')
-				.doc(response.user.uid)
-				.get();
-			const user = doc.data();
-			if (user.isAdmin) {
-				history.push('/admin');
-				setAdmin(true);
-			} else {
-				history.push({ pathname: '/user', query: query });
-			}
+			await auth.signInWithEmailAndPassword(email, password);
+			history.push({ pathname: '/user', query: query });
 		} catch (err) {
 			console.error(err);
 		}
@@ -95,7 +80,6 @@ export function AuthProvider({ children }) {
 
 	const value = {
 		currentUser,
-		admin,
 		login,
 		signup,
 		logout,

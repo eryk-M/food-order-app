@@ -56,6 +56,9 @@ const ProductItem = ({ props }) => {
 	const imgRef = useRef();
 	const showcaseRef = useRef(null);
 
+	//adding timeout to remove from unmount
+	const addedTimeoutRef = useRef();
+
 	const [currentItem, setCurrentItem] = useState();
 	const [quantity, setQuantity] = useState(1);
 	const [isAdded, setIsAdded] = useState(false);
@@ -70,22 +73,28 @@ const ProductItem = ({ props }) => {
 		setCurrentItem(data[0]);
 	}
 
-	async function addToCart(e) {
+	const addToCart = (e) => {
 		e.preventDefault();
 		currentItem.quantity = quantity;
-		await dispatch({
+		dispatch({
 			type: 'ADD_TO_CART',
 			payload: currentItem,
 		});
 		setIsAdded(true);
 
-		setTimeout(() => {
+		const timeout = setTimeout(() => {
 			setIsAdded(false);
 		}, 4000);
-	}
+		addedTimeoutRef.current = timeout;
+	};
 
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
+
+		const timeoutId = addedTimeoutRef.current;
+		return () => {
+			clearTimeout(timeoutId);
+		};
 	}, [cart]);
 
 	const slideImage = useCallback(

@@ -31,6 +31,7 @@ import 'react-lazy-load-image-component/src/effects/opacity.css';
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllProducts());
 	const { deleteAdminProduct } = useAdminApi();
+
 	const [query, setQuery] = useState('');
 	const [open, setOpen] = useState(false);
 	const [id, setId] = useState('');

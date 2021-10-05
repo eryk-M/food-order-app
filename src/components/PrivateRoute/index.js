@@ -12,7 +12,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 				return currentUser ? (
 					<Component {...props} {...rest} />
 				) : (
-					<Redirect to="/login" />
+					<Redirect
+						to={{
+							pathname: '/login',
+							query: props.match.path === '/admin' ? '/admin' : '',
+						}}
+					/>
 				);
 			}}
 		></Route>

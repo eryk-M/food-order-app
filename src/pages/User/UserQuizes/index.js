@@ -66,7 +66,6 @@ const UserQuizes = ({ userData }) => {
 	};
 	return (
 		<UserQuizContainer>
-			{console.log(data && userData && checkAvailableQuizes())}
 			<QuizUpperContent
 				variants={containerAndHeading}
 				initial="hidden"

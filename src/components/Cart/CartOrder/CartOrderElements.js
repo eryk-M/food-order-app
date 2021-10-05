@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AiFillCheckCircle, AiOutlineDelete } from 'react-icons/ai';
 
 import { device } from 'utils/breakpoints';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export const CartWrapper = styled.div`
 	max-width: 136rem;
@@ -59,7 +60,7 @@ export const CartColumn = styled.div`
 	}
 `;
 
-export const CartImage = styled.img`
+export const CartImage = styled(LazyLoadImage)`
 	height: 15rem;
 	width: 15rem;
 	object-fit: cover;

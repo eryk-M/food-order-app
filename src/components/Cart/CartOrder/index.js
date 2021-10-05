@@ -40,7 +40,6 @@ import Loader from 'components/Loader';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 const CartOrder = ({
 	setDispatchTotalPrice,
 	step,
@@ -219,7 +218,7 @@ const CartOrder = ({
 						<CartItem key={el.id}>
 							<CartColumn>
 								<CartLink to={`/product/${el.id}`}>
-									<CartImage src={el.img} />
+									<CartImage effect="opacity" src={el.img} />
 								</CartLink>
 							</CartColumn>
 							<CartColumn>

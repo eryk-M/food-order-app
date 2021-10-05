@@ -1,4 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, {
+	useState,
+	useContext,
+	useEffect,
+	useRef,
+} from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -51,10 +56,18 @@ const Item = ({ el }) => {
 		dispatch,
 	} = useContext(CartContext);
 	const size = useWindowSize();
+	//adding timeout to remove from unmount
+	const addedTimeoutRef = useRef();
+
 	const [isAdded, setIsAdded] = useState(false);
 
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
+
+		const timeoutId = addedTimeoutRef.current;
+		return () => {
+			clearTimeout(timeoutId);
+		};
 	}, [cart]);
 
 	const addToCart = (e) => {
@@ -64,9 +77,11 @@ const Item = ({ el }) => {
 			payload: el,
 		});
 		setIsAdded(true);
-		setTimeout(() => {
+
+		const timeout = setTimeout(() => {
 			setIsAdded(false);
 		}, 4000);
+		addedTimeoutRef.current = timeout;
 	};
 
 	const { width } = size;

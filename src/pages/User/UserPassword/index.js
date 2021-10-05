@@ -70,6 +70,7 @@ const UserPassword = () => {
 						required
 						ref={passwordRef}
 						error={!passwordsMatch}
+						autoComplete="on"
 					/>
 					{!passwordsMatch && (
 						<FormSpan>Passwords do not match</FormSpan>
@@ -85,6 +86,7 @@ const UserPassword = () => {
 						required
 						ref={passwordConfirmRef}
 						error={!passwordsMatch}
+						autoComplete="on"
 					/>
 					{!passwordsMatch && (
 						<FormSpan>Passwords do not match</FormSpan>

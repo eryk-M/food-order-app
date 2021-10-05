@@ -12,6 +12,7 @@ import {
 	FormAlternative,
 	FormLink,
 	FormError,
+	FormSpanSign,
 } from 'components/Form/FormElements';
 
 import { SignInContainer } from './SignInElements';
@@ -48,7 +49,6 @@ const SignIn = () => {
 			clearErrors();
 			setLoading(true);
 			await login(data.email, data.password, history, query);
-			setLoading(false);
 		} catch {
 			setLoading(false);
 			setError(
@@ -68,27 +68,15 @@ const SignIn = () => {
 			clearErrors();
 			setLoading(true);
 			await login('test@test.pl', 'test123', history, query);
-			setLoading(false);
 		} catch {
 			setLoading(false);
 		}
 	};
 
-	const onSubmitAdmin = async () => {
-		try {
-			clearErrors();
-			setLoading(true);
-			await login('admin@admin.pl', 'admin123', history, query);
-			setLoading(false);
-		} catch {
-			setLoading(false);
-		}
-	};
-	//TODO: Do skonczenia RWD dla komponentow logowania i rejestracji
 	return (
 		<>
 			<SignInContainer>
-				<FormHeading>Log In</FormHeading>
+				<FormHeading upper="Welcome back">Login</FormHeading>
 				<Form onSubmit={handleSubmit(onSubmit)}>
 					<FormElement id="email">
 						<FormLabel>Email</FormLabel>
@@ -117,7 +105,7 @@ const SignIn = () => {
 						)}
 					</FormElement>
 
-					<FormButton loading={loading} text="Log In" />
+					<FormButton loading={loading} text="Login" />
 				</Form>
 
 				<FormButton
@@ -127,13 +115,7 @@ const SignIn = () => {
 					type="text"
 					onClick={onSubmitDemo}
 				/>
-				<FormButton
-					secondary
-					loading={loading}
-					text="ADMIN"
-					type="text"
-					onClick={onSubmitAdmin}
-				/>
+
 				<FormAlternative>
 					<FormLink to="/forgot-password">Forgot Password?</FormLink>
 				</FormAlternative>
@@ -141,7 +123,7 @@ const SignIn = () => {
 			<FormAlternative>
 				Need an account?{' '}
 				<FormLink to={{ pathname: '/signup', query: query }}>
-					Sign up
+					<FormSpanSign>Sign up</FormSpanSign>
 				</FormLink>
 			</FormAlternative>
 		</>

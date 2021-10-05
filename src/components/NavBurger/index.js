@@ -47,7 +47,13 @@ const NavBarBurger = ({ hidden, toggle }) => {
 				</NavBurgerIcons>
 				<NavBurgerList>
 					<NavBurgerItem>
-						<NavBurgerLink to="/admin" onClick={toggle}>
+						<NavBurgerLink
+							to={{
+								pathname: '/admin',
+								query: '/admin',
+							}}
+							onClick={toggle}
+						>
 							Admin demo
 						</NavBurgerLink>
 					</NavBurgerItem>

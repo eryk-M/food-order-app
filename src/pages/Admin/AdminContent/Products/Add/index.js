@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import {
 	EditContainer,
@@ -50,6 +50,7 @@ const Add = () => {
 	const { addAdminProduct } = useAdminApi();
 	const history = useHistory();
 	const size = useWindowSize();
+	const timeoutRef = useRef();
 
 	const [ingredients, setIngredients] = useState([]);
 	const [ingredientToAdd, setIngredientToAdd] = useState('');
@@ -118,6 +119,13 @@ const Add = () => {
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(validationSchema) });
 
+	//clearing timeout function on unmount
+	useEffect(() => {
+		return () => {
+			clearTimeout(timeoutRef.current);
+		};
+	}, []);
+
 	const removeFromIngredients = (index) => {
 		let ings = ingredients.filter((el, i) => i !== index);
 		setIngredients(ings);
@@ -159,10 +167,12 @@ const Add = () => {
 
 						await addAdminProduct(data, imageSrc, ingredients);
 						setShowSuccess(true);
-						setTimeout(() => {
+
+						const timeout = setTimeout(() => {
 							setIsLoading(false);
 							history.push('/admin/products');
 						}, 3000);
+						timeoutRef.current = timeout;
 					} catch {
 						setIsLoading(false);
 						setError('Something went wrong. Please try again!');

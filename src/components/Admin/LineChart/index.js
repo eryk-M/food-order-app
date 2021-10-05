@@ -24,6 +24,9 @@ const LineChart = ({ array, days, color, text, span }) => {
 				show: false,
 			},
 			background: { enabled: false },
+			animations: {
+				enabled: false,
+			},
 		},
 		grid: { show: false },
 		stroke: {

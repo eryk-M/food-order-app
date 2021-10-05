@@ -51,12 +51,16 @@ const TrackerForm = () => {
 
 	const onSubmit = async (data) => {
 		setLoading(true);
-		const response = await getOrder(data.orderId).get();
-		history.push({
-			pathname: '/food-tracker/order',
-			order: response.docs[0].data(),
-		});
-		setLoading(false);
+		try {
+			const response = await getOrder(data.orderId).get();
+			history.push({
+				pathname: '/food-tracker/order',
+				order: response.docs[0].data(),
+			});
+		} catch {
+			setLoading(false);
+			console.error('Something went wrong, please try again');
+		}
 	};
 
 	return (

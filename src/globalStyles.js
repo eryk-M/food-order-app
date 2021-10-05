@@ -7,13 +7,14 @@ export const GlobalStyle = createGlobalStyle`
     --color-white: #fff;
     --color-grey-light:  rgb(232, 230, 227);
     --color-grey-dark: #252525;
+    --color-grey-dark-2: #303030;
     --color-primary: #E7272D;
     --color-secondary: #FFCC00;
     --color-green: #11c454;
     --color-red: #f81212;
     --color-blue: #52b7ff;
     --color-grey-light-2: rgb(189, 189, 188);
-    --color-footer: #2c2c2c;
+    --color-footer: #303030;
     --color-purple-light: #b374ec;
 }
 

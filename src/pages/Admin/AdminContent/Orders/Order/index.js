@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getOrder } from 'utils/firebaseGetters';
@@ -155,9 +155,16 @@ const Order = (props) => {
 	const { updateOrderStatus } = useApi();
 	const [isLoading, setIsLoading] = useState(false);
 	const [showSuccess, setShowSuccess] = useState(false);
-	const componentRef = useRef();
 	const [error, setError] = useState('');
 
+	const componentRef = useRef();
+	const timeoutRef = useRef();
+
+	useEffect(() => {
+		return () => {
+			clearTimeout(timeoutRef.current);
+		};
+	}, []);
 	const handlePrint = useReactToPrint({
 		content: () => componentRef.current,
 	});
@@ -183,25 +190,24 @@ const Order = (props) => {
 
 	const handleChangeStatus = async (step) => {
 		setShowSuccess(false);
-		clearAlert();
+		clearTimeout(timeoutRef.current);
 		setIsLoading(true);
 		try {
 			await updateOrderStatus(step, data[0].id);
 			setIsLoading(false);
 			setShowSuccess(true);
-			showAlert();
-		} catch {
+
+			const timeout = setTimeout(() => {
+				setShowSuccess(false);
+			}, 4000);
+			timeoutRef.current = timeout;
+		} catch (err) {
 			setIsLoading(false);
 			setError('Something went wrong. Please try again!');
 		}
 	};
 
-	const showAlert = () =>
-		setTimeout(() => {
-			setShowSuccess(false);
-		}, 4000);
-
-	const clearAlert = () => clearTimeout(showAlert);
+	// const clearAlert = () => clearTimeout(showAlert);
 
 	const returnUserStatus = (step) => {
 		const text = [
