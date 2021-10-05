@@ -154,7 +154,7 @@ const CartAddress = ({ onChangeStep, userData, step, dispatch }) => {
 							type="button"
 							onClick={(e) => onChangeStep(e, 'back')}
 						>
-							{width <= 360 ? '\u2190 Order' : '\u2190 Back to order'}
+							{width <= 360 ? 'Order' : 'Back to order'}
 						</Button>
 						<Button marginleft="auto" type="submit">
 							{width <= 360

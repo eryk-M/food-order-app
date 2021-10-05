@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 
-import {
-	MainContainer,
-	LoaderContainer,
-} from 'components/Admin/Containers';
+import { LoaderContainer } from 'components/Admin/Containers';
 import { AdminPanelHeading } from 'components/Typography';
 import {
 	CouponContainer,
 	CouponFormWrapper,
+	CouponMainContainer,
 } from './CouponsElements';
 import Loader from 'components/Loader';
 import { Alert } from 'components/Alert';
@@ -23,6 +21,8 @@ import {
 	TableRow,
 	TableCell,
 	TableButton,
+	TableHead,
+	TableCellHead,
 } from 'components/Table/TableElements';
 import { useApi } from 'contexts/APIContext';
 import { useForm } from 'react-hook-form';
@@ -92,7 +92,7 @@ const Coupons = () => {
 		await deleteCoupon(code);
 	};
 	return (
-		<MainContainer maxwidth="70rem" minwidth="none" minheight="65rem">
+		<CouponMainContainer maxwidth="70rem" minheight="65rem">
 			{showSuccess && (
 				<Alert right="1rem" top="1rem" success>
 					Coupon added
@@ -101,28 +101,36 @@ const Coupons = () => {
 			<AdminPanelHeading>Coupons</AdminPanelHeading>
 			<CouponContainer>
 				<Table>
-					<TableBody>
-						<TableRow backgroundColor="#93949417" fontW="bold">
-							<TableCell>Code</TableCell>
-							<TableCell>Percentage</TableCell>
-							<TableCell>From</TableCell>
-							<TableCell>Actions</TableCell>
+					<TableHead>
+						<TableRow fontW="bold">
+							<TableCellHead>Code</TableCellHead>
+							<TableCellHead>Percentage</TableCellHead>
+							<TableCellHead>From</TableCellHead>
+							<TableCellHead>Actions</TableCellHead>
 						</TableRow>
+					</TableHead>
+					<TableBody>
 						<TableRow>
-							<TableCell>DISCOUNT20</TableCell>
-							<TableCell>20%</TableCell>
-							<TableCell>$1</TableCell>
-							<TableCell></TableCell>
+							<TableCell data-label="Code">DISCOUNT20</TableCell>
+							<TableCell data-label="Percentage">20%</TableCell>
+							<TableCell data-label="From">$1</TableCell>
+							<TableCell data-label="Actions" center></TableCell>
 						</TableRow>
 						{data &&
 							data.map((el, i) => {
 								if (el.code !== 'DISCOUNT20') {
 									return (
 										<TableRow key={i}>
-											<TableCell>{el.code}</TableCell>
-											<TableCell>{el.discount}%</TableCell>
-											<TableCell>${el.fromPrice}</TableCell>
-											<TableCell>
+											<TableCell data-label="Code">
+												{el.code}
+											</TableCell>
+											<TableCell data-label="Percentage">
+												{el.discount}%
+											</TableCell>
+											<TableCell data-label="From">
+												${el.fromPrice}
+											</TableCell>
+											<TableCell data-label="Actions">
 												<TableButton
 													primary
 													onClick={() => onDelete(el.code)}
@@ -190,7 +198,7 @@ const Coupons = () => {
 					</Form>
 				</CouponFormWrapper>
 			</CouponContainer>
-		</MainContainer>
+		</CouponMainContainer>
 	);
 };
 

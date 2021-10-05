@@ -7,7 +7,7 @@ export const NavBurgerContainer = styled.nav`
 	background-color: var(--color-grey-dark);
 	width: 35rem;
 	height: 100vh;
-	z-index: 3;
+	z-index: 5007;
 	transition: all 0.5s;
 	right: -35rem;
 	top: 0;
@@ -53,15 +53,17 @@ export const NavBurgerClose = styled.div`
 	padding: 1rem;
 	padding-left: 2rem;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-	/* text-align: center; */
 	cursor: pointer;
 `;
 
 export const NavBurgerOverlay = styled.div`
 	display: ${(props) => props.display};
 	position: fixed;
-	height: 100%;
-	width: 100%;
 	background-color: rgba(0, 0, 0, 0.4);
-	z-index: 3;
+	z-index: 5006;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100vh;
 `;

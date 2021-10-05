@@ -23,12 +23,15 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box
 }
 
+html, body {
+    overflow-x: hidden;
+}
 html {
     font-size: 62.5%;
-    scroll-behavior: smooth;
     @media only screen and (max-width: 840px) {
 		font-size: 50%;
 	}
+    
 }
 
 h1, h2, h3 {

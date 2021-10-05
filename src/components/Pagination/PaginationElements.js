@@ -7,6 +7,7 @@ export const PaginationContainer = styled.div`
 	top: ${(props) => props.top};
 	left: 50%;
 	transform: translateX(-50%);
+	text-align: center;
 `;
 
 export const PaginationP = styled.p`

@@ -8,12 +8,11 @@ import {
 	TableRow,
 	TableCell,
 	TableButton,
+	TableHead,
+	TableCellHead,
 } from 'components/Table/TableElements';
 
-import {
-	MainContainer,
-	LoaderContainer,
-} from 'components/Admin/Containers';
+import { LoaderContainer } from 'components/Admin/Containers';
 import Loader from 'components/Loader';
 import Search from 'components/FilterGroup/Search';
 import DeleteModal from 'components/DeleteModal';
@@ -27,7 +26,7 @@ import { Alert } from 'components/Alert';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAdminAllProducts } from 'utils/firebaseGetters';
 import { useAdminApi } from 'contexts/AdminAPIContext';
-import { ListImage } from './ListElements';
+import { ListImage, ProductsListContainer } from './ListElements';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllProducts());
@@ -68,7 +67,7 @@ const List = () => {
 				secondText="PRODUCT ID"
 				description="this product"
 			/>
-			<MainContainer>
+			<ProductsListContainer>
 				{showSuccess && (
 					<Alert success right="1rem" top="1rem">
 						Product ID: {id} deleted!
@@ -90,40 +89,49 @@ const List = () => {
 					query={query}
 				/>
 				<Table>
-					<TableBody>
-						{console.log(data?.length)}
-						<TableRow backgroundColor="#93949417" fontW="bold">
-							<TableCell width="8rem">ID</TableCell>
-							<TableCell width="12rem">Image</TableCell>
-							<TableCell>Name</TableCell>
-							<TableCell width="8rem">Sale</TableCell>
-							<TableCell width="13rem">Availability</TableCell>
-							<TableCell>Category</TableCell>
-							<TableCell width="10rem">Price</TableCell>
-							<TableCell>Actions</TableCell>
+					<TableHead>
+						<TableRow fontW="bold">
+							<TableCellHead width="4rem">ID</TableCellHead>
+							<TableCellHead width="12rem">Image</TableCellHead>
+							<TableCellHead width="20%">Name</TableCellHead>
+							<TableCellHead width="10rem">Sale</TableCellHead>
+							<TableCellHead width="20%">Availability</TableCellHead>
+							<TableCellHead width="20%">Category</TableCellHead>
+							<TableCellHead width="20%">Price</TableCellHead>
+							<TableCellHead width="15rem" textalign="center">
+								Actions
+							</TableCellHead>
 						</TableRow>
-						{console.log(data)}
+					</TableHead>
+
+					<TableBody>
 						{data &&
-							onHandleSearch().map((el, i) => (
+							onHandleSearch().map((el) => (
 								<TableRow key={el.id}>
-									<TableCell>{el.id}</TableCell>
-									<TableCell>
+									<TableCell data-label="ID" width="4rem">
+										{el.id}
+									</TableCell>
+									<TableCell data-label="Image">
 										<ListImage
 											src={el.img}
 											alt={el.alt}
 											effect="opacity"
 										/>
 									</TableCell>
-									<TableCell>{el.name}</TableCell>
-									<TableCell center>
+									<TableCell data-label="Name">{el.name}</TableCell>
+									<TableCell center data-label="Sale">
 										{el.discountPrice !== 0 ? <SaleIcon /> : 'No'}
 									</TableCell>
-									<TableCell center>
+									<TableCell center data-label="Availability">
 										{el.availability ? <TickIcon /> : <CrossIcon />}
 									</TableCell>
-									<TableCell>{el.category}</TableCell>
-									<TableCell width="8rem">${el.price}</TableCell>
-									<TableCell>
+									<TableCell data-label="Category">
+										{el.category}
+									</TableCell>
+									<TableCell data-label="Price">
+										${el.price}
+									</TableCell>
+									<TableCell data-label="Actions" center>
 										<Link to={`/admin/products/${el.id}`}>
 											<TableButton secondary>Edit</TableButton>
 										</Link>
@@ -147,7 +155,7 @@ const List = () => {
 						<Loader primary />
 					</LoaderContainer>
 				)}
-			</MainContainer>
+			</ProductsListContainer>
 		</>
 	);
 };

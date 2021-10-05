@@ -92,7 +92,6 @@ const CartOrder = ({
 				if (currentUser) {
 					const response = await validateQuizCode(currentUser.uid);
 					const user = response.data();
-					//false
 					return !user.usedCoupons.some((el) => el.code === value);
 				} else {
 					return true;
@@ -204,9 +203,11 @@ const CartOrder = ({
 							<CartColumn></CartColumn>
 							<CartColumn>Name</CartColumn>
 							<CartColumn>Price</CartColumn>
-							<CartColumn>Quantity</CartColumn>
-							<CartColumn display="none">Subtotal</CartColumn>
-							<CartColumn>Delete</CartColumn>
+							<CartColumn textalign="center">Quantity</CartColumn>
+							<CartColumn display="none" textalign="center">
+								Subtotal
+							</CartColumn>
+							<CartColumn textalign="center">Delete</CartColumn>
 						</CartItem>
 					)}
 
@@ -232,7 +233,7 @@ const CartOrder = ({
 									? el.discountPrice.toFixed(2)
 									: el.price.toFixed(2)}
 							</CartColumn>
-							<CartColumn>
+							<CartColumn textalign="center" center>
 								<CartQuantityWrapper>
 									<CartQuantity
 										type="button"
@@ -255,13 +256,13 @@ const CartOrder = ({
 									/>
 								</CartQuantityWrapper>
 							</CartColumn>
-							<CartColumn display="none">
+							<CartColumn textalign="center" display="none">
 								$
 								{el.discountPrice !== 0
 									? (el.discountPrice * el.quantity).toFixed(2)
 									: (el.price * el.quantity).toFixed(2)}
 							</CartColumn>
-							<CartColumn>
+							<CartColumn textalign="center">
 								<CartDelete onClick={() => onDeleteItem(el.id)} />
 							</CartColumn>
 						</CartItem>

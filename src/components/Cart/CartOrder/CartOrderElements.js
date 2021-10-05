@@ -1,7 +1,6 @@
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
-import { ImBin } from 'react-icons/im';
-import { AiFillCheckCircle } from 'react-icons/ai';
+import { AiFillCheckCircle, AiOutlineDelete } from 'react-icons/ai';
 
 import { device } from 'utils/breakpoints';
 
@@ -44,6 +43,7 @@ export const CartColumn = styled.div`
 	display: table-cell;
 	vertical-align: middle;
 	padding: 2rem;
+	text-align: ${(props) => props.textalign};
 
 	@media only screen and (max-width: 840px) {
 		width: ${(props) => props.mobileWidth};
@@ -63,7 +63,7 @@ export const CartImage = styled.img`
 	height: 15rem;
 	width: 15rem;
 	object-fit: cover;
-
+	border-radius: 5px;
 	@media ${device.mobileL} {
 		height: 10rem;
 		width: 10rem;
@@ -75,16 +75,16 @@ export const CartImage = styled.img`
 	}
 `;
 
-export const CartDelete = styled(ImBin)`
+export const CartDelete = styled(AiOutlineDelete)`
 	cursor: pointer;
-	font-size: 2rem;
+	font-size: 2.2rem;
+	color: var(--color-grey-dark);
 `;
 
 export const CartTotal = styled.div`
 	margin-top: 3rem;
 	width: 40%;
 	margin-left: auto;
-	/* background-color: grey; */
 	background-color: #93949417;
 	@media ${device.MobileL} {
 		width: 33rem;
@@ -215,25 +215,19 @@ export const CartCodeAdded = styled.span`
 
 export const CartQuantity = styled.input`
 	padding: 0.7rem;
-	margin: 0 0.5rem;
-	/* vertical-align: middle; */
-	background-color: unset;
-	/* border: 1px solid rgba(0, 0, 0, 0.2); */
+	background-color: transparent;
 	cursor: pointer;
-
-	/* border: none; */
-	/* margin-bottom: 0.5rem; */
+	border: none;
 `;
 
 export const CartQuantityInput = styled.input`
-	/* max-width: 5rem; */
-	max-width: 3rem;
+	max-width: 2rem;
 	text-align: center;
 	font-size: 1.6rem;
-	padding: 0.5rem;
+
 	border: none;
 	&:disabled {
-		background-color: inherit;
+		background-color: transparent;
 		color: inherit;
 	}
 `;
@@ -241,10 +235,13 @@ export const CartQuantityInput = styled.input`
 export const CartQuantityWrapper = styled.div`
 	display: flex;
 	align-items: center;
-	/* display: inline-block; */
-	padding: 0.2rem;
-
+	justify-content: center;
+	background-color: #93949417;
+	padding: 0.5rem 1rem;
+	border-radius: 25px;
+	justify-content: space-between;
 	@media ${device.mobileL} {
 		flex-direction: column;
+		display: inline-flex;
 	}
 `;

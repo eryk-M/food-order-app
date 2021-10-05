@@ -165,7 +165,7 @@ const CartSummary = ({
 				))}
 				<CartSummaryButtonWrapper>
 					<Button onClick={(e) => onChangeStep(e, 'back')}>
-						&#8592; Back to address
+						Back to address
 					</Button>
 					<FormButton
 						button
@@ -173,6 +173,7 @@ const CartSummary = ({
 						disabled={loading}
 						text="Order now!"
 						onClick={(e) => pushOrder(e)}
+						secondary
 					/>
 				</CartSummaryButtonWrapper>
 			</CartSummaryDetails>

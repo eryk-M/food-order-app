@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 
-import { MainContainer } from 'components/Admin/Containers';
 import { AdminPanelHeading } from 'components/Typography';
 import Column from './Column';
 import { Alert } from 'components/Alert';
@@ -19,6 +18,7 @@ import {
 	ContentFormWrapper,
 	ContentColumnWrapper,
 	ContentHeading,
+	AddQuizContainer,
 } from './AddElements';
 import Discount from 'components/Form/Discount';
 import { validateCouponCode } from 'utils/firebaseGetters';
@@ -220,7 +220,7 @@ const Add = () => {
 	};
 
 	return (
-		<MainContainer
+		<AddQuizContainer
 			ref={quizContainerRef}
 			maxwidth="80rem"
 			minwidth="1rem"
@@ -370,7 +370,7 @@ const Add = () => {
 					</Form>
 				</ContentColumnWrapper>
 			</ContentWrapper>
-		</MainContainer>
+		</AddQuizContainer>
 	);
 };
 

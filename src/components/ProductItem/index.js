@@ -14,7 +14,7 @@ import {
 	ProductDesc,
 	ProductIngredients,
 	ProductForm,
-	ProductQuantityLabel,
+	ProductQuantityInput,
 	ProductQuantity,
 	ProductButton,
 	ProductCartIcon,
@@ -28,6 +28,7 @@ import {
 	SlideItem,
 	SliderSelect,
 	ResizeIcon,
+	ProductQuantityWrapper,
 } from './ProductItemElements';
 
 import { Alert } from '../Alert';
@@ -69,13 +70,9 @@ const ProductItem = ({ props }) => {
 		setCurrentItem(data[0]);
 	}
 
-	const onInputChange = (e) => {
-		currentItem.quantity = Number(e.target.value);
-		setQuantity(Number(e.target.value));
-	};
-
 	async function addToCart(e) {
 		e.preventDefault();
+		currentItem.quantity = quantity;
 		await dispatch({
 			type: 'ADD_TO_CART',
 			payload: currentItem,
@@ -227,19 +224,30 @@ const ProductItem = ({ props }) => {
 										Product added to cart
 									</Alert>
 								)}
-								<ProductQuantityLabel htmlFor="quantity">
-									Quantity:
-								</ProductQuantityLabel>
-								<ProductQuantity
-									name="quantity"
-									type="number"
-									value={quantity}
-									onChange={(e) => onInputChange(e)}
-									min="1"
-									max="10"
-									maxLength="2"
-									disabled={isAdded}
-								/>
+
+								<ProductQuantityWrapper>
+									<ProductQuantity
+										type="button"
+										value="-"
+										onClick={() =>
+											setQuantity((prevQuantity) => prevQuantity - 1)
+										}
+										disabled={quantity === 1}
+									/>
+									<ProductQuantityInput
+										name="quantity"
+										value={quantity}
+										disabled={true}
+									/>
+
+									<ProductQuantity
+										type="button"
+										value="+"
+										onClick={() =>
+											setQuantity((prevQuantity) => prevQuantity + 1)
+										}
+									/>
+								</ProductQuantityWrapper>
 
 								<ProductButton disabled={isAdded}>
 									<ProductCartIcon />

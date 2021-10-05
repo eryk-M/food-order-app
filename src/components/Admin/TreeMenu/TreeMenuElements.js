@@ -19,6 +19,9 @@ export const TreeItemMain = styled.li`
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
+	@media ${device.mobileM} {
+		font-size: 1.8rem;
+	}
 	& svg {
 		font-size: 2.2rem;
 		margin-right: ${(props) => (props.hidden ? '' : '1.2rem')};

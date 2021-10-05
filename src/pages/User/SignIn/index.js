@@ -3,7 +3,6 @@ import { useAuth } from 'contexts/AuthContext';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import {
-	FormContainer,
 	FormHeading,
 	Form,
 	FormElement,
@@ -14,6 +13,8 @@ import {
 	FormLink,
 	FormError,
 } from 'components/Form/FormElements';
+
+import { SignInContainer } from './SignInElements';
 
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -83,10 +84,10 @@ const SignIn = () => {
 			setLoading(false);
 		}
 	};
-
+	//TODO: Do skonczenia RWD dla komponentow logowania i rejestracji
 	return (
 		<>
-			<FormContainer>
+			<SignInContainer>
 				<FormHeading>Log In</FormHeading>
 				<Form onSubmit={handleSubmit(onSubmit)}>
 					<FormElement id="email">
@@ -136,7 +137,7 @@ const SignIn = () => {
 				<FormAlternative>
 					<FormLink to="/forgot-password">Forgot Password?</FormLink>
 				</FormAlternative>
-			</FormContainer>
+			</SignInContainer>
 			<FormAlternative>
 				Need an account?{' '}
 				<FormLink to={{ pathname: '/signup', query: query }}>

@@ -19,6 +19,7 @@ const ButtonMain = styled.button`
 	margin-bottom: ${(props) => props.marginbottom};
 	border-radius: 5px;
 	display: ${(props) => props.display ?? ''};
+	vertical-align: middle;
 	&:hover {
 		background-color: var(--color-secondary);
 		color: var(--color-grey-dark);

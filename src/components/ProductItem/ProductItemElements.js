@@ -49,7 +49,6 @@ export const SliderContainer = styled.div`
 export const SlideShow = styled.img`
 	min-width: 100%;
 	object-fit: cover;
-	transition: transform 0.3s ease;
 `;
 
 export const SliderShowcase = styled.div`
@@ -75,7 +74,9 @@ export const SliderSelect = styled.div`
 
 export const SlideItem = styled.div`
 	width: 32%;
-
+	height: auto;
+	object-fit: cover;
+	/* object-position: right top; */
 	&:hover {
 		opacity: 0.8;
 		cursor: pointer;
@@ -83,6 +84,8 @@ export const SlideItem = styled.div`
 
 	img {
 		object-fit: cover;
+		height: 15rem;
+		object-position: center;
 	}
 `;
 
@@ -188,19 +191,6 @@ export const ProductForm = styled.form`
 	}
 `;
 
-export const ProductQuantityLabel = styled.label`
-	font-size: 2rem;
-	margin-right: 1rem;
-`;
-
-export const ProductQuantity = styled.input`
-	text-align: center;
-	width: 6rem;
-	/* height: 2rem;  */
-	margin-right: 2rem;
-	font-size: 2rem;
-`;
-
 export const ProductStar = styled(FaStar)`
 	cursor: pointer;
 	color: #e4e5e9;
@@ -251,4 +241,31 @@ export const ResizeIcon = styled(IoIosResize)`
 	font-size: 3rem;
 	color: var(--color-grey-light);
 	z-index: 1;
+`;
+
+export const ProductQuantityWrapper = styled.div`
+	margin-right: 2rem;
+	background-color: #93949417;
+	border-radius: 25px;
+`;
+export const ProductQuantity = styled.input`
+	font-size: 2rem;
+	padding: 1.3rem 2rem;
+	background: none;
+	cursor: pointer;
+	border: none;
+
+	&:disabled {
+		cursor: default;
+	}
+`;
+
+export const ProductQuantityLabel = styled.label`
+	font-size: 2rem;
+`;
+export const ProductQuantityInput = styled.input`
+	text-align: center;
+	width: 6rem;
+	font-size: 2rem;
+	border: none;
 `;

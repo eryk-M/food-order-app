@@ -4,7 +4,7 @@ export const FormReviewContainer = styled.div`
 	max-width: 70rem;
 	margin: 0 auto;
 	background-color: #fff;
-	box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 `;
 

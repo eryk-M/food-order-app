@@ -2,21 +2,25 @@ import styled from 'styled-components/macro';
 import { motion } from 'framer-motion';
 
 import { MainContainer } from 'components/Admin/Containers';
-
+import {
+	TableCellHead,
+	Table,
+	TableRow,
+	TableCell,
+} from 'components/Table/TableElements';
 import { device } from 'utils/breakpoints';
 import { SearchContainer } from 'components/FilterGroup/Search/SearchElements';
 import { PaginationContainer } from 'components/Pagination/PaginationElements';
 
 export const ListContainer = styled(MainContainer)`
 	display: block;
-	overflow: hidden;
-	& table {
+	& ${Table} {
 		display: table;
 		@media ${device.laptopM} {
 			width: 100%;
 		}
 
-		& th {
+		& ${TableCellHead} {
 			padding: 1rem 0;
 
 			&:not(:first-of-type) {
@@ -42,7 +46,7 @@ export const ListContainer = styled(MainContainer)`
 			}
 		}
 
-		& tr {
+		& ${TableRow} {
 			@media ${device.mobileM} {
 				border: 1px solid rgba(0, 0, 0, 0.1);
 				padding: 1rem;
@@ -57,7 +61,7 @@ export const ListContainer = styled(MainContainer)`
 			}
 		}
 
-		& td {
+		& ${TableCell} {
 			padding: 1rem 0;
 			&:first-of-type {
 				padding-left: 3rem;
@@ -99,10 +103,6 @@ export const ListContainer = styled(MainContainer)`
 		@media ${device.mobileM} {
 			top: 7.4rem;
 		}
-	}
-
-	& .checkbox-group {
-		/* display: block; */
 	}
 `;
 

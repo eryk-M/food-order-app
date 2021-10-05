@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 import { device } from 'utils/breakpoints';
-
+import { AlertSuccessIcon } from 'components/Alert/AlertElements';
 export const OrderContainer = styled.div`
 	padding: 1rem;
 `;
@@ -68,13 +68,18 @@ export const OrderSteps = styled.div`
 	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 	grid-gap: 5rem;
 	margin-top: 2rem;
-
+	position: relative;
 	@media ${device.tablet} {
 		grid-gap: 1rem;
 		grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
 	}
 	@media ${device.mobileM} {
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	}
+	& ${AlertSuccessIcon} {
+		@media only screen and (max-width: 340px) {
+			margin-right: 0;
+		}
 	}
 `;
 

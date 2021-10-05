@@ -41,6 +41,7 @@ export const FormHeading = styled.h2`
 	margin-bottom: 5rem;
 	text-transform: uppercase;
 	font-weight: bold;
+	font-size: 2.4rem;
 `;
 
 export const Form = styled.form`

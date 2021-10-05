@@ -63,16 +63,6 @@ const ContentToPrint = React.forwardRef(
 						<OrderContainer ref={ref}>
 							<AdminPanelHeading>Order ID: {id}</AdminPanelHeading>
 							<JustifyCenterContainer>
-								{showSuccess && (
-									<Alert
-										success
-										top={width <= 400 ? '22rem' : '9rem'}
-										right={width <= 400 ? '39%' : '2rem'}
-									>
-										Updated
-									</Alert>
-								)}
-
 								<MiddleWrapper>
 									<OrderHeading>Status:</OrderHeading>
 									<Status step={data[0].step} />
@@ -135,6 +125,12 @@ const ContentToPrint = React.forwardRef(
 						</MiddleWrapper>
 
 						<OrderSteps>
+							{showSuccess && (
+								<Alert success top="-6rem" right="0rem">
+									{width <= 340 ? '' : 'Updated'}
+								</Alert>
+							)}
+
 							{steps.map((el, i) => (
 								<OrderChangeButton
 									onClick={() => handleChangeStatus(el.step)}

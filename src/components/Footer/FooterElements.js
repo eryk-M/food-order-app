@@ -24,7 +24,7 @@ export const FooterMediaIcon = styled.div`
 	width: 5.2rem;
 	height: 5.2rem;
 	border-radius: 50%;
-	border: 2px solid var(--color-grey-light);
+	border: 1px solid var(--color-grey-light);
 	font-size: 1.6rem;
 	color: var(--color-grey-light);
 	cursor: pointer;
@@ -32,13 +32,13 @@ export const FooterMediaIcon = styled.div`
 	&:hover {
 		${(props) => {
 			if (props.facebook)
-				return 'border: 2px solid #4267b2;color: #4267b2;';
+				return 'border: 1px solid #4267b2;color: #4267b2;';
 			else if (props.instagram)
-				return 'border: 2px solid #8a3ab9;color:#8a3ab9';
+				return 'border: 1px solid #8a3ab9;color:#8a3ab9';
 			else if (props.twitter)
-				return 'border: 2px solid #1DA1F2;color:#1DA1F2';
+				return 'border: 1px solid #1DA1F2;color:#1DA1F2';
 			else if (props.youtube)
-				return 'border: 2px solid #FF0000;color:#FF0000';
+				return 'border: 1px solid #FF0000;color:#FF0000';
 		}}
 	}
 	& svg {

@@ -126,6 +126,10 @@ export const TableButton = styled.button`
 	cursor: pointer;
 	transition: all 0.1s;
 
+	@media only screen and (max-width: 840px) {
+		font-size: 1.2rem;
+	}
+
 	& svg {
 		vertical-align: middle;
 		margin-left: 0.8rem;
