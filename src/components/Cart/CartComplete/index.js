@@ -11,31 +11,42 @@ import {
 	ShowCopyMessage,
 } from './CartCompleteElements';
 
-import { useLocation, Redirect } from 'react-router-dom';
+import { useLocation, Redirect, useHistory } from 'react-router-dom';
 
 import ButtonLink from 'components/ButtonLink';
 
 const CartComplete = ({ step }) => {
 	const [orderId, setOrderId] = useState('');
 	const [copied, setCopied] = useState(false);
+	const [locationKeys, setLocationKeys] = useState([]);
 
+	const history = useHistory();
 	const { order } = useLocation();
 
 	useEffect(() => {
-		window.history.pushState(
-			null,
-			document.title,
-			window.location.href
-		);
-		window.addEventListener('popstate', function () {
-			window.history.pushState(
-				null,
-				document.title,
-				window.location.href
-			);
-		});
 		setOrderId(order);
-	}, [order]);
+		return history.listen((location) => {
+			if (history.action === 'POP') {
+				if (locationKeys[1] === location.key) {
+					setLocationKeys(([_, ...keys]) => keys);
+				} else {
+					setLocationKeys((keys) => [location.key, ...keys]);
+					const response = window.confirm(
+						'Are you sure you want to go back? You will be redirected to first step!'
+					);
+
+					if (response) {
+						history.push('/cart');
+					} else {
+						history.push({
+							pathname: '/cart/complete',
+							order: orderId,
+						});
+					}
+				}
+			}
+		});
+	}, [order, history, locationKeys, orderId]);
 
 	if (step === 0) return <Redirect to="/cart" />;
 

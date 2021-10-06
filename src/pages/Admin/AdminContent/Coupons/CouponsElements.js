@@ -6,6 +6,7 @@ import { device } from 'utils/breakpoints';
 import { TableCell, TableRow } from 'components/Table/TableElements';
 import { FormGroup, FormElement } from 'components/Form/FormElements';
 export const CouponMainContainer = styled(MainContainer)`
+	min-width: 40%;
 	@media ${device.laptopS} {
 		max-width: unset;
 		margin-right: 2rem;

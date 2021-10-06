@@ -13,9 +13,16 @@ import {
 	TableCellHead,
 } from 'components/Table/TableElements';
 
-import { OrdersTableWrapper } from './UserOrdersElements';
+import {
+	OrdersTableWrapper,
+	OrdersNoData,
+	OrdersNoDataWrapper,
+	OrdersNoDataP,
+} from './UserOrdersElements';
 
 import Overall from './Overall';
+
+import NoData from 'images/no-data.svg';
 const UserOrders = () => {
 	const { currentUser } = useAuth();
 
@@ -36,6 +43,12 @@ const UserOrders = () => {
 					{data && data.map((el, i) => <Overall key={i} el={el} />)}
 				</TableBody>
 			</Table>
+			{data?.length === 0 && (
+				<OrdersNoDataWrapper>
+					<OrdersNoDataP>You didnt order anything yet</OrdersNoDataP>
+					<OrdersNoData src={NoData} alt="No data svg" />
+				</OrdersNoDataWrapper>
+			)}
 		</OrdersTableWrapper>
 	);
 };

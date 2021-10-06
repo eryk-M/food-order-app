@@ -15,7 +15,6 @@ import { getAllProducts } from 'utils/firebaseGetters';
 import Search from 'components/FilterGroup/Search';
 import Select from 'components/FilterGroup/Select';
 import Loader from 'components/Loader';
-
 const Content = lazy(() => import('./Content'));
 
 const Products = () => {

@@ -17,7 +17,7 @@ export const QuizCard = styled(motion.div)`
 	}
 `;
 export const QuizList = styled(motion.div)`
-	display: ${(props) => (props.items > 3 ? 'grid' : 'flex')};
+	display: ${(props) => (props.items?.length > 3 ? 'grid' : 'flex')};
 	grid-template-columns: repeat(auto-fit, minmax(150px, 4fr));
 	grid-gap: 2rem;
 	margin: 0 1rem;
@@ -36,7 +36,6 @@ export const QuizCardNote = styled.p`
 `;
 
 export const QuizButton = styled.button`
-	/* padding: 0 5rem; */
 	display: block;
 	width: 100%;
 	padding: 1rem;
@@ -55,7 +54,6 @@ export const QuizButton = styled.button`
 `;
 
 export const UserQuizContainer = styled.div`
-	/* height: 100%; */
 	width: 100%;
 	background: url(${quizBg});
 	background-position: center;
@@ -98,7 +96,6 @@ export const QuizDownerHeading = styled(motion.h3)`
 	text-align: center;
 	margin: 2rem 0;
 	position: relative;
-	/* border-bottom: 1px solid var(--color-primary); */
 	display: inline-block;
 	background-color: var(--color-primary);
 	padding: 1rem;

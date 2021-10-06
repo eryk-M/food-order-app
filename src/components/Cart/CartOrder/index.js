@@ -58,8 +58,8 @@ const CartOrder = ({
 }) => {
 	const { validateDiscountCode, validateQuizCode } = useApi();
 	const { currentUser } = useAuth();
-	const [loading, setLoading] = useState(false);
 
+	const [loading, setLoading] = useState(false);
 	const validationSchema = Yup.object().shape({
 		discount: Yup.string()
 			.test(
@@ -125,6 +125,7 @@ const CartOrder = ({
 			setTotalPrice(discountPrice);
 			setDiscountAdded(true);
 		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [
 		discount,

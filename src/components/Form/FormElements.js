@@ -166,7 +166,13 @@ export const FormBtn = styled.button`
 			: ''}
 `;
 
-export const FormButton = ({ loading, type, text, ...rest }) => {
+export const FormButton = ({
+	loading,
+	orderButton,
+	type,
+	text,
+	...rest
+}) => {
 	return (
 		<FormBtn
 			className="form"
@@ -174,7 +180,7 @@ export const FormButton = ({ loading, type, text, ...rest }) => {
 			disabled={loading}
 			type={type ?? 'submit'}
 		>
-			{loading && <Loader />}
+			{!orderButton && loading && <Loader />}
 			{text}
 		</FormBtn>
 	);

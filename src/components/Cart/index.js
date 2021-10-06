@@ -81,38 +81,34 @@ const Cart = () => {
 		getTotalPrice();
 	}, [cart, getTotalPrice]);
 
-	const onChangeStep = useCallback(
-		(e, where, orderId) => {
-			const { pathname } = history.location;
-			if (e !== undefined) e.preventDefault();
+	const onChangeStep = (e, where, orderId) => {
+		const { pathname } = history.location;
+		if (e !== undefined) e.preventDefault();
 
-			if (where === 'back') {
-				setStep((prevStep) => prevStep - 1);
-				if (pathname === '/cart/address') {
-					history.push('/cart');
-				} else if (pathname === '/cart/summary') {
-					history.push('/cart/address');
-				}
-			} else if (where === 'begin') {
-				setStep(0);
-			} else if (where === 'push') {
-				setStep((prevStep) => prevStep + 1);
-				if (pathname === '/cart') {
-					history.push('/cart/address');
-				} else if (pathname === '/cart/address') {
-					history.push('/cart/summary');
-				} else if (pathname === '/cart/summary') {
-					history.push({
-						pathname: '/cart/complete',
-						order: orderId,
-					});
-				}
+		if (where === 'back') {
+			setStep((prevStep) => prevStep - 1);
+			if (pathname === '/cart/address') {
+				history.push('/cart');
+			} else if (pathname === '/cart/summary') {
+				history.push('/cart/address');
 			}
-		},
-		[history]
-	);
+		} else if (where === 'begin') {
+			setStep(0);
+		} else if (where === 'push') {
+			setStep((prevStep) => prevStep + 1);
+			if (pathname === '/cart') {
+				history.push('/cart/address');
+			} else if (pathname === '/cart/address') {
+				history.push('/cart/summary');
+			} else if (pathname === '/cart/summary') {
+				history.push({
+					pathname: '/cart/complete',
+					order: orderId,
+				});
+			}
+		}
+	};
 
-	// scrollRef.current?.scrollIntoView();
 	return (
 		<CartWrapper ref={scrollRef}>
 			<StepsContainer>

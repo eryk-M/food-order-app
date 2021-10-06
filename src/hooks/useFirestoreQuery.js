@@ -44,33 +44,25 @@ export function useFirestoreQuery(query) {
 		return prevQuery && query && query.isEqual(prevQuery);
 	});
 	useEffect(() => {
-		let mounted = true;
-		// Return early if query is falsy and reset to "idle" status in case
-		// we're coming from "success" or "error" status due to query change.
 		if (!queryCached) {
 			dispatch({ type: 'idle' });
 			return;
 		}
 		dispatch({ type: 'loading' });
-		// Subscribe to query with onSnapshot
-		// Will unsubscribe on cleanup since this returns an unsubscribe function
-		if (mounted) {
-			queryCached.onSnapshot(
-				(response) => {
-					// Get data for collection or doc
-					const data = response.docs
-						? getCollectionData(response)
-						: getDocData(response);
-					dispatch({ type: 'success', payload: data });
-				},
-				(error) => {
-					dispatch({ type: 'error', payload: error });
-				}
-			);
-		}
 
-		return () => (mounted = false);
-	}, [queryCached]); // Only run effect if queryCached changes
+		return queryCached.onSnapshot(
+			(response) => {
+				// Get data for collection or doc
+				const data = response.docs
+					? getCollectionData(response)
+					: getDocData(response);
+				dispatch({ type: 'success', payload: data });
+			},
+			(error) => {
+				dispatch({ type: 'error', payload: error });
+			}
+		);
+	}, [queryCached]);
 	return state;
 }
 function getDocData(doc) {

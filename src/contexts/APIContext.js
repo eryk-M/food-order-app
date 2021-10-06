@@ -163,28 +163,24 @@ export function APIProvider({ children }) {
 		date,
 		payment
 	) => {
-		try {
-			orderInfo.forEach(async (el) => {
-				await productsRef
-					.doc(String(el.id))
-					.update({ popularity: increment });
-			});
-			await ordersRef.add({
-				orderId: orderId,
-				userId: userId ?? '',
-				totalPrice: totalPrice,
-				step: 0,
-				userInfo: userInfo,
-				orderInfo: orderInfo,
-				date: date,
-				payment: payment,
-			});
-		} catch (err) {
-			console.error(err);
-		}
+		orderInfo.forEach(async (el) => {
+			await productsRef
+				.doc(String(el.id))
+				.update({ popularity: increment });
+		});
+		await ordersRef.add({
+			orderId: orderId,
+			userId: userId ?? '',
+			totalPrice: totalPrice,
+			step: 0,
+			userInfo: userInfo,
+			orderInfo: orderInfo,
+			date: date,
+			payment: payment,
+		});
 	};
 
-	const validateDiscountCode = async (code, totalPrice) => {
+	const validateDiscountCode = async (code) => {
 		return await couponsRef.where('code', '==', code).get();
 	};
 
@@ -282,102 +278,3 @@ export function APIProvider({ children }) {
 		</APIContext.Provider>
 	);
 }
-
-//// JUST IN CASE
-
-// async function getProducts() {
-// 	let data = [];
-// 	await productsRef.get().then((snapshot) => {
-// 		snapshot.forEach((doc) => {
-// 			const item = doc.data();
-// 			data.push(item);
-// 		});
-// 	});
-// 	return data;
-// }
-
-// async function getOneProduct(id) {
-// 	let product;
-// 	await productsRef
-// 		.where('id', '==', id)
-// 		.get()
-// 		.then((snapshot) => {
-// 			product = snapshot.docs[0].data();
-// 		});
-// 	return product;
-// }
-
-// async function getUserInfo(uid) {
-// 	let user;
-// 	await usersRef
-// 		.doc(uid)
-// 		.get()
-// 		.then((doc) => {
-// 			user = doc.data();
-// 		});
-// 	return user;
-// }
-
-// async function getReviews(productId) {
-// 	let reviews = [];
-// 	await reviewsRef
-// 		.doc(productId)
-// 		.collection('reviews')
-// 		.orderBy('date', 'desc')
-// 		.get()
-// 		.then((snapshot) => {
-// 			snapshot.docs.forEach((doc) => {
-// 				reviews.push(doc.data());
-// 			});
-// 		});
-
-// 	return reviews;
-// }
-
-// async function getOrder(orderId) {
-// 	let order;
-// 	await ordersRef
-// 		.where('orderId', '==', orderId)
-// 		.get()
-// 		.then((snapshot) => {
-// 			order = snapshot.docs[0].data();
-// 		})
-// 		.catch((err) => {
-// 			return err;
-// 		});
-
-// 	return order;
-// }
-
-// async function getUserOrders(userId) {
-// 	let orders = [];
-
-// 	await ordersRef
-// 		.where('userId', '==', userId)
-// 		.get()
-// 		.then((snapshot) => {
-// 			snapshot.docs.forEach((doc) => {
-// 				orders.push(doc.data());
-// 			});
-// 		})
-// 		.catch((err) => {
-// 			return err;
-// 		});
-// 	return orders;
-// }
-
-// async function validateUsername(username) {
-// 	let found = false;
-// 	await usersRef
-// 		.where('username', '==', username)
-// 		.get()
-// 		.then((snapshot) => {
-// 			if (snapshot.empty) {
-// 				return found;
-// 			} else {
-// 				found = true;
-// 			}
-// 		});
-// 	return found;
-// }
-// JUST IN CASE

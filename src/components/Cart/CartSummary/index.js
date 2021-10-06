@@ -44,14 +44,45 @@ const CartSummary = ({
 		dispatch,
 	} = useContext(CartContext);
 
-	const [importantInfo, setImportantInfo] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [locationKeys, setLocationKeys] = useState([]);
+
 	const { addOrder, setCouponAsUsed } = useApi();
 	const { currentUser } = useAuth();
 	const history = useHistory();
-
 	useEffect(() => {
-		if (importantInfo.length === 0) {
+		return history.listen((location) => {
+			if (history.action === 'POP') {
+				if (locationKeys[1] === location.key) {
+					setLocationKeys(([_, ...keys]) => keys);
+				} else {
+					setLocationKeys((keys) => [location.key, ...keys]);
+					const response = window.confirm(
+						'Are you sure you want to go back? You will be redirected to first step!'
+					);
+
+					if (response) {
+						history.push('/cart');
+					} else {
+						history.push('/cart/summary');
+					}
+				}
+			}
+		});
+	}, [history, locationKeys, onChangeStep]);
+
+	if (step === 0) return <Redirect to="/cart" />;
+
+	const pushOrder = async (e) => {
+		setLoading(true);
+		let importantInfo = [];
+		let orderId = '';
+		for (let i = 0; i < 10; i++) {
+			let rndInt = Math.floor(Math.random() * 9) + 1;
+			orderId += rndInt;
+		}
+
+		try {
 			cart.forEach((el) => {
 				importantInfo.push({
 					name: el.name,
@@ -60,23 +91,6 @@ const CartSummary = ({
 					quantity: el.quantity,
 				});
 			});
-		}
-
-		return () => {
-			setImportantInfo([]);
-		};
-	}, [cart, importantInfo]);
-
-	if (step === 0) return <Redirect to="/cart" />;
-
-	const pushOrder = async (e) => {
-		setLoading(true);
-		let orderId = '';
-		for (let i = 0; i < 10; i++) {
-			let rndInt = Math.floor(Math.random() * 9) + 1;
-			orderId += rndInt;
-		}
-		try {
 			const date = Date.now();
 			await addOrder(
 				address,
@@ -90,14 +104,15 @@ const CartSummary = ({
 			if (quizCode) {
 				await setCouponAsUsed(currentUser.uid, quizCode);
 			}
+
+			setLoading(false);
+			localStorage.removeItem('cart');
 			setDiscountAdded(false);
 			setQuizCode('');
-			setLoading(false);
 			setDiscount(null);
 			dispatch({
 				type: 'RESET_CART',
 			});
-			localStorage.removeItem('cart');
 			onChangeStep(e, 'push', orderId);
 		} catch (error) {
 			console.error(error);
@@ -169,11 +184,12 @@ const CartSummary = ({
 					</Button>
 					<FormButton
 						button
-						loading={loading}
 						disabled={loading}
 						text="Order now!"
 						onClick={(e) => pushOrder(e)}
 						secondary
+						orderButton
+						loading={loading}
 					/>
 				</CartSummaryButtonWrapper>
 			</CartSummaryDetails>

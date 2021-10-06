@@ -178,7 +178,7 @@ const List = () => {
 			>
 				{showSuccess && (
 					<Alert success right="1rem" top="1rem">
-						Order deleted!
+						Orders deleted!
 					</Alert>
 				)}
 

@@ -63,7 +63,6 @@ const Item = ({ el }) => {
 
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
-
 		const timeoutId = addedTimeoutRef.current;
 		return () => {
 			clearTimeout(timeoutId);
