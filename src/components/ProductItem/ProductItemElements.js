@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 import { FaCartPlus } from 'react-icons/fa';
 import { IoIosResize } from 'react-icons/io';
 import { FaStar } from 'react-icons/fa';
-
+import { RiArrowGoBackLine } from 'react-icons/ri';
 import { device } from 'utils/breakpoints';
 
 export const ProductContainer = styled.section`
@@ -10,7 +10,7 @@ export const ProductContainer = styled.section`
 	border-radius: 5px;
 	max-width: 136rem;
 	margin: 5rem auto;
-
+	margin-top: 2rem;
 	@media screen and (max-width: 840px) {
 		flex-direction: column;
 		justify-content: center;
@@ -43,6 +43,7 @@ export const SliderContainer = styled.div`
 
 	@media ${device.mobileM} {
 		max-width: 40rem;
+		height: 45rem;
 	}
 `;
 
@@ -63,6 +64,7 @@ export const SliderShowcase = styled.div`
 	}
 	@media ${device.mobileM} {
 		width: 40rem;
+		height: 32rem;
 	}
 `;
 
@@ -86,6 +88,9 @@ export const SlideItem = styled.div`
 		object-fit: cover;
 		height: 15rem;
 		object-position: center;
+		@media ${device.mobileM} {
+			height: 10rem;
+		}
 	}
 `;
 
@@ -109,7 +114,7 @@ export const ProductImg = styled.img`
 `;
 
 export const ProductRight = styled.div`
-	padding: 6rem;
+	padding: 3rem;
 	width: 50%;
 	display: flex;
 	justify-content: space-between;
@@ -125,7 +130,7 @@ export const ProductTitle = styled.h2`
 	font-weight: 500;
 	font-size: 3.5rem;
 	text-align: center;
-	margin-top: 2.5rem;
+	/* margin-top: 2.5rem; */
 `;
 
 export const ProductDesc = styled.p`
@@ -158,9 +163,11 @@ export const ProductButton = styled.button`
 	align-items: center;
 
 	&:hover {
-		background-color: var(--color-secondary);
-		cursor: pointer;
-		color: #000;
+		@media (min-width: 1025px) {
+			background-color: var(--color-secondary);
+			cursor: pointer;
+			color: #000;
+		}
 	}
 
 	&:disabled {
@@ -268,4 +275,25 @@ export const ProductQuantityInput = styled.input`
 	width: 6rem;
 	font-size: 2rem;
 	border: none;
+`;
+
+export const ProductGoBack = styled.div`
+	max-width: 136rem;
+	margin: 0 auto;
+	display: flex;
+	justify-content: right;
+	padding: 0 2rem;
+
+	button {
+		padding: 1rem 2rem;
+		font-size: 1.6rem;
+		margin-top: 2rem;
+		background-color: var(--color-primary);
+		color: #fff;
+		border: none;
+	}
+`;
+
+export const ReturnGoBackIcon = styled(RiArrowGoBackLine)`
+	vertical-align: middle;
 `;

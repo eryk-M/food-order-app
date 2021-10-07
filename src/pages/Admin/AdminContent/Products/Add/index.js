@@ -5,8 +5,6 @@ import {
 	ProgressContainer,
 } from 'components/Admin/Containers';
 
-import { Line } from 'rc-progress';
-
 import {
 	EditImage,
 	IngredientList,
@@ -217,6 +215,9 @@ const Add = () => {
 
 	return (
 		<EditContainer>
+			{uploadPercentage > 0 && (
+				<ProgressContainer width={uploadPercentage} />
+			)}
 			<PlusBigIcon />
 			{showSuccess && (
 				<Alert
@@ -235,15 +236,7 @@ const Add = () => {
 			>
 				<FormElement>
 					{imgTag}
-					{uploadPercentage > 0 && (
-						<ProgressContainer>
-							<Line
-								percent={`${uploadPercentage}`}
-								strokeWidth="1"
-								strokeColor="#60dc64"
-							/>
-						</ProgressContainer>
-					)}
+
 					<FormLabel className="file-label" htmlFor="file">
 						Select image
 					</FormLabel>

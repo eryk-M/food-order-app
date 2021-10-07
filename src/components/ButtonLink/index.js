@@ -14,9 +14,11 @@ const ButtonAnchor = styled(Link)`
 	transition: all 0.2s;
 
 	&:hover {
-		background-color: var(--color-secondary);
-		cursor: pointer;
-		color: #000;
+		@media (min-width: 1025px) {
+			background-color: var(--color-secondary);
+			cursor: pointer;
+			color: #000;
+		}
 	}
 `;
 

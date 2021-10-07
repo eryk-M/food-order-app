@@ -6,9 +6,10 @@ import { device } from 'utils/breakpoints';
 export const Nav = styled.nav`
 	position: absolute;
 	height: 20rem;
-	z-index: 1;
+	z-index: 5001;
 	width: 100%;
 	padding: 4rem;
+	transition: all 0.2s ease;
 `;
 
 export const NavWrapper = styled.div`
@@ -23,7 +24,7 @@ export const NavLogo = styled(Link)``;
 
 export const NavLogoImage = styled.img`
 	height: 17rem;
-
+	transition: all 0.2s ease;
 	@media ${device.mobileM} {
 		height: 10rem;
 	}

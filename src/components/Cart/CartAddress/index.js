@@ -36,7 +36,8 @@ const CartAddress = ({ onChangeStep, userData, step, dispatch }) => {
 			.max(40, 'Address must have maximum of 40 characters'),
 		phone: Yup.string()
 			.required('Phone is required')
-			.matches(/[0-9]{9}/, 'Phone must be in 9 digits format'),
+			.min(9, 'Phone must be in 9 digits format')
+			.max(9, 'Phone must be in 9 digits format'),
 		city: Yup.string()
 			.required('City is required')
 			.min(3, 'City must be at least 3 characters')
@@ -101,7 +102,7 @@ const CartAddress = ({ onChangeStep, userData, step, dispatch }) => {
 						<FormLabel>Phone number *</FormLabel>
 						<FormInput
 							{...register('phone')}
-							type="text"
+							type="number"
 							defaultValue={userData?.phone}
 							error={errors.phone}
 						/>

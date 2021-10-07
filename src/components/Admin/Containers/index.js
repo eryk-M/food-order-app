@@ -52,9 +52,14 @@ export const EditContainer = styled.div`
 `;
 
 export const ProgressContainer = styled.div`
-	margin: 1rem 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: var(--color-green);
+	height: 0.5rem;
+	width: ${(props) => props.width + '%'};
+	z-index: 2;
 `;
-
 export const TotalContainer = styled.div`
 	flex: 0 0 30.333%;
 	max-width: 30.333%;

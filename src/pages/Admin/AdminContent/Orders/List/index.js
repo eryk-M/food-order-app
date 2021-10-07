@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAdminAllOrders } from 'utils/firebaseGetters';
 import { useApi } from 'contexts/APIContext';
+import { useWindowSize } from 'hooks/useWindowSize';
 
 import Loader from 'components/Loader';
 import Search from 'components/FilterGroup/Search';
@@ -38,14 +39,45 @@ import {
 } from 'components/Admin/Icons';
 import { AnimatePresence } from 'framer-motion';
 import Pagination from 'components/Pagination';
+
+const renderIcon = (sort) => {
+	if (sort === 1) {
+		return null;
+	} else if (sort === 2) {
+		return React.createElement(ArrowUpFilterIcon);
+	} else if (sort === 3) {
+		return React.createElement(ArrowDownFilterIcon);
+	}
+};
+
+const Sort = ({ children, setSort, sort }) => {
+	return (
+		<TableCellHead
+			center
+			pointer
+			onClick={setSort}
+			className={sort > 1 ? 'sort-active' : ''}
+		>
+			{renderIcon(sort)}
+			{children}
+			<ArrowsFilterIcon />
+		</TableCellHead>
+	);
+};
+
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllOrders());
 	const { deleteOrders } = useApi();
+	const size = useWindowSize();
 
 	const history = useHistory();
 	const [query, setQuery] = useState('');
 	const [showSuccess, setShowSuccess] = useState(false);
+
 	const [sortStatus, setSortStatus] = useState(1);
+	const [sortPrice, setSortPrice] = useState(1);
+	const [sortDate, setSortDate] = useState(1);
+
 	const [open, setOpen] = useState(false);
 	const [ordersToDelete, setOrdersToDelete] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -89,11 +121,11 @@ const List = () => {
 		history.push(`/admin/orders/${id}`);
 	};
 
-	const handleStatus = () => {
-		if (sortStatus === 3) {
-			setSortStatus(1);
+	const handleSortNumber = (sort, setSort) => {
+		if (sort === 3) {
+			setSort(1);
 		} else {
-			setSortStatus((prevStatus) => prevStatus + 1);
+			setSort((prevSort) => prevSort + 1);
 		}
 	};
 
@@ -104,6 +136,26 @@ const List = () => {
 			return a.step - b.step;
 		} else if (sortStatus === 3) {
 			return b.step - a.step;
+		}
+	};
+
+	const filterPrice = (a, b) => {
+		if (sortPrice === 1) {
+			return true;
+		} else if (sortPrice === 2) {
+			return a.totalPrice - b.totalPrice;
+		} else if (sortPrice === 3) {
+			return b.totalPrice - a.totalPrice;
+		}
+	};
+
+	const filterDate = (a, b) => {
+		if (sortDate === 1) {
+			return true;
+		} else if (sortDate === 2) {
+			return a.date - b.date;
+		} else if (sortDate === 3) {
+			return b.date - a.date;
 		}
 	};
 
@@ -130,16 +182,6 @@ const List = () => {
 		setOrdersToDelete(checkedItems);
 	};
 
-	const renderIcon = () => {
-		if (sortStatus === 1) {
-			return null;
-		} else if (sortStatus === 2) {
-			return React.createElement(ArrowUpFilterIcon);
-		} else if (sortStatus === 3) {
-			return React.createElement(ArrowDownFilterIcon);
-		}
-	};
-
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
@@ -149,13 +191,19 @@ const List = () => {
 		if (query.length >= 3) {
 			return orderState
 				.filter((el) => el.orderId.includes(query))
-				.sort((a, b) => filterStatus(a, b));
+				.sort((a, b) => filterStatus(a, b))
+				.sort((a, b) => filterPrice(a, b))
+				.sort((a, b) => filterDate(a, b));
 		} else {
 			return orderState
 				.sort((a, b) => filterStatus(a, b))
+				.sort((a, b) => filterPrice(a, b))
+				.sort((a, b) => filterDate(a, b))
 				.slice(indexOfFirstItem, indexOfLastItem);
 		}
 	};
+
+	const { width } = size;
 
 	return (
 		<>
@@ -189,14 +237,16 @@ const List = () => {
 					width="20rem"
 					placeholder="Search by ID"
 				/>
-				<Pagination
-					top="1.3rem"
-					itemsPerPage={itemsPerPage}
-					totalItems={data?.length}
-					paginate={paginate}
-					currentPage={currentPage}
-					query={query}
-				/>
+				{data?.length > 0 && (
+					<Pagination
+						top="1.3rem"
+						itemsPerPage={itemsPerPage}
+						totalItems={data?.length}
+						paginate={paginate}
+						currentPage={currentPage}
+						query={query}
+					/>
+				)}
 				<AnimatePresence>
 					{ordersToDelete.length > 0 && (
 						<ListDialogBox
@@ -237,8 +287,14 @@ const List = () => {
 						/>
 						Check all
 					</AllCheckerMobile>
-					<StatusMobile onClick={handleStatus}>
-						{renderIcon()}
+					<StatusMobile
+						onClick={() => {
+							handleSortNumber(sortStatus, setSortStatus);
+							setSortPrice(1);
+							setSortDate(1);
+						}}
+					>
+						{renderIcon(sortStatus)}
 						Status
 						<ArrowsFilterIcon />
 					</StatusMobile>
@@ -253,15 +309,41 @@ const List = () => {
 								/>
 								ID
 							</TableCellHead>
-							<TableCellHead center>Date</TableCellHead>
-							<TableCellHead center pointer onClick={handleStatus}>
-								{renderIcon()}
+							<Sort
+								setSort={() => {
+									handleSortNumber(sortDate, setSortDate);
+									setSortStatus(1);
+									setSortPrice(1);
+								}}
+								sort={sortDate}
+							>
+								Date{' '}
+							</Sort>
+
+							<Sort
+								setSort={() => {
+									handleSortNumber(sortStatus, setSortStatus);
+									setSortDate(1);
+									setSortPrice(1);
+								}}
+								sort={sortStatus}
+							>
 								Status
-								<ArrowsFilterIcon />
-							</TableCellHead>
+							</Sort>
 							<TableCellHead center>Payment</TableCellHead>
-							<TableCellHead center>Quantity</TableCellHead>
-							<TableCellHead center>Total</TableCellHead>
+							{width >= 1280 && (
+								<TableCellHead center>Quantity</TableCellHead>
+							)}
+							<Sort
+								setSort={() => {
+									handleSortNumber(sortPrice, setSortPrice);
+									setSortDate(1);
+									setSortStatus(1);
+								}}
+								sort={sortPrice}
+							>
+								Total
+							</Sort>
 							<TableCellHead>Actions</TableCellHead>
 						</TableRow>
 					</TableHead>
@@ -291,12 +373,22 @@ const List = () => {
 											<CashIcon />
 										)}
 									</TableCell>
-									<TableCell data-label="Quantity" center>
-										{' '}
-										{el.orderInfo.reduce((a, b) => {
-											return a + b.quantity;
-										}, 0)}
-									</TableCell>
+									{width >= 1280 && (
+										<TableCell data-label="Quantity" center>
+											{' '}
+											{el.orderInfo.reduce((a, b) => {
+												return a + b.quantity;
+											}, 0)}
+										</TableCell>
+									)}
+									{width <= 460 && (
+										<TableCell data-label="Quantity" center>
+											{' '}
+											{el.orderInfo.reduce((a, b) => {
+												return a + b.quantity;
+											}, 0)}
+										</TableCell>
+									)}
 
 									<TableCell data-label="Total" center>
 										${el.totalPrice}

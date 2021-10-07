@@ -49,8 +49,6 @@ export const TableRow = styled.tr`
 	@media ${device.mobileM} {
 		border-bottom: 1px solid #ddd;
 		display: block;
-		/* border-top: 1px solid rgba(0, 0, 0, 0.1);
-         */
 		border: 1px solid var(--color-primary);
 		&:nth-child(even) {
 			margin-bottom: 2rem;
@@ -62,7 +60,6 @@ export const TableRow = styled.tr`
 export const TableHead = styled.thead`
 	padding: 1rem 3rem;
 	clip: rect(0 0 0 0);
-	/* width: 100%; */
 	background-color: #93949417;
 	&:hover {
 		background-color: inherit;
@@ -82,6 +79,8 @@ export const TableCellHead = styled.th`
 	padding: 1rem 3rem;
 	text-align: left;
 	width: ${(props) => props.width};
+	cursor: ${(props) => (props.pointer ? 'pointer' : 'default')};
+	transition: all 0.2s;
 `;
 
 export const TableCell = styled.td`
@@ -92,7 +91,6 @@ export const TableCell = styled.td`
 	cursor: ${(props) => (props.pointer ? 'pointer' : '')};
 
 	@media ${device.mobileM} {
-		/* display: block; */
 		font-size: 1.4rem;
 		text-align: right;
 		display: block;

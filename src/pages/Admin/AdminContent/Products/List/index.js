@@ -81,14 +81,16 @@ const List = () => {
 					width="20rem"
 					placeholder="Search by name"
 				/>
-				<Pagination
-					top="1.3rem"
-					itemsPerPage={itemsPerPage}
-					totalItems={data?.length}
-					paginate={paginate}
-					currentPage={currentPage}
-					query={query}
-				/>
+				{data?.length > 0 && (
+					<Pagination
+						top="1.3rem"
+						itemsPerPage={itemsPerPage}
+						totalItems={data?.length}
+						paginate={paginate}
+						currentPage={currentPage}
+						query={query}
+					/>
+				)}
 				<Table>
 					<TableHead>
 						<TableRow fontW="bold">

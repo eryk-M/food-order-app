@@ -16,9 +16,9 @@ export const FormReviewForm = styled.form`
 `;
 
 export const FormReviewNote = styled.p`
-	margin: 1rem 0;
+	margin: 2rem 0;
 	text-align: center;
-	font-size: 1.6rem;
+	font-size: 1.8rem;
 `;
 
 export const FormReviewFormRating = styled.div``;

@@ -24,12 +24,23 @@ import { useWindowSize } from 'hooks/useWindowSize';
 const NavBar = (props) => {
 	const { currentUser } = useAuth();
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
+	const [scroll, setScroll] = useState(false);
+
 	const size = useWindowSize();
 
 	const {
 		state: { cart },
 		dispatch,
 	} = useContext(CartContext);
+
+	useEffect(() => {
+		window.addEventListener('scroll', () => {
+			setScroll(window.scrollY > 1);
+		});
+		return () => {
+			window.removeEventListener('scroll', null);
+		};
+	}, []);
 
 	useEffect(() => {
 		if (localStorage.getItem('cart') && !isInitiallyFetched) {
@@ -103,7 +114,10 @@ const NavBar = (props) => {
 	};
 
 	return (
-		<Nav style={conditionalMenu()}>
+		<Nav
+			style={conditionalMenu()}
+			className={scroll ? 'fixed-menu' : ''}
+		>
 			<NavWrapper>
 				<NavLogo to="/">
 					<NavLogoImage

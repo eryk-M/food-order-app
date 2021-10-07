@@ -35,7 +35,6 @@ import {
 } from 'components/Admin/Containers';
 import { MinusIcon, EditBigIcon } from 'components/Admin/Icons';
 
-import { Line } from 'rc-progress';
 import { Alert } from 'components/Alert';
 import { storage } from 'firebase';
 import { capitalizeEachWord } from 'utils/capitalizeEachWord';
@@ -244,6 +243,9 @@ const Edit = (props) => {
 		<>
 			{data && (
 				<EditContainer>
+					{uploadPercentage > 0 && (
+						<ProgressContainer width={uploadPercentage} />
+					)}
 					<EditBigIcon />
 					{showSuccess && (
 						<Alert
@@ -262,15 +264,7 @@ const Edit = (props) => {
 							<EditImage src={data[0].img} />
 						</EditImageWrapper>
 					)}
-					{uploadPercentage > 0 && (
-						<ProgressContainer>
-							<Line
-								percent={`${uploadPercentage}`}
-								strokeWidth="1"
-								strokeColor="#60dc64"
-							/>
-						</ProgressContainer>
-					)}
+
 					<Form
 						onKeyDown={(e) => checkKeyDown(e)}
 						onSubmit={handleSubmit(onSubmit)}

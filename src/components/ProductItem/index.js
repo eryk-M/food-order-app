@@ -29,15 +29,17 @@ import {
 	SliderSelect,
 	ResizeIcon,
 	ProductQuantityWrapper,
+	ProductGoBack,
+	ReturnGoBackIcon,
 } from './ProductItemElements';
 
 import { Alert } from '../Alert';
 import Loader from 'components/Loader';
 import { CartContext } from 'contexts/CartContext';
 import StarRating from '../Reviews/FormReview/StarRating';
-
+import { useHistory } from 'react-router';
 import Reviews from '../Reviews';
-
+import Button from 'components/Button';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getOneProduct } from 'utils/firebaseGetters';
 
@@ -55,6 +57,7 @@ const ProductItem = ({ props }) => {
 
 	const imgRef = useRef();
 	const showcaseRef = useRef(null);
+	const history = useHistory();
 
 	//adding timeout to remove from unmount
 	const addedTimeoutRef = useRef();
@@ -155,6 +158,11 @@ const ProductItem = ({ props }) => {
 							}
 						/>
 					)}
+					<ProductGoBack>
+						<Button onClick={history.goBack}>
+							<ReturnGoBackIcon />
+						</Button>
+					</ProductGoBack>
 					<ProductContainer>
 						<ProductLeft>
 							<SliderContainer discount={currentItem.discountPrice}>

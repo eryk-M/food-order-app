@@ -21,8 +21,10 @@ const ButtonMain = styled.button`
 	display: ${(props) => props.display ?? ''};
 	vertical-align: middle;
 	&:hover {
-		background-color: var(--color-secondary);
-		color: var(--color-grey-dark);
+		@media (min-width: 1025px) {
+			background-color: var(--color-secondary);
+			color: var(--color-grey-dark);
+		}
 	}
 	&:disabled {
 		opacity: 0.5;

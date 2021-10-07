@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 import './index.css';
+import { NavLogoImage } from 'components/NavBar/NavBarElements';
 
 export const GlobalStyle = createGlobalStyle`
 :root {
@@ -14,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-red: #f81212;
     --color-blue: #52b7ff;
     --color-grey-light-2: rgb(189, 189, 188);
-    --color-footer: #303030;
+    --color-footer: #1a1a1a;
     --color-purple-light: #b374ec;
 }
 
@@ -121,5 +122,19 @@ input[type=file]{
 
 .is-hidden-menu-mobile {
     transform: translateX(0) !important
+}
+
+.fixed-menu {
+    position: fixed;
+    height: auto;
+    background-color: var(--color-grey-dark);
+    padding: 1rem 4rem;
+    ${NavLogoImage}{
+        height: 8rem;
+    }
+}
+
+.sort-active {
+    background-color: var(--color-secondary);
 }
 `;
