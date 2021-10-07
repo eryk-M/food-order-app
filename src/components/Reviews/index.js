@@ -9,7 +9,7 @@ import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getReviews } from 'utils/firebaseGetters';
 
 const ReviewsContainer = styled.section`
-	background-color: #93949417;
+	background-color: var(--color-background-grey-light);
 	padding-bottom: 3rem;
 `;
 

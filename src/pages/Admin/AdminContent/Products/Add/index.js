@@ -90,6 +90,7 @@ const Add = () => {
 		name: Yup.string()
 			.required('Name is required')
 			.min(3, 'Name must be at least 3 characters')
+			.matches(/^[a-zA-Z]+$/, 'Only letters are allowed')
 			.trim()
 			.max(20, 'Name must have maximum of 20 characters'),
 		description: Yup.string()
@@ -100,7 +101,12 @@ const Add = () => {
 		price: Yup.string()
 			.required('Price is required')
 			.trim()
-			.test('price', 'Format: e.g. 11.00, 12.99', (value) =>
+			.test(
+				'discount',
+				'Price must be from 1$ to 99$',
+				(value) => value > 0 && value < 100
+			)
+			.test('price', 'Format: e.g. 11, 12.99', (value) =>
 				(value + '').match(/^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/)
 			),
 		discount: Yup.string()

@@ -25,9 +25,7 @@ export const ProductsSearchWrapper = styled.div`
 export const SearchContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-	/* max-width: 80%; */
 	width: 98%;
-
 	align-items: center;
 	margin: 0 auto;
 	margin-top: 2rem;

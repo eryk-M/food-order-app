@@ -110,7 +110,7 @@ export const MobileFilter = styled.div`
 	display: flex;
 	justify-content: space-between;
 	font-size: 1.6rem;
-	background-color: #93949417;
+	background-color: var(--color-background-grey-light);
 	padding: 1rem 0.5rem;
 	margin-top: 0.7rem;
 	width: 100%;

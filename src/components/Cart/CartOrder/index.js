@@ -199,7 +199,7 @@ const CartOrder = ({
 			<CartTable>
 				<CartList>
 					{cart.length >= 1 && (
-						<CartItem backgroundColor="#93949417">
+						<CartItem backgroundColor="var(--color-background-grey-light)">
 							<CartColumn></CartColumn>
 							<CartColumn>Name</CartColumn>
 							<CartColumn>Price</CartColumn>

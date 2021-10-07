@@ -1,7 +1,6 @@
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import React from 'react';
 import { getQuizes } from 'utils/firebaseGetters';
-// import { UserAccountHeading } from '../UserAccount/UserAccountElements';
 import { useHistory } from 'react-router';
 import {
 	QuizCard,

@@ -27,11 +27,11 @@ import { getUserDoc } from 'utils/firebaseGetters';
 import { useLocation, Redirect } from 'react-router-dom';
 
 const User = () => {
-	const { currentUser, admin } = useAuth();
+	const { currentUser } = useAuth();
 	const { data } = useFirestoreQuery(getUserDoc(currentUser.uid));
-	const { pathname } = useLocation();
+	const { pathname, query } = useLocation();
 
-	if (admin) return <Redirect to="/admin" />;
+	if (query) return <Redirect to={query} />;
 
 	const subtrPathQuiz = pathname.substr(0, 12);
 
@@ -42,7 +42,7 @@ const User = () => {
 				Here you can edit your personal info and see latest orders
 			</UserDesc>
 			<UserContainer>
-				<GlobalStyle backgroundColor="#93949417" />
+				<GlobalStyle backgroundColor="var(--color-background-grey-light)" />
 				<UserNav />
 				<UserContent
 					margin={

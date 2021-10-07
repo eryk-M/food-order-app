@@ -252,7 +252,7 @@ export const ResizeIcon = styled(IoIosResize)`
 
 export const ProductQuantityWrapper = styled.div`
 	margin-right: 2rem;
-	background-color: #93949417;
+	background-color: var(--color-background-grey-light);
 	border-radius: 25px;
 `;
 export const ProductQuantity = styled.input`

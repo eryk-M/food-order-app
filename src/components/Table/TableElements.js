@@ -37,19 +37,18 @@ export const TableRow = styled.tr`
 	}
 	${(props) => {
 		if (props.hover) {
-			return '&:hover {background-color: #93949417;cursor: pointer;}';
+			return '&:hover {background-color: var(--color-background-grey-light);cursor: pointer;}';
 		}
 	}}
 	@media (min-width: 768px) {
 		&:hover {
-			background-color: #93949417;
+			background-color: var(--color-background-grey-light);
 		}
 	}
 
 	@media ${device.mobileM} {
 		border-bottom: 1px solid #ddd;
 		display: block;
-		border: 1px solid var(--color-primary);
 		&:nth-child(even) {
 			margin-bottom: 2rem;
 			border: none;
@@ -60,7 +59,7 @@ export const TableRow = styled.tr`
 export const TableHead = styled.thead`
 	padding: 1rem 3rem;
 	clip: rect(0 0 0 0);
-	background-color: #93949417;
+	background-color: var(--color-background-grey-light);
 	&:hover {
 		background-color: inherit;
 	}

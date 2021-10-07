@@ -75,7 +75,7 @@ const NavBar = (props) => {
 						<NavItem>
 							<NavLink
 								to={{
-									pathname: '/admin',
+									pathname: '/login',
 									query: '/admin',
 								}}
 							>

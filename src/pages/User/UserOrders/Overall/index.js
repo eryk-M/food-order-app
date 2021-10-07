@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Order from '../Order';
 
 import {
-	TableRow,
 	TableCell,
 	TableButton,
 } from 'components/Table/TableElements';
@@ -11,7 +10,7 @@ import {
 import { IoIosArrowDown } from 'react-icons/io';
 
 import Status from 'components/Status';
-
+import { OrdersTableRow } from '../UserOrdersElements';
 const Overall = ({ el }) => {
 	const [open, setOpen] = useState(true);
 
@@ -21,7 +20,7 @@ const Overall = ({ el }) => {
 
 	return (
 		<>
-			<TableRow>
+			<OrdersTableRow>
 				<TableCell data-label="ID">{el.orderId}</TableCell>
 				<TableCell data-label="Date">17.09.2021</TableCell>
 				<TableCell data-label="Status">
@@ -37,10 +36,9 @@ const Overall = ({ el }) => {
 						<IoIosArrowDown style={open ? null : iconRotate} />
 					</TableButton>
 				</TableCell>
-			</TableRow>
-			<TableRow>
-				<Order el={el} open={open} />
-			</TableRow>
+			</OrdersTableRow>
+
+			<Order el={el} open={open} />
 		</>
 	);
 };

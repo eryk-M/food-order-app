@@ -42,12 +42,10 @@ export const QuestionList = styled.ul`
 
 export const QuestionItem = styled.li`
 	margin-top: 1rem;
-	/* background-color: ${(props) =>
-		props.correct ? 'var(--color-green)' : '#93949417'}; */
 	background-color: ${(props) => {
 		if (props.userAnswer) return 'var(--color-red)';
 		else if (props.correct) return 'var(--color-green)';
-		else return '#93949417';
+		else return 'var(--color-background-grey-light)';
 	}};
 	color: ${(props) => {
 		if (props.userAnswer || props.correct) return '#fff';

@@ -29,7 +29,9 @@ const UserCoupons = () => {
 			<UserAccountHeading>Available coupons</UserAccountHeading>
 			<UserCouponsContainer>
 				{data &&
-					findAvailableCoupons().map((el) => <Coupon el={el} />)}
+					findAvailableCoupons().map((el, i) => (
+						<Coupon key={i} el={el} />
+					))}
 			</UserCouponsContainer>
 			{data && findAvailableCoupons().length === 0 && (
 				<UserCouponsNotAvailable>

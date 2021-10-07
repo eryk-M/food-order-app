@@ -86,7 +86,7 @@ export const CartTotal = styled.div`
 	margin-top: 3rem;
 	width: 40%;
 	margin-left: auto;
-	background-color: #93949417;
+	background-color: var(--color-background-grey-light);
 	@media ${device.MobileL} {
 		width: 33rem;
 		margin-right: 2rem;
@@ -237,7 +237,7 @@ export const CartQuantityWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #93949417;
+	background-color: var(--color-background-grey-light);
 	padding: 0.5rem 1rem;
 	border-radius: 25px;
 	justify-content: space-between;

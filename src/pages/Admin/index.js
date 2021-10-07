@@ -16,7 +16,7 @@ const AdminContentContainer = styled.div`
 	padding-left: 2rem;
 	transition: margin-left 0.2s ease-in-out;
 	min-height: calc(100vh - 6rem);
-	background-color: #93949417;
+	background-color: var(--color-background-grey-light);
 
 	@media only screen and (max-width: 1024px) {
 		margin-left: 0;

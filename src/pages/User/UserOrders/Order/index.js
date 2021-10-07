@@ -1,6 +1,4 @@
 import React from 'react';
-import { SlideDown } from 'react-slidedown';
-import 'react-slidedown/lib/slidedown.css';
 
 import {
 	OrderWrapper,
@@ -10,10 +8,10 @@ import {
 } from './OrderElements';
 import { CashIcon, CreditCardIcon } from 'components/Admin/Icons';
 
-import { TableCell } from 'components/Table/TableElements';
+import { TableCell, TableRow } from 'components/Table/TableElements';
 
 import { useWindowSize } from 'hooks/useWindowSize';
-
+import { OrdersTableRow } from '../UserOrdersElements';
 const Order = ({ el, open }) => {
 	const size = useWindowSize();
 
@@ -33,52 +31,60 @@ const Order = ({ el, open }) => {
 
 	if (width <= 460) {
 		return (
-			<div style={{ backgroundColor: '#93949417' }}>
-				<SlideDown className="my-dropdown-slidedown" closed={open}>
-					<TableCell data-label="Order info">
-						{el.orderInfo.map((order, i) => (
-							<OrderInfo key={i}>
-								{order.quantity}x {order.name}
-							</OrderInfo>
-						))}
-					</TableCell>
-					<TableCell data-label="Address:">
-						{el.userInfo.name}
-						<br />
-						{el.userInfo.address}
-						<br />
-						{el.userInfo.city}
-						<br />
-						{el.userInfo.zip}
-						<br />
-						{el.userInfo.phone}
-					</TableCell>
-					<TableCell data-label="Payment">
-						{el.payment === 2 ? (
-							<>
-								{' '}
-								<CashIcon /> Cash{' '}
-							</>
-						) : (
-							<>
-								<CreditCardIcon /> Card{' '}
-							</>
-						)}
-					</TableCell>
-					<TableCell data-label="Total price:">
-						${el.totalPrice}
-					</TableCell>
-					<TableCell data-label="Detailed status:">
-						{returnUserStatus(el.step)}
-					</TableCell>
-				</SlideDown>
-			</div>
+			<OrdersTableRow
+				style={{
+					backgroundColor: 'var(--color-background-grey-light)',
+				}}
+				className={open ? 'order-closed' : 'order-opened'}
+			>
+				<TableCell data-label="Order info">
+					{el.orderInfo.map((order, i) => (
+						<OrderInfo key={i}>
+							{order.quantity}x {order.name}
+						</OrderInfo>
+					))}
+				</TableCell>
+				<TableCell data-label="Address:">
+					{el.userInfo.name}
+					<br />
+					{el.userInfo.address}
+					<br />
+					{el.userInfo.city}
+					<br />
+					{el.userInfo.zip}
+					<br />
+					{el.userInfo.phone}
+				</TableCell>
+				<TableCell data-label="Payment">
+					{el.payment === 2 ? (
+						<>
+							{' '}
+							<CashIcon /> Cash{' '}
+						</>
+					) : (
+						<>
+							<CreditCardIcon /> Card{' '}
+						</>
+					)}
+				</TableCell>
+				<TableCell data-label="Total price:">
+					${el.totalPrice}
+				</TableCell>
+				<TableCell data-label="Detailed status:">
+					{returnUserStatus(el.step)}
+				</TableCell>
+			</OrdersTableRow>
 		);
 	}
 
 	return (
-		<TableCell colSpan={5} className="cell-word-wrap" padding={0}>
-			<SlideDown className="my-dropdown-slidedown" closed={open}>
+		<TableRow
+			className={`cell-word-wrap ${
+				open ? 'order-closed' : 'order-opened'
+			}`}
+			padding={0}
+		>
+			<td colSpan={5}>
 				<OrderWrapper>
 					<OrderContent>
 						<OrderHeading>Order Info:</OrderHeading>
@@ -128,8 +134,8 @@ const Order = ({ el, open }) => {
 						{returnUserStatus(el.step)}
 					</OrderContent>
 				</OrderWrapper>
-			</SlideDown>
-		</TableCell>
+			</td>
+		</TableRow>
 	);
 };
 

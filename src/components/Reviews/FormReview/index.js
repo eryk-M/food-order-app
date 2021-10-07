@@ -118,6 +118,7 @@ const FormReview = ({
 									message: 'You have reached max length',
 								},
 							})}
+							error={errors.body}
 						/>
 						{errors.body && (
 							<FormError>{errors.body.message}</FormError>

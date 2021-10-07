@@ -11,8 +11,10 @@ export const TopProductContainer = styled.figure`
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	transition: all 0.2s ease-in-out;
 	&:hover {
-		transform: translateY(-1.3rem);
-		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+		@media (min-width: 769px) {
+			transform: translateY(-1.3rem);
+			box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+		}
 	}
 	@media ${device.mobileL} {
 		width: 80%;

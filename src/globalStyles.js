@@ -17,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
     --color-grey-light-2: rgb(189, 189, 188);
     --color-footer: #1a1a1a;
     --color-purple-light: #b374ec;
+    --color-background-grey-light: #93949417
 }
 
 * {
@@ -61,6 +62,8 @@ input, textarea {
     font-weight: 400;
     outline: 0;
 	font-family: inherit;
+    transition: border .2s ease;
+
 }
 
 input[type=file]{
@@ -136,5 +139,13 @@ input[type=file]{
 
 .sort-active {
     background-color: var(--color-secondary);
+}
+
+.order-opened {
+    display: table-row;
+}
+
+.order-closed {
+    display: none;
 }
 `;

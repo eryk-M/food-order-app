@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, query, ...rest }) => {
 	const { currentUser } = useAuth();
 
 	return (
@@ -15,7 +15,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 					<Redirect
 						to={{
 							pathname: '/login',
-							query: props.match.path === '/admin' ? '/admin' : '',
+							query: props.location.pathname.query,
 						}}
 					/>
 				);

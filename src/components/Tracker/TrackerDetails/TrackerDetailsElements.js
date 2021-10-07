@@ -76,7 +76,7 @@ export const TrackerDetailsSummaryDesc = styled.p`
 
 export const TrackerDetailsSummaryContainer = styled.div`
 	margin-top: 8rem;
-	background-color: #93949417;
+	background-color: var(--color-background-grey-light);
 	padding: 5rem 0;
 	border-top: 1px solid rgba(0, 0, 0, 0.1);
 `;

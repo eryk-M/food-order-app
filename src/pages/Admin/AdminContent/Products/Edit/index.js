@@ -90,31 +90,38 @@ const Edit = (props) => {
 			),
 		}),
 		name: Yup.string()
+			.trim()
 			.test('name', 'Name must be at least 3 characters', (value) =>
 				value ? value.length > 3 : true
 			)
-			.trim()
+			.matches(/^[a-zA-Z]+$/, 'Only letters are allowed')
 			.max(20, 'Name must have maximum of 20 characters'),
 		description: Yup.string()
+			.trim()
 			.test(
 				'description',
 				'Description must be at least 10 characters',
 				(value) => (value ? value.length >= 10 : true)
 			)
-			.trim()
+
 			.max(200, 'Maximum of 200 characters'),
-		price: Yup.number().test(
-			'price',
-			'Format: e.g. 11.00, 12.99',
-			(value) =>
+		price: Yup.string()
+			.test(
+				'discount',
+				'Price must be from 1$ to 99$',
+				(value) => value > 0 && value < 100
+			)
+
+			.test('price', 'Format: e.g. 11, 12.99', (value) =>
 				(value + '').match(/^[1-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/)
-		),
-		discount: Yup.string().test(
-			'price',
-			'Format: e.g. 11.00, 12.99 or 0',
-			(value) =>
-				(value + '').match(/^[0-9]\d*(((,\d{3}){1})?(\.\d{0,2})?)$/)
-		),
+			),
+		discount: Yup.string()
+			.trim()
+			.test('discount', 'Value from 0 - 99', (value) =>
+				value
+					? value >= 0 && value < 100 && /[0-9]/.test(value)
+					: true
+			),
 	});
 
 	const {

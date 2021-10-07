@@ -2,11 +2,14 @@ import styled from 'styled-components/macro';
 
 export const OrderWrapper = styled.div`
 	display: flex;
-	background-color: #93949417;
+	background-color: var(--color-background-grey-light);
 	padding: 2rem;
 	text-align: left;
 	justify-content: space-around;
 	width: 100%;
+	&:hover {
+		background-color: inherit;
+	}
 `;
 
 export const OrderContent = styled.div`

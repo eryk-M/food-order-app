@@ -107,7 +107,11 @@ export const FormInput = styled.input`
 		}
 		return '1px solid #ccc;';
 	}};
-
+	&:focus {
+		${(props) => {
+			if (!props.error) return 'border: 1px solid var(--color-blue)';
+		}}
+	}
 	-moz-appearance: textfield;
 	&::placeholder {
 		opacity: 0.5;
@@ -125,13 +129,18 @@ export const FormTextArea = styled.textarea`
 	height: ${(props) => props.height ?? '20rem'};
 	width: 100%;
 	border-radius: 0.5rem;
-	color: #666;
 	outline: 0;
 	font-size: 1.6rem;
 	margin-top: 1rem;
 	margin-bottom: ${(props) => props.marginbottom};
 	border: ${(props) =>
 		props.error ? '1px solid var(--color-red)' : ''};
+
+	&:focus {
+		${(props) => {
+			if (!props.error) return 'border: 1px solid var(--color-blue)';
+		}}
+	}
 `;
 
 export const FormBtn = styled.button`

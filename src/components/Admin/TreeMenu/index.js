@@ -11,7 +11,7 @@ import {
 	TreeItemMain,
 } from './TreeMenuElements';
 import { SlideDown } from 'react-slidedown';
-
+import 'react-slidedown/lib/slidedown.css';
 const TreeMenu = ({
 	width,
 	text,

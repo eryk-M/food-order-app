@@ -5,7 +5,9 @@ export const QuestionList = styled.div`
 	padding: 1rem;
 	min-height: 30rem;
 	background-color: ${(props) =>
-		props.isDraggingOver ? '#93949417' : 'white'};
+		props.isDraggingOver
+			? 'var(--color-background-grey-light)'
+			: 'white'};
 	/* background-color: green; */
 	position: relative;
 `;

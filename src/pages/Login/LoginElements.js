@@ -6,7 +6,7 @@ export const LoginContainer = styled.div`
 	display: flex;
 	width: 100%;
 	height: 80rem;
-	background-color: #93949417;
+	background-color: var(--color-background-grey-light);
 	@media ${device.mobileM} {
 		height: unset;
 	}
