@@ -11,14 +11,14 @@ import {
 	FormInput,
 	FormButton,
 	FormSpan,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 import { Alert } from 'components/Alert';
 import { UserAccountWrapper } from '../UserAccount/UserAccountElements';
 const UserPassword = () => {
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
 
-	const { updatePassword } = useAuth();
+	const { updatePassword, currentUser } = useAuth();
 
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [error, setError] = useState('');
@@ -71,10 +71,16 @@ const UserPassword = () => {
 						ref={passwordRef}
 						error={!passwordsMatch}
 						autoComplete="on"
+						disabled={currentUser.email === 'test@test.pl' ? 1 : 0}
 					/>
 					{!passwordsMatch && (
 						<FormSpan>Passwords do not match</FormSpan>
 					)}
+					{currentUser.email === 'test@test.pl' ? (
+						<FormSpan>
+							You can't change password in DEMO mode
+						</FormSpan>
+					) : null}
 				</FormElement>
 				<FormElement>
 					<FormLabel htmlFor="password-confirm">
@@ -87,15 +93,22 @@ const UserPassword = () => {
 						ref={passwordConfirmRef}
 						error={!passwordsMatch}
 						autoComplete="on"
+						disabled={currentUser.email === 'test@test.pl' ? 1 : 0}
 					/>
 					{!passwordsMatch && (
 						<FormSpan>Passwords do not match</FormSpan>
 					)}
+					{currentUser.email === 'test@test.pl' ? (
+						<FormSpan>
+							You can't change password in DEMO mode
+						</FormSpan>
+					) : null}
 				</FormElement>
-				{/* <FormButton disabled={loading} text="Update" type="submit">
-					{loading ? <Loader /> : 'Update'}
-				</FormButton> */}
-				<FormButton loading={loading} text="Update" />
+				<FormButton
+					loading={loading}
+					text="Update"
+					disabled={currentUser.email === 'test@test.pl' ? 1 : 0}
+				/>
 			</Form>
 		</UserAccountWrapper>
 	);

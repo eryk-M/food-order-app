@@ -16,11 +16,7 @@ import {
 } from './FormReviewElements';
 
 import Button from 'components/Button';
-import {
-	FormInput,
-	FormTextArea,
-	FormError,
-} from 'components/Form/FormElements';
+import { FormInput, FormTextArea, FormError } from 'components/Form';
 
 import StarRating from './StarRating';
 

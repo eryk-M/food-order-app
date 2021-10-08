@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 
-import { FormContainer } from 'components/Form/FormElements';
+import { FormContainer } from 'components/Form';
 
 import { device } from 'utils/breakpoints';
 export const SignInContainer = styled(FormContainer)`

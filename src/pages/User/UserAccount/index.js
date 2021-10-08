@@ -9,7 +9,8 @@ import {
 	FormButton,
 	FormGroup,
 	FormError,
-} from 'components/Form/FormElements';
+	FormSpan,
+} from 'components/Form';
 
 import { Alert } from 'components/Alert';
 import { Redirect, useLocation } from 'react-router-dom';
@@ -139,7 +140,7 @@ const UserAccount = ({ userData }) => {
 	return (
 		<UserAccountWrapper>
 			<UserAccountHeading>General Info</UserAccountHeading>
-			{!user && <Loader />}
+			{!user && <Loader primary high margincenter />}
 			{user && (
 				<Form onSubmit={handleSubmit(onSubmit)}>
 					{showSuccess && (
@@ -160,7 +161,15 @@ const UserAccount = ({ userData }) => {
 								defaultValue={currentUser.email}
 								error={errors.email}
 								onChange={() => setInputChanged(true)}
+								disabled={
+									currentUser.email === 'test@test.pl' ? 1 : 0
+								}
 							/>
+							{currentUser.email === 'test@test.pl' ? (
+								<FormSpan>
+									You can't change email in DEMO mode
+								</FormSpan>
+							) : null}
 							{errors.email && (
 								<FormError>{errors.email.message}</FormError>
 							)}

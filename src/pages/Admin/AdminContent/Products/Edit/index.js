@@ -12,7 +12,7 @@ import {
 	FormTextArea,
 	FormAlert,
 	FormGroupWrapper,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 
 import {
 	SelectContent,
@@ -94,7 +94,7 @@ const Edit = (props) => {
 			.test('name', 'Name must be at least 3 characters', (value) =>
 				value ? value.length > 3 : true
 			)
-			.matches(/^[a-zA-Z]+$/, 'Only letters are allowed')
+			.matches(/^[a-z][a-z\s]*$/i, 'Only letters are allowed')
 			.max(20, 'Name must have maximum of 20 characters'),
 		description: Yup.string()
 			.trim()
@@ -286,6 +286,7 @@ const Edit = (props) => {
 								type="file"
 								accept="image/jpeg, image/png"
 								onChange={(e) => handleChangeFile(e)}
+								error={errors.file}
 							/>
 							{errors.file && (
 								<FormError>{errors.file.message}</FormError>

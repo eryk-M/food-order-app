@@ -13,7 +13,7 @@ import {
 	FormError,
 	FormAlert,
 	FormSpanSign,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 import { SignInContainer } from '../SignIn/SignInElements';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';

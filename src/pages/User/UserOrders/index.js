@@ -21,12 +21,15 @@ import {
 } from './UserOrdersElements';
 
 import Overall from './Overall';
+import Loader from 'components/Loader';
 
 import NoData from 'images/no-data.svg';
 const UserOrders = () => {
 	const { currentUser } = useAuth();
 
-	const { data } = useFirestoreQuery(getUserOrders(currentUser.uid));
+	const { data, loading } = useFirestoreQuery(
+		getUserOrders(currentUser.uid)
+	);
 	return (
 		<OrdersTableWrapper>
 			<Table>
@@ -43,6 +46,7 @@ const UserOrders = () => {
 					{data && data.map((el, i) => <Overall key={i} el={el} />)}
 				</TableBody>
 			</Table>
+			{loading && <Loader primary high margincenter />}
 			{data?.length === 0 && (
 				<OrdersNoDataWrapper>
 					<OrdersNoDataP>You didnt order anything yet</OrdersNoDataP>

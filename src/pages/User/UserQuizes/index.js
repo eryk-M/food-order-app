@@ -85,8 +85,8 @@ const UserQuizes = ({ userData }) => {
 					animate="show"
 				>
 					{data && userData && checkAvailableQuizes().length === 0
-						? 'There isnt any available quiz for now'
-						: ' Available quizes for you'}
+						? "There isn't any available quiz for now"
+						: 'Available quizes for you'}
 				</QuizDownerHeading>
 			</QuizDownerContent>
 			<QuizList

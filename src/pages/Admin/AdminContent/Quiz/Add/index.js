@@ -12,7 +12,7 @@ import {
 	FormGroup,
 	FormTextArea,
 	FormError,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 import {
 	ContentWrapper,
 	ContentFormWrapper,
@@ -111,11 +111,13 @@ const Add = () => {
 				(value) => !/\s/.test(value)
 			)
 			.test('discount', 'Code already exists', async (value) => {
-				const response = await validateCouponCode(
-					value.toUpperCase()
-				).get();
+				if (value) {
+					const response = await validateCouponCode(
+						value.toUpperCase()
+					).get();
 
-				return response?.empty;
+					return response?.empty;
+				}
 			}),
 	});
 

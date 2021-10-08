@@ -154,9 +154,10 @@ const Quiz = (props) => {
 				</AnswersContainer>
 				{showNextQuestion && (
 					<NextButton disabled={loading} onClick={handleNextQuestion}>
-						Next &#x2192;
+						Next
 					</NextButton>
 				)}
+
 				{showSummary && (
 					<NextButton
 						disabled={loading}

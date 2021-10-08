@@ -12,7 +12,7 @@ import {
 	FormLink,
 	FormAlert,
 	FormSpanSign,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 import { SignInContainer } from '../SignIn/SignInElements';
 const ForgotPassword = () => {
 	const emailRef = useRef();
@@ -21,8 +21,11 @@ const ForgotPassword = () => {
 	const [message, setMessage] = useState('');
 	const [loading, setLoading] = useState(false);
 
-	async function handleSubmit(e) {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		if (emailRef.current.value === 'test@test.pl')
+			return setError("You can't change DEMO email");
 
 		try {
 			setMessage('');
@@ -35,7 +38,7 @@ const ForgotPassword = () => {
 		}
 
 		setLoading(false);
-	}
+	};
 
 	return (
 		<>
@@ -45,6 +48,7 @@ const ForgotPassword = () => {
 				{message && (
 					<FormAlert variant="success">{message}</FormAlert>
 				)}
+
 				<Form onSubmit={handleSubmit}>
 					<FormElement id="email">
 						<FormLabel>Email</FormLabel>

@@ -19,7 +19,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useAuth } from 'contexts/AuthContext';
 
-import { FormAlert } from 'components/Form/FormElements';
+import { FormAlert } from 'components/Form';
 
 const UserNav = () => {
 	const [error, setError] = useState('');

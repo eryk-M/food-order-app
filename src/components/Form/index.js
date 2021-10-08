@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { MdErrorOutline } from 'react-icons/md';
 
 import Loader from '../Loader';
-
+import { LoaderWrapper } from 'components/Loader/LoaderElements';
 const fadeIn = keyframes`
 from{
     opacity: 0%
@@ -20,9 +20,10 @@ export const FormContainer = styled.div`
 `;
 
 export const FormAlert = styled.div`
-	color: #842029;
-	background-color: #f8d7da;
-	border-color: #f5c2c7;
+	color: ${(props) =>
+		props.variant === 'success' ? 'var(--color-green)' : '#842029;'};
+	background-color: ${(props) =>
+		props.variant === 'success' ? '#11c45429' : '#f8d7da'};
 	position: relative;
 	padding: 1rem 1rem;
 	margin-bottom: 1rem;
@@ -62,6 +63,10 @@ export const FormSpanSign = styled.span`
 
 export const Form = styled.form`
 	position: relative;
+	${LoaderWrapper} {
+		position: absolute;
+		left: 5%;
+	}
 `;
 
 export const FormElement = styled.div`
@@ -103,7 +108,7 @@ export const FormInput = styled.input`
 		if (props.warning) {
 			return '1px solid orange';
 		} else if (props.error) {
-			return '1px solid var(--color-red)';
+			return '1px solid var(--color-red) !important';
 		}
 		return '1px solid #ccc;';
 	}};
@@ -171,8 +176,12 @@ export const FormBtn = styled.button`
 
 	${(props) =>
 		props.button
-			? 'letter-spacing: 1px;width: unset;font-size: 1.4rem;padding: 1rem;text-transform: uppercase;margin: 0;box-shadow: 0 0.2rem 1.5rem rgba(0, 0, 0, 0.2);border-radius: 5px;width:16rem;&:hover {background-color: var(--color-secondary);color: var(--color-grey-dark);}'
+			? 'letter-spacing: 1px;width: unset;font-size: 1.4rem;padding: 1rem;text-transform: uppercase;margin: 0;border-radius: 5px;width:16rem;&:hover {background-color: var(--color-secondary);color: var(--color-grey-dark);}'
 			: ''}
+	${LoaderWrapper} {
+		position: absolute;
+		left: 5%;
+	}
 `;
 
 export const FormButton = ({
@@ -185,8 +194,8 @@ export const FormButton = ({
 	return (
 		<FormBtn
 			className="form"
-			{...rest}
 			disabled={loading}
+			{...rest}
 			type={type ?? 'submit'}
 		>
 			{!orderButton && loading && <Loader />}

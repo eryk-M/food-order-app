@@ -1,40 +1,26 @@
 import React from 'react';
 
-import './loader.css';
-import styled from 'styled-components/macro';
+import {
+	LoaderWrapper,
+	LoaderSVG,
+	LoaderCircle,
+} from './LoaderElements';
 
-const LoaderWrapper = styled.div`
-	display: ${(props) => props.display ?? 'flex'};
-	justify-content: center;
-	align-items: center;
-	vertical-align: middle;
-	margin: ${(props) => (props.margincenter ? '4rem 0' : '')};
-	margin-left: ${(props) => props.marginleft ?? ''};
-	min-height: ${(props) => {
-		if (props.high) return '20rem';
-		else if (props.veryhigh) return '50rem';
-	}};
-	& .lds-ring div {
-		border-color: ${(props) =>
-			props.primary
-				? 'var(--color-primary) transparent transparent transparent'
-				: '#fff transparent transparent transparent'};
-	}
-`;
-
-const Loader = ({ primary, ...rest }) => {
+const Loader = ({ primary, high, veryhigh, ...rest }) => {
 	return (
 		<LoaderWrapper
-			className="loader-wrapper"
-			primary={primary}
+			high={high ? 1 : 0}
+			veryhigh={veryhigh ? 1 : 0}
 			{...rest}
 		>
-			<div className="lds-ring">
-				<div></div>
-				<div></div>
-				<div></div>
-				<div></div>
-			</div>
+			<LoaderSVG viewBox="25 25 50 50">
+				<LoaderCircle
+					primary={primary}
+					cx="50"
+					cy="50"
+					r="20"
+				></LoaderCircle>
+			</LoaderSVG>
 		</LoaderWrapper>
 	);
 };

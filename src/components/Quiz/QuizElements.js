@@ -16,7 +16,7 @@ export const QuizContent = styled.div`
 	max-width: 70%;
 	margin: 0 auto;
 	padding-top: 3rem;
-	padding-bottom: 4rem;
+	padding-bottom: 5rem;
 	@media ${device.mobileM} {
 		max-width: 90%;
 	}
@@ -31,7 +31,6 @@ export const QuizHeading = styled.h2`
 
 export const AnswerContent = styled.div`
 	padding: 2rem;
-	/* text-align: center; */
 	background-color: #b374ec;
 	border-radius: 5px;
 	display: flex;

@@ -37,7 +37,7 @@ import Status from 'components/Status';
 import { useReactToPrint } from 'react-to-print';
 import { useApi } from 'contexts/APIContext';
 import { useWindowSize } from 'hooks/useWindowSize';
-import { FormAlert } from 'components/Form/FormElements';
+import { FormAlert } from 'components/Form';
 
 const ContentToPrint = React.forwardRef(
 	(

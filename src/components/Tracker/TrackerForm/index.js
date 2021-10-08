@@ -16,7 +16,7 @@ import {
 	FormInput,
 	FormButton,
 	FormError,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 
 import { getOrder } from 'utils/firebaseGetters';
 

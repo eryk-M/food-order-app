@@ -37,7 +37,7 @@ import {
 	FormTextArea,
 	FormAlert,
 	FormGroupWrapper,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 
 import {
 	SelectContent,
@@ -90,7 +90,7 @@ const Add = () => {
 		name: Yup.string()
 			.required('Name is required')
 			.min(3, 'Name must be at least 3 characters')
-			.matches(/^[a-zA-Z]+$/, 'Only letters are allowed')
+			.matches(/^[a-z][a-z\s]*$/i, 'Only letters are allowed')
 			.trim()
 			.max(20, 'Name must have maximum of 20 characters'),
 		description: Yup.string()
@@ -252,6 +252,7 @@ const Add = () => {
 						type="file"
 						accept="image/jpeg, image/png"
 						onChange={(e) => handleChangeFile(e)}
+						error={errors.file}
 					/>
 					{errors.file && (
 						<FormError>{errors.file.message}</FormError>

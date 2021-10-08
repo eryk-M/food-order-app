@@ -11,7 +11,7 @@ import {
 	DeleteActions,
 } from './DeleteModalElements';
 
-import { FormInput, FormError } from 'components/Form/FormElements';
+import { FormInput, FormError } from 'components/Form';
 
 import Button from 'components/Button';
 import Loader from 'components/Loader';
@@ -114,7 +114,8 @@ const DeleteModal = ({
 			</DeleteBody>
 
 			<DeleteActions>
-				{loading && <Loader primary />}
+				{loading && <Loader primary marginright="2rem" />}
+
 				<Button disabled={loading} secondary onClick={handleCancel}>
 					Cancel
 				</Button>

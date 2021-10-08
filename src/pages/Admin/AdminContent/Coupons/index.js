@@ -9,7 +9,7 @@ import {
 } from './CouponsElements';
 import Loader from 'components/Loader';
 import { Alert } from 'components/Alert';
-import { Form, FormButton } from 'components/Form/FormElements';
+import { Form, FormButton } from 'components/Form';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import {
 	getCoupons,
@@ -61,11 +61,13 @@ const Coupons = () => {
 				(value) => !/\s/.test(value)
 			)
 			.test('discount', 'Code already exists', async (value) => {
-				const response = await validateCouponCode(
-					value.toUpperCase()
-				).get();
+				if (value) {
+					const response = await validateCouponCode(
+						value.toUpperCase()
+					).get();
 
-				return response?.empty;
+					return response?.empty;
+				}
 			}),
 	});
 

@@ -6,7 +6,7 @@ import {
 	FormLabel,
 	FormInput,
 	FormError,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 
 import {
 	CartAddressContainer,

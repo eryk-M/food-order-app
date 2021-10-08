@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-	Form,
-	FormInput,
-	FormElement,
-} from 'components/Form/FormElements';
+import { Form, FormInput, FormElement } from 'components/Form';
 import { BsSearch } from 'react-icons/bs';
 import { SearchContainer, SearchHint } from './SearchElements';
 const Search = ({ query, setQuery, width, placeholder, tooltip }) => {

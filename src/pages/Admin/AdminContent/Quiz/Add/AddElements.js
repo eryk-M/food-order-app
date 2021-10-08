@@ -8,7 +8,7 @@ import {
 	FormGroup,
 	FormElement,
 	FormBtn,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 export const AddQuizContainer = styled(MainContainer)`
 	@media only screen and (max-width: 1100px) {
 		margin-right: 2rem;

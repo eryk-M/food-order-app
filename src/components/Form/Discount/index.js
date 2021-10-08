@@ -6,7 +6,7 @@ import {
 	FormLabel,
 	FormError,
 	FormGroup,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 const Discount = ({ isLoading, register, errors }) => {
 	return (
 		<FormGroup flex justify="space-between">

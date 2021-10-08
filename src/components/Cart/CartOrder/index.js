@@ -26,7 +26,7 @@ import {
 	CartQuantityWrapper,
 } from './CartOrderElements';
 
-import { FormError, FormInput } from 'components/Form/FormElements';
+import { FormError, FormInput } from 'components/Form';
 
 import Button from 'components/Button/index';
 import Cash from 'images/cash.png';

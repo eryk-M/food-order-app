@@ -13,7 +13,7 @@ import {
 	FormLink,
 	FormError,
 	FormSpanSign,
-} from 'components/Form/FormElements';
+} from 'components/Form';
 
 import { SignInContainer } from './SignInElements';
 
