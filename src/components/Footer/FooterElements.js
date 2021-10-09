@@ -17,30 +17,24 @@ export const FooterMedia = styled.div`
 	justify-content: space-between;
 `;
 
-export const FooterMediaIcon = styled.div`
+export const FooterMediaIcon = styled.a`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 5.2rem;
-	height: 5.2rem;
+	width: 5rem;
+	height: 5rem;
 	border-radius: 50%;
-	border: 1px solid var(--color-grey-light);
+	/* outline: 1px solid var(--color-grey-light); */
 	font-size: 1.6rem;
 	color: var(--color-grey-light);
 	cursor: pointer;
 	transition: all 0.1s;
-	&:hover {
-		${(props) => {
-			if (props.facebook)
-				return 'border: 1px solid #4267b2;color: #4267b2;';
-			else if (props.instagram)
-				return 'border: 1px solid #8a3ab9;color:#8a3ab9';
-			else if (props.twitter)
-				return 'border: 1px solid #1DA1F2;color:#1DA1F2';
-			else if (props.youtube)
-				return 'border: 1px solid #FF0000;color:#FF0000';
-		}}
-	}
+	background-color: ${(props) => {
+		if (props.facebook) return '#4267b2;;';
+		else if (props.instagram) return '#8a3ab9';
+		else if (props.twitter) return '#1DA1F2';
+		else if (props.youtube) return '#FF0000';
+	}};
 	& svg {
 		font-size: 2rem;
 	}

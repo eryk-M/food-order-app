@@ -1,13 +1,9 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 
-import Loader from 'components/Loader';
-const ProductItem = lazy(() => import('components/ProductItem'));
+import ProductItem from 'components/ProductItem';
+
 const Product = (props) => {
-	return (
-		<Suspense fallback={<Loader margincenter veryhigh primary />}>
-			<ProductItem props={props} />
-		</Suspense>
-	);
+	return <ProductItem props={props} />;
 };
 
 export default Product;

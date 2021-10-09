@@ -17,7 +17,8 @@ export const SideBarContainer = styled.aside`
 	left: 0;
 	bottom: 0;
 	font-weight: 100;
-	transition: transform 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	overflow-x: hidden;
 	.is-active {
 		background-color: var(--color-primary) !important;
 		& .icon-arrow {
@@ -27,12 +28,20 @@ export const SideBarContainer = styled.aside`
 		}
 	}
 
+	.tree-menu-opened {
+		height: 9.6rem;
+	}
+	.tree-menu-closed {
+		height: 0;
+	}
 	@media ${device.laptopS} {
 		transform: translateX(-26rem);
 	}
 `;
 
-export const SideBarP = styled.p``;
+export const SideBarP = styled.p`
+	transition: display 0.2s ease;
+`;
 
 export const SideBarLogo = styled(Link)`
 	display: block;
@@ -42,6 +51,7 @@ export const SideBarLogo = styled(Link)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	transition: height 0.2s ease;
 `;
 export const SideBarLogoImage = styled.img`
 	height: 10rem;

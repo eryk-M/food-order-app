@@ -4,6 +4,7 @@ import {
 	LoaderWrapper,
 	LoaderSVG,
 	LoaderCircle,
+	LoaderCircleTwo,
 } from './LoaderElements';
 
 const Loader = ({ primary, high, veryhigh, ...rest }) => {
@@ -14,6 +15,7 @@ const Loader = ({ primary, high, veryhigh, ...rest }) => {
 			{...rest}
 		>
 			<LoaderSVG viewBox="25 25 50 50">
+				<LoaderCircleTwo cx="50" cy="50" r="20"></LoaderCircleTwo>
 				<LoaderCircle
 					primary={primary}
 					cx="50"

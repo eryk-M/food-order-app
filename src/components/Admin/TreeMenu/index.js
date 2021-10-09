@@ -10,8 +10,6 @@ import {
 	Tree,
 	TreeItemMain,
 } from './TreeMenuElements';
-import { SlideDown } from 'react-slidedown';
-import 'react-slidedown/lib/slidedown.css';
 const TreeMenu = ({
 	width,
 	text,
@@ -45,29 +43,30 @@ const TreeMenu = ({
 					hidden={hidden && width > 1024}
 				/>
 			</TreeItemMain>
-			<SlideDown className="my-dropdown-slidedown" closed={closed}>
-				<TreeList>
-					{list.map((el, i) => (
-						<TreeItem key={i}>
-							<TreeNavLink
-								exact
-								to={el.path}
-								activeClassName="is-active"
-								hidden={hidden && width > 1024}
-								onClick={
-									width <= 1024
-										? () => setHidden((prevHidden) => !prevHidden)
-										: undefined
-								}
-							>
-								{React.createElement(el.icon)}
-								<TreeP>{el.text}</TreeP>
-								<MdKeyboardArrowRight className="icon-arrow" />
-							</TreeNavLink>
-						</TreeItem>
-					))}
-				</TreeList>
-			</SlideDown>
+
+			<TreeList
+				className={!closed ? 'tree-menu-opened' : 'tree-menu-closed'}
+			>
+				{list.map((el, i) => (
+					<TreeItem key={i}>
+						<TreeNavLink
+							exact
+							to={el.path}
+							activeClassName="is-active"
+							hidden={hidden && width > 1024}
+							onClick={
+								width <= 1024
+									? () => setHidden((prevHidden) => !prevHidden)
+									: undefined
+							}
+						>
+							{React.createElement(el.icon)}
+							<TreeP>{el.text}</TreeP>
+							<MdKeyboardArrowRight className="icon-arrow" />
+						</TreeNavLink>
+					</TreeItem>
+				))}
+			</TreeList>
 		</Tree>
 	);
 };

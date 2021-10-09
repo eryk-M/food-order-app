@@ -32,7 +32,7 @@ export const FormReviewLabelRating = styled.label`
 `;
 
 export const FormReviewFormComment = styled.p`
-	margin-bottom: 2.4em;
+	margin-bottom: 1rem;
 `;
 
 export const FormReviewFormCommentLabel = styled.label`

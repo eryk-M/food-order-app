@@ -7,16 +7,20 @@ import {
 	FormReviewForm,
 	FormReviewNote,
 	FormReviewFormRating,
-	FormReviewLabelRating,
 	FormReviewFormComment,
-	FormReviewFormCommentLabel,
 	FormReviewFormCommentBottom,
 	AlreadyReviewed,
 	FormReviewNotLoggedIn,
 } from './FormReviewElements';
 
 import Button from 'components/Button';
-import { FormInput, FormTextArea, FormError } from 'components/Form';
+import {
+	FormInput,
+	FormTextArea,
+	FormError,
+	FormLabel,
+	FormElement,
+} from 'components/Form';
 
 import StarRating from './StarRating';
 
@@ -83,29 +87,23 @@ const FormReview = ({
 						Add review and let us know what you think!
 					</FormReviewNote>
 					<FormReviewFormRating>
-						<FormReviewLabelRating>
-							Your rating *
-						</FormReviewLabelRating>
+						<FormLabel>Your rating*</FormLabel>
 						<StarRating setRating={setRating} rating={rating} />
 						{starError && (
 							<FormError>You need to rate this product</FormError>
 						)}
 					</FormReviewFormRating>
 					<FormReviewFormCommentBottom>
-						<FormReviewFormComment>
-							<FormReviewFormCommentLabel>
-								Name
-							</FormReviewFormCommentLabel>
+						<FormElement>
+							<FormLabel>Name</FormLabel>
 							<FormInput
 								{...register('displayName')}
 								disabled={true}
 							/>
-						</FormReviewFormComment>
+						</FormElement>
 					</FormReviewFormCommentBottom>
 					<FormReviewFormComment>
-						<FormReviewFormCommentLabel>
-							Your review *
-						</FormReviewFormCommentLabel>
+						<FormLabel>Your review*</FormLabel>
 						<FormTextArea
 							{...register('body', {
 								required: 'Text required here',

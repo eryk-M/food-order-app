@@ -95,8 +95,10 @@ export const Tree = styled.div`
 `;
 
 export const TreeList = styled.ul`
-	width: 100%;
 	background-color: #3e4a54;
+	overflow: hidden;
+	width: 25rem;
+	transition: height 0.2s ease-in-out;
 `;
 
 export const TreeItem = styled.li`

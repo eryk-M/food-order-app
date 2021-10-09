@@ -69,9 +69,7 @@ input, textarea {
 input[type=file]{
     border: none;
 }
-.stars-error {
-    border: 1px solid var(--color-red);
-}
+
 
 .active-user-nav {
     font-weight: 700;
@@ -103,7 +101,7 @@ input[type=file]{
         }
         & p {
             display: none;
-        width: 5rem;
+            width: 5rem;
         }
     }
 
@@ -137,15 +135,4 @@ input[type=file]{
     }
 }
 
-.sort-active {
-    background-color: var(--color-secondary);
-}
-
-.order-opened {
-    display: table-row;
-}
-
-.order-closed {
-    display: none;
-}
 `;

@@ -35,7 +35,8 @@ export const LoaderWrapper = styled.div`
 	margin-right: ${(props) => props.marginright};
 	display: ${(props) =>
 		props.margincenter ? 'flex' : 'inline-block'};
-	align-items: ${(props) => (props.margincenter ? 'center' : 'none')};
+	align-items: ${(props) =>
+		props.margincenter ? 'center' : 'normal'};
 `;
 
 export const LoaderSVG = styled.svg`
@@ -44,7 +45,15 @@ export const LoaderSVG = styled.svg`
 
 export const LoaderCircle = styled.circle`
 	fill: none;
-	stroke-width: 5px;
+	stroke-width: 0.5rem;
 	animation: ${(props) => animateStroke(props)} 1.5s linear infinite;
 	stroke-linecap: round;
+	stroke: rgba(0, 0, 0, 0.5);
+`;
+
+export const LoaderCircleTwo = styled.circle`
+	fill: none;
+	stroke-width: 0.5rem;
+	stroke-linecap: round;
+	stroke: rgba(0, 0, 0, 0.1);
 `;

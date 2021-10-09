@@ -2,9 +2,10 @@ import styled, { keyframes } from 'styled-components/macro';
 
 import { Link } from 'react-router-dom';
 import { MdErrorOutline } from 'react-icons/md';
-
+import { BsQuestionSquare } from 'react-icons/bs';
 import Loader from '../Loader';
 import { LoaderWrapper } from 'components/Loader/LoaderElements';
+import { device } from 'utils/breakpoints';
 const fadeIn = keyframes`
 from{
     opacity: 0%
@@ -68,9 +69,37 @@ export const Form = styled.form`
 		left: 5%;
 	}
 `;
+export const FormTooltip = styled.span`
+	background-color: var(--color-grey-dark-2);
+	color: var(--color-white);
+	padding: 1rem;
+	position: absolute;
+	right: ${(props) => props.right};
+	top: ${(props) => props.top};
+	opacity: 0;
+	transition: visibility 0s, opacity 0.2s ease;
+	visibility: hidden;
+	@media ${device.mobileM} {
+		right: 0;
+	}
+`;
+export const FormTooltipIcon = styled(BsQuestionSquare)`
+	font-size: 1.8rem;
+	fill: var(--color-grey-dark);
+	position: absolute;
+	top: 0;
+	right: 0;
+	vertical-align: middle;
+
+	&:hover + ${FormTooltip} {
+		opacity: 1;
+		visibility: visible;
+	}
+`;
 
 export const FormElement = styled.div`
 	margin-left: ${(props) => props.marginleft};
+	position: relative;
 	& .search-icon {
 		position: absolute;
 		font-size: 1.8rem;
@@ -179,8 +208,8 @@ export const FormBtn = styled.button`
 			? 'letter-spacing: 1px;width: unset;font-size: 1.4rem;padding: 1rem;text-transform: uppercase;margin: 0;border-radius: 5px;width:16rem;&:hover {background-color: var(--color-secondary);color: var(--color-grey-dark);}'
 			: ''}
 	${LoaderWrapper} {
-		position: absolute;
-		left: 5%;
+		position: absolute !important;
+		left: 5% !important;
 	}
 `;
 
@@ -232,7 +261,7 @@ export const FormErr = styled.p`
 export const FormErrIcon = styled(MdErrorOutline)`
 	font-size: 2rem;
 	vertical-align: middle;
-	margin-right: 1rem;
+	margin-right: 0.5rem;
 `;
 
 export const FormError = ({ children, ...rest }) => {

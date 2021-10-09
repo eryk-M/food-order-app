@@ -15,23 +15,26 @@ export const Table = styled.table`
 	table-layout: fixed;
 	border-collapse: collapse;
 
-	& .checkbox-group {
-		margin-right: 1rem;
-		vertical-align: -1px;
+	.sort-active {
+		background-color: var(--color-secondary);
+	}
+
+	.order-opened {
+		display: table-row;
+	}
+
+	.order-closed {
+		display: none;
 	}
 `;
 
 export const TableBody = styled.tbody``;
 
 export const TableRow = styled.tr`
-	/* display: table-row; */
 	font-size: 1.4rem;
 	background-color: ${(props) => props.backgroundColor};
 	font-weight: ${(props) => props.fontW};
 
-	&:not(:last-of-type) {
-		/* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
-	}
 	& .cell-word-wrap {
 		word-wrap: break-word;
 	}

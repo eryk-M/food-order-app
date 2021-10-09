@@ -13,6 +13,8 @@ import {
 	FormError,
 	FormAlert,
 	FormSpanSign,
+	FormTooltip,
+	FormTooltipIcon,
 } from 'components/Form';
 import { SignInContainer } from '../SignIn/SignInElements';
 import { useForm } from 'react-hook-form';
@@ -81,6 +83,7 @@ const Signup = () => {
 		}
 	};
 
+	//TODO: spacje usuniete, sprawdzic username testem .join.touppercase to samo na backendzie
 	return (
 		<>
 			<SignInContainer>
@@ -93,7 +96,13 @@ const Signup = () => {
 
 				<Form onSubmit={handleSubmit(onSubmit)}>
 					<FormElement id="username">
-						<FormLabel>Username (4 - 12 characters) *</FormLabel>
+						<FormTooltipIcon />
+						<FormTooltip top="-6rem" right="-9rem">
+							- Username must be unique
+							<br />- Username must have 4 - 12 characters
+							<br />- Any spaces will be trimmed out
+						</FormTooltip>
+						<FormLabel>Username*</FormLabel>
 						<FormInput
 							type="text"
 							placeholder="Your username"
@@ -106,7 +115,7 @@ const Signup = () => {
 						)}
 					</FormElement>
 					<FormElement id="email">
-						<FormLabel>Email *</FormLabel>
+						<FormLabel>Email*</FormLabel>
 						<FormInput
 							type="email"
 							{...register('email')}
@@ -119,7 +128,11 @@ const Signup = () => {
 						)}
 					</FormElement>
 					<FormElement id="password">
-						<FormLabel>Password (min 6 characters) *</FormLabel>
+						<FormTooltipIcon />
+						<FormTooltip top="-3.5rem" right="-9rem">
+							- Password must have minimum 6 characters
+						</FormTooltip>
+						<FormLabel>Password*</FormLabel>
 						<FormInput
 							type="password"
 							{...register('password')}
@@ -132,7 +145,7 @@ const Signup = () => {
 						)}
 					</FormElement>
 					<FormElement id="password-confirm">
-						<FormLabel>Password Confirmation *</FormLabel>
+						<FormLabel>Password Confirmation*</FormLabel>
 						<FormInput
 							type="password"
 							{...register('confirmPassword')}
