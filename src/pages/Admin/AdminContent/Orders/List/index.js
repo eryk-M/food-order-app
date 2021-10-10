@@ -39,6 +39,7 @@ import {
 } from 'components/Admin/Icons';
 import { AnimatePresence } from 'framer-motion';
 import Pagination from 'components/Pagination';
+import Info from 'components/Admin/Info';
 
 const renderIcon = (sort) => {
 	if (sort === 1) {
@@ -207,6 +208,10 @@ const List = () => {
 
 	return (
 		<>
+			<Info>
+				- Data in Orders Panel are coming from main page. You can
+				delete orders and test food tracker.
+			</Info>
 			<DeleteModal
 				input={ordersToDelete.length}
 				toDelete={ordersToDelete}

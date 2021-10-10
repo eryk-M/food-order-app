@@ -22,9 +22,13 @@ import {
 	chartOrdersYear,
 	chartOrdersMonth,
 } from 'utils/lineChartsData';
+import Info from 'components/Admin/Info';
 const Dashboard = () => {
 	return (
 		<>
+			<Info>
+				- Data in Dashboard are generating randomly every refresh
+			</Info>
 			<FlexCenterContainer>
 				<Total {...totalOrdersSettings} />
 				<Total {...totalClientsSettings} />

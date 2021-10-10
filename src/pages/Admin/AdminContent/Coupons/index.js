@@ -29,6 +29,8 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Discount from 'components/Form/Discount';
+import Info from 'components/Admin/Info';
+
 const Coupons = () => {
 	const { data, loading } = useFirestoreQuery(getCoupons());
 	const { addCoupon, deleteCoupon } = useApi();
@@ -94,67 +96,73 @@ const Coupons = () => {
 		await deleteCoupon(code);
 	};
 	return (
-		<CouponMainContainer maxwidth="70rem" minheight="65rem">
-			{showSuccess && (
-				<Alert right="1rem" top="1rem" success>
-					Coupon added
-				</Alert>
-			)}
-			<AdminPanelHeading>Coupons</AdminPanelHeading>
-			<CouponContainer>
-				<Table>
-					<TableHead>
-						<TableRow fontW="bold">
-							<TableCellHead>Code</TableCellHead>
-							<TableCellHead>Percentage</TableCellHead>
-							<TableCellHead>From</TableCellHead>
-							<TableCellHead>Actions</TableCellHead>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						<TableRow>
-							<TableCell data-label="Code">DISCOUNT20</TableCell>
-							<TableCell data-label="Percentage">20%</TableCell>
-							<TableCell data-label="From">$1</TableCell>
-							<TableCell data-label="Actions" center></TableCell>
-						</TableRow>
-						{data &&
-							data.map((el, i) => {
-								if (el.code !== 'DISCOUNT20') {
-									return (
-										<TableRow key={i}>
-											<TableCell data-label="Code">
-												{el.code}
-											</TableCell>
-											<TableCell data-label="Percentage">
-												{el.discount}%
-											</TableCell>
-											<TableCell data-label="From">
-												${el.fromPrice}
-											</TableCell>
-											<TableCell data-label="Actions">
-												<TableButton
-													primary
-													onClick={() => onDelete(el.code)}
-												>
-													Delete
-												</TableButton>
-											</TableCell>
-										</TableRow>
-									);
-								}
-								return true;
-							})}
-					</TableBody>
-				</Table>
-				{loading && (
-					<LoaderContainer height="30rem">
-						<Loader primary />
-					</LoaderContainer>
+		<>
+			<Info>
+				- Quizzes and coupons are working with main page as well. You
+				can add, delete quizzes and test them with coupons in user
+				panel.
+			</Info>
+			<CouponMainContainer maxwidth="70rem" minheight="65rem">
+				{showSuccess && (
+					<Alert right="1rem" top="1rem" success>
+						Coupon added
+					</Alert>
 				)}
-				<CouponFormWrapper>
-					<Form onSubmit={handleSubmit(onSubmit)}>
-						{/* <FormGroup flex>
+				<AdminPanelHeading>Coupons</AdminPanelHeading>
+				<CouponContainer>
+					<Table>
+						<TableHead>
+							<TableRow fontW="bold">
+								<TableCellHead>Code</TableCellHead>
+								<TableCellHead>Percentage</TableCellHead>
+								<TableCellHead>From</TableCellHead>
+								<TableCellHead>Actions</TableCellHead>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							<TableRow>
+								<TableCell data-label="Code">DISCOUNT20</TableCell>
+								<TableCell data-label="Percentage">20%</TableCell>
+								<TableCell data-label="From">$1</TableCell>
+								<TableCell data-label="Actions" center></TableCell>
+							</TableRow>
+							{data &&
+								data.map((el, i) => {
+									if (el.code !== 'DISCOUNT20') {
+										return (
+											<TableRow key={i}>
+												<TableCell data-label="Code">
+													{el.code}
+												</TableCell>
+												<TableCell data-label="Percentage">
+													{el.discount}%
+												</TableCell>
+												<TableCell data-label="From">
+													${el.fromPrice}
+												</TableCell>
+												<TableCell data-label="Actions">
+													<TableButton
+														primary
+														onClick={() => onDelete(el.code)}
+													>
+														Delete
+													</TableButton>
+												</TableCell>
+											</TableRow>
+										);
+									}
+									return true;
+								})}
+						</TableBody>
+					</Table>
+					{loading && (
+						<LoaderContainer height="30rem">
+							<Loader primary />
+						</LoaderContainer>
+					)}
+					<CouponFormWrapper>
+						<Form onSubmit={handleSubmit(onSubmit)}>
+							{/* <FormGroup flex>
 							<FormElement>
 								<FormLabel>Coupon code</FormLabel>
 								<FormInput
@@ -191,16 +199,17 @@ const Coupons = () => {
 								)}
 							</FormElement>
 						</FormGroup> */}
-						<Discount
-							isLoading={isLoading}
-							register={register}
-							errors={errors}
-						/>
-						<FormButton loading={isLoading} text="Add coupon" />
-					</Form>
-				</CouponFormWrapper>
-			</CouponContainer>
-		</CouponMainContainer>
+							<Discount
+								isLoading={isLoading}
+								register={register}
+								errors={errors}
+							/>
+							<FormButton loading={isLoading} text="Add coupon" />
+						</Form>
+					</CouponFormWrapper>
+				</CouponContainer>
+			</CouponMainContainer>
+		</>
 	);
 };
 

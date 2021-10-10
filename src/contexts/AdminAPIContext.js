@@ -13,8 +13,6 @@ export function useAdminApi() {
 export function AdminAPIProvider({ children }) {
 	const adminProductsRef = db.collection('adminProducts');
 	const adminOrdersRef = db.collection('adminOrders');
-	// const adminUsersRef = db.collection('adminUsers');
-	// const adminReviewsRef = db.collection('adminReviews');
 
 	async function updateAdminProduct(id, data, ingredients, imageSrc) {
 		await adminProductsRef.doc(id).update({
@@ -58,11 +56,15 @@ export function AdminAPIProvider({ children }) {
 			.where('id', '==', id)
 			.get();
 		const data = response.docs[0].data();
-		const pictureRef = storage.refFromURL(data.img);
-		await pictureRef.delete();
 		response.forEach(async (doc) => {
 			await doc.ref.delete();
 		});
+		if (id < 12) {
+			return;
+		} else {
+			const pictureRef = storage.refFromURL(data.img);
+			await pictureRef.delete();
+		}
 	};
 
 	const deleteAdminOrders = async (orders) => {

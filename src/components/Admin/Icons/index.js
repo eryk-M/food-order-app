@@ -79,6 +79,9 @@ export const InfoIcon = styled(AiOutlineInfoCircle)`
 	font-size: 5.4rem;
 	color: #fff;
 	vertical-align: middle;
+	@media ${device.mobileL} {
+		font-size: 4rem;
+	}
 `;
 
 export const SettingsIcon = styled(FiSettings)`

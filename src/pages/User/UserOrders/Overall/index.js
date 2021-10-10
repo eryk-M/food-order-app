@@ -18,11 +18,15 @@ const Overall = ({ el }) => {
 		transform: 'rotate(180deg)',
 	};
 
+	const renderDate = (timestamp) => {
+		const date = new Date(timestamp);
+		return date.toLocaleDateString();
+	};
 	return (
 		<>
 			<OrdersTableRow>
 				<TableCell data-label="ID">{el.orderId}</TableCell>
-				<TableCell data-label="Date">17.09.2021</TableCell>
+				<TableCell data-label="Date">{renderDate(el.date)}</TableCell>
 				<TableCell data-label="Status">
 					<Status step={el.step} />
 				</TableCell>

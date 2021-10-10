@@ -19,67 +19,66 @@ export function APIProvider({ children }) {
 	const quizRef = db.collection('quizes');
 	// HELPER AT START TO SET COLLECTION OF PRODUCTS
 
-	const setItems = (data, admin) => {
+	const setItems = (data) => {
 		data.forEach((el) => {
 			const storageRef = storage.ref(`images/${el.img}.jpg`);
 			storageRef.getDownloadURL().then((url) => {
-				if (admin) {
-					adminProductsRef
-						.doc(`${el.id}`)
-						.set({
-							id: el.id,
-							img: url,
-							alt: el.alt,
-							name: el.name,
-							desc: el.desc,
-							price: el.price,
-							button: el.button,
-							ingredients: el.ingredients,
-							category: el.category,
-							quantity: el.quantity,
-							avgRating: el.avgRating,
-							popularity: el.popularity,
-							ratingCount: el.ratingCount,
-							availability: el.availability,
-							discountPrice: el.discountPrice,
-							sale: el.sale,
-						})
-						.then(() => {
-							console.log(el.id, ' admin successfully written!');
-						})
-						.catch((err) => {
-							console.log(err);
-						});
-				} else {
-					productsRef
-						.doc(`${el.id}`)
-						.set({
-							id: el.id,
-							img: url,
-							alt: el.alt,
-							name: el.name,
-							desc: el.desc,
-							price: el.price,
-							button: el.button,
-							ingredients: el.ingredients,
-							category: el.category,
-							quantity: el.quantity,
-							avgRating: el.avgRating,
-							popularity: el.popularity,
-							ratingCount: el.ratingCount,
-							availability: el.availability,
-							discountPrice: el.discountPrice,
-							sale: el.sale,
-						})
-						.then(() => {
-							console.log(el.id, ' successfully written!');
-						})
-						.catch((err) => {
-							console.log(err);
-						});
-				}
+				productsRef
+					.doc(`${el.id}`)
+					.set({
+						id: el.id,
+						img: url,
+						alt: el.alt,
+						name: el.name,
+						desc: el.desc,
+						price: el.price,
+						button: el.button,
+						ingredients: el.ingredients,
+						category: el.category,
+						quantity: el.quantity,
+						avgRating: el.avgRating,
+						popularity: el.popularity,
+						ratingCount: el.ratingCount,
+						availability: el.availability,
+						discountPrice: el.discountPrice,
+						sale: el.sale,
+					})
+					.then(() => {
+						console.log(el.id, ' successfully written!');
+					})
+					.catch((err) => {
+						console.log(err);
+					});
 			});
 		});
+	};
+
+	const setAdminItems = async (data) => {
+		for (const el of data) {
+			const storageRef = storage.ref(
+				`adminDefaultImages/${el.img}.jpg`
+			);
+			const url = await storageRef.getDownloadURL();
+			await adminProductsRef.doc(`${el.id}`).set({
+				id: el.id,
+				img: url,
+				alt: el.alt,
+				name: el.name,
+				desc: el.desc,
+				price: el.price,
+				button: el.button,
+				ingredients: el.ingredients,
+				category: el.category,
+				quantity: el.quantity,
+				avgRating: el.avgRating,
+				popularity: el.popularity,
+				ratingCount: el.ratingCount,
+				availability: el.availability,
+				discountPrice: el.discountPrice,
+				sale: el.sale,
+				img_ref: el.img,
+			});
+		}
 	};
 
 	const updateUserInfo = async (
@@ -258,6 +257,7 @@ export function APIProvider({ children }) {
 
 	const value = {
 		setItems,
+		setAdminItems,
 		updateUserInfo,
 		addReview,
 		addOrder,

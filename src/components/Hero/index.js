@@ -15,11 +15,12 @@ import ButtonLink from '../ButtonLink';
 import Shape from 'images/shape.png';
 import ImgBg from 'images/header-burger-2.jpg';
 const Hero = () => {
-	const height = window.outerHeight;
+	const height = window.innerHeight;
 
 	return (
 		<HeroContainer height={height}>
 			<HeroImageWrapper
+				height={height}
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1, transition: { duration: 0.5 } }}
 			>

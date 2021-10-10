@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -26,11 +26,16 @@ import { Alert } from 'components/Alert';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAdminAllProducts } from 'utils/firebaseGetters';
 import { useAdminApi } from 'contexts/AdminAPIContext';
+import { useApi } from 'contexts/APIContext';
 import { ListImage, ProductsListContainer } from './ListElements';
+import ProductsReset from './ListElements';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
+import { dummyData } from 'utils/dummyData';
+
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllProducts());
 	const { deleteAdminProduct } = useAdminApi();
+	const { setAdminItems, setItems } = useApi();
 
 	const [query, setQuery] = useState('');
 	const [open, setOpen] = useState(false);
@@ -38,12 +43,23 @@ const List = () => {
 	const [showSuccess, setShowSuccess] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [itemsPerPage] = useState(10);
+	const [isLoading, setIsLoading] = useState(false);
+	const [resetSuccess, setResetSuccess] = useState(false);
+
+	const timeoutRef = useRef();
 
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
 	//PAGINATE
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+	useEffect(() => {
+		return () => {
+			clearTimeout(timeoutRef.current);
+			setIsLoading(false);
+		};
+	}, []);
 
 	const onHandleSearch = () => {
 		if (query.length >= 3) {
@@ -54,6 +70,34 @@ const List = () => {
 			return data.slice(indexOfFirstItem, indexOfLastItem);
 		}
 	};
+
+	//RESET ADMIN
+	const onSetItems = async () => {
+		setIsLoading(true);
+		try {
+			await setAdminItems(dummyData);
+			setIsLoading(false);
+			setResetSuccess(true);
+
+			const timeout = setTimeout(() => {
+				setResetSuccess(false);
+			}, 3000);
+			timeoutRef.current = timeout;
+		} catch (err) {
+			console.log(err);
+			setIsLoading(false);
+		}
+	};
+
+	//RESET ZWYKLE
+	// const onSetMainItems = () => {
+	// 	try {
+	// 		console.log('Wrzucam...');
+	// 		setItems(dummyData);
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// };
 
 	return (
 		<>
@@ -81,6 +125,13 @@ const List = () => {
 					width="20rem"
 					placeholder="Search by name"
 				/>
+
+				<ProductsReset
+					loading={isLoading}
+					onSetItems={onSetItems}
+					resetSuccess={resetSuccess}
+				/>
+
 				{data?.length > 0 && (
 					<Pagination
 						top="1.3rem"
@@ -132,7 +183,10 @@ const List = () => {
 										{el.category}
 									</TableCell>
 									<TableCell data-label="Price">
-										${el.price}
+										$
+										{el.discountPrice === 0
+											? el.price
+											: el.discountPrice}
 									</TableCell>
 									<TableCell data-label="Actions" center>
 										<Link to={`/admin/products/${el.id}`}>

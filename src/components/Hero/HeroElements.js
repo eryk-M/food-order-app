@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { motion } from 'framer-motion';
 
 export const HeroImageWrapper = styled(motion.div)`
-	height: 100vh;
+	height: ${(props) => props.height + 'px'};
 	width: 100%;
 	position: absolute;
 	z-index: 0;
@@ -30,7 +30,7 @@ export const HeroIMG = styled.img`
 export const HeroContainer = styled.header`
 	background-position: center;
 	background-size: cover;
-	height: 100vh;
+	height: ${(props) => props.height + 'px'};
 	background-color: black;
 `;
 

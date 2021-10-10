@@ -3,7 +3,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { MainContainer } from 'components/Admin/Containers';
 
 import { device } from 'utils/breakpoints';
-
+import Loader from 'components/Loader';
 import {
 	TableCellHead,
 	TableCell,
@@ -113,3 +113,64 @@ export const ListImage = styled(LazyLoadImage)`
 	object-fit: cover;
 	border-radius: 5px;
 `;
+
+export const ProductsResetButton = styled.button`
+	margin-bottom: 2rem;
+	padding: 1rem 1.6rem;
+	display: inline-block;
+	font-size: 1.4rem;
+	background-color: ${(props) => {
+		if (props.resetSuccess) {
+			return 'var(--color-green)';
+		} else {
+			return 'var(--color-secondary);';
+		}
+	}};
+	color: var(--color-grey-dark);
+	width: 20rem;
+	border: none;
+	border-radius: 5px;
+	position: relative;
+	text-transform: uppercase;
+	&:hover {
+		cursor: pointer;
+	}
+	&:disabled {
+		opacity: 0.8;
+		&:hover {
+			color: var(--color-grey-dark);
+			cursor: default;
+		}
+	}
+
+	@media ${device.mobileM} {
+		margin-bottom: 0rem;
+		margin-top: 2rem;
+	}
+`;
+
+const LoaderReset = styled(Loader)`
+	height: 2rem;
+	width: 2rem;
+	position: absolute;
+	display: block;
+	top: 50%;
+	left: 1rem;
+	transform: translateY(-50%);
+`;
+
+const ProductsReset = ({ loading, onSetItems, resetSuccess }) => {
+	return (
+		<ProductsResetButton
+			onClick={onSetItems}
+			disabled={loading || resetSuccess}
+			resetSuccess={resetSuccess}
+		>
+			{resetSuccess && 'Done'}
+			{loading && <LoaderReset />}
+			{loading && 'Resetting...'}
+			{!loading && !resetSuccess && 'Reset products'}
+		</ProductsResetButton>
+	);
+};
+export default ProductsReset;

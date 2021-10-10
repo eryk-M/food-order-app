@@ -16,6 +16,7 @@ export const InfoNote = styled.div`
 	padding: 1rem 0;
 	@media ${device.mobileM} {
 		padding: 1rem 0.5rem;
+		margin-left: 1rem;
 	}
 `;
 

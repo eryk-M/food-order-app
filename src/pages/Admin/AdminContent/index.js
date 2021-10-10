@@ -9,11 +9,9 @@ import Orders from './Orders';
 import Coupons from './Coupons';
 import Quiz from './Quiz';
 
-import Info from '../../../components/Admin/Info';
 const AdminContent = () => {
 	return (
 		<>
-			<Info />
 			<Switch>
 				<Route path="/admin" exact component={Dashboard} />
 				<Route path="/admin/products" component={Products} />
