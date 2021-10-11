@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import {
 	PriceFilterContainer,
@@ -9,7 +9,7 @@ import { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './rc-slider-override.css';
 
-export const PriceFilter = ({ price }) => {
+export const PriceFilter = memo(({ price }) => {
 	return (
 		<PriceFilterContainer>
 			<PriceFilterSpan size={1.6}>
@@ -27,4 +27,4 @@ export const PriceFilter = ({ price }) => {
 			/>
 		</PriceFilterContainer>
 	);
-};
+});

@@ -15,15 +15,14 @@ import {
 } from './NavBarElements';
 
 import { useAuth, CartContext } from 'contexts';
-import { withRouter } from 'react-router-dom';
-
+import { withRouter, useHistory } from 'react-router';
 import { useWindowSize } from 'hooks/useWindowSize';
 
 const NavBar = (props) => {
 	const { currentUser } = useAuth();
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
 	const [scroll, setScroll] = useState(false);
-
+	const history = useHistory();
 	const size = useWindowSize();
 
 	const {
@@ -32,13 +31,16 @@ const NavBar = (props) => {
 	} = useContext(CartContext);
 
 	useEffect(() => {
-		window.addEventListener('scroll', () => {
-			setScroll(window.scrollY > 1);
-		});
+		if (history.location.pathname === '/') {
+			window.addEventListener('scroll', () => {
+				setScroll(window.scrollY > 1);
+			});
+		}
+
 		return () => {
 			window.removeEventListener('scroll', null);
 		};
-	}, []);
+	}, [history.location.pathname]);
 
 	useEffect(() => {
 		if (localStorage.getItem('cart') && !isInitiallyFetched) {

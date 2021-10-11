@@ -23,8 +23,11 @@ import {
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { getAdminAllProducts } from 'utils/firebaseGetters';
 import { useApi, useAdminApi } from 'contexts';
-import { ListImage, ProductsListContainer } from './ListElements';
-import ProductsReset from './ListElements';
+import {
+	ListImage,
+	ProductsListContainer,
+	ProductsReset,
+} from './ListElements';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { dummyData } from 'utils/dummyData';
 

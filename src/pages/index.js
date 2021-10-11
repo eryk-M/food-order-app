@@ -1,66 +1,66 @@
 // TRACKER
-export { TrackerForm } from 'pages/Tracker/TrackerForm/TrackerForm';
-export { TrackerDetails } from 'pages/Tracker/TrackerDetails/TrackerDetails';
-export { Tracker } from 'pages/Tracker/Tracker';
+export { TrackerForm } from './Tracker/TrackerForm/TrackerForm';
+export { TrackerDetails } from './Tracker/TrackerDetails/TrackerDetails';
+export { Tracker } from './Tracker/Tracker';
 
 // USER
-export { ForgotPassword } from 'pages/User/ForgotPassword/ForgotPassword';
-export { SignIn } from 'pages/User/SignIn/SignIn';
-export { Signup } from 'pages/User/Signup/Signup';
-export { UserAccount } from 'pages/User/UserAccount/UserAccount';
-export { UserCoupons } from 'pages/User/UserCoupons/UserCoupons';
-export { UserNav } from 'pages/User/UserNav/UserNav';
-export { UserOrders } from 'pages/User/UserOrders/UserOrders';
-export { UserPassword } from 'pages/User/UserPassword/UserPassword';
-export { UserQuizes } from 'pages/User/UserQuizes/UserQuizes';
-export { User } from 'pages/User/User';
+export { ForgotPassword } from './User/ForgotPassword/ForgotPassword';
+export { SignIn } from './User/SignIn/SignIn';
+export { Signup } from './User/Signup/Signup';
+export { UserAccount } from './User/UserAccount/UserAccount';
+export { UserCoupons } from './User/UserCoupons/UserCoupons';
+export { UserNav } from './User/UserNav/UserNav';
+export { UserOrders } from './User/UserOrders/UserOrders';
+export { UserPassword } from './User/UserPassword/UserPassword';
+export { UserQuizes } from './User/UserQuizes/UserQuizes';
+export { User } from './User/User';
 
 //Login
-export { Login } from 'pages/Login/Login';
+export { Login } from './Login/Login';
 
 //Home
-export { Story } from 'pages/Home/Story/Story';
-export { TopProducts } from 'pages/Home/TopProducts/TopProducts';
-export { Home } from 'pages/Home/Home';
+export { Story } from './Home/Story/Story';
+export { TopProducts } from './Home/TopProducts/TopProducts';
+export { Home } from './Home/Home';
 
 //Cart
-export { CartAddress } from 'pages/Cart/CartAddress/CartAddress';
-export { CartComplete } from 'pages/Cart/CartComplete/CartComplete';
-export { CartOrder } from 'pages/Cart/CartOrder/CartOrder';
-export { CartSummary } from 'pages/Cart/CartSummary/CartSummary';
-export { Cart } from 'pages/Cart/Cart';
+export { CartAddress } from './Cart/CartAddress/CartAddress';
+export { CartComplete } from './Cart/CartComplete/CartComplete';
+export { CartOrder } from './Cart/CartOrder/CartOrder';
+export { CartSummary } from './Cart/CartSummary/CartSummary';
+export { Cart } from './Cart/Cart';
 
 //ProductItem
-export { ProductItem } from 'pages/ProductItem/ProductItem';
-export { Reviews } from 'pages/ProductItem/Reviews/Reviews';
-export { FormReview } from 'pages/ProductItem/Reviews/FormReview/FormReview';
-export { UserReviews } from 'pages/ProductItem/Reviews/UserReviews/UserReviews';
+export { ProductItem } from './ProductItem/ProductItem';
+export { Reviews } from './ProductItem/Reviews/Reviews';
+export { FormReview } from './ProductItem/Reviews/FormReview/FormReview';
+export { UserReviews } from './ProductItem/Reviews/UserReviews/UserReviews';
 
 //Products
-export { default as ProductsItem } from 'pages/Products/Content/Item/Item';
-export { default as ProductsContent } from 'pages/Products/Content/Content';
-export { default as ProductsSearchForm } from 'pages/Products/SearchForm/SearchForm';
-export { default as ProductsSideBar } from 'pages/Products/SideBar/SideBar';
-export { Products } from 'pages/Products/Products';
+export { default as ProductsItem } from './Products/Content/Item/Item';
+export { default as ProductsContent } from './Products/Content/Content';
+export { default as ProductsSearchForm } from './Products/SearchForm/SearchForm';
+export { default as ProductsSideBar } from './Products/SideBar/SideBar';
+export { Products } from './Products/Products';
 
 //AdminPanel
-export { Admin } from 'pages/Admin/Admin';
-export { default as AdminTopBar } from 'pages/Admin/TopBar/TopBar';
-export { default as AdminSideBar } from 'pages/Admin/SideBar/SideBar';
-export { AdminContent } from 'pages/Admin/AdminContent/AdminContent';
+export { Admin } from './Admin/Admin';
+export { default as AdminTopBar } from './Admin/TopBar/TopBar';
+export { default as AdminSideBar } from './Admin/SideBar/SideBar';
+export { AdminContent } from './Admin/AdminContent/AdminContent';
 
-export { default as AdminQuiz } from 'pages/Admin/AdminContent/Quiz/Quiz';
-export { default as AdminQuizAdd } from 'pages/Admin/AdminContent/Quiz/Add/Add';
-export { default as AdminQuizAddColumn } from 'pages/Admin/AdminContent/Quiz/Add/Column/Column';
+export { default as AdminQuiz } from './Admin/AdminContent/Quiz/Quiz';
+export { default as AdminQuizAdd } from './Admin/AdminContent/Quiz/Add/Add';
+export { default as AdminQuizAddColumn } from './Admin/AdminContent/Quiz/Add/Column/Column';
 
-export { default as AdminProducts } from 'pages/Admin/AdminContent/Products/Products';
-export { default as AdminProductsList } from 'pages/Admin/AdminContent/Products/List/List';
-export { default as AdminProductsAdd } from 'pages/Admin/AdminContent/Products/Add/Add';
-export { default as AdminProductsEdit } from 'pages/Admin/AdminContent/Products/Edit/Edit';
+export { default as AdminProducts } from './Admin/AdminContent/Products/Products';
+export { default as AdminProductsList } from './Admin/AdminContent/Products/List/List';
+export { default as AdminProductsAdd } from './Admin/AdminContent/Products/Add/Add';
+export { default as AdminProductsEdit } from './Admin/AdminContent/Products/Edit/Edit';
 
-export { default as AdminOrders } from 'pages/Admin/AdminContent/Orders/Orders';
-export { default as AdminOrdersList } from 'pages/Admin/AdminContent/Orders/List/List';
-export { default as AdminOrdersOrder } from 'pages/Admin/AdminContent/Orders/Order/Order';
+export { default as AdminOrders } from './Admin/AdminContent/Orders/Orders';
+export { default as AdminOrdersList } from './Admin/AdminContent/Orders/List/List';
+export { default as AdminOrdersOrder } from './Admin/AdminContent/Orders/Order/Order';
 
-export { default as AdminDashboard } from 'pages/Admin/AdminContent/Dashboard/Dashboard';
-export { default as AdminCoupons } from 'pages/Admin/AdminContent/Coupons/Coupons';
+export { default as AdminDashboard } from './Admin/AdminContent/Dashboard/Dashboard';
+export { default as AdminCoupons } from './Admin/AdminContent/Coupons/Coupons';

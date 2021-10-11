@@ -159,7 +159,11 @@ const LoaderReset = styled(Loader)`
 	transform: translateY(-50%);
 `;
 
-const ProductsReset = ({ loading, onSetItems, resetSuccess }) => {
+export const ProductsReset = ({
+	loading,
+	onSetItems,
+	resetSuccess,
+}) => {
 	return (
 		<ProductsResetButton
 			onClick={onSetItems}
@@ -173,4 +177,3 @@ const ProductsReset = ({ loading, onSetItems, resetSuccess }) => {
 		</ProductsResetButton>
 	);
 };
-export default ProductsReset;

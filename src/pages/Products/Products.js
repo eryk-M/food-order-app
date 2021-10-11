@@ -11,6 +11,7 @@ import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
 import { useWindowSize } from 'hooks/useWindowSize';
 import { getAllProducts } from 'utils/firebaseGetters';
 import { Search, Select, Loader } from 'components';
+
 const Content = lazy(() => import('./Content/Content'));
 
 export const Products = () => {
@@ -19,6 +20,7 @@ export const Products = () => {
 	const [category, setCategory] = useState('All');
 	const [query, setQuery] = useState('');
 	const [sort, setSort] = useState('');
+
 	const size = useWindowSize();
 
 	const { data } = useFirestoreQuery(getAllProducts());

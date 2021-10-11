@@ -64,9 +64,9 @@ export const ProductItem = (props) => {
 	const [currentItem, setCurrentItem] = useState();
 	const [quantity, setQuantity] = useState(1);
 	const [isAdded, setIsAdded] = useState(false);
-
 	const [isLightboxOpen, setIsLigtboxOpen] = useState(false);
 	const [photoIndex, setPhotoIndex] = useState(0);
+
 	if (
 		(!currentItem && data) ||
 		(data instanceof Array &&

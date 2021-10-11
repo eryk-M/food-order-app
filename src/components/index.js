@@ -1,39 +1,39 @@
-export { Coupon } from 'components/Coupon/Coupon';
-export { DeleteModal } from 'components/DeleteModal/DeleteModal';
-export { PriceFilter } from 'components/FilterGroup/PriceFilter/PriceFilter';
-export { Search } from 'components/FilterGroup/Search/Search';
-export { Select } from 'components/FilterGroup/Select/Select';
-export { default as Footer } from 'components/Footer/Footer';
-export { Hero } from 'components/Hero/Hero';
-export { Loader } from 'components/Loader/Loader';
-export { Modal } from 'components/Modal/Modal';
-export { default as NavBar } from 'components/NavBar/NavBar';
-export { NavBarBurger } from 'components/NavBurger/NavBurger';
-export { Offer } from 'components/Offer/Offer';
-export { Pagination } from 'components/Pagination/Pagination';
-export { PrivateRoute } from 'components/PrivateRoute/PrivateRoute';
-export { Status } from 'components/Status/Status';
-export { TopProduct } from 'components/TopProduct/TopProduct';
-export { Discount } from 'components/Form/Discount/Discount';
-export { Alert } from 'components/Alert/Alert';
-export { StarRating } from 'components/StarRating/StarRating';
-export { Button } from 'components/Button/Button';
-export { ButtonLink } from 'components/ButtonLink/ButtonLink';
+export { Coupon } from './Coupon/Coupon';
+export { DeleteModal } from './DeleteModal/DeleteModal';
+export { PriceFilter } from './FilterGroup/PriceFilter/PriceFilter';
+export { Search } from './FilterGroup/Search/Search';
+export { Select } from './FilterGroup/Select/Select';
+export { default as Footer } from './Footer/Footer';
+export { Hero } from './Hero/Hero';
+export { Loader } from './Loader/Loader';
+export { Modal } from './Modal/Modal';
+export { default as NavBar } from './NavBar/NavBar';
+export { NavBarBurger } from './NavBurger/NavBurger';
+export { Offer } from './Offer/Offer';
+export { Pagination } from './Pagination/Pagination';
+export { PrivateRoute } from './PrivateRoute/PrivateRoute';
+export { Status } from './Status/Status';
+export { TopProduct } from './TopProduct/TopProduct';
+export { Discount } from './Form/Discount/Discount';
+export { Alert } from './Alert/Alert';
+export { StarRating } from './StarRating/StarRating';
+export { Button } from './Button/Button';
+export { ButtonLink } from './ButtonLink/ButtonLink';
 
 //Admin
-export { DonutChart } from 'components/Admin/DonutChart/DonutChart';
-export { Info } from 'components/Admin/Info/Info';
-export { LineChart } from 'components/Admin/LineChart/LineChart';
-export { Question } from 'components/Admin/Question/Question';
-export { Total } from 'components/Admin/Total/Total';
-export { TreeMenu } from 'components/Admin/TreeMenu/TreeMenu';
+export { DonutChart } from './Admin/DonutChart/DonutChart';
+export { Info } from './Admin/Info/Info';
+export { LineChart } from './Admin/LineChart/LineChart';
+export { Question } from './Admin/Question/Question';
+export { Total } from './Admin/Total/Total';
+export { TreeMenu } from './Admin/TreeMenu/TreeMenu';
 
-export * from 'components/Admin/Containers';
+export * from './Admin/Containers';
 
-export * from 'components/Form';
+export * from './Form';
 
-export * from 'components/Admin/Icons';
+export * from './Admin/Icons';
 
-export * from 'components/Table';
+export * from './Table';
 
-export * from 'components/Typography';
+export * from './Typography';

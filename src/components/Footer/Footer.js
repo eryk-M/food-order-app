@@ -19,7 +19,7 @@ import {
 
 import Logo from 'assets/images/logo.png';
 
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 const Footer = (props) => {
 	const { location } = props;

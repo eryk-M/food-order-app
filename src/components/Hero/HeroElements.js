@@ -1,9 +1,9 @@
 import styled from 'styled-components/macro';
 
 import { motion } from 'framer-motion';
-
+import { device } from 'utils/breakpoints';
 export const HeroImageWrapper = styled(motion.div)`
-	height: ${(props) => props.height + 'px'};
+	height: 100vh;
 	width: 100%;
 	position: absolute;
 	z-index: 0;
@@ -15,6 +15,9 @@ export const HeroImageWrapper = styled(motion.div)`
 		left: 0;
 		right: 0;
 		bottom: 0;
+	}
+	@media ${device.laptopS} {
+		height: ${(props) => props.height + 'px'};
 	}
 `;
 
@@ -30,8 +33,11 @@ export const HeroIMG = styled.img`
 export const HeroContainer = styled.header`
 	background-position: center;
 	background-size: cover;
-	height: ${(props) => props.height + 'px'};
+	height: 100vh;
 	background-color: black;
+	@media ${device.laptopS} {
+		height: ${(props) => props.height + 'px'};
+	}
 `;
 
 export const HeroContent = styled.div`
