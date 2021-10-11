@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import { useApi } from 'contexts/APIContext';
+// import { useApi } from 'contexts';
 
 // import { dummyData } from 'utils/dummyData';
 

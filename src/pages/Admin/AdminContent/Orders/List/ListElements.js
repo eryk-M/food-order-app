@@ -1,13 +1,13 @@
 import styled from 'styled-components/macro';
 import { motion } from 'framer-motion';
 
-import { MainContainer } from 'components/Admin/Containers';
 import {
 	TableCellHead,
 	Table,
 	TableRow,
 	TableCell,
-} from 'components/Table/TableElements';
+	MainContainer,
+} from 'components';
 import { device } from 'utils/breakpoints';
 import { SearchContainer } from 'components/FilterGroup/Search/SearchElements';
 import { PaginationContainer } from 'components/Pagination/PaginationElements';

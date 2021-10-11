@@ -6,15 +6,18 @@ import { capitalizeEachWord } from 'utils/capitalizeEachWord';
 
 const AdminAPIContext = createContext();
 
-export function useAdminApi() {
-	return useContext(AdminAPIContext);
-}
+export const useAdminApi = () => useContext(AdminAPIContext);
 
-export function AdminAPIProvider({ children }) {
+export const AdminAPIProvider = ({ children }) => {
 	const adminProductsRef = db.collection('adminProducts');
 	const adminOrdersRef = db.collection('adminOrders');
 
-	async function updateAdminProduct(id, data, ingredients, imageSrc) {
+	const updateAdminProduct = async (
+		id,
+		data,
+		ingredients,
+		imageSrc
+	) => {
 		await adminProductsRef.doc(id).update({
 			...(imageSrc && { img: imageSrc }),
 			availability: data.available,
@@ -26,7 +29,7 @@ export function AdminAPIProvider({ children }) {
 			ingredients: ingredients,
 			desc: data.description,
 		});
-	}
+	};
 
 	const addAdminProduct = async (data, imageSrc, ingredients) => {
 		const response = await adminProductsRef
@@ -89,4 +92,4 @@ export function AdminAPIProvider({ children }) {
 			{children}
 		</AdminAPIContext.Provider>
 	);
-}
+};

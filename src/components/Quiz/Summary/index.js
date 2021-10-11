@@ -9,7 +9,7 @@ import {
 	CopyIconContainer,
 	ShowCopyMessage,
 	CartCompleteOrderContainer,
-} from 'components/Cart/CartComplete/CartCompleteElements';
+} from 'pages/Cart/CartComplete/CartCompleteElements';
 
 import {
 	SummaryContainer,

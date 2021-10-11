@@ -6,9 +6,12 @@ import {
 	OrderInfo,
 	OrderContent,
 } from './OrderElements';
-import { CashIcon, CreditCardIcon } from 'components/Admin/Icons';
-
-import { TableCell, TableRow } from 'components/Table/TableElements';
+import {
+	CashIcon,
+	CreditCardIcon,
+	TableCell,
+	TableRow,
+} from 'components';
 
 import { useWindowSize } from 'hooks/useWindowSize';
 import { OrdersTableRow } from '../UserOrdersElements';

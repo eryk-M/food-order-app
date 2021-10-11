@@ -12,9 +12,8 @@ import {
 	NextButton,
 	QuizContent,
 } from './QuizElements';
-import { useApi } from 'contexts/APIContext';
-import { useAuth } from 'contexts/AuthContext';
-import Loader from 'components/Loader';
+import { useAuth, useApi } from 'contexts';
+import { Loader } from 'components';
 import { LoaderWrapper } from 'pages/Admin/AdminContent/Orders/Order/OrderElements';
 
 const Quiz = (props) => {

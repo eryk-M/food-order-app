@@ -8,11 +8,11 @@ import { auth, db } from '../firebase';
 
 const AuthContext = createContext();
 
-export function useAuth() {
+export const useAuth = () => {
 	return useContext(AuthContext);
-}
+};
 
-export function AuthProvider({ children }) {
+export const AuthProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState();
 	const [loading, setLoading] = useState(true);
 
@@ -67,9 +67,9 @@ export function AuthProvider({ children }) {
 		});
 	};
 
-	function updatePassword(password) {
+	const updatePassword = (password) => {
 		return currentUser.updatePassword(password);
-	}
+	};
 	useEffect(() => {
 		const usubscribe = auth.onAuthStateChanged((user) => {
 			setCurrentUser(user);
@@ -93,4 +93,4 @@ export function AuthProvider({ children }) {
 			{!loading && children}
 		</AuthContext.Provider>
 	);
-}
+};

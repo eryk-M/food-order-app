@@ -2,13 +2,14 @@ import styled from 'styled-components/macro';
 
 import { device } from 'utils/breakpoints';
 
-import { MainContainer } from 'components/Admin/Containers';
 import {
+	MainContainer,
 	Form,
 	FormGroup,
 	FormElement,
 	FormBtn,
-} from 'components/Form';
+} from 'components';
+
 export const AddQuizContainer = styled(MainContainer)`
 	@media only screen and (max-width: 1100px) {
 		margin-right: 2rem;

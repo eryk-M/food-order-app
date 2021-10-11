@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 import { device } from 'utils/breakpoints';
-import { TableRow, TableCell } from 'components/Table/TableElements';
+import { TableRow, TableCell } from 'components';
 
 export const OrdersTableRow = styled(TableRow)`
 	@media ${device.mobileM} {

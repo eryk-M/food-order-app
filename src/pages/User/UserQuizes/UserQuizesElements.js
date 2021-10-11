@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 
-import quizBg from 'images/quiz_bg.jpg';
+import quizBg from 'assets/images/quiz_bg.jpg';
 
 import { motion } from 'framer-motion';
 

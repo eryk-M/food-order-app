@@ -2,14 +2,9 @@ import React, { useState } from 'react';
 
 import Order from '../Order';
 
-import {
-	TableCell,
-	TableButton,
-} from 'components/Table/TableElements';
-
 import { IoIosArrowDown } from 'react-icons/io';
 
-import Status from 'components/Status';
+import { Status, TableCell, TableButton } from 'components';
 import { OrdersTableRow } from '../UserOrdersElements';
 const Overall = ({ el }) => {
 	const [open, setOpen] = useState(true);

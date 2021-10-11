@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { motion } from 'framer-motion';
-import quizBg from 'images/quiz_bg.jpg';
+import quizBg from 'assets/images/quiz_bg.jpg';
 import { device } from 'utils/breakpoints';
 
 export const QuizContainer = styled.div`

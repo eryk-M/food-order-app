@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 
-import Button from 'components/Button';
+import { Button } from 'components';
 
 export const EditImage = styled.img`
 	height: 15rem;

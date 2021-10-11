@@ -1,6 +1,7 @@
 @font-face {
 	font-family: 'Arvo';
-	src: local('Arvo'), url(./fonts/Arvo-Bold.ttf) format('truetype');
+	src: local('Arvo'),
+		url(./assets/fonts/Arvo-Bold.ttf) format('truetype');
 	/* other formats include: 'woff2', 'truetype, 'opentype',
                               'embedded-opentype', and 'svg' */
 }

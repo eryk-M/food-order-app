@@ -1,14 +1,14 @@
 import styled from 'styled-components/macro';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { MainContainer } from 'components/Admin/Containers';
 
 import { device } from 'utils/breakpoints';
-import Loader from 'components/Loader';
 import {
+	Loader,
+	MainContainer,
 	TableCellHead,
 	TableCell,
 	TableRow,
-} from 'components/Table/TableElements';
+} from 'components';
 import { SearchContainer } from 'components/FilterGroup/Search/SearchElements';
 import { PaginationContainer } from 'components/Pagination/PaginationElements';
 

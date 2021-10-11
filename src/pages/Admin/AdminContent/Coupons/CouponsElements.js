@@ -1,10 +1,15 @@
 import styled from 'styled-components/macro';
 
-import { MainContainer } from 'components/Admin/Containers';
+import {
+	MainContainer,
+	FormGroup,
+	FormElement,
+	TableCell,
+	TableRow,
+} from 'components';
 
 import { device } from 'utils/breakpoints';
-import { TableCell, TableRow } from 'components/Table/TableElements';
-import { FormGroup, FormElement } from 'components/Form';
+
 export const CouponMainContainer = styled(MainContainer)`
 	min-width: 40%;
 	@media ${device.laptopS} {

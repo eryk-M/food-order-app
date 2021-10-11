@@ -1,0 +1,37 @@
+import React from 'react';
+
+import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { getTopProducts } from 'utils/firebaseGetters';
+
+import {
+	TopProductsWrapper,
+	TopProductsContainer,
+} from './TopProductsElements';
+
+import {
+	Loader,
+	TopProduct,
+	LoaderContainer,
+	MainPageHeading,
+} from 'components';
+
+export const TopProducts = () => {
+	const { data, loading } = useFirestoreQuery(getTopProducts());
+
+	return (
+		<TopProductsContainer>
+			<MainPageHeading upper="Give it a try">
+				Top products
+			</MainPageHeading>
+
+			<TopProductsWrapper loading={String(loading)}>
+				{data && data.map((el) => <TopProduct key={el.id} el={el} />)}
+				{loading && (
+					<LoaderContainer height="15rem">
+						<Loader primary />
+					</LoaderContainer>
+				)}
+			</TopProductsWrapper>
+		</TopProductsContainer>
+	);
+};

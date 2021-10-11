@@ -5,43 +5,48 @@ import {
 	Switch,
 } from 'react-router-dom';
 import { GlobalStyle } from './globalStyles';
-import { AuthProvider } from './contexts/AuthContext';
 
-import PrivateRoute from './components/PrivateRoute';
-import NavBar from './components/NavBar';
-import NavBarBurger from './components/NavBurger';
-import Footer from './components/Footer';
+import {
+	Footer,
+	NavBar,
+	NavBarBurger,
+	PrivateRoute,
+} from 'components';
 
-import Login from './pages/Login';
-import User from './pages/User';
-import Home from './pages/Home';
-import Product from './pages/Product';
-import Checkout from './pages/Checkout';
-import Tracker from './pages/Tracker';
-import ProductsFilter from './pages/ProductsFilter';
-import AdminPage from './pages/Admin';
-
-import { CartProvider } from './contexts/CartContext';
-import { APIProvider } from './contexts/APIContext';
-import { AdminAPIProvider } from 'contexts/AdminAPIContext';
+import {
+	Tracker,
+	User,
+	Login,
+	Home,
+	Cart,
+	ProductItem,
+	Products,
+	Admin,
+} from 'pages';
+import {
+	CartProvider,
+	APIProvider,
+	AdminAPIProvider,
+	AuthProvider,
+} from 'contexts';
 
 import { ScrollToTop } from 'utils/scrollToTop';
 
 const routes = (
 	<Route>
 		<Route path="/" exact component={Home} />
-		<Route path="/product/:id" exact component={Product} />
+		<Route path="/product/:id" exact component={ProductItem} />
 		<Route path="/login" component={Login} />
 		<Route path="/signup" component={Login} />
 		<Route path="/forgot-password" component={Login} />
-		<Route path="/cart" component={Checkout} />
+		<Route path="/cart" component={Cart} />
 		<Route path="/food-tracker" component={Tracker} />
-		<Route path="/products" component={ProductsFilter} />
+		<Route path="/products" component={Products} />
 
 		<PrivateRoute path="/user" component={User} />
 
 		<AdminAPIProvider>
-			<PrivateRoute path="/admin" component={AdminPage} />
+			<PrivateRoute path="/admin" component={Admin} />
 		</AdminAPIProvider>
 	</Route>
 );

@@ -4,11 +4,9 @@ import { db, storage, increment, firestore } from '../firebase';
 
 const APIContext = createContext();
 
-export function useApi() {
-	return useContext(APIContext);
-}
+export const useApi = () => useContext(APIContext);
 
-export function APIProvider({ children }) {
+export const APIProvider = ({ children }) => {
 	const productsRef = db.collection('products');
 	const adminProductsRef = db.collection('adminProducts');
 	// const adminOrdersRef = db.collection('adminOrders');
@@ -277,4 +275,4 @@ export function APIProvider({ children }) {
 			{children}
 		</APIContext.Provider>
 	);
-}
+};
