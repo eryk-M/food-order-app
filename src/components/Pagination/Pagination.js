@@ -32,6 +32,7 @@ export const Pagination = ({
 							{pageNumbers.map((number) => (
 								<PaginationItem key={number}>
 									<PaginationLink
+										data-testid="paginate-number-test"
 										currentpage={currentPage}
 										number={number}
 										onClick={(e) => {

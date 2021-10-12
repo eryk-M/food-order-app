@@ -12,6 +12,7 @@ import { FcMenu } from 'react-icons/fc';
 const TopBar = ({ width, setHidden, hidden }) => {
 	return (
 		<TopBarNav
+			data-testid="topbar-nav-test"
 			className={
 				hidden && width > 1024 ? 'is-hidden-content-desktop' : ''
 			}
@@ -19,6 +20,7 @@ const TopBar = ({ width, setHidden, hidden }) => {
 			<TopBarList>
 				<TopBarItem>
 					<TopBarNavLink
+						data-testid="topbar-test"
 						to="#"
 						onClick={() => setHidden((prevHidden) => !prevHidden)}
 					>

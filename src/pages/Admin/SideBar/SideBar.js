@@ -29,6 +29,7 @@ const SideBar = ({ width, hidden, setHidden }) => {
 
 	return (
 		<SideBarContainer
+			data-testid="sidebar-test"
 			className={
 				hidden && width > 1024
 					? 'is-hidden-menu-desktop'

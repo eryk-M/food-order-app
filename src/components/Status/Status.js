@@ -63,5 +63,9 @@ export const Status = ({ step }) => {
 				break;
 		}
 	};
-	return <StatusNote step={step}>{giveStepText(step)}</StatusNote>;
+	return (
+		<StatusNote step={step} data-testid="status-step">
+			{giveStepText(step)}
+		</StatusNote>
+	);
 };

@@ -24,7 +24,10 @@ export const TopProducts = () => {
 				Top products
 			</MainPageHeading>
 
-			<TopProductsWrapper loading={String(loading)}>
+			<TopProductsWrapper
+				loading={String(loading)}
+				data-testid="top-products-test"
+			>
 				{data && data.map((el) => <TopProduct key={el.id} el={el} />)}
 				{loading && (
 					<LoaderContainer height="15rem">

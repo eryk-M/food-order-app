@@ -47,7 +47,7 @@ const Content = ({
 	};
 
 	return (
-		<ContentList>
+		<ContentList data-testid="products-content-test">
 			{data &&
 				data
 					.filter((el) => filterCategory(el))

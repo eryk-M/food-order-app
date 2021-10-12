@@ -1,5 +1,4 @@
 import { db } from 'firebase';
-
 // GETTERS TO CUSTOM HOOK USE FIRESTORE QUERY
 
 // MAIN PAGE //
