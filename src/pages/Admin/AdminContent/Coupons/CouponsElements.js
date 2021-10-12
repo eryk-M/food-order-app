@@ -76,3 +76,9 @@ export const CouponContainer = styled.div`
 export const CouponFormWrapper = styled.div`
 	margin-top: auto;
 `;
+
+export const CouponSpanLength = styled.span`
+	position: absolute;
+	top: 4rem;
+	right: 2rem;
+`;

@@ -4,12 +4,8 @@
 	"private": true,
 	"dependencies": {
 		"@hookform/resolvers": "^2.8.0",
-		"@testing-library/jest-dom": "^5.14.1",
-		"@testing-library/react": "^11.2.7",
-		"@testing-library/user-event": "^12.8.3",
 		"faker": "^5.5.3",
 		"firebase": "^9.0.1",
-		"firebase-mock": "^2.3.2",
 		"framer-motion": "^4.1.17",
 		"npm": "^7.23.0",
 		"rc-slider": "^9.7.2",
@@ -72,5 +68,10 @@
 			"html",
 			"text"
 		]
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^11.2.7",
+		"@testing-library/user-event": "^12.8.3"
 	}
 }

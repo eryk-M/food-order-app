@@ -17,7 +17,6 @@ import {
 	AlertIcon,
 	Button,
 } from 'components';
-
 export const DeleteModal = ({
 	setOpen,
 	open,
@@ -34,7 +33,6 @@ export const DeleteModal = ({
 	const [inputValue, setInputValue] = useState('');
 	const [isInitiallyChanged, setIsInitiallyChanged] = useState(false);
 	const [loading, setLoading] = useState(false);
-
 	const timeoutRef = useRef();
 
 	const handleChange = async (e) => {

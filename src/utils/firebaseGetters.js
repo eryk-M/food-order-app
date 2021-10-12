@@ -31,6 +31,9 @@ export const validateUsername = (username) =>
 export const validateCouponCode = (code) =>
 	db.collection('coupons').where('code', '==', code);
 
+export const validateQuizTitle = (title) =>
+	db.collection('quizes').where('title', '==', title);
+
 export const getCoupons = () => db.collection('coupons');
 
 export const getTopProducts = () =>

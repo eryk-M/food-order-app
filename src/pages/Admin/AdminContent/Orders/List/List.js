@@ -242,7 +242,7 @@ const List = () => {
 					width="20rem"
 					placeholder="Search by ID"
 				/>
-				{data?.length > 0 && (
+				{data?.length > 10 && (
 					<Pagination
 						top="1.3rem"
 						itemsPerPage={itemsPerPage}

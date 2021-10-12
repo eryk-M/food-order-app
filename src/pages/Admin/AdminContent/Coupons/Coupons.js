@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import {
 	CouponContainer,
 	CouponFormWrapper,
 	CouponMainContainer,
+	CouponSpanLength,
 } from './CouponsElements';
 import {
 	Loader,
@@ -23,14 +24,13 @@ import {
 	AdminPanelHeading,
 } from 'components';
 import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
-import {
-	getCoupons,
-	validateCouponCode,
-} from 'utils/firebaseGetters';
+import { getCoupons } from 'utils/firebaseGetters';
 
 import { useApi } from 'contexts';
+
+//FORM
 import { useForm } from 'react-hook-form';
-import * as Yup from 'yup';
+import { validationSchema } from './validationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const Coupons = () => {
@@ -39,41 +39,7 @@ const Coupons = () => {
 	const [isLoading, setIsLoading] = useState();
 	const [showSuccess, setShowSuccess] = useState(false);
 
-	const validationSchema = Yup.object().shape({
-		discount: Yup.string()
-			.required('Discount is required')
-			.test(
-				'discount',
-				'Number must be from 1 to 99',
-				(value) => value > 0 && value < 100
-			),
-		fromPrice: Yup.string()
-			.required('Price is required')
-			.test(
-				'fromPrice',
-				'Number must be from 1 to 200',
-				(value) => value > 0 && value < 200
-			),
-		code: Yup.string()
-			.required('Code is required')
-			.min(5, 'Minimum 5 characters')
-			.max(12, 'Maximum 12 characters')
-			.trim()
-			.test(
-				'discount',
-				'Code cannot contain any space',
-				(value) => !/\s/.test(value)
-			)
-			.test('discount', 'Code already exists', async (value) => {
-				if (value) {
-					const response = await validateCouponCode(
-						value.toUpperCase()
-					).get();
-
-					return response?.empty;
-				}
-			}),
-	});
+	const timeoutRef = useRef();
 
 	const {
 		register,
@@ -82,16 +48,22 @@ const Coupons = () => {
 		reset,
 	} = useForm({ resolver: yupResolver(validationSchema) });
 
+	useEffect(() => {
+		return () => {
+			clearTimeout(timeoutRef.current);
+			setIsLoading(false);
+		};
+	}, []);
 	const onSubmit = async ({ code, discount, fromPrice }) => {
 		setIsLoading(true);
 		reset();
 		await addCoupon(code, discount, fromPrice);
 		setIsLoading(false);
 		setShowSuccess(true);
-
-		setTimeout(() => {
+		const timeout = setTimeout(() => {
 			setShowSuccess(false);
 		}, 4000);
+		timeoutRef.current = timeout;
 	};
 
 	const onDelete = async (code) => {
@@ -100,7 +72,7 @@ const Coupons = () => {
 	return (
 		<>
 			<Info>
-				- Quizzes and coupons are working with main page as well. You
+				- Quizes and coupons are working with main page as well. You
 				can add, delete quizzes and test them with coupons in user
 				panel.
 			</Info>
@@ -111,6 +83,9 @@ const Coupons = () => {
 					</Alert>
 				)}
 				<AdminPanelHeading>Coupons</AdminPanelHeading>
+				<CouponSpanLength>
+					{data && data.length + '/10 coupons'}
+				</CouponSpanLength>
 				<CouponContainer>
 					<Table>
 						<TableHead>
@@ -126,11 +101,20 @@ const Coupons = () => {
 								<TableCell data-label="Code">DISCOUNT20</TableCell>
 								<TableCell data-label="Percentage">20%</TableCell>
 								<TableCell data-label="From">$1</TableCell>
-								<TableCell data-label="Actions" center></TableCell>
+								<TableCell data-label="Actions">DEMO</TableCell>
+							</TableRow>
+							<TableRow>
+								<TableCell data-label="Code">SAMPLE10</TableCell>
+								<TableCell data-label="Percentage">10%</TableCell>
+								<TableCell data-label="From">$1</TableCell>
+								<TableCell data-label="Actions">DEMO</TableCell>
 							</TableRow>
 							{data &&
 								data.map((el, i) => {
-									if (el.code !== 'DISCOUNT20') {
+									if (
+										el.code !== 'DISCOUNT20' &&
+										el.code !== 'SAMPLE10'
+									) {
 										return (
 											<TableRow key={i}>
 												<TableCell data-label="Code">
@@ -164,43 +148,6 @@ const Coupons = () => {
 					)}
 					<CouponFormWrapper>
 						<Form onSubmit={handleSubmit(onSubmit)}>
-							{/* <FormGroup flex>
-							<FormElement>
-								<FormLabel>Coupon code</FormLabel>
-								<FormInput
-									{...register('code')}
-									error={errors.code}
-									disabled={isLoading}
-								/>
-								{errors.code && (
-									<FormError>{errors.code.message}</FormError>
-								)}
-							</FormElement>
-							<FormElement marginleft="2rem">
-								<FormLabel>Discount percent</FormLabel>
-								<FormInput
-									{...register('discount')}
-									type="number"
-									error={errors.discount}
-									disabled={isLoading}
-								/>
-								{errors.discount && (
-									<FormError>{errors.discount.message}</FormError>
-								)}
-							</FormElement>
-							<FormElement marginleft="2rem">
-								<FormLabel>From price</FormLabel>
-								<FormInput
-									{...register('fromPrice')}
-									type="number"
-									error={errors.fromPrice}
-									disabled={isLoading}
-								/>
-								{errors.fromPrice && (
-									<FormError>{errors.fromPrice.message}</FormError>
-								)}
-							</FormElement>
-						</FormGroup> */}
 							<Discount
 								isLoading={isLoading}
 								register={register}

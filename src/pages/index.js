@@ -52,6 +52,7 @@ export { AdminContent } from './Admin/AdminContent/AdminContent';
 export { default as AdminQuiz } from './Admin/AdminContent/Quiz/Quiz';
 export { default as AdminQuizAdd } from './Admin/AdminContent/Quiz/Add/Add';
 export { default as AdminQuizAddColumn } from './Admin/AdminContent/Quiz/Add/Column/Column';
+export { default as AdminQuizList } from './Admin/AdminContent/Quiz/List/List';
 
 export { default as AdminProducts } from './Admin/AdminContent/Products/Products';
 export { default as AdminProductsList } from './Admin/AdminContent/Products/List/List';

@@ -12,7 +12,6 @@ import {
 	FormTextArea,
 	FormError,
 	Discount,
-	Alert,
 	AdminPanelHeading,
 } from 'components';
 
@@ -24,10 +23,12 @@ import {
 	AddQuizContainer,
 } from './AddElements';
 
-import { validateCouponCode } from 'utils/firebaseGetters';
 import { useApi } from 'contexts';
+import { useHistory } from 'react-router';
+//FORM
 import { useForm } from 'react-hook-form';
-import * as Yup from 'yup';
+import { validationSchema } from './validationSchema';
+import { validationDiscount } from './validationDiscount';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const data = {
@@ -45,27 +46,10 @@ const Add = () => {
 	const [initialData, setInitialData] = useState(data);
 	const [isLoading, setIsLoading] = useState(false);
 	const { addQuiz, addCoupon } = useApi();
-	const [showSuccess, setShowSuccess] = useState(false);
+	const history = useHistory();
+
 	const quizContainerRef = useRef();
 
-	const validationSchema = Yup.object().shape({
-		incorrect: Yup.array().of(
-			Yup.string()
-				.required('Field is required')
-				.min(2, 'Minimum 2 characters')
-				.max(40, 'Maximum 40 characters')
-				.trim()
-		),
-		correct: Yup.string()
-			.required('Field is required')
-			.min(2, 'Minimum 2 characters')
-			.max(40, 'Maximum 40 characters')
-			.trim(),
-		question: Yup.string()
-			.required('Field is required')
-			.min(5, 'Minimum 5 characters')
-			.max(300, 'Maximum 300 characters'),
-	});
 	const {
 		register,
 		handleSubmit,
@@ -75,60 +59,10 @@ const Add = () => {
 		clearErrors,
 	} = useForm({ resolver: yupResolver(validationSchema) });
 
-	const validationDiscount = Yup.object().shape({
-		title: Yup.string()
-			.required('Title is required')
-			.min(3, 'Minimum 3 characters')
-			.max(20, 'Maximum 20 characters')
-			.trim(),
-		discount: Yup.string()
-			.required('Discount is required')
-			.trim()
-			.test(
-				'discount',
-				'Number must be from 1 to 99',
-				(value) => value > 0 && value < 100
-			)
-			.test('numbers', 'Only digits are allowed', (value) =>
-				value ? /[0-9]/.test(value) : true
-			),
-		fromPrice: Yup.string()
-			.required('Price is required')
-			.test(
-				'fromPrice',
-				'Number must be from 1 to 200',
-				(value) => value > 0 && value < 200
-			)
-			.trim()
-			.test('numbers', 'Only digits are allowed', (value) =>
-				value ? /[0-9]/.test(value) : true
-			),
-		code: Yup.string()
-			.required('Code is required')
-			.min(5, 'Minimum 5 characters')
-			.max(12, 'Maximum 12 characters')
-			.trim()
-			.test(
-				'discount',
-				'Code cannot contain any space',
-				(value) => !/\s/.test(value)
-			)
-			.test('discount', 'Code already exists', async (value) => {
-				if (value) {
-					const response = await validateCouponCode(
-						value.toUpperCase()
-					).get();
-
-					return response?.empty;
-				}
-			}),
-	});
-
 	const {
 		register: registerDiscount,
 		handleSubmit: handleSubmitDiscount,
 		formState: { errors: errorsDiscount },
-		reset: resetDiscount,
 		setError,
 	} = useForm({ resolver: yupResolver(validationDiscount) });
 
@@ -207,13 +141,7 @@ const Add = () => {
 					data.fromPrice,
 					true
 				);
-				setIsLoading(false);
-				quizContainerRef.current.scrollIntoView();
-				setShowSuccess(true);
-				resetDiscount();
-				setTimeout(() => {
-					setShowSuccess(false);
-				}, 4000);
+				history.push('/admin/quiz');
 			} catch (error) {
 				console.error(error);
 			}
@@ -231,11 +159,6 @@ const Add = () => {
 			minwidth="1rem"
 			center
 		>
-			{showSuccess && (
-				<Alert success right="1rem" top="1rem">
-					Quiz added!
-				</Alert>
-			)}
 			<AdminPanelHeading>Add QUIZ</AdminPanelHeading>
 			<ContentWrapper>
 				<ContentFormWrapper>

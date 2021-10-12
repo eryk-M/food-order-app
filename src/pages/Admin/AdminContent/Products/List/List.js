@@ -54,11 +54,14 @@ const List = () => {
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 	useEffect(() => {
+		if (data?.length <= 10) {
+			setCurrentPage(1);
+		}
 		return () => {
 			clearTimeout(timeoutRef.current);
 			setIsLoading(false);
 		};
-	}, []);
+	}, [data]);
 
 	const onHandleSearch = () => {
 		if (query.length >= 3) {
@@ -131,7 +134,7 @@ const List = () => {
 					resetSuccess={resetSuccess}
 				/>
 
-				{data?.length > 0 && (
+				{data?.length > 10 && (
 					<Pagination
 						top="1.3rem"
 						itemsPerPage={itemsPerPage}

@@ -219,9 +219,17 @@ export const APIProvider = ({ children }) => {
 		});
 	};
 
+	const deleteQuiz = async (title) => {
+		const response = await quizRef.where('title', '==', title).get();
+
+		response.forEach(async (doc) => {
+			await doc.ref.delete();
+		});
+	};
+
 	const addQuiz = async (questions, data) => {
 		await quizRef.add({
-			title: data.title,
+			title: data.title.toUpperCase(),
 			questions: questions,
 			coupon: {
 				code: data.code,
@@ -268,6 +276,7 @@ export const APIProvider = ({ children }) => {
 		addQuizAndCouponToUser,
 		validateQuizCode,
 		setCouponAsUsed,
+		deleteQuiz,
 	};
 
 	return (

@@ -1,7 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
-import { AdminTopBar } from 'pages';
-import { mount } from 'enzyme';
 import '@testing-library/jest-dom';
+import { AdminTopBar } from 'pages';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 jest.mock('firebase', () => ({
@@ -9,8 +8,18 @@ jest.mock('firebase', () => ({
 	initializeApp: jest.fn(),
 }));
 
-describe('<TopBar/>', () => {
-	it('renders', () => {
-		const wrapper = mount();
+describe('<AdminTopBar />', () => {
+	test('render', () => {
+		const { queryByTestId } = render(
+			<Router>
+				<AdminTopBar />
+			</Router>
+		);
+
+		fireEvent.click(queryByTestId('topbar-test'));
+
+		expect(queryByTestId('topbar-nav-test')).toHaveClass(
+			'is-hidden-content-desktop'
+		);
 	});
 });

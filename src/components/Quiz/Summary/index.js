@@ -39,10 +39,6 @@ const Summary = () => {
 			);
 		});
 		if (questions?.coupon.code) setCoupon(questions.coupon.code);
-
-		// return () => {
-		// 	setCoupon('');
-		// };
 	}, [questions?.coupon.code]);
 
 	if (!data) return <Redirect to="/user/quizes" />;
@@ -55,9 +51,6 @@ const Summary = () => {
 			setCopied(false);
 		}, 3000);
 	};
-	// const score = data.filter((el) => el.isCorrect).length;
-
-	// const minimumScore = data.length - data.length * 0.2;
 
 	return (
 		<SummaryContainer>
@@ -71,8 +64,9 @@ const Summary = () => {
 						<span>
 							You won! <br />
 							<br />
-							Here is your coupon. <br />
-							REMEMBER: You can use it only once.
+							{coupon === 'SAMPLE10'
+								? 'BUT: You cant use this code, because this is demo quiz. Please go to admin panel, add quiz and play for real!'
+								: 'Here is your coupon. REMEMBER: You can use it only once.'}
 						</span>
 					</SummaryNote>
 					<CartCompleteOrderContainer>

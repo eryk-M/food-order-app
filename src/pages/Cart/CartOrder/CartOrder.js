@@ -39,8 +39,9 @@ import {
 	Button,
 } from 'components';
 
+//FORM
 import { useForm } from 'react-hook-form';
-import * as Yup from 'yup';
+import { validationSchema } from './validationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 export const CartOrder = ({
@@ -63,43 +64,6 @@ export const CartOrder = ({
 	const { currentUser } = useAuth();
 
 	const [loading, setLoading] = useState(false);
-	const validationSchema = Yup.object().shape({
-		discount: Yup.string()
-			.test(
-				'discount',
-				'Discount code is not valid!',
-				async (value) => {
-					const response = await validateDiscountCode(value);
-					return !response.empty;
-				}
-			)
-			.test(
-				'discount',
-				'You have to be logged in to use this code',
-				async (value) => {
-					const response = await validateDiscountCode(value);
-					if (!response.empty) {
-						const checkCode = response.docs[0].data();
-						if (checkCode.quiz && !currentUser) {
-							return false;
-						} else {
-							return true;
-						}
-					} else {
-						return true;
-					}
-				}
-			)
-			.test('discount', 'You cant use this code', async (value) => {
-				if (currentUser) {
-					const response = await validateQuizCode(currentUser.uid);
-					const user = response.data();
-					return !user.usedCoupons.some((el) => el.code === value);
-				} else {
-					return true;
-				}
-			}),
-	});
 
 	const {
 		state: { cart },
@@ -112,7 +76,13 @@ export const CartOrder = ({
 		formState: { errors },
 		setError,
 	} = useForm({
-		resolver: yupResolver(validationSchema),
+		resolver: yupResolver(
+			validationSchema(
+				validateQuizCode,
+				validateDiscountCode,
+				currentUser
+			)
+		),
 	});
 
 	const findItem = (id) => {

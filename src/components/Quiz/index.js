@@ -105,12 +105,15 @@ const Quiz = (props) => {
 		const minimumScore =
 			finalAnswers.length - finalAnswers.length * 0.2;
 		try {
-			await addQuizAndCouponToUser(
-				currentUser.uid,
-				props.match.params.id,
-				data.coupon,
-				score >= minimumScore
-			);
+			if (data.coupon.code !== 'SAMPLE10') {
+				await addQuizAndCouponToUser(
+					currentUser.uid,
+					props.match.params.id,
+					data.coupon,
+					score >= minimumScore
+				);
+			}
+
 			history.push({
 				pathname: `/user/quizes/${props.match.params.id}/summary`,
 				data: finalAnswers,

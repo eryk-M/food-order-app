@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Switch, Route } from 'react-router-dom';
-import { AdminQuizAdd } from 'pages';
+import { AdminQuizAdd, AdminQuizList } from 'pages';
 import { Info } from 'components';
 // import List from './List';
 
@@ -9,12 +9,12 @@ const Quiz = () => {
 	return (
 		<>
 			<Info>
-				- Quizzes and coupons are working with main page as well. You
+				- Quizes and coupons are working with main page as well. You
 				can add, delete quizzes and test them with coupons in user
 				panel.
 			</Info>
 			<Switch>
-				{/* <Route path="/admin/products" exact component={List} /> */}
+				<Route path="/admin/quiz" exact component={AdminQuizList} />
 				<Route
 					path="/admin/quiz/add"
 					exact
