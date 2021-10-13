@@ -18,8 +18,6 @@ export const SummaryWinner = styled.div`
 	flex-direction: column;
 	margin: 2rem auto;
 	align-items: center;
-	/* max-width: 80%; */
-	/* border: 1px solid rgba(0, 0, 0, 0.1); */
 `;
 
 export const SummaryNote = styled.p`

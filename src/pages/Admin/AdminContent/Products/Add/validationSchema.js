@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-const FILE_SIZE = 5242880;
+const FILE_SIZE = 1048576;
 const SUPPORTED_FORMATS = ['image/jpeg', 'image/png'];
 
 export const validationSchema = (ingredients) =>
@@ -10,7 +10,7 @@ export const validationSchema = (ingredients) =>
 			.test('file', 'File is required', (value) =>
 				value.length ? true : false
 			)
-			.test('fileSize', 'File too large. Max 5 MB', (value) => {
+			.test('fileSize', 'File too large. Max 1 MB', (value) => {
 				if (!value.length) return true;
 				return value[0].size <= FILE_SIZE;
 			})

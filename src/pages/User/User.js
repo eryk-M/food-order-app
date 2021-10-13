@@ -8,10 +8,9 @@ import {
 	UserNav,
 	UserQuizes,
 	UserCoupons,
+	Quiz,
+	QuizSummary,
 } from 'pages';
-
-import Quiz from 'components/Quiz';
-import Summary from 'components/Quiz/Summary';
 
 import {
 	UserContainer,
@@ -86,7 +85,7 @@ export const User = () => {
 					<PrivateRoute
 						path="/user/quizes/:id/summary"
 						exact
-						component={Summary}
+						component={QuizSummary}
 					/>
 					<PrivateRoute
 						path="/user/coupons"

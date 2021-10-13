@@ -23,7 +23,7 @@ export const validationDiscount = Yup.object().shape({
 		})
 		.test(
 			'number of coupons',
-			'Maximum of 10 quizes exceeded. Delete at least one.',
+			'Maximum of 10 quizzes exceeded. Delete at least one.',
 			async (value) => {
 				if (value) {
 					const response = await getQuizes().get();

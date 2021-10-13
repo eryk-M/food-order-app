@@ -32,9 +32,9 @@ const List = () => {
 	return (
 		<>
 			<CouponMainContainer maxwidth="70rem" minheight="65rem">
-				<AdminPanelHeading>Quizes</AdminPanelHeading>
+				<AdminPanelHeading>Quizzes</AdminPanelHeading>
 				<CouponSpanLength>
-					{data && data.length + '/10 quizes'}
+					{data && data.length + '/10 quizzes'}
 				</CouponSpanLength>
 				<CouponContainer>
 					<Table>

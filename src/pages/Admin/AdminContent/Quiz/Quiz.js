@@ -9,7 +9,7 @@ const Quiz = () => {
 	return (
 		<>
 			<Info>
-				- Quizes and coupons are working with main page as well. You
+				- Quizzes and coupons are working with main page as well. You
 				can add, delete quizzes and test them with coupons in user
 				panel.
 			</Info>

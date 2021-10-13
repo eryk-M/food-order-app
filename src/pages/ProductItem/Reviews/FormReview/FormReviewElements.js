@@ -31,7 +31,7 @@ export const FormReviewLabelRating = styled.label`
 	font-size: 1.6rem;
 `;
 
-export const FormReviewFormComment = styled.p`
+export const FormReviewFormComment = styled.div`
 	margin-bottom: 1rem;
 `;
 

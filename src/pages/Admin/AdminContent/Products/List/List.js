@@ -34,7 +34,7 @@ import { dummyData } from 'utils/dummyData';
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllProducts());
 	const { deleteAdminProduct } = useAdminApi();
-	const { setAdminItems, setItems } = useApi();
+	const { setAdminItems } = useApi();
 	const {
 		itemsPerPage,
 		paginate,
@@ -91,7 +91,7 @@ const List = () => {
 		}
 	};
 
-	//RESET ZWYKLE
+	// RESET ZWYKLE
 	// const onSetMainItems = () => {
 	// 	try {
 	// 		console.log('Wrzucam...');

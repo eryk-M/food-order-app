@@ -12,8 +12,12 @@ export { UserCoupons } from './User/UserCoupons/UserCoupons';
 export { UserNav } from './User/UserNav/UserNav';
 export { UserOrders } from './User/UserOrders/UserOrders';
 export { UserPassword } from './User/UserPassword/UserPassword';
-export { UserQuizes } from './User/UserQuizes/UserQuizes';
 export { User } from './User/User';
+
+export { UserQuizes } from './User/UserQuizes/UserQuizes';
+export { Quiz } from './User/UserQuizes/Quiz/Quiz';
+export { default as QuizSummary } from './User/UserQuizes/Quiz/Summary/Summary';
+export { default as QuizQuestion } from './User/UserQuizes/Quiz/Summary/Question/Question';
 
 //Login
 export { Login } from './Login/Login';

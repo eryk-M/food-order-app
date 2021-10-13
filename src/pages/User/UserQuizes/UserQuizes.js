@@ -72,8 +72,9 @@ export const UserQuizes = ({ userData }) => {
 			>
 				<QuizHeading>Welcome to Quiz App</QuizHeading>
 				<QuizHint>
-					You have only one chance to participate in each quiz. You
-					can win coupons which can be used for shopping. <br />
+					You have only one chance to participate in each quiz{' '}
+					<strong>(besides sample quiz)</strong>. You can win coupons
+					which can be used for shopping. <br />
 					<br />
 					Coupons can be used only once.
 				</QuizHint>
@@ -86,7 +87,7 @@ export const UserQuizes = ({ userData }) => {
 				>
 					{data && userData && checkAvailableQuizes().length === 0
 						? "There isn't any available quiz for now"
-						: 'Available quizes for you'}
+						: 'Available quizzes for you'}
 				</QuizDownerHeading>
 			</QuizDownerContent>
 			<QuizList

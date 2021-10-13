@@ -17,8 +17,7 @@ import {
 	SummaryWinner,
 	SummaryNote,
 } from './SummaryElements';
-
-import Question from './Question';
+import { QuizQuestion } from 'pages';
 
 const Summary = () => {
 	const { data, questions, score, minimumScore } = useLocation();
@@ -96,7 +95,7 @@ const Summary = () => {
 				Check questions and answers down below:
 			</SummaryNote>
 			{data.map((el, i) => (
-				<Question
+				<QuizQuestion
 					key={i}
 					answer={el[Object.keys(el)[0]]}
 					question={questions.questions[Object.keys(el)[0]]}

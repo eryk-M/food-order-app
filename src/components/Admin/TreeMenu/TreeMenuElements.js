@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { device } from 'utils/breakpoints';
 import { SideBarLinkTooltip } from 'pages/Admin/SideBar/SideBarElements';
 export const TreeP = styled.p`
-	transition: all 0.1s ease-in-out;
+	/* transition: all 0.1s ease-in-out; */
 `;
 
 export const TreeItemMain = styled.li`
@@ -64,7 +64,6 @@ export const TreeNavLink = styled(NavLink)`
 	padding: 1.2rem 1.4rem;
 	display: flex;
 	align-items: center;
-	transition: all 0.2s ease-in-out;
 	& svg {
 		font-size: 2.2rem;
 		margin-right: ${(props) => (props.hidden ? '' : '1.2rem')};
@@ -88,7 +87,7 @@ export const TreeNavLink = styled(NavLink)`
 export const Tree = styled.div`
 	overflow-x: ${(props) =>
 		props.hiddenOverflow ? 'visible' : 'hidden'};
-
+	overflow-y: clip;
 	${TreeItemMain} {
 		${(props) => {
 			if (props.hidden) {
@@ -114,9 +113,11 @@ export const TreeList = styled.ul`
 	background-color: #3e4a54;
 	overflow: ${(props) =>
 		props.hiddenOverflow ? 'visible' : 'hidden'};
-
 	width: 25rem;
 	transition: height 0.2s ease-in-out;
+	@media (max-width: 1024px) {
+		width: unset;
+	}
 `;
 
 export const TreeItem = styled.li`

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Hero, Offer } from 'components';
 import { Story, TopProducts } from 'pages';
-//OLD
-import Products from 'components/ProductsOLD';
 
 export const Home = () => {
 	return (
@@ -11,7 +9,6 @@ export const Home = () => {
 			<Story />
 			<TopProducts />
 			<Offer />
-			<Products />
 		</>
 	);
 };

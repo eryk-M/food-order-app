@@ -16,7 +16,7 @@ import { useAuth, useApi } from 'contexts';
 import { Loader } from 'components';
 import { LoaderWrapper } from 'pages/Admin/AdminContent/Orders/Order/OrderElements';
 
-const Quiz = (props) => {
+export const Quiz = (props) => {
 	const { data } = useLocation();
 	const { addQuizAndCouponToUser } = useApi();
 	const [question, setQuestion] = useState(
@@ -172,5 +172,3 @@ const Quiz = (props) => {
 		</QuizContainer>
 	);
 };
-
-export default Quiz;

@@ -20,6 +20,7 @@ export const SideBarContainer = styled.aside`
 	overflow-x: ${(props) =>
 		props.hiddenOverflow ? 'visible' : 'hidden'};
 
+	transition: transform 0.2s ease, width 0.2s ease-in-out;
 	.is-active {
 		background-color: var(--color-primary) !important;
 		& .icon-arrow {
