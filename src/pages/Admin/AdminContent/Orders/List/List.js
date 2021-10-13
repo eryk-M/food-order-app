@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import {
+	useFirestoreQuery,
+	useWindowSize,
+	usePagination,
+} from 'hooks';
 import { getAdminAllOrders } from 'utils/firebaseGetters';
 import { useApi } from 'contexts';
-import { useWindowSize } from 'hooks/useWindowSize';
 
 import {
 	DeleteModal,
@@ -70,23 +73,29 @@ const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllOrders());
 	const { deleteOrders } = useApi();
 	const size = useWindowSize();
-
+	const {
+		itemsPerPage,
+		paginate,
+		currentPage,
+		indexOfFirstItem,
+		indexOfLastItem,
+		setCurrentPage,
+	} = usePagination(10);
 	const history = useHistory();
+
 	const [query, setQuery] = useState('');
 	const [showSuccess, setShowSuccess] = useState(false);
-
 	const [sortStatus, setSortStatus] = useState(1);
 	const [sortPrice, setSortPrice] = useState(1);
 	const [sortDate, setSortDate] = useState(1);
-
 	const [open, setOpen] = useState(false);
 	const [ordersToDelete, setOrdersToDelete] = useState([]);
-	const [currentPage, setCurrentPage] = useState(1);
-	const [itemsPerPage] = useState(10);
-
 	const [orderState, setOrderState] = useState([]);
 
 	useEffect(() => {
+		if (data?.length <= 10) {
+			setCurrentPage(1);
+		}
 		if (data) {
 			setOrderState(
 				data.map((el) => {
@@ -103,7 +112,7 @@ const List = () => {
 				})
 			);
 		}
-	}, [data]);
+	}, [data, setCurrentPage]);
 
 	const giveDateSpan = (timestamp) => {
 		const a = new Date(timestamp);
@@ -182,11 +191,6 @@ const List = () => {
 		const checkedItems = orderState.filter((el) => el.select);
 		setOrdersToDelete(checkedItems);
 	};
-
-	const indexOfLastItem = currentPage * itemsPerPage;
-	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 	const onHandleSearch = () => {
 		if (query.length >= 3) {

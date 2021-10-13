@@ -16,7 +16,7 @@ import {
 
 import { useAuth, CartContext } from 'contexts';
 import { withRouter, useHistory } from 'react-router';
-import { useWindowSize } from 'hooks/useWindowSize';
+import { useWindowSize } from 'hooks';
 
 const NavBar = (props) => {
 	const { currentUser } = useAuth();

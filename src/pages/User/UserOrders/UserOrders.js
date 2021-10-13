@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useAuth } from 'contexts';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery } from 'hooks';
 import { getUserOrders } from 'utils/firebaseGetters';
 
 import {

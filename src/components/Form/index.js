@@ -228,7 +228,9 @@ export const FormButton = ({
 			type={type ?? 'submit'}
 		>
 			{!orderButton && loading && <Loader />}
-			{text}
+			{orderButton && loading && 'Ordering...'}
+			{orderButton && !loading && 'Order now!'}
+			{!orderButton && text}
 		</FormBtn>
 	);
 };

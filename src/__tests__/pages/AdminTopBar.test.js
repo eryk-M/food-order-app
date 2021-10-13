@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { AdminTopBar } from 'pages';
@@ -9,17 +10,22 @@ jest.mock('firebase', () => ({
 }));
 
 describe('<AdminTopBar />', () => {
-	test('render', () => {
+	test('Changing class when sidebar is hidden', () => {
+		const hidden = jest.fn();
+		const setHidden = jest.spyOn(React, 'useState');
+		setHidden.mockImplementation((hidden) => [hidden, setHidden]);
 		const { queryByTestId } = render(
 			<Router>
-				<AdminTopBar />
+				<AdminTopBar
+					setHidden={setHidden}
+					width={1025}
+					hidden={hidden}
+				/>
 			</Router>
 		);
 
 		fireEvent.click(queryByTestId('topbar-test'));
-
-		expect(queryByTestId('topbar-nav-test')).toHaveClass(
-			'is-hidden-content-desktop'
-		);
+		expect(setHidden).toBeCalled();
+		expect(hidden).toBeTruthy();
 	});
 });

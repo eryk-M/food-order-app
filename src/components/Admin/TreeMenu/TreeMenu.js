@@ -12,7 +12,7 @@ import {
 	Tree,
 	TreeItemMain,
 } from './TreeMenuElements';
-
+import { SideBarLinkTooltip } from 'pages/Admin/SideBar/SideBarElements';
 export const TreeMenu = ({
 	width,
 	text,
@@ -32,6 +32,7 @@ export const TreeMenu = ({
 			className={
 				hidden && width > 1024 ? 'is-hidden-menu-desktop' : ''
 			}
+			hiddenOverflow={hidden}
 		>
 			<TreeItemMain
 				activeClassName="is-active"
@@ -40,15 +41,17 @@ export const TreeMenu = ({
 			>
 				{React.createElement(mainIcon, { className: 'icon-left' })}
 				<TreeP hidden={hidden && width > 1024}>{text}</TreeP>
+				<SideBarLinkTooltip>{text}</SideBarLinkTooltip>
 				<MdKeyboardArrowDown
 					style={closed ? null : rotateArrowList}
 					className="icon-arrow"
 					hidden={hidden && width > 1024}
 				/>
 			</TreeItemMain>
-
+			{/* TODO: */}
 			<TreeList
 				className={!closed ? 'tree-menu-opened' : 'tree-menu-closed'}
+				hiddenOverflow={hidden}
 			>
 				{list.map((el, i) => (
 					<TreeItem key={i}>
@@ -67,6 +70,7 @@ export const TreeMenu = ({
 							<TreeP>{el.text}</TreeP>
 							<MdKeyboardArrowRight className="icon-arrow" />
 						</TreeNavLink>
+						<SideBarLinkTooltip>{el.text}</SideBarLinkTooltip>
 					</TreeItem>
 				))}
 			</TreeList>

@@ -17,8 +17,9 @@ export const SideBarContainer = styled.aside`
 	left: 0;
 	bottom: 0;
 	font-weight: 100;
-	transition: all 0.2s ease-in-out;
-	overflow-x: hidden;
+	overflow-x: ${(props) =>
+		props.hiddenOverflow ? 'visible' : 'hidden'};
+
 	.is-active {
 		background-color: var(--color-primary) !important;
 		& .icon-arrow {
@@ -64,7 +65,25 @@ export const SideBarList = styled.ul`
 `;
 export const SideBarItem = styled.li`
 	margin: 0.1rem 0;
+	position: relative;
 `;
+
+export const SideBarLinkTooltip = styled.span`
+	position: absolute;
+	background-color: #323940;
+	font-size: 1.4rem;
+	padding: 1rem;
+	left: 120%;
+	border-radius: 5px;
+	color: #fff;
+	top: 0.3rem;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s, opacity 0.2s ease;
+	width: 10rem;
+	text-align: center;
+`;
+
 export const SideBarLink = styled(NavLink)`
 	display: block;
 	width: calc(25rem - 0.5rem * 2);
@@ -90,7 +109,15 @@ export const SideBarLink = styled(NavLink)`
 			background-color: transparent;
 		}
 	}
+
+	&:hover + ${SideBarLinkTooltip} {
+		@media (min-width: 1025px) {
+			visibility: visible;
+			opacity: 1;
+		}
+	}
 `;
+
 export const SideBarTree = styled.ul``;
 export const SideBarTreeMenu = styled.ul`
 	padding: 0 0.8rem;

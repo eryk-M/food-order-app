@@ -23,7 +23,7 @@ import {
 	Alert,
 	AdminPanelHeading,
 } from 'components';
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery } from 'hooks';
 import { getCoupons } from 'utils/firebaseGetters';
 
 import { useApi } from 'contexts';

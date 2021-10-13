@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery } from 'hooks';
 import { getQuizes } from 'utils/firebaseGetters';
 import { useApi } from 'contexts';
 import {

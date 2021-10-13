@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery } from 'hooks';
 import { getUserDoc } from 'utils/firebaseGetters';
 import { useAuth } from 'contexts';
 import { Coupon } from 'components';

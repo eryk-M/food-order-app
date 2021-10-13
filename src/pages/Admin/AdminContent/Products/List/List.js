@@ -20,7 +20,7 @@ import {
 	CrossIcon,
 	Alert,
 } from 'components';
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery, usePagination } from 'hooks';
 import { getAdminAllProducts } from 'utils/firebaseGetters';
 import { useApi, useAdminApi } from 'contexts';
 import {
@@ -35,33 +35,33 @@ const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllProducts());
 	const { deleteAdminProduct } = useAdminApi();
 	const { setAdminItems, setItems } = useApi();
+	const {
+		itemsPerPage,
+		paginate,
+		currentPage,
+		indexOfFirstItem,
+		indexOfLastItem,
+		setCurrentPage,
+	} = usePagination(10);
 
 	const [query, setQuery] = useState('');
 	const [open, setOpen] = useState(false);
 	const [id, setId] = useState('');
 	const [showSuccess, setShowSuccess] = useState(false);
-	const [currentPage, setCurrentPage] = useState(1);
-	const [itemsPerPage] = useState(10);
 	const [isLoading, setIsLoading] = useState(false);
 	const [resetSuccess, setResetSuccess] = useState(false);
 
-	const timeoutRef = useRef();
-
-	const indexOfLastItem = currentPage * itemsPerPage;
-	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-	//PAGINATE
-	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+	const timeoutResetRef = useRef();
 
 	useEffect(() => {
 		if (data?.length <= 10) {
 			setCurrentPage(1);
 		}
 		return () => {
-			clearTimeout(timeoutRef.current);
+			clearTimeout(timeoutResetRef.current);
 			setIsLoading(false);
 		};
-	}, [data]);
+	}, [data, setCurrentPage]);
 
 	const onHandleSearch = () => {
 		if (query.length >= 3) {
@@ -81,10 +81,10 @@ const List = () => {
 			setIsLoading(false);
 			setResetSuccess(true);
 
-			const timeout = setTimeout(() => {
+			const timeoutReset = setTimeout(() => {
 				setResetSuccess(false);
 			}, 3000);
-			timeoutRef.current = timeout;
+			timeoutResetRef.current = timeoutReset;
 		} catch (err) {
 			console.log(err);
 			setIsLoading(false);

@@ -31,7 +31,7 @@ import { useHistory } from 'react-router-dom';
 import { storage } from 'firebase';
 import { capitalizeEachWord } from 'utils/capitalizeEachWord';
 import { useAdminApi } from 'contexts';
-import { useWindowSize } from 'hooks/useWindowSize';
+import { useWindowSize } from 'hooks';
 
 import {
 	SelectContent,

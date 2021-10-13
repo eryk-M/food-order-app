@@ -5,6 +5,7 @@ export const UserReviewsContainer = styled.div`
 	margin: 0 auto;
 	margin-bottom: 2rem;
 	padding: 0 1rem;
+	position: relative;
 `;
 
 export const UserReview = styled.div`

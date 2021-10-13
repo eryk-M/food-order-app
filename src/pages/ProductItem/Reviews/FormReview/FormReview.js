@@ -32,6 +32,7 @@ export const FormReview = ({
 	sectionReviewRef,
 	isAdded,
 	setIsAdded,
+	setCurrentPage,
 }) => {
 	const [rating, setRating] = useState(null);
 	const [starError, setStarError] = useState(false);
@@ -65,6 +66,7 @@ export const FormReview = ({
 				rating
 			);
 			sectionReviewRef.current.scrollIntoView();
+			setCurrentPage(1);
 			setStarError('');
 			setIsAdded(true);
 		} catch (err) {

@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 export const PaginationContainer = styled.div`
 	position: absolute;
 	top: ${(props) => props.top};
-	left: 50%;
+	left: ${(props) => props.left ?? '50%'};
+	right: ${(props) => props.right};
 	transform: translateX(-50%);
 	text-align: center;
 `;

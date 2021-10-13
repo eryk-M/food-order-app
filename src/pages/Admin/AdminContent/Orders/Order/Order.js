@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery, useWindowSize } from 'hooks';
 import { getOrder } from 'utils/firebaseGetters';
 
 import {
@@ -32,7 +32,6 @@ import {
 
 import { useReactToPrint } from 'react-to-print';
 import { useApi } from 'contexts';
-import { useWindowSize } from 'hooks/useWindowSize';
 
 const ContentToPrint = React.forwardRef(
 	(

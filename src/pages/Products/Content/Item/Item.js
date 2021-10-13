@@ -28,7 +28,7 @@ import { CartContext } from 'contexts';
 
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 
-import { useWindowSize } from 'hooks/useWindowSize';
+import { useWindowSize } from 'hooks';
 
 const Image = ({ el }) => {
 	const [loaded, setLoaded] = useState(false);

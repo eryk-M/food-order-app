@@ -10,7 +10,7 @@ import {
 } from '../LineChart/LineChartElements';
 
 import { DonutChartWrapper } from './DonutChartElements.js';
-import { useWindowSize } from 'hooks/useWindowSize';
+import { useWindowSize } from 'hooks';
 
 export const DonutChart = () => {
 	const size = useWindowSize();

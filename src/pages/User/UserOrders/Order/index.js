@@ -13,7 +13,7 @@ import {
 	TableRow,
 } from 'components';
 
-import { useWindowSize } from 'hooks/useWindowSize';
+import { useWindowSize } from 'hooks';
 import { OrdersTableRow } from '../UserOrdersElements';
 const Order = ({ el, open }) => {
 	const size = useWindowSize();

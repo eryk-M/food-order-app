@@ -8,7 +8,7 @@ export const validationSchema = Yup.object().shape({
 		.max(12, 'Username must have maximum of 12 characters')
 		.test('userName', 'Username is already taken', async (value) => {
 			const response = await validateUsername(
-				value.toLowerCase()
+				value.split(' ').join('').toLowerCase()
 			).get();
 			return response.empty;
 		}),

@@ -4,7 +4,7 @@ import { useLocation, Redirect } from 'react-router-dom';
 
 import { Steps } from 'rsuite';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery } from 'hooks';
 
 import { getOrder } from 'utils/firebaseGetters';
 

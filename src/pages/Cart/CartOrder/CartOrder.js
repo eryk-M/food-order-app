@@ -153,7 +153,6 @@ export const CartOrder = ({
 					message: `This code is available from $${docs.fromPrice}`,
 				});
 			}
-			// await setCouponAsUsed(currentUser.uid, data.discount);
 
 			if (docs.quiz) {
 				setQuizCode(data.discount);

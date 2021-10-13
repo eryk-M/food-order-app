@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery } from 'hooks';
 import { getTopProducts } from 'utils/firebaseGetters';
 
 import {

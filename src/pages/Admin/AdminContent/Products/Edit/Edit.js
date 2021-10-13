@@ -36,11 +36,10 @@ import {
 import { storage } from 'firebase';
 import { capitalizeEachWord } from 'utils/capitalizeEachWord';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery, useWindowSize } from 'hooks';
 
 import { useAdminApi } from 'contexts';
 import { getAdminOneProduct } from 'utils/firebaseGetters';
-import { useWindowSize } from 'hooks/useWindowSize';
 
 //FORM
 import { useForm } from 'react-hook-form';

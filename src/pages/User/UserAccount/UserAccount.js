@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useAuth, useApi } from 'contexts';
 
 import { Redirect, useLocation } from 'react-router-dom';
@@ -28,8 +28,6 @@ import { useForm } from 'react-hook-form';
 import { validationSchema } from './validationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-//TODO: REFRESH UI po update
-
 export const UserAccount = ({ userData }) => {
 	const { currentUser, updateEmail } = useAuth();
 	const { updateUserInfo } = useApi();
@@ -45,11 +43,31 @@ export const UserAccount = ({ userData }) => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm({
 		resolver: yupResolver(
 			validationSchema(inputChanged, currentUser)
 		),
+		defaultValues: useMemo(() => {
+			return {
+				zipcode: user?.zip,
+				name: user?.name,
+				address: user?.address,
+				phone: user?.phone,
+				city: user?.city,
+			};
+		}, [
+			user?.name,
+			user?.address,
+			user?.phone,
+			user?.city,
+			user?.zip,
+		]),
 	});
+
+	useEffect(() => {
+		reset(user);
+	}, [user, reset]);
 
 	if (query) return <Redirect to={query} />;
 
@@ -69,13 +87,15 @@ export const UserAccount = ({ userData }) => {
 		const capitalizeAddress =
 			data.address?.charAt(0).toUpperCase() + data.address?.slice(1);
 
+		const capitalizeCity =
+			data.city?.charAt(0).toUpperCase() + data.city?.slice(1);
 		promises.push(
 			updateUserInfo(
 				currentUser.uid,
 				capitalizeName,
 				capitalizeAddress,
 				data.phone,
-				data.city,
+				capitalizeCity,
 				data.zipcode
 			)
 		);
@@ -138,7 +158,6 @@ export const UserAccount = ({ userData }) => {
 						<FormInput
 							type="text"
 							{...register('name')}
-							defaultValue={user.name}
 							error={errors.name}
 						/>
 						{errors.name && (
@@ -150,7 +169,6 @@ export const UserAccount = ({ userData }) => {
 						<FormInput
 							type="text"
 							{...register('address')}
-							defaultValue={user.address}
 							placeholder="Street, Flat/House number"
 							error={errors.address}
 						/>
@@ -163,7 +181,6 @@ export const UserAccount = ({ userData }) => {
 						<FormInput
 							type="tel"
 							{...register('phone')}
-							defaultValue={user.phone}
 							placeholder="9 digits"
 							error={errors.phone}
 						/>
@@ -177,19 +194,18 @@ export const UserAccount = ({ userData }) => {
 							<FormInput
 								type="text"
 								{...register('city')}
-								defaultValue={user.city}
 								error={errors.city}
 							/>
 							{errors.city && (
 								<FormError>{errors.city.message}</FormError>
 							)}
 						</FormElement>
-						<FormElement id="zipcode" marginleft="2rem">
+						<FormElement marginleft="2rem">
 							<FormLabel>Zip/Postal Code</FormLabel>
 							<FormInput
+								defaultValue={user.zip}
 								type="text"
 								{...register('zipcode')}
-								defaultValue={user.zip}
 								placeholder="e.g. 11-111"
 								error={errors.zipcode}
 							/>

@@ -113,11 +113,17 @@ input[type=file]{
     & ul {
         padding: 0;
     }
+    & div {
+        & ul {
+            width: 5rem;
+        }
+    }
 }
 .is-hidden-content-desktop{
     margin-left: 5rem !important;
     padding-left: 1rem;
    
+    
 }
 
 

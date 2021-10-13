@@ -1,4 +1,4 @@
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery } from 'hooks';
 import React from 'react';
 import { getQuizes } from 'utils/firebaseGetters';
 import { useHistory } from 'react-router';

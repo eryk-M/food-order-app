@@ -23,7 +23,7 @@ import {
 
 import { CartContext, useAuth } from 'contexts';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery } from 'hooks';
 import { getUserDoc } from 'utils/firebaseGetters';
 
 export const Cart = () => {

@@ -16,6 +16,8 @@ export const Pagination = ({
 	currentPage,
 	top,
 	query,
+	left,
+	right,
 }) => {
 	const pageNumbers = [];
 
@@ -25,7 +27,7 @@ export const Pagination = ({
 	return (
 		<>
 			{query.length < 3 && (
-				<PaginationContainer top={top}>
+				<PaginationContainer top={top} left={left} right={right}>
 					<PaginationP>Pages</PaginationP>
 					<PaginationNav>
 						<PaginationList>

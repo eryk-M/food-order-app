@@ -2,7 +2,7 @@ import React from 'react';
 
 import { SearchFormContainer } from './SearchFormElements';
 import { Search, Select, PriceFilter } from 'components';
-import { useWindowSize } from 'hooks/useWindowSize';
+import { useWindowSize } from 'hooks';
 const SearchForm = ({ price, query, setQuery, setSort, tooltip }) => {
 	const size = useWindowSize();
 

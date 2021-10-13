@@ -7,8 +7,7 @@ import {
 	SearchContainer,
 } from './ProductsElements';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
-import { useWindowSize } from 'hooks/useWindowSize';
+import { useFirestoreQuery, useWindowSize } from 'hooks';
 import { getAllProducts } from 'utils/firebaseGetters';
 import { Search, Select, Loader } from 'components';
 

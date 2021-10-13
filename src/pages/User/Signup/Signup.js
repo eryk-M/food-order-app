@@ -41,7 +41,12 @@ export const Signup = () => {
 		try {
 			clearErrors();
 			setLoading(true);
-			await signup(data.email, data.password, data.userName, history);
+			await signup(
+				data.email,
+				data.password,
+				data.userName.split(' ').join(''),
+				history
+			);
 		} catch (e) {
 			setLoading(false);
 			if (e.message === 'auth/email-already-in-use') {
@@ -55,8 +60,6 @@ export const Signup = () => {
 			}
 		}
 	};
-
-	//TODO: spacje usuniete, sprawdzic username testem .join.touppercase to samo na backendzie
 	return (
 		<>
 			<SignInContainer>

@@ -21,7 +21,7 @@ import { useForm } from 'react-hook-form';
 //FORM
 import { validationSchema } from './validationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useWindowSize } from 'hooks/useWindowSize';
+import { useWindowSize } from 'hooks';
 
 export const CartAddress = ({
 	onChangeStep,

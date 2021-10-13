@@ -10,6 +10,7 @@ import {
 	SideBarTree,
 	SideBarP,
 	SideBarClose,
+	SideBarLinkTooltip,
 } from './SideBarElements';
 
 import { useAuth } from 'contexts';
@@ -29,7 +30,6 @@ const SideBar = ({ width, hidden, setHidden }) => {
 
 	return (
 		<SideBarContainer
-			data-testid="sidebar-test"
 			className={
 				hidden && width > 1024
 					? 'is-hidden-menu-desktop'
@@ -37,6 +37,7 @@ const SideBar = ({ width, hidden, setHidden }) => {
 					? 'is-hidden-menu-mobile'
 					: ''
 			}
+			hiddenOverflow={hidden}
 		>
 			{width <= 1024 && (
 				<SideBarClose
@@ -65,6 +66,7 @@ const SideBar = ({ width, hidden, setHidden }) => {
 						<SideBarP>Dashboard</SideBarP>
 						<MdKeyboardArrowRight className="icon-arrow" />
 					</SideBarLink>
+					<SideBarLinkTooltip>Dashboard</SideBarLinkTooltip>
 				</SideBarItem>
 				<SideBarItem>
 					<SideBarLink
@@ -81,6 +83,7 @@ const SideBar = ({ width, hidden, setHidden }) => {
 						<SideBarP>Orders</SideBarP>
 						<MdKeyboardArrowRight className="icon-arrow" />
 					</SideBarLink>
+					<SideBarLinkTooltip>Orders</SideBarLinkTooltip>
 				</SideBarItem>
 
 				<SideBarTree>
@@ -112,12 +115,14 @@ const SideBar = ({ width, hidden, setHidden }) => {
 						<SideBarP>Coupons</SideBarP>
 						<MdKeyboardArrowRight className="icon-arrow" />
 					</SideBarLink>
+					<SideBarLinkTooltip>Coupons</SideBarLinkTooltip>
 				</SideBarItem>
-				<SideBarItem>
+				<SideBarItem data-testid="logout-test">
 					<SideBarLink to="#" onClick={() => logout()}>
 						<AiOutlinePoweroff className="icon-left" />
 						<SideBarP>Logout</SideBarP>
 					</SideBarLink>
+					<SideBarLinkTooltip>Logout</SideBarLinkTooltip>
 				</SideBarItem>
 			</SideBarList>
 		</SideBarContainer>

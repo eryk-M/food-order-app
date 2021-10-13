@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import { AdminSideBar, AdminContent, AdminTopBar } from 'pages';
 
-import { useWindowSize } from 'hooks/useWindowSize';
+import { useWindowSize } from 'hooks';
 
 const AdminContentContainer = styled.div`
 	margin-top: 6rem;

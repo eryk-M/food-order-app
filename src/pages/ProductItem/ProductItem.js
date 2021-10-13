@@ -39,7 +39,7 @@ import { CartContext } from 'contexts';
 import { useHistory } from 'react-router';
 import { Reviews } from 'pages';
 
-import { useFirestoreQuery } from 'hooks/useFirestoreQuery';
+import { useFirestoreQuery } from 'hooks';
 import { getOneProduct } from 'utils/firebaseGetters';
 
 import Lightbox from 'react-image-lightbox';
