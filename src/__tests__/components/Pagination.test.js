@@ -17,7 +17,7 @@ const props = {
 };
 
 describe('<Pagination />', () => {
-	it('show 2 pages when 20 items', () => {
+	test('show 2 pages when 20 items', () => {
 		const { getByText } = render(
 			<Router>
 				<Pagination {...props} totalItems={20} />
@@ -28,7 +28,7 @@ describe('<Pagination />', () => {
 		expect(getByText('2')).toBeInTheDocument();
 	});
 
-	it('show 4 pages when 41 items', () => {
+	test('show 4 pages when 41 items', () => {
 		const { getByText } = render(
 			<Router>
 				<Pagination {...props} totalItems={41} />

@@ -7,12 +7,12 @@ jest.mock('firebase', () => ({
 }));
 
 describe('<Status />', () => {
-	it('renders "New" when step is 0', () => {
+	test('renders "New" when step is 0', () => {
 		const { queryByTestId } = render(<Status step={0} />);
 		expect(queryByTestId('status-step').textContent).toEqual('New');
 	});
 
-	it('renders "Cancelled" when step is 5', () => {
+	test('renders "Cancelled" when step is 5', () => {
 		const { queryByTestId } = render(<Status step={5} />);
 		expect(queryByTestId('status-step').textContent).toEqual(
 			'Cancelled'

@@ -17,7 +17,7 @@ const searchQuery = {
 	maxPrice: 40,
 };
 describe('<ProductsContent />', () => {
-	it('renders with products data', () => {
+	test('renders with products data', () => {
 		const { getByText } = render(
 			<CartProvider>
 				<Router>

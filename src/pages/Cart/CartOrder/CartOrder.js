@@ -31,13 +31,7 @@ import Card from 'assets/images/card.jpg';
 
 import { useApi, useAuth, CartContext } from 'contexts';
 
-import {
-	Loader,
-	FormError,
-	FormInput,
-	Alert,
-	Button,
-} from 'components';
+import { FormError, FormInput, Alert, Button } from 'components';
 
 //FORM
 import { useForm } from 'react-hook-form';
@@ -242,11 +236,6 @@ export const CartOrder = ({
 				</CartList>
 			</CartTable>
 			<CartCouponForm onSubmit={handleSubmit(onSubmit)}>
-				{discountAdded && (
-					<Alert success right="-17rem" top="1rem" noanimate>
-						Coupon added!
-					</Alert>
-				)}
 				<FormInput
 					display="inline-block"
 					width="20rem"
@@ -268,9 +257,6 @@ export const CartOrder = ({
 					>
 						Apply coupon
 					</Button>
-				)}
-				{loading && (
-					<Loader primary display="inline-block" marginleft="2rem" />
 				)}
 			</CartCouponForm>
 			{errors.discount && (
