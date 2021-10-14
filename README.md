@@ -1,7 +1,7 @@
 # Food Order App
 
 > Burger House is company providing food. User can order food, track order through food tracker and participate in quizzes.
-> Project was created to learn React.
+Project was created to learn React.
 > Live demo [_here_](https://www.food-order-eryk.netlify.app).
 
 ## Table of Contents
@@ -42,13 +42,13 @@
 
 ## Screenshots
 
-![Home page](./assets/images/screenshots/screenshot_1.jpg)
-![Top products section](./assets/images/screenshots/screenshot_2.jpg)
-![Products](./assets/images/screenshots/screenshot_3.jpg)
-![Product item](./assets/images/screenshots/screenshot_4.jpg)
-![User panel](./assets/images/screenshots/screenshot_5.jpg)
-![Cart](./assets/images/screenshots/screenshot_6.jpg)
-![Admin panel](./assets/images/screenshots/screenshot_7.jpg)
+![Home page](./src/assets/images/screenshots/screenshot_1.jpg)
+![Top products section](./src/assets/images/screenshots/screenshot_2.jpg)
+![Products](./src/assets/images/screenshots/screenshot_3.jpg)
+![Product item](./src/assets/images/screenshots/screenshot_4.jpg)
+![User panel](./src/assets/images/screenshots/screenshot_5.jpg)
+![Cart](./src/assets/images/screenshots/screenshot_6.jpg)
+![Admin panel](./src/assets/images/screenshots/screenshot_7.jpg)
 
 ## Setup
 
