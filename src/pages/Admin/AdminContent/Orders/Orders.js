@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { AdminOrdersList, AdminOrdersOrder } from 'pages';
 
 const Orders = () => {
@@ -12,7 +12,9 @@ const Orders = () => {
 				exact
 				component={AdminOrdersOrder}
 			/>
-			{/* <Route path="/admin/products/:id" exact component={Edit} /> */}
+			<Route>
+				<Redirect to="/404" />
+			</Route>
 		</Switch>
 	);
 };

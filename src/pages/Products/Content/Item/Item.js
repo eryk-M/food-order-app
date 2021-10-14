@@ -96,13 +96,6 @@ const Item = ({ el }) => {
 					Product added to cart
 				</Alert>
 			)}
-			<Alert
-				top={width <= 460 ? '95%' : '2rem'}
-				right={width <= 460 ? '27%' : '2rem'}
-				success
-			>
-				Product added to cart
-			</Alert>
 			<Image el={el} />
 			<ItemInfo>
 				<Link to={`/product/${el.id}`}>

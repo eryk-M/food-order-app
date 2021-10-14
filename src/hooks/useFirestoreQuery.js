@@ -1,5 +1,4 @@
 import { useReducer, useEffect } from 'react';
-
 import { useMemoCompare } from './useMemoCompare';
 
 const reducer = (state, action) => {
@@ -56,7 +55,10 @@ export function useFirestoreQuery(query) {
 				const data = response.docs
 					? getCollectionData(response)
 					: getDocData(response);
-				dispatch({ type: 'success', payload: data });
+				dispatch({
+					type: 'success',
+					payload: data.length === 0 ? null : data,
+				});
 			},
 			(error) => {
 				dispatch({ type: 'error', payload: error });

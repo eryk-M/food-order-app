@@ -6,50 +6,20 @@ import {
 } from 'react-router-dom';
 import { GlobalStyle } from './globalStyles';
 
-import {
-	Footer,
-	NavBar,
-	NavBarBurger,
-	PrivateRoute,
-} from 'components';
-
+import { Footer, NavBar, NavBarBurger } from 'components';
+import { RedirectFromAuth } from 'components/RedirectFromAuth/RedirectFromAuth';
 import {
 	Tracker,
-	User,
 	Login,
 	Home,
 	Cart,
 	ProductItem,
 	Products,
-	Admin,
+	NotFound,
 } from 'pages';
-import {
-	CartProvider,
-	APIProvider,
-	AdminAPIProvider,
-	AuthProvider,
-} from 'contexts';
+import { CartProvider, APIProvider, AuthProvider } from 'contexts';
 
 import { ScrollToTop } from 'utils/scrollToTop';
-
-const routes = (
-	<Route>
-		<Route path="/" exact component={Home} />
-		<Route path="/product/:id" exact component={ProductItem} />
-		<Route path="/login" component={Login} />
-		<Route path="/signup" component={Login} />
-		<Route path="/forgot-password" component={Login} />
-		<Route path="/cart" component={Cart} />
-		<Route path="/food-tracker" component={Tracker} />
-		<Route path="/products" component={Products} />
-
-		<PrivateRoute path="/user" component={User} />
-
-		<AdminAPIProvider>
-			<PrivateRoute path="/admin" component={Admin} />
-		</AdminAPIProvider>
-	</Route>
-);
 
 function App() {
 	//navbar
@@ -68,7 +38,33 @@ function App() {
 						<NavBarBurger hidden={hidden} toggle={toggleClass} />
 						<GlobalStyle />
 						<ScrollToTop>
-							<Switch>{routes}</Switch>
+							<Switch>
+								<Route path="/" exact component={Home} />
+								<Route
+									path="/product/:id"
+									exact
+									component={ProductItem}
+								/>
+								<Route path="/login" exact component={Login} />
+								<Route path="/signup" exact component={Login} />
+
+								<Route
+									path="/forgot-password"
+									exact
+									component={Login}
+								/>
+
+								<Route path="/cart" exact component={Cart} />
+								<Route
+									path="/food-tracker"
+									exact
+									component={Tracker}
+								/>
+								<Route path="/products" exact component={Products} />
+								<Route path="/404" exact component={NotFound} />
+								{/* problem with handling 404 */}
+								<RedirectFromAuth />
+							</Switch>
 						</ScrollToTop>
 						<Footer />
 					</Router>

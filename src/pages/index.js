@@ -69,3 +69,6 @@ export { default as AdminOrdersOrder } from './Admin/AdminContent/Orders/Order/O
 
 export { default as AdminDashboard } from './Admin/AdminContent/Dashboard/Dashboard';
 export { default as AdminCoupons } from './Admin/AdminContent/Coupons/Coupons';
+
+//404
+export { NotFound } from './NotFound/NotFound';

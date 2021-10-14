@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import {
 	AdminProductsList,
@@ -33,6 +33,9 @@ const Products = () => {
 					exact
 					component={AdminProductsEdit}
 				/>
+				<Route>
+					<Redirect to="/404" />
+				</Route>
 			</Switch>
 		</>
 	);

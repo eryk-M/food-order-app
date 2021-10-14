@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import { useFirestoreQuery, useWindowSize } from 'hooks';
 import { getOrder } from 'utils/firebaseGetters';
-
+import { Redirect } from 'react-router';
 import {
 	OrderDate,
 	OrderWrapper,
@@ -158,10 +158,13 @@ const Order = (props) => {
 		return () => {
 			clearTimeout(timeoutRef.current);
 		};
-	}, []);
+	}, [data]);
+
 	const handlePrint = useReactToPrint({
 		content: () => componentRef.current,
 	});
+
+	if (data === null) return <Redirect to="/404" />;
 
 	const steps = [
 		{ step: 1, text: 'Preparing' },

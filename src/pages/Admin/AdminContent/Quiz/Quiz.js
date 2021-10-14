@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { AdminQuizAdd, AdminQuizList } from 'pages';
 import { Info } from 'components';
 // import List from './List';
@@ -20,6 +20,9 @@ const Quiz = () => {
 					exact
 					component={AdminQuizAdd}
 				/>
+				<Route>
+					<Redirect to="/404" />
+				</Route>
 			</Switch>
 		</>
 	);

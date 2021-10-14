@@ -88,6 +88,9 @@ export const Tree = styled.div`
 	overflow-x: ${(props) =>
 		props.hiddenOverflow ? 'visible' : 'hidden'};
 	overflow-y: clip;
+	@media ${device.laptopS} {
+		overflow-x: clip;
+	}
 	${TreeItemMain} {
 		${(props) => {
 			if (props.hidden) {

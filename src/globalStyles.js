@@ -34,6 +34,9 @@ html {
     @media only screen and (max-width: 840px) {
 		font-size: 50%;
 	}
+    @media only screen and (min-width: 1921px){
+        font-size: 75%;
+    }
     
 }
 

@@ -6,7 +6,12 @@ import React, {
 	useRef,
 } from 'react';
 
-import { Switch, Route, useHistory } from 'react-router-dom';
+import {
+	Switch,
+	Route,
+	useHistory,
+	Redirect,
+} from 'react-router-dom';
 
 import { Steps } from 'rsuite';
 
@@ -177,6 +182,9 @@ export const Cart = () => {
 						exact
 						render={() => <CartComplete step={step} />}
 					/>
+					<Route>
+						<Redirect to="/404" />
+					</Route>
 				</Switch>
 			</CartContainer>
 		</CartWrapper>

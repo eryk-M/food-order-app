@@ -1,5 +1,4 @@
 import React from 'react';
-import { PrivateRoute } from 'components';
 
 import {
 	UserAccount,
@@ -26,7 +25,12 @@ import { GlobalStyle } from 'globalStyles';
 
 import { useFirestoreQuery } from 'hooks';
 import { getUserDoc } from 'utils/firebaseGetters';
-import { useLocation, Redirect } from 'react-router-dom';
+import {
+	useLocation,
+	Redirect,
+	Route,
+	Switch,
+} from 'react-router-dom';
 
 export const User = () => {
 	const { currentUser } = useAuth();
@@ -55,43 +59,34 @@ export const User = () => {
 					}
 					pathname={subtrPathQuiz}
 				>
-					<PrivateRoute
-						path="/user"
-						exact
-						component={UserAccount}
-						userData={data}
-					/>
-					<PrivateRoute
-						path="/user/change-password"
-						exact
-						component={UserPassword}
-					/>
-					<PrivateRoute
-						path="/user/orders"
-						exact
-						component={UserOrders}
-					/>
-					<PrivateRoute
-						path="/user/quizes"
-						exact
-						component={UserQuizes}
-						userData={data}
-					/>
-					<PrivateRoute
-						path="/user/quizes/:id"
-						exact
-						component={Quiz}
-					/>
-					<PrivateRoute
-						path="/user/quizes/:id/summary"
-						exact
-						component={QuizSummary}
-					/>
-					<PrivateRoute
-						path="/user/coupons"
-						exact
-						component={UserCoupons}
-					/>
+					<Switch>
+						<Route path="/user" exact>
+							<UserAccount userData={data} />
+						</Route>
+						<Route
+							path="/user/change-password"
+							exact
+							component={UserPassword}
+						/>
+						<Route path="/user/orders" exact component={UserOrders} />
+						<Route path="/user/quizes" exact component={UserQuizes}>
+							<UserQuizes userData={data} />
+						</Route>
+						<Route path="/user/quizes/:id" exact component={Quiz} />
+						<Route
+							path="/user/quizes/:id/summary"
+							exact
+							component={QuizSummary}
+						/>
+						<Route
+							path="/user/coupons"
+							exact
+							component={UserCoupons}
+						/>
+						<Route>
+							<Redirect to="/404" />
+						</Route>
+					</Switch>
 				</UserContent>
 			</UserContainer>
 		</UserWrapper>

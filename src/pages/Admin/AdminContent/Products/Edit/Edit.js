@@ -37,7 +37,7 @@ import { storage } from 'firebase';
 import { capitalizeEachWord } from 'utils/capitalizeEachWord';
 
 import { useFirestoreQuery, useWindowSize } from 'hooks';
-
+import { Redirect } from 'react-router';
 import { useAdminApi } from 'contexts';
 import { getAdminOneProduct } from 'utils/firebaseGetters';
 
@@ -77,6 +77,8 @@ const Edit = (props) => {
 			clearTimeout(timeoutRef.current);
 		};
 	}, []);
+
+	if (data === null) return <Redirect to="/404" />;
 
 	if (ingredients.length === 0 && data && !isInitiallyFetched) {
 		setIngredients(data[0].ingredients);

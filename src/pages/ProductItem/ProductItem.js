@@ -36,7 +36,7 @@ import {
 import { Loader, Alert, StarRating, Button } from 'components';
 import { CartContext } from 'contexts';
 
-import { useHistory } from 'react-router';
+import { useHistory, Redirect } from 'react-router';
 import { Reviews } from 'pages';
 
 import { useFirestoreQuery } from 'hooks';
@@ -129,6 +129,8 @@ export const ProductItem = (props) => {
 		{ id: 2, src: currentItem?.img },
 		{ id: 3, src: currentItem?.img },
 	];
+
+	if (data === null) return <Redirect to="/404" />;
 
 	return (
 		<>
