@@ -1,8 +1,12 @@
 # Food Order App
 
 > Burger House is company providing food. User can order food, track order through food tracker and participate in quizzes.
+
+
 Project was created to learn React.
-> Live demo [_here_](https://www.food-order-eryk.netlify.app).
+
+
+> Live demo [_here_](https://food-order-eryk.netlify.app/).
 
 ## Table of Contents
 
@@ -106,7 +110,11 @@ Project is: _uncomplete_
 ## License
 
 This website was built by eryk-M.
+
+
 Copyright @ 2021 eryk-M. All Rights Reserved.
+
+
 You are allowed to use it for both personal and commercial use, but not to claim it as your own project.
 
 ## Contact
