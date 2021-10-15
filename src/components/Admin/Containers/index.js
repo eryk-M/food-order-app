@@ -3,18 +3,18 @@ import styled from 'styled-components/macro';
 import { device } from 'utils/breakpoints';
 
 export const MainContainer = styled.div`
-	display: ${(props) => props.display};
+	display: ${({ display }) => display};
 	background-color: var(--color-white);
 	padding: 1.5rem;
 	border-radius: 5px;
-	min-width: ${(props) => props.minwidth ?? '80%'};
+	min-width: ${({ minwidth }) => minwidth ?? '80%'};
 	margin-right: 2rem;
-	margin: ${(props) => (props.center ? '0 auto' : '0 2rem 0 0')};
+	margin: ${({ center }) => (center ? '0 auto' : '0 2rem 0 0')};
 	box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
 	position: relative;
-	width: ${(props) => props.width};
-	max-width: ${(props) => props.maxwidth ?? ''};
-	min-height: ${(props) => props.minheight ?? ''};
+	width: ${({ width }) => width};
+	max-width: ${({ maxwidth }) => maxwidth ?? ''};
+	min-height: ${({ minheight }) => minheight ?? ''};
 
 	@media ${device.laptopS} {
 		display: block;
@@ -57,7 +57,7 @@ export const ProgressContainer = styled.div`
 	left: 0;
 	background-color: var(--color-green);
 	height: 0.5rem;
-	width: ${(props) => props.width + '%'};
+	width: ${({ width }) => width + '%'};
 	z-index: 2;
 `;
 export const TotalContainer = styled.div`
@@ -89,14 +89,13 @@ export const TotalContainer = styled.div`
 
 export const FlexCenterContainer = styled.div`
 	display: flex;
-	justify-content: ${(props) =>
-		props.center ? 'center' : 'space-between'};
+	justify-content: ${({ center }) =>
+		center ? 'center' : 'space-between'};
 	align-items: center;
 	margin-right: 2rem;
 
 	@media ${device.mobileM} {
 		flex-direction: column;
-		/* width: 100%; */
 	}
 `;
 
@@ -106,12 +105,11 @@ export const JustifyCenterContainer = styled.div`
 `;
 
 export const LineChartContainer = styled.div`
-	/* margin-top: 2rem; */
 	border-radius: 5px;
 	box-shadow: 0 0.1rem 1rem rgb(0 0 0 / 10%);
 	padding: 1.8rem;
 	background-color: #fff;
-	border-bottom: 3px solid ${(props) => props.color};
+	border-bottom: 3px solid ${({ color }) => color};
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -222,7 +220,7 @@ export const GridDonut = styled.div`
 `;
 
 export const LoaderContainer = styled.div`
-	height: ${(props) => props.height};
+	height: ${({ height }) => height};
 	display: flex;
 	align-items: center;
 	justify-content: center;

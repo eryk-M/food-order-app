@@ -30,7 +30,7 @@ export const TotalNumber = styled.span`
 	display: block;
 	font-size: 2.6rem;
 	font-weight: bold;
-	color: ${(props) => props.spanColor};
+	color: ${({ spanColor }) => spanColor};
 
 	@media only screen and (max-width: 1132px) {
 		font-size: 2rem;

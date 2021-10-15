@@ -84,7 +84,6 @@ export const SideBarItem = styled.li`
 		}
 	}
 	@media ${device.mobileL} {
-		/* flex-grow: 20%; */
 		width: 20%;
 		display: flex;
 		justify-content: center;
@@ -120,7 +119,6 @@ export const SideBarList = styled.ul`
 	}
 	@media ${device.mobileL} {
 		display: inline-flex;
-		/* margin: 0 0.5rem; */
 		width: 92%;
 		border-radius: 0;
 		margin: 0 auto;

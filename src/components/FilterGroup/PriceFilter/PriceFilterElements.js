@@ -13,7 +13,7 @@ export const PriceFilterContainer = styled.div`
 `;
 
 export const PriceFilterSpan = styled.span`
-	font-size: ${(props) => props.size + 'rem'};
+	font-size: ${({ size }) => size + 'rem'};
 	display: block;
 	font-weight: 100;
 	margin: 1rem 0;

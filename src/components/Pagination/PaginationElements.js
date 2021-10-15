@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 export const PaginationContainer = styled.div`
 	position: absolute;
-	top: ${(props) => props.top};
-	left: ${(props) => props.left ?? '50%'};
-	right: ${(props) => props.right};
+	top: ${({ top }) => top};
+	left: ${({ left }) => left ?? '50%'};
+	right: ${({ right }) => right};
 	transform: translateX(-50%);
 	text-align: center;
 `;
@@ -31,15 +31,15 @@ export const PaginationLink = styled(Link)`
 	font-size: 1.6rem;
 	padding: 0.5rem 1rem;
 	border: 1px solid rgba(0, 0, 0, 0.1);
-	background-color: ${(props) => {
-		if (props.number === props.currentpage) {
+	background-color: ${({ number, currentpage }) => {
+		if (number === currentpage) {
 			return 'var(--color-primary)';
 		} else {
 			return 'var(--color-white)';
 		}
 	}};
-	color: ${(props) => {
-		if (props.number === props.currentpage) {
+	color: ${({ number, currentpage }) => {
+		if (number === currentpage) {
 			return 'var(--color-white)';
 		} else {
 			return '#000';

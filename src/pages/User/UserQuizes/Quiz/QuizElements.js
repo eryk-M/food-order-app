@@ -59,11 +59,10 @@ export const AnswerButton = styled.button`
 	font-size: 1.6rem;
 	padding: 1rem;
 	color: var(--color-black);
-	background-color: ${(props) =>
-		props.elementId === props.selectedAnswer ? '#b374ec' : '#fff'};
-	color: ${(props) =>
-		props.elementId === props.selectedAnswer ? '#fff' : '#000'};
-	/* background-color: #fff; */
+	background-color: ${({ elementId, selectedAnswer }) =>
+		elementId === selectedAnswer ? '#b374ec' : '#fff'};
+	color: ${({ elementId, selectedAnswer }) =>
+		elementId === selectedAnswer ? '#fff' : '#000'};
 	border: 2px solid #b374ec;
 	border-radius: 5px;
 	cursor: pointer;

@@ -10,14 +10,14 @@ export const SearchHint = styled.span`
 	padding: 0.5rem;
 	border-radius: 5px;
 	left: 0;
-	opacity: ${(props) => {
-		if (props.query.length === 0 || props.query.length >= 3) {
+	opacity: ${({ query }) => {
+		if (query.length === 0 || query.length >= 3) {
 			return 0;
 		} else return 1;
 	}};
 	transition: visibility 0s, opacity 0.2s ease;
-	visibility: ${(props) => {
-		if (props.query.length === 0 || props.query.length >= 3) {
+	visibility: ${({ query }) => {
+		if (query.length === 0 || query.length >= 3) {
 			return 'hidden';
 		} else return 'visible';
 	}};
@@ -26,16 +26,16 @@ export const SearchHint = styled.span`
 	}
 `;
 export const SearchContainer = styled.div`
-	width: ${(props) => props.width ?? ''};
+	width: ${({ width }) => width ?? ''};
 
 	& input:focus + ${SearchHint} {
-		opacity: ${(props) => {
-			if (props.query.length === 0 || props.query.length < 3) {
+		opacity: ${({ query }) => {
+			if (query.length === 0 || query.length < 3) {
 				return 1;
 			} else return 0;
 		}};
-		visibility: ${(props) => {
-			if (props.query.length === 0 || props.query.length < 3) {
+		visibility: ${({ query }) => {
+			if (query.length === 0 || query.length < 3) {
 				return 'visible';
 			} else return 'hidden';
 		}};

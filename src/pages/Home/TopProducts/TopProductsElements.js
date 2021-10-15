@@ -11,13 +11,12 @@ export const TopProductsContainer = styled.section`
 
 export const TopProductsWrapper = styled.div`
 	display: flex;
-	justify-content: ${(props) =>
-		props.loading === 'true' ? 'center' : 'space-between'};
+	justify-content: ${({ loading }) =>
+		loading === 'true' ? 'center' : 'space-between'};
 	margin-top: 5rem;
 
 	@media ${device.mobileL} {
 		flex-direction: column;
-		/* width: 90%; */
 		align-items: center;
 	}
 `;

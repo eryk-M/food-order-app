@@ -17,7 +17,7 @@ export const HeroImageWrapper = styled(motion.div)`
 		bottom: 0;
 	}
 	@media ${device.laptopS} {
-		height: ${(props) => props.height + 'px'};
+		height: ${({ height }) => height + 'px'};
 	}
 `;
 
@@ -36,7 +36,7 @@ export const HeroContainer = styled.header`
 	height: 100vh;
 	background-color: black;
 	@media ${device.laptopS} {
-		height: ${(props) => props.height + 'px'};
+		height: ${({ height }) => height + 'px'};
 	}
 `;
 
@@ -74,11 +74,11 @@ export const HeroH1 = styled.h1`
 `;
 
 export const HeroP = styled.p`
-	font-family: ${(props) => props.fontFamily};
+	font-family: ${({ fontFamily }) => fontFamily};
 	font-size: clamp(2rem, 2.5vw, 3rem);
 	margin-top: 1.2rem;
 	margin-bottom: 2rem;
-	color: ${(props) => props.color};
+	color: ${({ color }) => color};
 	font-weight: 400;
 `;
 

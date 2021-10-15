@@ -51,8 +51,8 @@ export const NavCartSpan = styled.span`
 	width: 2.4rem;
 	font-size: 2.4rem;
 	border-radius: 50%;
-	top: ${(props) => props.top ?? '-1.8rem'};
-	right: ${(props) => props.right ?? '-1.8rem'};
+	top: ${({ top }) => top ?? '-1.8rem'};
+	right: ${({ right }) => right ?? '-1.8rem'};
 	color: var(--color-grey-light);
 `;
 
@@ -67,8 +67,7 @@ export const NavLink = styled(Link)`
 `;
 
 export const NavCart = styled(FiShoppingCart)`
-	font-size: ${(props) => props.fontSize ?? '3rem'};
-	/* padding: 2rem; */
+	font-size: ${({ fontSize }) => fontSize ?? '3rem'};
 `;
 
 export const NavUser = styled(FiUser)`

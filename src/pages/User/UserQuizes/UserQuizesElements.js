@@ -17,7 +17,7 @@ export const QuizCard = styled(motion.div)`
 	}
 `;
 export const QuizList = styled(motion.div)`
-	display: ${(props) => (props.items?.length > 3 ? 'grid' : 'flex')};
+	display: ${({ items }) => (items?.length > 3 ? 'grid' : 'flex')};
 	grid-template-columns: repeat(auto-fit, minmax(150px, 4fr));
 	grid-gap: 2rem;
 	margin: 0 1rem;

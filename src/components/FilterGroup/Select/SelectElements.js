@@ -11,9 +11,9 @@ export const SelectContent = styled.select`
 	font-family: 'Rubik', sans-serif;
 	margin-bottom: 1.5rem;
 	margin-top: 1rem;
-	width: ${(props) => props.width ?? ''};
-	display: ${(props) => props.display ?? ''};
-	margin-left: ${(props) => props.marginleft ?? ''};
+	width: ${({ width }) => width ?? ''};
+	display: ${({ display }) => display ?? ''};
+	margin-left: ${({ marginleft }) => marginleft ?? ''};
 `;
 
 export const SelectOption = styled.option`

@@ -22,7 +22,7 @@ export const MainPageHeading = styled.h2`
 	position: relative;
 	display: inline-block;
 	&:before {
-		content: '${(props) => props.upper}';
+		content: '${({ upper }) => upper}';
 		position: absolute;
 		top: -2rem;
 		left: 0;

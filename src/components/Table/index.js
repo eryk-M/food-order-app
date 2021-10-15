@@ -10,7 +10,7 @@ export const TableWrapper = styled.div`
 `;
 
 export const Table = styled.table`
-	display: ${(props) => props.display};
+	display: ${({ display }) => display};
 	width: 100%;
 	table-layout: fixed;
 	border-collapse: collapse;
@@ -32,14 +32,14 @@ export const TableBody = styled.tbody``;
 
 export const TableRow = styled.tr`
 	font-size: 1.4rem;
-	background-color: ${(props) => props.backgroundColor};
-	font-weight: ${(props) => props.fontW};
+	background-color: ${({ backgroundColor }) => backgroundColor};
+	font-weight: ${({ fontW }) => fontW};
 
 	& .cell-word-wrap {
 		word-wrap: break-word;
 	}
-	${(props) => {
-		if (props.hover) {
+	${({ hover }) => {
+		if (hover) {
 			return '&:hover {background-color: var(--color-background-grey-light);cursor: pointer;}';
 		}
 	}}
@@ -80,17 +80,17 @@ export const TableHead = styled.thead`
 export const TableCellHead = styled.th`
 	padding: 1rem 3rem;
 	text-align: left;
-	width: ${(props) => props.width};
-	cursor: ${(props) => (props.pointer ? 'pointer' : 'default')};
+	width: ${({ width }) => width};
+	cursor: ${({ pointer }) => (pointer ? 'pointer' : 'default')};
 	transition: all 0.2s;
 `;
 
 export const TableCell = styled.td`
 	padding: 1rem 3rem;
-	padding: ${(props) => props.padding ?? '1rem 3rem'};
-	width: ${(props) => props.width};
-	text-align: ${(props) => (props.center ? 'center' : null)};
-	cursor: ${(props) => (props.pointer ? 'pointer' : '')};
+	padding: ${({ padding }) => padding ?? '1rem 3rem'};
+	width: ${({ width }) => width};
+	text-align: ${({ center }) => (center ? 'center' : null)};
+	cursor: ${({ pointer }) => (pointer ? 'pointer' : '')};
 
 	@media ${device.mobileM} {
 		font-size: 1.4rem;
@@ -111,15 +111,15 @@ export const TableCell = styled.td`
 
 export const TableButton = styled.button`
 	padding: 0.6rem 0.8rem;
-	background-color: ${(props) => {
-		if (props.primary) {
+	background-color: ${({ primary, secondary }) => {
+		if (primary) {
 			return 'var(--color-primary)';
-		} else if (props.secondary) {
+		} else if (secondary) {
 			return 'var(--color-secondary)';
 		}
 	}};
 	color: var(--color-white);
-	margin-left: ${(props) => props.marginleft};
+	margin-left: ${({ marginleft }) => marginleft};
 	border-radius: 50%;
 	border-radius: 5px;
 	border: none;

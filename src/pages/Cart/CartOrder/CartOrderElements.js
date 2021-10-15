@@ -33,9 +33,9 @@ export const CartLink = styled(Link)`
 `;
 
 export const CartItem = styled.div`
-	background-color: ${(props) => props.backgroundColor};
+	background-color: ${({ backgroundColor }) => backgroundColor};
 	display: table-row;
-	font-weight: ${(props) => props.fontW};
+	font-weight: ${({ fontW }) => fontW};
 	font-size: 1.6rem;
 `;
 
@@ -44,18 +44,18 @@ export const CartColumn = styled.div`
 	display: table-cell;
 	vertical-align: middle;
 	padding: 2rem;
-	text-align: ${(props) => props.textalign};
+	text-align: ${({ textalign }) => textalign};
 
 	@media only screen and (max-width: 840px) {
-		width: ${(props) => props.mobileWidth};
+		width: ${({ mobileWidth }) => mobileWidth};
 	}
 
 	@media only screen and (max-width: 640px) {
-		display: ${(props) => props.display};
-		flex-direction: ${(props) => props.flexDirection};
-		align-items: ${(props) => props.alignItems};
+		display: ${({ display }) => display};
+		flex-direction: ${({ flexDirection }) => flexDirection};
+		align-items: ${({ alignItems }) => alignItems};
 		text-align: center;
-		justify-content: ${(props) => props.justifyContent};
+		justify-content: ${({ justifyContent }) => justifyContent};
 		padding: 1rem 0.5rem;
 	}
 `;

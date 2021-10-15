@@ -1,23 +1,23 @@
 import styled from 'styled-components/macro';
 
 export const Button = styled.button`
-	width: ${(props) => props.width};
-	margin-left: ${(props) => props.marginleft};
+	width: ${({ width }) => width};
+	margin-left: ${({ marginleft }) => marginleft};
 	padding: 1rem;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-size: 1.4rem;
-	background-color: ${(props) =>
-		props.secondary ? '#fff' : 'var(--color-primary)'};
-	color: ${(props) =>
-		props.secondary ? '#000' : 'var(--color-grey-light)'};
-	border: ${(props) =>
-		props.secondary ? '1px solid var(--color-primary)' : 'none'};
+	background-color: ${({ secondary }) =>
+		secondary ? '#fff' : 'var(--color-primary)'};
+	color: ${({ secondary }) =>
+		secondary ? '#000' : 'var(--color-grey-light)'};
+	border: ${({ secondary }) =>
+		secondary ? '1px solid var(--color-primary)' : 'none'};
 	cursor: pointer;
 	transition: all 0.2s;
-	margin-bottom: ${(props) => props.marginbottom};
+	margin-bottom: ${({ marginbottom }) => marginbottom};
 	border-radius: 5px;
-	display: ${(props) => props.display ?? ''};
+	display: ${({ display }) => display ?? ''};
 	vertical-align: middle;
 	&:hover {
 		@media (min-width: 1025px) {

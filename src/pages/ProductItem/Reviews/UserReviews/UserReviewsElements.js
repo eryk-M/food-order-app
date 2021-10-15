@@ -21,7 +21,6 @@ export const UserReviewName = styled.p`
 
 export const UserReviewTime = styled.span`
 	margin-left: auto;
-	/* width: 3rem; */
 	font-size: 1.1rem;
 	float: right;
 	display: block;

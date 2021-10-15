@@ -13,23 +13,22 @@ to {
 
 export const AlertContainer = styled.div`
 	position: absolute;
-	top: ${(props) => props.top};
-	right: ${(props) => props.right};
-	bottom: ${(props) => props.bottom};
-	left: ${(props) => props.left};
+	top: ${({ top }) => top};
+	right: ${({ right }) => right};
+	bottom: ${({ bottom }) => bottom};
+	left: ${({ left }) => left};
 	font-size: 1.6rem;
 	color: #fff;
-	background-color: ${(props) =>
-		props.success ? 'var(--color-green)' : ''};
+	background-color: ${({ success }) =>
+		success ? 'var(--color-green)' : ''};
 	padding: 1rem;
 	display: flex;
 	align-items: center;
 	opacity: 100%;
 	font-weight: 100;
 	border-radius: 0.5rem;
-	/* animation: ; */
-	animation: ${(props) =>
-		props.noanimate
+	animation: ${({ noanimate }) =>
+		noanimate
 			? 'none'
 			: css`
 					${fadeIn} 0.71s cubic-bezier(0.075, 0.82, 0.165, 1)

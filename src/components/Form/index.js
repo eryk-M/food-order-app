@@ -21,10 +21,10 @@ export const FormContainer = styled.div`
 `;
 
 export const FormAlert = styled.div`
-	color: ${(props) =>
-		props.variant === 'success' ? 'var(--color-green)' : '#842029;'};
-	background-color: ${(props) =>
-		props.variant === 'success' ? '#11c45429' : '#f8d7da'};
+	color: ${({ variant }) =>
+		variant === 'success' ? 'var(--color-green)' : '#842029;'};
+	background-color: ${(variant) =>
+		variant === 'success' ? '#11c45429' : '#f8d7da'};
 	position: relative;
 	padding: 1rem 1rem;
 	margin-bottom: 1rem;
@@ -40,11 +40,11 @@ export const FormHeading = styled.h2`
 	font-weight: bold;
 	font-size: 2.4rem;
 	position: relative;
-	width: ${(props) => (props.block ? '' : '11rem')};
+	width: ${({ block }) => (block ? '' : '11rem')};
 	margin-left: auto;
 	margin-right: auto;
 	&:before {
-		content: '${(props) => props.upper}';
+		content: '${({ upper }) => upper}';
 		position: absolute;
 		top: -3rem;
 		left: 0;
@@ -74,8 +74,8 @@ export const FormTooltip = styled.span`
 	color: var(--color-white);
 	padding: 1rem;
 	position: absolute;
-	right: ${(props) => props.right};
-	top: ${(props) => props.top};
+	right: ${({ right }) => right};
+	top: ${({ top }) => top};
 	opacity: 0;
 	transition: visibility 0s, opacity 0.2s ease;
 	visibility: hidden;
@@ -98,7 +98,7 @@ export const FormTooltipIcon = styled(BsQuestionSquare)`
 `;
 
 export const FormElement = styled.div`
-	margin-left: ${(props) => props.marginleft};
+	margin-left: ${({ marginleft }) => marginleft};
 	position: relative;
 	& .search-icon {
 		position: absolute;
@@ -110,10 +110,10 @@ export const FormElement = styled.div`
 	}
 `;
 export const FormGroup = styled.div`
-	display: ${(props) => (props.flex ? 'flex' : '')};
-	justify-content: ${(props) => props.justify};
-	align-items: ${(props) => props.align};
-	margin: ${(props) => props.margin};
+	display: ${({ flex }) => (flex ? 'flex' : '')};
+	justify-content: ${({ justify }) => justify};
+	align-items: ${({ align }) => align};
+	margin: ${({ margin }) => margin};
 `;
 export const FormLabel = styled.label`
 	font-size: 1.6rem;
@@ -129,21 +129,21 @@ export const FormInput = styled.input`
 	margin-bottom: 1.5rem;
 	margin-top: 1rem;
 	padding: 1rem;
-	width: ${(props) => props.width ?? '100%'};
-	display: ${(props) => props.display ?? 'block'};
+	width: ${({ width }) => width ?? '100%'};
+	display: ${({ display }) => display ?? 'block'};
 	border-radius: 0.5rem;
 	transition: border 0.1s ease-in;
-	border: ${(props) => {
-		if (props.warning) {
+	border: ${({ warning, error }) => {
+		if (warning) {
 			return '1px solid orange';
-		} else if (props.error) {
+		} else if (error) {
 			return '1px solid var(--color-red) !important';
 		}
 		return '1px solid #ccc;';
 	}};
 	&:focus {
-		${(props) => {
-			if (!props.error) return 'border: 1px solid var(--color-blue)';
+		${({ error }) => {
+			if (!error) return 'border: 1px solid var(--color-blue)';
 		}}
 	}
 	-moz-appearance: textfield;
@@ -160,19 +160,19 @@ export const FormInput = styled.input`
 export const FormTextArea = styled.textarea`
 	resize: none;
 	padding: 1rem;
-	height: ${(props) => props.height ?? '20rem'};
+	height: ${({ height }) => height ?? '20rem'};
 	width: 100%;
 	border-radius: 0.5rem;
 	outline: 0;
 	font-size: 1.6rem;
 	margin-top: 1rem;
-	margin-bottom: ${(props) => props.marginbottom};
-	border: ${(props) =>
-		props.error ? '1px solid var(--color-red)' : ''};
+	margin-bottom: ${({ marginbottom }) => marginbottom};
+	border: ${({ error }) =>
+		error ? '1px solid var(--color-red)' : ''};
 
 	&:focus {
-		${(props) => {
-			if (!props.error) return 'border: 1px solid var(--color-blue)';
+		${({ error }) => {
+			if (!error) return 'border: 1px solid var(--color-blue)';
 		}}
 	}
 `;
@@ -182,14 +182,10 @@ export const FormBtn = styled.button`
 	font-size: 1.8rem;
 	width: 100%;
 	height: 4.5rem;
-	background-color: ${(props) =>
-		props.secondary
-			? 'var(--color-secondary)'
-			: 'var(--color-primary)'};
-	color: ${(props) =>
-		props.secondary
-			? 'var(--color-grey-dark)'
-			: 'var(--color-grey-light)'};
+	background-color: ${({ secondary }) =>
+		secondary ? 'var(--color-secondary)' : 'var(--color-primary)'};
+	color: ${({ secondary }) =>
+		secondary ? 'var(--color-grey-dark)' : 'var(--color-grey-light)'};
 	vertical-align: middle;
 	cursor: pointer;
 	margin-top: 1.5rem;
@@ -203,8 +199,8 @@ export const FormBtn = styled.button`
 		cursor: default;
 	}
 
-	${(props) =>
-		props.button
+	${({ button }) =>
+		button
 			? 'letter-spacing: 1px;width: unset;font-size: 1.4rem;padding: 1rem;text-transform: uppercase;margin: 0;border-radius: 5px;width:16rem;&:hover {background-color: var(--color-secondary);color: var(--color-grey-dark);}'
 			: ''}
 	${LoaderWrapper} {
@@ -252,12 +248,12 @@ export const FormSpan = styled.span`
 
 export const FormErr = styled.p`
 	font-size: 1.4rem;
-	color: ${(props) =>
-		props.warning ? 'orange' : 'var(--color-red)'};
+	color: ${({ warning }) =>
+		warning ? 'orange' : 'var(--color-red)'};
 	margin: 1rem 0;
 	animation: ${fadeIn} 0.1s ease-in;
 	opacity: 100%;
-	display: ${(props) => props.display};
+	display: ${({ display }) => display};
 `;
 
 export const FormErrIcon = styled(MdErrorOutline)`

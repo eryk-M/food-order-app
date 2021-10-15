@@ -11,7 +11,7 @@ export const NavBurgerContainer = styled.nav`
 	transition: all 0.5s;
 	right: -35rem;
 	top: 0;
-	right: ${(props) => props.right};
+	right: ${({ right }) => right};
 `;
 
 export const NavBurgerIcons = styled.div`
@@ -57,7 +57,7 @@ export const NavBurgerClose = styled.div`
 `;
 
 export const NavBurgerOverlay = styled.div`
-	display: ${(props) => props.display};
+	display: ${({ display }) => display};
 	position: fixed;
 	background-color: rgba(0, 0, 0, 0.4);
 	z-index: 5006;

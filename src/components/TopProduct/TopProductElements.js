@@ -41,13 +41,11 @@ export const TopProductImage = styled.img`
 
 export const TopProductInfo = styled.div`
 	text-align: center;
-	/* margin-top: 1.5rem; */
 	margin-top: 1rem;
 	display: flex;
 	flex-direction: column;
 	height: calc(100% - 26rem);
 	@media ${device.mobileL} {
-		/* height: calc(100% - 34rem); */
 		height: 20rem;
 	}
 `;
@@ -76,7 +74,6 @@ export const TopProductOrder = styled(Link)`
 	color: var(--color-primary);
 	padding: 2rem 0;
 	border-top: 1px solid rgba(0, 0, 0, 0.1);
-	/* margin-top: 2rem; */
 	transition: all 0.2s;
 	margin-top: auto;
 	&:hover {

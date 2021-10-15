@@ -9,6 +9,6 @@ export const StarInput = styled.input`
 `;
 
 export const StarIcon = styled(FaStar)`
-	cursor: ${(props) => (props.show === 'true' ? '' : 'pointer')};
+	cursor: ${({ show }) => (show === 'true' ? '' : 'pointer')};
 	margin: 1rem 0 1rem 0.3rem;
 `;

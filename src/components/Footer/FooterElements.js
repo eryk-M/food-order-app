@@ -24,16 +24,15 @@ export const FooterMediaIcon = styled.a`
 	width: 5rem;
 	height: 5rem;
 	border-radius: 50%;
-	/* outline: 1px solid var(--color-grey-light); */
 	font-size: 1.6rem;
 	color: var(--color-grey-light);
 	cursor: pointer;
 	transition: all 0.1s;
-	background-color: ${(props) => {
-		if (props.facebook) return '#4267b2;;';
-		else if (props.instagram) return '#8a3ab9';
-		else if (props.twitter) return '#1DA1F2';
-		else if (props.youtube) return '#FF0000';
+	background-color: ${({ facebook, instagram, twitter, youtube }) => {
+		if (facebook) return '#4267b2;;';
+		else if (instagram) return '#8a3ab9';
+		else if (twitter) return '#1DA1F2';
+		else if (youtube) return '#FF0000';
 	}};
 	& svg {
 		font-size: 2rem;
@@ -46,7 +45,6 @@ export const FooterLogo = styled.img`
 	width: 15rem;
 	object-fit: cover;
 	margin: 4rem 0;
-	/* width: 13rem; */
 `;
 
 export const FooterAddress = styled.ul`

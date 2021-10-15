@@ -47,15 +47,6 @@ const Dashboard = () => {
 					<DonutChart />
 				</GridDonut>
 			</DashBoardGridContainer>
-			{/* <ChartsWrapper>
-				<LineChartsContainer>
-					<LineChart {...chartSalesYear} />
-					<LineChart {...chartSalesMonth} />
-					<LineChart {...chartOrdersYear} />
-					<LineChart {...chartOrdersMonth} />
-				</LineChartsContainer>
-				<DonutChart />
-			</ChartsWrapper> */}
 		</>
 	);
 };

@@ -17,9 +17,8 @@ export const SideBarContainer = styled.aside`
 	left: 0;
 	bottom: 0;
 	font-weight: 100;
-	overflow-x: ${(props) =>
-		props.hiddenOverflow ? 'visible' : 'hidden'};
-
+	overflow-x: ${({ hiddenOverflow }) =>
+		hiddenOverflow ? 'visible' : 'hidden'};
 	transition: transform 0.2s ease, width 0.2s ease-in-out;
 	.is-active {
 		background-color: var(--color-primary) !important;

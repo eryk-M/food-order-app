@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const ButtonLink = styled(Link)`
 	padding: 1.2rem 1rem;
-	font-size: ${(props) => props.font ?? '1.2rem'};
+	font-size: ${({ font }) => font ?? '1.2rem'};
 	min-width: 13rem;
 	background-color: var(--color-primary);
 	text-align: center;

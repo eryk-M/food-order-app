@@ -44,9 +44,9 @@ export const ItemImageWrapper = styled.div`
 		width: 20rem;
 		background-color: var(--color-primary);
 		z-index: -1;
-		opacity: ${(props) => (props.loaded ? '1' : '0')};
-		animation: ${(props) =>
-			props.loaded
+		opacity: ${({ loaded }) => (loaded ? '1' : '0')};
+		animation: ${({ loaded }) =>
+			loaded
 				? css`
 						${moveRightDown} .3s ease-in-out
 				  `
@@ -63,7 +63,8 @@ export const ItemImageWrapper = styled.div`
 		padding: 0.5rem;
 		border-radius: 5px;
 		z-index: 1;
-		visibility: ${(props) => (props.discount ? 'visible' : 'hidden')};
+		visibility: ${({ discount }) =>
+			discount ? 'visible' : 'hidden'};
 	}
 `;
 
@@ -109,7 +110,6 @@ export const ItemButton = styled.div`
 		width: 100%;
 		display: flex;
 		justify-content: center;
-		/* margin: 2rem 0; */
 		margin-top: 3rem;
 	}
 `;
@@ -117,15 +117,13 @@ export const ItemButton = styled.div`
 export const ItemPrice = styled.span`
 	font-family: 'Arvo', sans-serif;
 	font-weight: 700;
-	color: ${(props) =>
-		props.discount
-			? 'var(--color-grey-light-2)'
-			: 'var(--color-primary)'};
+	color: ${({ discount }) =>
+		discount ? 'var(--color-grey-light-2)' : 'var(--color-primary)'};
 	font-size: 2rem;
 	display: block;
 	margin-top: 1rem;
-	text-decoration: ${(props) =>
-		props.discount ? 'line-through' : 'none'};
+	text-decoration: ${({ discount }) =>
+		discount ? 'line-through' : 'none'};
 	display: block;
-	margin-right: ${(props) => (props.discount ? '1rem' : '')};
+	margin-right: ${({ discount }) => (discount ? '1rem' : '')};
 `;

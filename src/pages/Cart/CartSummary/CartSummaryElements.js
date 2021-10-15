@@ -27,7 +27,7 @@ export const CartSummaryItem = styled.div`
 	margin-top: 1rem;
 	margin-left: 7rem;
 	padding-bottom: 2rem;
-	display: ${(props) => (props.flex ? 'flex' : 'block')};
+	display: ${({ flex }) => (flex ? 'flex' : 'block')};
 	&:first-of-type {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	}
@@ -83,7 +83,7 @@ export const CartSummaryOrderInfo = styled.p`
 	line-height: 1.7;
 	font-size: 1.4rem;
 	margin-left: 2rem;
-	font-weight: ${(props) => props.fontW};
+	font-weight: ${({ fontW }) => fontW};
 	&:first-of-type {
 		font-family: 'Arvo';
 	}
@@ -109,7 +109,7 @@ export const CartSummaryTotalHeading = styled.h2`
 `;
 export const CartSummaryTotalItem = styled.p`
 	margin-top: 2rem;
-	font-size: ${(props) => (props.total ? '1.6rem' : '1.4rem')};
+	font-size: ${({ total }) => (total ? '1.6rem' : '1.4rem')};
 	display: flex;
 	justify-content: space-between;
 

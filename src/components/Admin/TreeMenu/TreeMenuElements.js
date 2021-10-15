@@ -11,8 +11,8 @@ export const TreeP = styled.p`
 export const TreeItemMain = styled.li`
 	display: block;
 	font-size: 1.6rem;
-	width: ${(props) =>
-		props.hidden ? '5rem' : 'calc(25rem - 0.5rem * 2)'};
+	width: ${({ hidden }) =>
+		hidden ? '5rem' : 'calc(25rem - 0.5rem * 2)'};
 	padding: 1rem;
 	border-radius: 5px;
 	display: flex;
@@ -25,7 +25,7 @@ export const TreeItemMain = styled.li`
 	}
 	& svg {
 		font-size: 2.2rem;
-		margin-right: ${(props) => (props.hidden ? '' : '1.2rem')};
+		margin-right: ${({ hidden }) => (hidden ? '' : '1.2rem')};
 	}
 
 	&:hover {
@@ -35,7 +35,7 @@ export const TreeItemMain = styled.li`
 		}
 	}
 	& .icon-arrow {
-		display: ${(props) => (props.hidden ? 'none' : 'block')};
+		display: ${({ hidden }) => (hidden ? 'none' : 'block')};
 		font-size: 2rem;
 		margin-left: auto;
 		margin-right: 0;
@@ -66,7 +66,7 @@ export const TreeNavLink = styled(NavLink)`
 	align-items: center;
 	& svg {
 		font-size: 2.2rem;
-		margin-right: ${(props) => (props.hidden ? '' : '1.2rem')};
+		margin-right: ${({ hidden }) => (hidden ? '' : '1.2rem')};
 	}
 	&:hover {
 		background-color: var(--color-primary);
@@ -85,15 +85,15 @@ export const TreeNavLink = styled(NavLink)`
 `;
 
 export const Tree = styled.div`
-	overflow-x: ${(props) =>
-		props.hiddenOverflow ? 'visible' : 'hidden'};
+	overflow-x: ${({ hiddenOverflow }) =>
+		hiddenOverflow ? 'visible' : 'hidden'};
 	overflow-y: clip;
 	@media ${device.laptopS} {
 		overflow-x: clip;
 	}
 	${TreeItemMain} {
-		${(props) => {
-			if (props.hidden) {
+		${({ hidden }) => {
+			if (hidden) {
 				return `
             width: 5rem;
             `;
@@ -102,8 +102,8 @@ export const Tree = styled.div`
 	}
 
 	${TreeNavLink} {
-		${(props) => {
-			if (props.hidden) {
+		${({ hidden }) => {
+			if (hidden) {
 				return `
             font-size: 2.5rem;
             `;
@@ -114,8 +114,8 @@ export const Tree = styled.div`
 
 export const TreeList = styled.ul`
 	background-color: #3e4a54;
-	overflow: ${(props) =>
-		props.hiddenOverflow ? 'visible' : 'hidden'};
+	overflow: ${({ hiddenOverflow }) =>
+		hiddenOverflow ? 'visible' : 'hidden'};
 	width: 25rem;
 	transition: height 0.2s ease-in-out;
 	@media (max-width: 1024px) {

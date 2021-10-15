@@ -7,37 +7,29 @@ const StatusNote = styled.p`
 	display: inline-block;
 	font-size: 1.6rem;
 
-	color: ${(props) => {
-		if (props.step === 0) {
+	color: ${({ step }) => {
+		if (step === 0) {
 			return '#fff;';
-		} else if (
-			props.step === 1 ||
-			props.step === 2 ||
-			props.step === 3
-		) {
+		} else if (step === 1 || step === 2 || step === 3) {
 			return '#000';
-		} else if (props.step === 4) {
+		} else if (step === 4) {
 			return '#194c22';
 		} else {
 			return '#969696';
 		}
 	}};
-	background-color: ${(props) => {
-		if (props.step === 0) {
+	background-color: ${({ step }) => {
+		if (step === 0) {
 			return '#52b7ff;';
-		} else if (
-			props.step === 1 ||
-			props.step === 2 ||
-			props.step === 3
-		) {
+		} else if (step === 1 || step === 2 || step === 3) {
 			return '#ffbc00';
-		} else if (props.step === 4) {
+		} else if (step === 4) {
 			return 'var(--color-green)';
 		} else {
 			return '#dedede';
 		}
 	}};
-	opacity: ${(props) => (props.step === 5 ? '0.6' : '')};
+	opacity: ${({ step }) => (step === 5 ? '0.6' : '')};
 	margin: 0 auto;
 	border-radius: 1rem;
 	padding: 0.4rem 1rem;

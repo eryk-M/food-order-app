@@ -119,8 +119,8 @@ export const ProductsResetButton = styled.button`
 	padding: 1rem 1.6rem;
 	display: inline-block;
 	font-size: 1.4rem;
-	background-color: ${(props) => {
-		if (props.resetSuccess) {
+	background-color: ${({ resetSuccess }) => {
+		if (resetSuccess) {
 			return 'var(--color-green)';
 		} else {
 			return 'var(--color-secondary);';

@@ -3,7 +3,6 @@ import styled from 'styled-components/macro';
 export const DeleteQuestionContainer = styled.header`
 	color: #c62828;
 	background-color: #fbe9e7;
-
 	border-radius: 10px;
 	padding: 2.4rem;
 `;

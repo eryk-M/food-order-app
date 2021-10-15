@@ -15,7 +15,7 @@ export const OrderP = styled.p`
 	display: block;
 	margin-right: 2rem;
 	line-height: 1.5;
-	font-size: ${(props) => (props.medium ? '1.8rem' : '')};
+	font-size: ${({ medium }) => (medium ? '1.8rem' : '')};
 `;
 
 export const OrderHeading = styled.p`
@@ -90,15 +90,15 @@ export const OrderChangeButton = styled.button`
 	border-radius: 5px;
 	font-size: 1.6rem;
 	font-weight: bold;
-	background-color: ${(props) => {
-		if (props.step === 2) return 'var(--color-secondary)';
-		else if (props.step === 1) return 'var(--color-blue)';
-		else if (props.step === 3) return 'var(--color-primary)';
-		else if (props.step === 5) return 'var(--color-grey-light)';
+	background-color: ${({ step }) => {
+		if (step === 2) return 'var(--color-secondary)';
+		else if (step === 1) return 'var(--color-blue)';
+		else if (step === 3) return 'var(--color-primary)';
+		else if (step === 5) return 'var(--color-grey-light)';
 		else return 'var(--color-green)';
 	}};
-	color: ${(props) =>
-		props.step === 5 ? 'var(--color-black)' : '#fff'};
+	color: ${({ step }) =>
+		step === 5 ? 'var(--color-black)' : '#fff'};
 	transition: 0.1s all ease-in-out;
 	@media only screen and (min-width: 1024px) {
 		&:hover {
@@ -119,19 +119,17 @@ export const UserStatus = styled.p`
 
 export const UserOrderStatus = styled.span`
 	display: inline-block;
-	/* font-style: italic;
-	font-weight: 100; */
 	border-radius: 1rem;
 	font-size: 1.6rem;
 	padding: 0.4rem 1rem;
-	opacity: ${(props) => (props.step === 5 ? '0.6' : '')};
-	color: ${(props) => (props.step === 5 ? '#969696' : '#fff')};
-	background-color: ${(props) => {
-		if (props.step === 2) return 'var(--color-secondary)';
-		else if (props.step === 1) return 'var(--color-blue)';
-		else if (props.step === 3) return 'var(--color-primary)';
-		else if (props.step === 5) return '#dededd';
-		else if (props.step === 0) return 'var(--color-blue)';
+	opacity: ${({ step }) => (step === 5 ? '0.6' : '')};
+	color: ${({ step }) => (step === 5 ? '#969696' : '#fff')};
+	background-color: ${({ step }) => {
+		if (step === 2) return 'var(--color-secondary)';
+		else if (step === 1) return 'var(--color-blue)';
+		else if (step === 3) return 'var(--color-primary)';
+		else if (step === 5) return '#dededd';
+		else if (step === 0) return 'var(--color-blue)';
 		else return 'var(--color-green)';
 	}};
 	margin-left: 1rem;
@@ -139,8 +137,8 @@ export const UserOrderStatus = styled.span`
 
 export const LoaderWrapper = styled.div`
 	position: absolute;
-	top: ${(props) => props.top};
-	right: ${(props) => props.right};
+	top: ${({ top }) => top};
+	right: ${({ right }) => right};
 `;
 
 export const PrintButton = styled.button`
@@ -149,7 +147,6 @@ export const PrintButton = styled.button`
 	top: 2rem;
 	padding: 0.5rem 1rem;
 	cursor: pointer;
-	/* outline: none; */
 	text-transform: uppercase;
 	border: none;
 	border-radius: 5px;

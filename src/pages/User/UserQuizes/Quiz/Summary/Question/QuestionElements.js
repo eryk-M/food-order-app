@@ -1,12 +1,9 @@
 import styled from 'styled-components/macro';
 
 export const QuestionContainer = styled.div`
-	/* width: 80rem; */
 	max-width: 60rem;
 	margin: 0 auto;
-	/* text-align: center; */
 	display: block;
-	/* background-color: green; */
 	overflow: hidden;
 	background-color: #f8f8f8;
 	padding: 1rem;
@@ -34,21 +31,19 @@ export const QuestionAnswer = styled.p`
 `;
 
 export const QuestionList = styled.ul`
-	/* margin-top: 1rem; */
 	font-size: 1.4rem;
-	/* padding-left: 1rem; */
 	padding: 0 0 1rem 0;
 `;
 
 export const QuestionItem = styled.li`
 	margin-top: 1rem;
-	background-color: ${(props) => {
-		if (props.userAnswer) return 'var(--color-red)';
-		else if (props.correct) return 'var(--color-green)';
+	background-color: ${({ userAnswer, correct }) => {
+		if (userAnswer) return 'var(--color-red)';
+		else if (correct) return 'var(--color-green)';
 		else return 'var(--color-background-grey-light)';
 	}};
-	color: ${(props) => {
-		if (props.userAnswer || props.correct) return '#fff';
+	color: ${({ userAnswer, correct }) => {
+		if (userAnswer || correct) return '#fff';
 		else return '#000';
 	}};
 	padding: 1rem;

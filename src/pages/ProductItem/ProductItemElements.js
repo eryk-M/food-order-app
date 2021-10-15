@@ -38,7 +38,8 @@ export const SliderContainer = styled.div`
 		padding: 0.5rem;
 		border-radius: 5px;
 		z-index: 1;
-		visibility: ${(props) => (props.discount ? 'visible' : 'hidden')};
+		visibility: ${({ discount }) =>
+			discount ? 'visible' : 'hidden'};
 	}
 
 	@media ${device.mobileM} {
@@ -78,7 +79,6 @@ export const SlideItem = styled.div`
 	width: 32%;
 	height: auto;
 	object-fit: cover;
-	/* object-position: right top; */
 	&:hover {
 		opacity: 0.8;
 		cursor: pointer;
@@ -130,7 +130,6 @@ export const ProductTitle = styled.h2`
 	font-weight: 500;
 	font-size: 3.5rem;
 	text-align: center;
-	/* margin-top: 2.5rem; */
 `;
 
 export const ProductDesc = styled.p`
@@ -227,17 +226,17 @@ export const ProductPrice = styled.p`
 	line-height: 1.4;
 	margin-top: 1rem;
 	text-align: center;
-	text-decoration: ${(props) =>
-		props.discount ? 'line-through' : 'none'};
-	color: ${(props) =>
-		props.discount
+	text-decoration: ${({ discount }) =>
+		discount ? 'line-through' : 'none'};
+	color: ${({ discount }) =>
+		discount
 			? 'var(--color-grey-light-2)'
 			: 'var(--color-primary)'}; ;
 `;
 
 export const ProductBackground = styled.div`
 	height: 10rem;
-	background-image: url(${(props) => props.background});
+	background-image: url(${({ background }) => background});
 	width: 100%;
 `;
 

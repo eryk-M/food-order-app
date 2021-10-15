@@ -10,7 +10,6 @@ import { getReviews } from 'utils/firebaseGetters';
 const ReviewsContainer = styled.section`
 	background-color: var(--color-background-grey-light);
 	padding-bottom: 3rem;
-
 	position: relative;
 `;
 const ReviewsPaginationContainer = styled.div`
