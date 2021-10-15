@@ -49,7 +49,7 @@ export const NavBarBurger = ({ hidden, toggle }) => {
 					<NavBurgerItem>
 						<NavBurgerLink
 							to={{
-								pathname: '/admin',
+								pathname: '/login',
 								query: '/admin',
 							}}
 							onClick={toggle}

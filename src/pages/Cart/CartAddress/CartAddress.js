@@ -29,7 +29,7 @@ export const CartAddress = ({
 	step,
 	dispatch,
 }) => {
-	const size = useWindowSize();
+	const { width } = useWindowSize();
 
 	const {
 		register,
@@ -54,8 +54,6 @@ export const CartAddress = ({
 		});
 		onChangeStep(undefined, 'push');
 	};
-
-	const { width } = size;
 
 	return (
 		<>

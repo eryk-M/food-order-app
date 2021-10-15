@@ -9,18 +9,17 @@ import {
 	HeroShape,
 	HeroImageWrapper,
 	HeroIMG,
+	HeroSpan,
 } from './HeroElements';
 
 import { ButtonLink } from 'components';
 import Shape from 'assets/images/shape.png';
 import ImgBg from 'assets/images/header-burger-2.jpg';
-export const Hero = () => {
-	const height = window.innerHeight;
 
+export const Hero = () => {
 	return (
-		<HeroContainer height={height}>
+		<HeroContainer>
 			<HeroImageWrapper
-				height={height}
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1, transition: { duration: 0.5 } }}
 			>
@@ -28,14 +27,9 @@ export const Hero = () => {
 			</HeroImageWrapper>
 			<HeroWrapper>
 				<HeroContent>
-					<HeroP
-						fontFamily="Shadows Into Light Two, handwriting"
-						color="white"
-					>
-						Express food to raise your mood!
-					</HeroP>
+					<HeroSpan>Express food to raise your mood!</HeroSpan>
 					<HeroH1>The best burgers in town</HeroH1>
-					<HeroP fontFamily="Arvo, serif">From $10.99</HeroP>
+					<HeroP>From $10.99</HeroP>
 					<ButtonLink to="/products">Order now!</ButtonLink>
 				</HeroContent>
 			</HeroWrapper>

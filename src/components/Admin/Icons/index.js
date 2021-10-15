@@ -146,7 +146,7 @@ export const CrossDeleteIcon = styled(TiDeleteOutline)`
 	font-size: 4rem;
 	cursor: pointer;
 	vertical-align: middle;
-	color: var(--color-red);
+	color: var(--color-grey-dark);
 	display: inline-block;
 	position: absolute;
 	right: 1rem;

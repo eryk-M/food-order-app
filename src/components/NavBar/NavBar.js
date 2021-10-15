@@ -23,7 +23,7 @@ const NavBar = (props) => {
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
 	const [scroll, setScroll] = useState(false);
 	const history = useHistory();
-	const size = useWindowSize();
+	const { width } = useWindowSize();
 
 	const {
 		state: { cart },
@@ -65,7 +65,6 @@ const NavBar = (props) => {
 
 	const { pathname } = props.location;
 	const { toggle } = props;
-	const { width } = size;
 
 	const switchMenu = () => {
 		if (width > 840) {

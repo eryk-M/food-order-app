@@ -126,10 +126,11 @@ export const ProductRight = styled.div`
 `;
 
 export const ProductTitle = styled.h2`
-	font-family: 'Rubik', sans-serif;
-	font-weight: 500;
+	font-family: 'Arvo', sans-serif;
+	font-weight: 700;
 	font-size: 3.5rem;
 	text-align: center;
+	color: var(--color-grey-dark);
 `;
 
 export const ProductDesc = styled.p`

@@ -13,7 +13,7 @@ import { DonutChartWrapper } from './DonutChartElements.js';
 import { useWindowSize } from 'hooks';
 
 export const DonutChart = () => {
-	const size = useWindowSize();
+	const { width } = useWindowSize();
 
 	const options = {
 		labels: ['Burgers', 'Chicken', 'Fries', 'Drinks'],
@@ -26,7 +26,7 @@ export const DonutChart = () => {
 		},
 		plotOptions: {
 			pie: {
-				size: size.width <= 640 ? 100 : '',
+				size: width <= 640 ? 100 : '',
 			},
 		},
 	};
@@ -59,7 +59,7 @@ export const DonutChart = () => {
 					options={options}
 					series={series}
 					type="pie"
-					width={donutWidth(size.width)}
+					width={donutWidth(width)}
 					height="700"
 				/>
 			</DonutChartWrapper>

@@ -22,9 +22,7 @@ const AdminContentContainer = styled.div`
 
 export const Admin = () => {
 	const [hidden, setHidden] = useState(false);
-	const size = useWindowSize();
-
-	const { width } = size;
+	const { width } = useWindowSize();
 
 	return (
 		<>

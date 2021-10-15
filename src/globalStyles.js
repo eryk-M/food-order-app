@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 
-import './index.css';
 import { NavLogoImage } from 'components/NavBar/NavBarElements';
 
 export const GlobalStyle = createGlobalStyle`

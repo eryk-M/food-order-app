@@ -47,9 +47,8 @@ const ContentToPrint = React.forwardRef(
 		},
 		ref
 	) => {
-		const size = useWindowSize();
+		const { width } = useWindowSize();
 
-		const { width } = size;
 		return (
 			<>
 				{data && (

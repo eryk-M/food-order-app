@@ -51,7 +51,7 @@ const Edit = (props) => {
 		getAdminOneProduct(Number(props.match.params.id))
 	);
 	const { updateAdminProduct } = useAdminApi();
-	const size = useWindowSize();
+	const { width } = useWindowSize();
 	const timeoutRef = useRef();
 
 	const [ingredients, setIngredients] = useState([]);
@@ -188,7 +188,6 @@ const Edit = (props) => {
 	};
 
 	const imgTag = buildImgTag();
-	const { width } = size;
 	return (
 		<>
 			{data && (

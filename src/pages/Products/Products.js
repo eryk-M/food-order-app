@@ -20,11 +20,9 @@ export const Products = () => {
 	const [query, setQuery] = useState('');
 	const [sort, setSort] = useState('');
 
-	const size = useWindowSize();
+	const { width } = useWindowSize();
 
 	const { data } = useFirestoreQuery(getAllProducts());
-
-	const { width } = size;
 
 	return (
 		<ProductsContainer>

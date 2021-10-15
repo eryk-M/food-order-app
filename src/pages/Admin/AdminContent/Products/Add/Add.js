@@ -46,7 +46,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 const Add = () => {
 	const { addAdminProduct } = useAdminApi();
 	const history = useHistory();
-	const size = useWindowSize();
+	const { width } = useWindowSize();
 	const timeoutRef = useRef();
 
 	const [ingredients, setIngredients] = useState([]);
@@ -159,7 +159,6 @@ const Add = () => {
 	};
 
 	const imgTag = buildImgTag();
-	const { width } = size;
 
 	return (
 		<EditContainer>

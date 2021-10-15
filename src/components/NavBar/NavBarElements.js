@@ -36,6 +36,7 @@ export const NavList = styled.ul`
 	justify-content: center;
 	font-size: 2rem;
 	font-family: 'Arvo', sans-serif;
+	font-weight: 700;
 	text-transform: uppercase;
 `;
 

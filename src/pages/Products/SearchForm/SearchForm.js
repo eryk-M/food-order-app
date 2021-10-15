@@ -4,9 +4,8 @@ import { SearchFormContainer } from './SearchFormElements';
 import { Search, Select, PriceFilter } from 'components';
 import { useWindowSize } from 'hooks';
 const SearchForm = ({ price, query, setQuery, setSort, tooltip }) => {
-	const size = useWindowSize();
+	const { width } = useWindowSize();
 
-	const { width } = size;
 	return (
 		<SearchFormContainer>
 			{width > 640 && (

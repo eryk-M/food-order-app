@@ -55,7 +55,7 @@ const Item = ({ el }) => {
 		state: { cart },
 		dispatch,
 	} = useContext(CartContext);
-	const size = useWindowSize();
+	const { width } = useWindowSize();
 	//adding timeout to remove from unmount
 	const addedTimeoutRef = useRef();
 
@@ -82,8 +82,6 @@ const Item = ({ el }) => {
 		}, 4000);
 		addedTimeoutRef.current = timeout;
 	};
-
-	const { width } = size;
 
 	return (
 		<ItemWrapper>

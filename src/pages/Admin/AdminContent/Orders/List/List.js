@@ -72,7 +72,7 @@ const Sort = ({ children, setSort, sort }) => {
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllOrders());
 	const { deleteOrders } = useApi();
-	const size = useWindowSize();
+	const { width } = useWindowSize();
 	const {
 		itemsPerPage,
 		paginate,
@@ -207,8 +207,6 @@ const List = () => {
 				.slice(indexOfFirstItem, indexOfLastItem);
 		}
 	};
-
-	const { width } = size;
 
 	return (
 		<>

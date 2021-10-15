@@ -17,7 +17,8 @@ export const HeroImageWrapper = styled(motion.div)`
 		bottom: 0;
 	}
 	@media ${device.laptopS} {
-		height: ${({ height }) => height + 'px'};
+		min-height: 100vh;
+		min-height: -webkit-fill-available;
 	}
 `;
 
@@ -36,7 +37,8 @@ export const HeroContainer = styled.header`
 	height: 100vh;
 	background-color: black;
 	@media ${device.laptopS} {
-		height: ${({ height }) => height + 'px'};
+		min-height: 100vh;
+		min-height: -webkit-fill-available;
 	}
 `;
 
@@ -73,13 +75,22 @@ export const HeroH1 = styled.h1`
 	letter-spacing: 3px;
 `;
 
+export const HeroSpan = styled.span`
+	font-family: Shadows Into Light Two, handwriting;
+	font-size: clamp(2rem, 2.5vw, 3rem);
+	margin-top: 1.2rem;
+	margin-bottom: 2rem;
+	color: white;
+	font-weight: 400;
+`;
+
 export const HeroP = styled.p`
-	font-family: ${({ fontFamily }) => fontFamily};
+	font-family: Arvo, serif;
 	font-size: clamp(2rem, 2.5vw, 3rem);
 	margin-top: 1.2rem;
 	margin-bottom: 2rem;
 	color: ${({ color }) => color};
-	font-weight: 400;
+	font-weight: 700;
 `;
 
 export const HeroShape = styled.img`
@@ -88,4 +99,7 @@ export const HeroShape = styled.img`
 	width: 100%;
 	bottom: 0rem;
 	left: 0;
+	@media ${device.laptopS} {
+		display: none;
+	}
 `;

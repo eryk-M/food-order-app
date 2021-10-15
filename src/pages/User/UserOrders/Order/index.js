@@ -16,7 +16,7 @@ import {
 import { useWindowSize } from 'hooks';
 import { OrdersTableRow } from '../UserOrdersElements';
 const Order = ({ el, open }) => {
-	const size = useWindowSize();
+	const { width } = useWindowSize();
 
 	const returnUserStatus = (step) => {
 		const text = [
@@ -29,8 +29,6 @@ const Order = ({ el, open }) => {
 		];
 		return text[step];
 	};
-
-	const { width } = size;
 
 	if (width <= 460) {
 		return (
