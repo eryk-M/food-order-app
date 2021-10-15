@@ -164,7 +164,7 @@ const Order = (props) => {
 		content: () => componentRef.current,
 	});
 
-	if (data === null) return <Redirect to="/404" />;
+	if (data === null) return <Redirect to="/admin/orders/" />;
 
 	const steps = [
 		{ step: 1, text: 'Preparing' },

@@ -54,12 +54,8 @@ function App() {
 									component={Login}
 								/>
 
-								<Route path="/cart" exact component={Cart} />
-								<Route
-									path="/food-tracker"
-									exact
-									component={Tracker}
-								/>
+								<Route path="/cart" component={Cart} />
+								<Route path="/food-tracker" component={Tracker} />
 								<Route path="/products" exact component={Products} />
 								<Route path="/404" exact component={NotFound} />
 								{/* problem with handling 404 */}

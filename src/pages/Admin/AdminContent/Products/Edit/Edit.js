@@ -78,7 +78,7 @@ const Edit = (props) => {
 		};
 	}, []);
 
-	if (data === null) return <Redirect to="/404" />;
+	if (data === null) return <Redirect to="/admin/products" />;
 
 	if (ingredients.length === 0 && data && !isInitiallyFetched) {
 		setIngredients(data[0].ingredients);
