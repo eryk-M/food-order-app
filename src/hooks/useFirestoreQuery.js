@@ -57,7 +57,7 @@ export function useFirestoreQuery(query) {
 					: getDocData(response);
 				dispatch({
 					type: 'success',
-					payload: data.length === 0 ? null : data,
+					payload: data,
 				});
 			},
 			(error) => {

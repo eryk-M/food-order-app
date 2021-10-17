@@ -52,29 +52,44 @@ export const APIProvider = ({ children }) => {
 	};
 
 	const setAdminItems = async (data) => {
-		for (const el of data) {
-			const storageRef = storage.ref(
-				`adminDefaultImages/${el.img}.jpg`
-			);
+		for (const {
+			id,
+			alt,
+			name,
+			desc,
+			price,
+			button,
+			ingredients,
+			category,
+			quantity,
+			avgRating,
+			popularity,
+			ratingCount,
+			availability,
+			discountPrice,
+			sale,
+			img,
+		} of data) {
+			const storageRef = storage.ref(`adminDefaultImages/${img}.jpg`);
 			const url = await storageRef.getDownloadURL();
-			await adminProductsRef.doc(`${el.id}`).set({
-				id: el.id,
+			await adminProductsRef.doc(`${id}`).set({
+				id,
 				img: url,
-				alt: el.alt,
-				name: el.name,
-				desc: el.desc,
-				price: el.price,
-				button: el.button,
-				ingredients: el.ingredients,
-				category: el.category,
-				quantity: el.quantity,
-				avgRating: el.avgRating,
-				popularity: el.popularity,
-				ratingCount: el.ratingCount,
-				availability: el.availability,
-				discountPrice: el.discountPrice,
-				sale: el.sale,
-				img_ref: el.img,
+				alt,
+				name,
+				desc,
+				price,
+				button,
+				ingredients,
+				category,
+				quantity,
+				avgRating,
+				popularity,
+				ratingCount,
+				availability,
+				discountPrice,
+				sale,
+				img_ref: img,
 			});
 		}
 	};
@@ -89,11 +104,11 @@ export const APIProvider = ({ children }) => {
 	) => {
 		try {
 			await usersRef.doc(uid).update({
-				name: name,
-				address: address,
-				phone: phone,
-				city: city,
-				zip: zip,
+				name,
+				address,
+				phone,
+				city,
+				zip,
 			});
 		} catch (err) {
 			console.error(err);
@@ -117,11 +132,11 @@ export const APIProvider = ({ children }) => {
 				.doc(String(productId))
 				.collection('reviews')
 				.add({
-					userId: userId,
-					userName: userName,
-					date: date,
-					body: body,
-					rating: rating,
+					userId,
+					userName,
+					date,
+					body,
+					rating,
 				});
 			const reviews = [];
 			let avgRating = 0;
@@ -139,11 +154,11 @@ export const APIProvider = ({ children }) => {
 			size = response.size;
 			avgRating = avgRating / response.docs.length;
 			reviewsRef.doc(String(productId)).set({
-				avgRating: avgRating,
+				avgRating,
 				ratingCount: size,
 			});
 			productsRef.doc(String(productId)).update({
-				avgRating: avgRating,
+				avgRating,
 				ratingCount: size,
 			});
 		} catch (err) {
@@ -166,14 +181,14 @@ export const APIProvider = ({ children }) => {
 				.update({ popularity: increment });
 		});
 		await ordersRef.add({
-			orderId: orderId,
+			orderId,
 			userId: userId ?? '',
-			totalPrice: totalPrice,
+			totalPrice,
 			step: 0,
-			userInfo: userInfo,
-			orderInfo: orderInfo,
-			date: date,
-			payment: payment,
+			userInfo,
+			orderInfo,
+			date,
+			payment,
 		});
 	};
 
@@ -227,14 +242,17 @@ export const APIProvider = ({ children }) => {
 		});
 	};
 
-	const addQuiz = async (questions, data) => {
+	const addQuiz = async (
+		questions,
+		{ title, code, discount, fromPrice }
+	) => {
 		await quizRef.add({
-			title: data.title.toUpperCase(),
-			questions: questions,
+			title: title.toUpperCase(),
+			questions,
 			coupon: {
-				code: data.code,
-				discount: data.discount,
-				fromPrice: data.fromPrice,
+				code,
+				discount,
+				fromPrice,
 			},
 		});
 	};

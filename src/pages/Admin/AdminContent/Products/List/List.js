@@ -48,7 +48,7 @@ const List = () => {
 	const [open, setOpen] = useState(false);
 	const [id, setId] = useState('');
 	const [showSuccess, setShowSuccess] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isResetLoading, setIsResetLoading] = useState(false);
 	const [resetSuccess, setResetSuccess] = useState(false);
 
 	const timeoutResetRef = useRef();
@@ -59,7 +59,7 @@ const List = () => {
 		}
 		return () => {
 			clearTimeout(timeoutResetRef.current);
-			setIsLoading(false);
+			setIsResetLoading(false);
 		};
 	}, [data, setCurrentPage]);
 
@@ -75,10 +75,10 @@ const List = () => {
 
 	//RESET ADMIN
 	const onSetItems = async () => {
-		setIsLoading(true);
+		setIsResetLoading(true);
 		try {
 			await setAdminItems(dummyData);
-			setIsLoading(false);
+			setIsResetLoading(false);
 			setResetSuccess(true);
 
 			const timeoutReset = setTimeout(() => {
@@ -87,7 +87,7 @@ const List = () => {
 			timeoutResetRef.current = timeoutReset;
 		} catch (err) {
 			console.log(err);
-			setIsLoading(false);
+			setIsResetLoading(false);
 		}
 	};
 
@@ -129,7 +129,7 @@ const List = () => {
 				/>
 
 				<ProductsReset
-					loading={isLoading}
+					loading={isResetLoading}
 					onSetItems={onSetItems}
 					resetSuccess={resetSuccess}
 				/>

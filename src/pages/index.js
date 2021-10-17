@@ -24,7 +24,7 @@ export { Login } from './Login/Login';
 
 //Home
 export { Story } from './Home/Story/Story';
-export { TopProducts } from './Home/TopProducts/TopProducts';
+export { default as TopProducts } from './Home/TopProducts/TopProducts';
 export { Home } from './Home/Home';
 
 //Cart

@@ -48,7 +48,9 @@ const ContentToPrint = React.forwardRef(
 		ref
 	) => {
 		const { width } = useWindowSize();
-
+		const [{ step, date, userInfo, orderInfo, payment, totalPrice }] =
+			data || [{}];
+		const { name, address, city, zip, phone } = userInfo || {};
 		return (
 			<>
 				{data && (
@@ -58,36 +60,34 @@ const ContentToPrint = React.forwardRef(
 							<JustifyCenterContainer>
 								<MiddleWrapper>
 									<OrderHeading>Status:</OrderHeading>
-									<Status step={data[0].step} />
+									<Status step={step} />
 									<UserStatus>
 										Food tracker:{' '}
-										<UserOrderStatus step={data[0].step}>
-											{returnUserStatus(data[0].step)}
+										<UserOrderStatus step={step}>
+											{returnUserStatus(step)}
 										</UserOrderStatus>
 									</UserStatus>
-									<OrderDate>
-										Time: {giveDateSpan(data[0].date)}
-									</OrderDate>
+									<OrderDate>Time: {giveDateSpan(date)}</OrderDate>
 								</MiddleWrapper>
 							</JustifyCenterContainer>
 							<OrderWrapper>
 								<OrderInfo>
 									<OrderHeading>User address:</OrderHeading>
 									<OrderP>
-										Name: {data[0].userInfo.name}
+										Name: {name}
 										<br />
-										Address: {data[0].userInfo.address}
+										Address: {address}
 										<br />
-										City: {data[0].userInfo.city}
+										City: {city}
 										<br />
-										Zip-Code: {data[0].userInfo.zip}
+										Zip-Code: {zip}
 										<br />
-										Phone: {data[0].userInfo.phone}
+										Phone: {phone}
 									</OrderP>
 								</OrderInfo>
 								<OrderInfo>
 									<OrderHeading>Order info:</OrderHeading>
-									{data[0].orderInfo.map((el, i) => (
+									{orderInfo.map((el, i) => (
 										<OrderP key={i}>
 											{el.quantity}x {el.name}
 										</OrderP>
@@ -96,7 +96,7 @@ const ContentToPrint = React.forwardRef(
 								<OrderInfo>
 									<OrderHeading>Payment</OrderHeading>
 									<OrderP>
-										{data[0].payment === 1 ? (
+										{payment === 1 ? (
 											<>
 												<CreditCardIcon /> Card
 											</>
@@ -109,7 +109,7 @@ const ContentToPrint = React.forwardRef(
 								</OrderInfo>
 								<OrderInfo>
 									<OrderHeading>Total price</OrderHeading>
-									<OrderP medium>${data[0].totalPrice}</OrderP>
+									<OrderP medium>${totalPrice}</OrderP>
 								</OrderInfo>
 							</OrderWrapper>
 						</OrderContainer>
@@ -163,7 +163,7 @@ const Order = (props) => {
 		content: () => componentRef.current,
 	});
 
-	if (data === null) return <Redirect to="/admin/orders/" />;
+	if (data?.length === 0) return <Redirect to="/admin/orders" />;
 
 	const steps = [
 		{ step: 1, text: 'Preparing' },

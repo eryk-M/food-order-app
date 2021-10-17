@@ -78,7 +78,7 @@ const Edit = (props) => {
 		};
 	}, []);
 
-	if (data === null) return <Redirect to="/admin/products" />;
+	if (data?.length === 0) return <Redirect to="/admin/products" />;
 
 	if (ingredients.length === 0 && data && !isInitiallyFetched) {
 		setIngredients(data[0].ingredients);
@@ -188,6 +188,10 @@ const Edit = (props) => {
 	};
 
 	const imgTag = buildImgTag();
+
+	const [
+		{ name, img, availability, category, price, discountPrice, desc },
+	] = data || [{}];
 	return (
 		<>
 			{data && (
@@ -207,10 +211,10 @@ const Edit = (props) => {
 					)}
 
 					{error && <FormAlert variant="danger">{error}</FormAlert>}
-					<AdminPanelHeading>{data[0].name}</AdminPanelHeading>
+					<AdminPanelHeading>{name}</AdminPanelHeading>
 					{imgTag || (
 						<EditImageWrapper>
-							<EditImage src={data[0].img} />
+							<EditImage src={img} />
 						</EditImageWrapper>
 					)}
 
@@ -239,7 +243,7 @@ const Edit = (props) => {
 							<FormCheckbox
 								{...register('available')}
 								type="checkbox"
-								defaultChecked={data[0].availability}
+								defaultChecked={availability}
 							/>
 						</FormGroup>
 						<FormGroupWrapper>
@@ -249,7 +253,7 @@ const Edit = (props) => {
 									<FormInput
 										{...register('name')}
 										type="text"
-										defaultValue={data[0].name}
+										defaultValue={name}
 										error={errors.name}
 									/>
 									{errors.name && (
@@ -262,7 +266,7 @@ const Edit = (props) => {
 										display="block"
 										width="21.3rem"
 										{...register('category')}
-										defaultValue={data[0].category}
+										defaultValue={category}
 									>
 										<SelectOption value="Burgers">
 											Burgers
@@ -280,7 +284,7 @@ const Edit = (props) => {
 									<FormLabel>Price</FormLabel>
 									<FormInput
 										{...register('price')}
-										defaultValue={data[0].price}
+										defaultValue={price}
 										error={errors.price}
 									/>
 									{errors.price && (
@@ -291,7 +295,7 @@ const Edit = (props) => {
 									<FormLabel>Discount price</FormLabel>
 									<FormInput
 										{...register('discount')}
-										defaultValue={data[0].discountPrice}
+										defaultValue={discountPrice}
 										type="number"
 										error={errors.discount}
 									/>
@@ -339,7 +343,7 @@ const Edit = (props) => {
 							<FormLabel>Description</FormLabel>
 							<FormTextArea
 								{...register('description')}
-								defaultValue={data[0].desc}
+								defaultValue={desc}
 								error={errors.description}
 							/>
 							{errors.description && (

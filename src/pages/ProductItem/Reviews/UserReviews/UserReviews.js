@@ -19,7 +19,6 @@ export const UserReviews = ({
 	loading,
 }) => {
 	const dateNow = Date.now();
-
 	return (
 		<UserReviewsContainer className="user">
 			{loading && <Loader margincenter primary high="true" />}

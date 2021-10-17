@@ -15,7 +15,7 @@ import {
 	MainPageHeading,
 } from 'components';
 
-export const TopProducts = () => {
+const TopProducts = () => {
 	const { data, loading } = useFirestoreQuery(getTopProducts());
 
 	return (
@@ -38,3 +38,5 @@ export const TopProducts = () => {
 		</TopProductsContainer>
 	);
 };
+
+export default TopProducts;
