@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { device } from 'utils/breakpoints';
 
 export const StoryContainer = styled.section`
@@ -36,7 +36,7 @@ export const StoryDesc = styled.p`
 	margin: 2rem 0;
 `;
 
-export const StoryImage = styled.img`
+export const StoryImage = styled(LazyLoadImage)`
 	display: inline-block;
 	height: 500px;
 

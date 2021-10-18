@@ -29,7 +29,12 @@ export const TopProduct = ({ el }) => {
 			<TopProductPrice>
 				${el.discountPrice !== 0 ? el.discountPrice : el.price}
 			</TopProductPrice>
-			<TopProductImage src={el.img} alt={el.name} />
+			<TopProductImage
+				effect="blur"
+				src={el.img}
+				alt={el.name}
+				width="100%"
+			/>
 			<TopProductInfo>
 				<TopProductHeading>{el.name}</TopProductHeading>
 				<TopProductIngs>

@@ -16,6 +16,8 @@ import { FaPhoneAlt } from 'react-icons/fa';
 
 import Image from 'assets/images/story_image.jpg';
 
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 export const Story = () => {
 	return (
 		<StoryContainer>
@@ -49,7 +51,7 @@ export const Story = () => {
 				</StoryContactWrapper>
 			</StoryContent>
 			<StoryImageWrapper>
-				<StoryImage src={Image} alt="Story image" />
+				<StoryImage effect="blur" src={Image} alt="Story image" />
 			</StoryImageWrapper>
 		</StoryContainer>
 	);

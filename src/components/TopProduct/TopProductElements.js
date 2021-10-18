@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
 import { device } from 'utils/breakpoints';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 export const TopProductContainer = styled.figure`
 	min-height: 48rem;
 	position: relative;
@@ -25,10 +25,11 @@ export const TopProductContainer = styled.figure`
 	}
 `;
 
-export const TopProductImage = styled.img`
+export const TopProductImage = styled(LazyLoadImage)`
 	display: block;
 	height: 25rem;
 	width: 100%;
+
 	object-fit: cover;
 	clip-path: polygon(0 85%, 0 0, 100% 0, 100% 85%, 50% 100%);
 	@media ${device.mobileL} {
