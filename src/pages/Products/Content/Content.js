@@ -11,13 +11,15 @@ const Content = ({
 	//SORTING BY POPULARITY:
 	//Popularity of product is incrementing when user order product or add review
 	const sortFunction = (a, b) => {
+		const value = (e) =>
+			e.discountPrice > 0 ? e.discountPrice : e.price;
 		switch (sort) {
 			case 'default':
 				return;
 			case 'low':
-				return a.price - b.price;
+				return value(a) - value(b);
 			case 'high':
-				return b.price - a.price;
+				return value(b) - value(a);
 			case 'average':
 				return b.avgRating - a.avgRating;
 			case 'popularity':
