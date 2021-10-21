@@ -57,11 +57,14 @@ const List = () => {
 		if (data?.length <= 10) {
 			setCurrentPage(1);
 		}
+	}, [data, setCurrentPage]);
+
+	useEffect(() => {
 		return () => {
 			clearTimeout(timeoutResetRef.current);
 			setIsResetLoading(false);
 		};
-	}, [data, setCurrentPage]);
+	}, []);
 
 	const onHandleSearch = () => {
 		if (query.length >= 3) {

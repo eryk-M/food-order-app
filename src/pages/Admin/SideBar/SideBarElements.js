@@ -154,3 +154,15 @@ export const SideBarClose = styled.p`
 	border-bottom: 1px solid #4b545c;
 	cursor: pointer;
 `;
+
+export const SideBarOverlay = styled.div`
+	display: ${({ display }) => display};
+	position: fixed;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 5002;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 100vh;
+`;

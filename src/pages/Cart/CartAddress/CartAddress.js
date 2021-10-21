@@ -133,7 +133,7 @@ export const CartAddress = ({
 							type="button"
 							onClick={(e) => onChangeStep(e, 'back')}
 						>
-							{width <= 360 ? 'Order' : 'Back to order'}
+							{width <= 360 ? 'Cart' : 'Back to cart'}
 						</Button>
 						<Button marginleft="auto" type="submit">
 							{width <= 360

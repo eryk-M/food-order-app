@@ -70,6 +70,9 @@ export const TreeNavLink = styled(NavLink)`
 	}
 	&:hover {
 		background-color: var(--color-primary);
+		@media ${device.laptopS} {
+			background-color: transparent;
+		}
 	}
 	& .icon-arrow {
 		display: none;

@@ -38,7 +38,8 @@ const Content = ({
 	};
 
 	const filterPrice = (el) =>
-		el.price <= maxPrice && el.price >= minPrice;
+		(el.discountPrice || el.price) <= maxPrice &&
+		(el.discountPrice || el.price) >= minPrice;
 
 	const filterCategory = (el) => {
 		if (category === 'All') {

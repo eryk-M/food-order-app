@@ -49,11 +49,13 @@ export const DeleteModal = ({
 		} else {
 			setError('');
 		}
+	}, [inputValue, setError, input, isInitiallyChanged]);
 
+	useEffect(() => {
 		return () => {
 			clearTimeout(timeoutRef.current);
 		};
-	}, [inputValue, setError, input, isInitiallyChanged]);
+	}, []);
 
 	const handleDelete = async () => {
 		try {

@@ -63,11 +63,13 @@ const Item = ({ el }) => {
 
 	useEffect(() => {
 		localStorage.setItem('cart', JSON.stringify(cart));
-		const timeoutId = addedTimeoutRef.current;
-		return () => {
-			clearTimeout(timeoutId);
-		};
 	}, [cart]);
+
+	useEffect(() => {
+		return () => {
+			clearTimeout(addedTimeoutRef.current);
+		};
+	}, []);
 
 	const addToCart = (e) => {
 		e.preventDefault();

@@ -11,6 +11,7 @@ export const NavBurgerContainer = styled.nav`
 	transition: all 0.5s;
 	right: -35rem;
 	top: 0;
+	font-weight: 700;
 	right: ${({ right }) => right};
 `;
 
