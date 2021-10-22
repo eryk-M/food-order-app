@@ -37,4 +37,5 @@ export const AlertContainer = styled.div`
 export const AlertSuccessIcon = styled(GiConfirmed)`
 	margin-right: 0.5rem;
 	font-size: 2rem;
+	vertical-align: middle;
 `;

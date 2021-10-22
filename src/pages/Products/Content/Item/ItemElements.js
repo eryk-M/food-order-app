@@ -127,3 +127,16 @@ export const ItemPrice = styled.span`
 	display: block;
 	margin-right: ${({ discount }) => (discount ? '1rem' : '')};
 `;
+
+export const ItemAlertWrapper = styled.div`
+	display: none;
+	@media (max-width: 360px) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		width: 100%;
+		position: absolute;
+		top: 50rem;
+	}
+`;

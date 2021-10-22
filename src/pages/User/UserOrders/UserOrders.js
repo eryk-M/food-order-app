@@ -29,6 +29,7 @@ export const UserOrders = () => {
 	const { data, loading } = useFirestoreQuery(
 		getUserOrders(currentUser.uid)
 	);
+
 	return (
 		<OrdersTableWrapper>
 			<Table>
@@ -42,7 +43,10 @@ export const UserOrders = () => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{data && data.map((el, i) => <Overall key={i} el={el} />)}
+					{data &&
+						data
+							.sort((a, b) => b.date - a.date)
+							.map((el, i) => <Overall key={i} el={el} />)}
 				</TableBody>
 			</Table>
 			{loading && <Loader primary high margincenter />}

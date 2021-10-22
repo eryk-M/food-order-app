@@ -38,6 +38,9 @@ export const NavList = styled.ul`
 	font-family: 'Arvo', sans-serif;
 	font-weight: 700;
 	text-transform: uppercase;
+	@media (max-width: 960px) {
+		display: none;
+	}
 `;
 
 export const NavItem = styled.li``;
@@ -65,6 +68,9 @@ export const NavLink = styled(Link)`
 	&:hover {
 		color: var(--color-primary);
 	}
+	@media (max-width: 960px) {
+		display: none;
+	}
 `;
 
 export const NavCart = styled(FiShoppingCart)`
@@ -83,4 +89,8 @@ export const NavBurger = styled(FaBars)`
 	font-size: 5rem;
 	color: var(--color-grey-light);
 	cursor: pointer;
+	display: none;
+	@media (max-width: 960px) {
+		display: block;
+	}
 `;

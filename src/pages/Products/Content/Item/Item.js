@@ -16,6 +16,7 @@ import {
 	ItemButton,
 	ItemPrice,
 	ItemImageWrapper,
+	ItemAlertWrapper,
 } from './ItemElements';
 
 import {
@@ -87,7 +88,7 @@ const Item = ({ el }) => {
 
 	return (
 		<ItemWrapper>
-			{isAdded && (
+			{isAdded && width > 360 && (
 				<Alert
 					top={width <= 460 ? '95%' : '2rem'}
 					right={width <= 460 ? '23%' : '2rem'}
@@ -96,6 +97,12 @@ const Item = ({ el }) => {
 					Product added to cart
 				</Alert>
 			)}
+			{isAdded && width <= 360 && (
+				<ItemAlertWrapper>
+					<Alert success>Product added to cart</Alert>
+				</ItemAlertWrapper>
+			)}
+
 			<Image el={el} />
 			<ItemInfo>
 				<Link to={`/product/${el.id}`}>

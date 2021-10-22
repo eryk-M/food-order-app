@@ -16,14 +16,12 @@ import {
 
 import { useAuth, CartContext } from 'contexts';
 import { withRouter, useHistory } from 'react-router';
-import { useWindowSize } from 'hooks';
 
 const NavBar = (props) => {
 	const { currentUser } = useAuth();
 	const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
 	const [scroll, setScroll] = useState(false);
 	const history = useHistory();
-	const { width } = useWindowSize();
 
 	const {
 		state: { cart },
@@ -66,44 +64,6 @@ const NavBar = (props) => {
 	const { pathname } = props.location;
 	const { toggle } = props;
 
-	const switchMenu = () => {
-		if (width > 840) {
-			return (
-				<>
-					<NavList>
-						<NavItem>
-							<NavLink
-								to={{
-									pathname: '/login',
-									query: '/admin',
-								}}
-							>
-								Admin
-							</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink to="/products">Products</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink to="/food-tracker">Food tracker</NavLink>
-						</NavItem>
-					</NavList>
-					<NavLink to={currentUser ? '/user' : '/login'}>
-						<NavUser fontSize="3rem" />
-					</NavLink>
-					<NavLink to="/cart">
-						<NavCart />
-						{cart.length >= 1 && (
-							<NavCartSpan>{cart.length}</NavCartSpan>
-						)}
-					</NavLink>
-				</>
-			);
-		} else {
-			return <NavBurger onClick={toggle} />;
-		}
-	};
-
 	const conditionalMenu = () => {
 		if (pathname === '/') {
 			return null;
@@ -124,7 +84,34 @@ const NavBar = (props) => {
 						src={Logo}
 					/>
 				</NavLogo>
-				{switchMenu()}
+				<NavList>
+					<NavItem>
+						<NavLink
+							to={{
+								pathname: '/login',
+								query: '/admin',
+							}}
+						>
+							Admin
+						</NavLink>
+					</NavItem>
+					<NavItem>
+						<NavLink to="/products">Products</NavLink>
+					</NavItem>
+					<NavItem>
+						<NavLink to="/food-tracker">Food tracker</NavLink>
+					</NavItem>
+				</NavList>
+				<NavLink to={currentUser ? '/user' : '/login'}>
+					<NavUser fontSize="3rem" />
+				</NavLink>
+				<NavLink to="/cart">
+					<NavCart />
+					{cart.length >= 1 && (
+						<NavCartSpan>{cart.length}</NavCartSpan>
+					)}
+				</NavLink>
+				<NavBurger onClick={toggle} />
 			</NavWrapper>
 		</Nav>
 	);
