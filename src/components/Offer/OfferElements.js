@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { ButtonLink } from 'components/ButtonLink/ButtonLink';
-import Image from 'assets/images/offer-quiz.jpg';
+import Image from 'assets/images/offer-quiz.webp';
 import { device } from 'utils/breakpoints';
 export const OfferContainer = styled.div`
 	height: 50rem;

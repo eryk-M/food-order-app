@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import Logo from 'assets/images/logo.png';
+import Logo from 'assets/images/logo.webp';
 import {
 	Nav,
 	NavLogo,

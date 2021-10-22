@@ -1,13 +1,9 @@
-import faker from 'faker';
 const generateRandomArray = (min, max, days, total) => {
 	let array = [];
 	for (let i = 0; i < days; i++) {
-		const randomNumber = faker.datatype.number({
-			min: min,
-			max: max,
-		});
-		array.push(randomNumber);
+		array.push(Math.floor(Math.random() * (max - min) + min));
 	}
+
 	return array;
 };
 
@@ -33,28 +29,28 @@ export const totalOrdersSettings = {
 	spanColor: '#3ac47d',
 	top: 'Total orders',
 	bottom: 'Total orders number',
-	number: faker.datatype.number({ min: 1200, max: 1500 }),
+	number: Math.floor(Math.random() * (1500 - 1200) + 1200),
 };
 
 export const totalClientsSettings = {
 	spanColor: '#f7b924',
 	top: 'Total income',
 	bottom: 'Total clients profit',
-	number: `$${faker.datatype.number({ min: 31000, max: 42000 })}`,
+	number: `$${Math.floor(Math.random() * (42000 - 31000) + 31000)}`,
 };
 
 export const totalUsersSettings = {
 	spanColor: '#d92550',
 	top: 'Total users',
 	bottom: 'People registered',
-	number: faker.datatype.number({ min: 150, max: 400 }),
+	number: Math.floor(Math.random() * (400 - 150) + 150),
 };
 
 export const chartOrdersYear = {
 	array: ordersDataYear,
 	days: generateArrayDays(12),
 	color: '#f7b924',
-	text: faker.datatype.number({ min: 800, max: 1100 }),
+	text: Math.floor(Math.random() * (1100 - 800) + 800),
 	span: 'orders last years',
 };
 export const chartSalesYear = {
@@ -69,7 +65,7 @@ export const chartOrdersMonth = {
 	array: ordersDataMonth,
 	days: generateArrayDays(30),
 	color: '#1fa2ff',
-	text: faker.datatype.number({ min: 70, max: 110 }),
+	text: Math.floor(Math.random() * (110 - 70) + 70),
 	span: 'orders last month',
 };
 export const chartSalesMonth = {

@@ -23,7 +23,7 @@ import {
 } from 'react-icons/ai';
 import { FiTruck } from 'react-icons/fi';
 import { MdKeyboardArrowRight } from 'react-icons/md';
-import logo from 'assets/images/logo.png';
+import logo from 'assets/images/logo.webp';
 import { treeProducts, treeQuiz } from 'helpers/treeMenus';
 
 const SideBar = ({ width, hidden, setHidden }) => {

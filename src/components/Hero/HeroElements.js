@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components/macro';
 
 import { motion } from 'framer-motion';
 import { device } from 'utils/breakpoints';
@@ -7,6 +7,7 @@ export const HeroImageWrapper = styled(motion.div)`
 	width: 100%;
 	position: absolute;
 	z-index: 0;
+
 	&::after {
 		content: '';
 		position: absolute;
@@ -93,12 +94,20 @@ export const HeroP = styled.p`
 	font-weight: 700;
 `;
 
+const filter = keyframes`
+from {
+    filter: blur(3px)
+}
+to { filter: blur(0px)}
+`;
+
 export const HeroShape = styled.img`
 	position: absolute;
 	z-index: 3;
 	width: 100%;
-	bottom: 0rem;
+	bottom: -0.1rem;
 	left: 0;
+	animation: ${filter} 0.2s ease;
 	@media ${device.laptopS} {
 		display: none;
 	}

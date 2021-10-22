@@ -12,6 +12,7 @@ to {
 `;
 
 export const AlertContainer = styled.div`
+	z-index: 10;
 	position: absolute;
 	top: ${({ top }) => top};
 	right: ${({ right }) => right};

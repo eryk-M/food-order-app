@@ -2,7 +2,7 @@ import React from 'react';
 
 import Chart from 'react-apexcharts';
 
-import { DonutChartContainer } from 'components';
+import { DonutChartContainer, Loader } from 'components';
 import {
 	LineChartTop,
 	LineChartP,
@@ -11,6 +11,7 @@ import {
 
 import { DonutChartWrapper } from './DonutChartElements.js';
 import { useWindowSize } from 'hooks';
+import LazyLoad from 'react-lazyload';
 
 export const DonutChart = () => {
 	const { width } = useWindowSize();
@@ -28,6 +29,12 @@ export const DonutChart = () => {
 			pie: {
 				size: width <= 640 ? 100 : '',
 			},
+		},
+		markers: {
+			size: 0,
+		},
+		dataLabels: {
+			enabled: false,
 		},
 	};
 
@@ -54,15 +61,20 @@ export const DonutChart = () => {
 				<LineChartP>Popularity</LineChartP>
 				<LineChartSpan>Products by category</LineChartSpan>
 			</LineChartTop>
-			<DonutChartWrapper>
-				<Chart
-					options={options}
-					series={series}
-					type="pie"
-					width={donutWidth(width)}
-					height="700"
-				/>
-			</DonutChartWrapper>
+			<LazyLoad
+				height={300}
+				placeholder={<Loader primary margincenter high />}
+			>
+				<DonutChartWrapper>
+					<Chart
+						options={options}
+						series={series}
+						type="pie"
+						width={donutWidth(width)}
+						height="700"
+					/>
+				</DonutChartWrapper>
+			</LazyLoad>
 		</DonutChartContainer>
 	);
 };

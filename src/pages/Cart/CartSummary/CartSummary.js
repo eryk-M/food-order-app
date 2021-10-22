@@ -168,8 +168,8 @@ export const CartSummary = ({
 								<span>
 									$
 									{el.discountPrice !== 0
-										? el.discountPrice.toFixed(2) * el.quantity
-										: el.price.toFixed(2) * el.quantity}
+										? (el.discountPrice * el.quantity).toFixed(2)
+										: (el.price * el.quantity).toFixed(2)}
 								</span>
 							</CartSummaryOrderInfo>
 						</CartSummaryOrder>

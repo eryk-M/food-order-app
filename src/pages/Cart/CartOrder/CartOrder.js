@@ -26,8 +26,8 @@ import {
 	CartQuantityWrapper,
 } from './CartOrderElements';
 
-import Cash from 'assets/images/cash.png';
-import Card from 'assets/images/card.jpg';
+import Cash from 'assets/images/cash.webp';
+import Card from 'assets/images/card.webp';
 
 import { useApi, useAuth, CartContext } from 'contexts';
 

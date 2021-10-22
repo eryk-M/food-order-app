@@ -14,7 +14,7 @@ import { MainPageHeading } from 'components';
 import { IoMdMail } from 'react-icons/io';
 import { FaPhoneAlt } from 'react-icons/fa';
 
-import Image from 'assets/images/story_image.jpg';
+import Image from 'assets/images/story_image.webp';
 
 import 'react-lazy-load-image-component/src/effects/blur.css';
 

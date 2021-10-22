@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
 import Chart from 'react-apexcharts';
+import LazyLoad from 'react-lazyload';
 
-import { LineChartContainer } from 'components';
+import { LineChartContainer, Loader } from 'components';
 import {
 	LineChartTop,
 	LineChartP,
@@ -70,6 +71,12 @@ export const LineChart = ({ array, days, color, text, span }) => {
 			show: false,
 			labels: { show: false },
 		},
+		markers: {
+			size: 0,
+		},
+		dataLabels: {
+			enabled: false,
+		},
 	};
 	const series = [
 		{
@@ -83,9 +90,14 @@ export const LineChart = ({ array, days, color, text, span }) => {
 				<LineChartP>{text}</LineChartP>
 				<LineChartSpan>{span}</LineChartSpan>
 			</LineChartTop>
-			<LineChartWrapper>
-				<Chart options={options} series={series} />
-			</LineChartWrapper>
+			<LazyLoad
+				height={300}
+				placeholder={<Loader primary margincenter high />}
+			>
+				<LineChartWrapper>
+					<Chart options={options} series={series} />
+				</LineChartWrapper>
+			</LazyLoad>
 		</LineChartContainer>
 	);
 };

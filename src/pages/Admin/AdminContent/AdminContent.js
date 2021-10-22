@@ -1,13 +1,20 @@
 import React from 'react';
-
+import loadable from '@loadable/component';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import {
 	AdminProducts,
-	AdminDashboard,
+	// AdminDashboard,
 	AdminOrders,
 	AdminCoupons,
 	AdminQuiz,
 } from 'pages';
+import { Loader } from 'components';
+const AdminDashboard = loadable(
+	() => import('./Dashboard/Dashboard'),
+	{
+		fallback: <Loader primary veryhigh margincenter />,
+	}
+);
 
 export const AdminContent = () => {
 	return (

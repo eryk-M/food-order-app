@@ -67,7 +67,6 @@ export { default as AdminOrders } from './Admin/AdminContent/Orders/Orders';
 export { default as AdminOrdersList } from './Admin/AdminContent/Orders/List/List';
 export { default as AdminOrdersOrder } from './Admin/AdminContent/Orders/Order/Order';
 
-export { default as AdminDashboard } from './Admin/AdminContent/Dashboard/Dashboard';
 export { default as AdminCoupons } from './Admin/AdminContent/Coupons/Coupons';
 
 //404

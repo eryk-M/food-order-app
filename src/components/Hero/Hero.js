@@ -13,8 +13,8 @@ import {
 } from './HeroElements';
 
 import { ButtonLink } from 'components';
-import Shape from 'assets/images/shape.png';
-import ImgBg from 'assets/images/header-burger-2.jpg';
+import Shape from 'assets/images/shape.webp';
+import ImgBg from 'assets/images/header-burger-2.webp';
 
 export const Hero = () => {
 	return (

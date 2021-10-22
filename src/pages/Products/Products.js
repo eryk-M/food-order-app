@@ -19,9 +19,7 @@ export const Products = () => {
 	const [category, setCategory] = useState('All');
 	const [query, setQuery] = useState('');
 	const [sort, setSort] = useState('');
-
 	const { width } = useWindowSize();
-
 	const { data } = useFirestoreQuery(getAllProducts());
 
 	return (
