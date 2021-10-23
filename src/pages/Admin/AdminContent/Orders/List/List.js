@@ -27,8 +27,8 @@ import {
 	ArrowUpFilterIcon,
 	CashIcon,
 	CreditCardIcon,
-	Alert,
 	Button,
+	AlertAdmin,
 } from 'components';
 
 import { useHistory } from 'react-router-dom';
@@ -231,11 +231,9 @@ const List = () => {
 				minwidth=""
 				minheight="40rem"
 			>
-				{showSuccess && (
-					<Alert success right="1rem" top="1rem">
-						Orders deleted!
-					</Alert>
-				)}
+				<AlertAdmin right="2rem" showSuccess={showSuccess}>
+					Orders deleted
+				</AlertAdmin>
 
 				<Search
 					tooltip={true}

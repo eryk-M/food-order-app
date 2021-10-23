@@ -27,12 +27,11 @@ import {
 	FormAlert,
 	MainContainer,
 	JustifyCenterContainer,
-	Alert,
+	AlertAdmin,
 } from 'components';
 
 import { useReactToPrint } from 'react-to-print';
 import { useApi } from 'contexts';
-
 const ContentToPrint = React.forwardRef(
 	(
 		{
@@ -118,17 +117,20 @@ const ContentToPrint = React.forwardRef(
 						</MiddleWrapper>
 
 						<OrderSteps>
-							{showSuccess && (
-								<Alert success top="-6rem" right="0rem">
-									{width <= 340 ? '' : 'Updated'}
-								</Alert>
-							)}
+							<AlertAdmin
+								top="-7rem"
+								right="0"
+								showSuccess={showSuccess}
+							>
+								{width <= 340 ? '' : 'Updated'}
+							</AlertAdmin>
 
 							{steps.map((el, i) => (
 								<OrderChangeButton
 									onClick={() => handleChangeStatus(el.step)}
 									key={i}
 									step={el.step}
+									disabled={showSuccess}
 								>
 									{el.text}
 								</OrderChangeButton>
@@ -195,15 +197,13 @@ const Order = (props) => {
 
 			const timeout = setTimeout(() => {
 				setShowSuccess(false);
-			}, 4000);
+			}, 3000);
 			timeoutRef.current = timeout;
 		} catch (err) {
 			setIsLoading(false);
 			setError('Something went wrong. Please try again!');
 		}
 	};
-
-	// const clearAlert = () => clearTimeout(showAlert);
 
 	const returnUserStatus = (step) => {
 		const text = [

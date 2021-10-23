@@ -16,8 +16,8 @@ import {
 	ProgressContainer,
 	MinusIcon,
 	EditBigIcon,
-	Alert,
 	AdminPanelHeading,
+	AlertAdmin,
 } from 'components';
 
 import {
@@ -200,15 +200,14 @@ const Edit = (props) => {
 						<ProgressContainer width={uploadPercentage} />
 					)}
 					<EditBigIcon />
-					{showSuccess && (
-						<Alert
-							right={width <= 580 ? '1.5rem' : '1rem'}
-							top={width <= 580 ? '70%' : '1rem'}
-							success
-						>
-							Updated
-						</Alert>
-					)}
+
+					<AlertAdmin
+						right={width <= 580 ? '1.5rem' : '1rem'}
+						top={width <= 580 ? '70%' : '1rem'}
+						showSuccess={showSuccess}
+					>
+						Updated
+					</AlertAdmin>
 
 					{error && <FormAlert variant="danger">{error}</FormAlert>}
 					<AdminPanelHeading>{name}</AdminPanelHeading>

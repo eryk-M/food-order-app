@@ -19,6 +19,7 @@ export { Alert } from './Alert/Alert';
 export { StarRating } from './StarRating/StarRating';
 export { Button } from './Button/Button';
 export { ButtonLink } from './ButtonLink/ButtonLink';
+export { ConnectionStatus } from './ConnectionStatus/ConnectionStatus';
 
 //Admin
 export { DonutChart } from './Admin/DonutChart/DonutChart';
@@ -27,6 +28,7 @@ export { LineChart } from './Admin/LineChart/LineChart';
 export { Question } from './Admin/Question/Question';
 export { Total } from './Admin/Total/Total';
 export { TreeMenu } from './Admin/TreeMenu/TreeMenu';
+export { AlertAdmin } from './Admin/AlertAdmin/AlertAdmin';
 
 export * from './Admin/Containers';
 

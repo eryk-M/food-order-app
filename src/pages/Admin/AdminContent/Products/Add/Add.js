@@ -16,8 +16,8 @@ import {
 	FormGroupWrapper,
 	PlusBigIcon,
 	MinusIcon,
-	Alert,
 	AdminPanelHeading,
+	AlertAdmin,
 } from 'components';
 
 import {
@@ -32,7 +32,6 @@ import { storage } from 'firebase';
 import { capitalizeEachWord } from 'utils/capitalizeEachWord';
 import { useAdminApi } from 'contexts';
 import { useWindowSize } from 'hooks';
-
 import {
 	SelectContent,
 	SelectOption,
@@ -166,15 +165,15 @@ const Add = () => {
 				<ProgressContainer width={uploadPercentage} />
 			)}
 			<PlusBigIcon />
-			{showSuccess && (
-				<Alert
-					right={width <= 580 ? '1.5rem' : '1rem'}
-					top={width <= 580 ? '70%' : '1rem'}
-					success
-				>
-					Added
-				</Alert>
-			)}
+
+			<AlertAdmin
+				right={width <= 580 ? '1.5rem' : '1rem'}
+				top={width <= 580 ? '70%' : '1rem'}
+				showSuccess={showSuccess}
+			>
+				Added
+			</AlertAdmin>
+
 			{error && <FormAlert variant="danger">{error}</FormAlert>}
 			<AdminPanelHeading>Add product</AdminPanelHeading>
 			<Form

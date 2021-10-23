@@ -10,6 +10,7 @@ export const Search = ({
 	width,
 	placeholder,
 	tooltip,
+	disabled,
 }) => {
 	return (
 		<SearchContainer width={width} query={query}>
@@ -22,6 +23,7 @@ export const Search = ({
 						onChange={(e) => {
 							setQuery(e.currentTarget.value);
 						}}
+						disabled={disabled}
 					/>
 					{tooltip && (
 						<SearchHint query={query}>

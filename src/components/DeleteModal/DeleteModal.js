@@ -64,6 +64,7 @@ export const DeleteModal = ({
 			handleCancel();
 			setLoading(false);
 			setShowSuccess(true);
+
 			if (setToDelete) {
 				setToDelete(0);
 			}

@@ -18,7 +18,7 @@ import {
 	TickIcon,
 	SaleIcon,
 	CrossIcon,
-	Alert,
+	AlertAdmin,
 } from 'components';
 import { useFirestoreQuery, usePagination } from 'hooks';
 import { getAdminAllProducts } from 'utils/firebaseGetters';
@@ -27,10 +27,10 @@ import {
 	ListImage,
 	ProductsListContainer,
 	ProductsReset,
+	ListImageWrapper,
 } from './ListElements';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import { dummyData } from 'utils/dummyData';
-
 const List = () => {
 	const { data, loading } = useFirestoreQuery(getAdminAllProducts());
 	const { deleteAdminProduct } = useAdminApi();
@@ -118,23 +118,29 @@ const List = () => {
 				description="this product"
 			/>
 			<ProductsListContainer>
-				{showSuccess && (
-					<Alert success right="1rem" top="1rem">
-						Product ID: {id} deleted!
-					</Alert>
-				)}
+				<AlertAdmin
+					right="1rem"
+					top="1rem"
+					showSuccess={showSuccess || resetSuccess}
+				>
+					{showSuccess && `Product ID: ${id} deleted!`}
+					{resetSuccess && `Resetted successfully`}
+				</AlertAdmin>
+
 				<Search
 					tooltip={true}
 					query={query}
 					setQuery={setQuery}
 					width="20rem"
 					placeholder="Search by name"
+					disabled={resetSuccess || isResetLoading}
 				/>
 
 				<ProductsReset
 					loading={isResetLoading}
 					onSetItems={onSetItems}
 					resetSuccess={resetSuccess}
+					showSuccess={showSuccess}
 				/>
 
 				{data?.length > 10 && (
@@ -171,11 +177,13 @@ const List = () => {
 										{el.id}
 									</TableCell>
 									<TableCell data-label="Image">
-										<ListImage
-											src={el.img}
-											alt={el.alt}
-											effect="opacity"
-										/>
+										<ListImageWrapper>
+											<ListImage
+												src={el.img}
+												alt={el.alt}
+												effect="opacity"
+											/>
+										</ListImageWrapper>
 									</TableCell>
 									<TableCell data-label="Name">{el.name}</TableCell>
 									<TableCell center data-label="Sale">
@@ -195,7 +203,16 @@ const List = () => {
 									</TableCell>
 									<TableCell data-label="Actions" center>
 										<Link to={`/admin/products/${el.id}`}>
-											<TableButton secondary>Edit</TableButton>
+											<TableButton
+												disabled={
+													isResetLoading ||
+													showSuccess ||
+													resetSuccess
+												}
+												secondary
+											>
+												Edit
+											</TableButton>
 										</Link>
 										<TableButton
 											primary
@@ -204,6 +221,9 @@ const List = () => {
 												setOpen((currOpen) => !currOpen);
 												setId(el.id);
 											}}
+											disabled={
+												isResetLoading || showSuccess || resetSuccess
+											}
 										>
 											Delete
 										</TableButton>

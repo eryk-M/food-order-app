@@ -5,8 +5,12 @@ import {
 	Switch,
 } from 'react-router-dom';
 import { GlobalStyle } from './globalStyles';
-
-import { Footer, NavBar, NavBarBurger } from 'components';
+import {
+	Footer,
+	NavBar,
+	NavBarBurger,
+	ConnectionStatus,
+} from 'components';
 import { RedirectFromAuth } from 'components/RedirectFromAuth/RedirectFromAuth';
 import {
 	Tracker,
@@ -24,7 +28,6 @@ import { ScrollToTop } from 'utils/scrollToTop';
 function App() {
 	//navbar
 	const [hidden, setHidden] = useState(true);
-
 	const toggleClass = () => {
 		setHidden(!hidden);
 	};
@@ -33,6 +36,7 @@ function App() {
 		<AuthProvider>
 			<CartProvider>
 				<APIProvider>
+					<ConnectionStatus />
 					<Router>
 						<NavBar toggle={toggleClass} />
 						<NavBarBurger hidden={hidden} toggle={toggleClass} />

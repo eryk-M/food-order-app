@@ -18,6 +18,7 @@ export const ItemWrapper = styled.li`
 	padding: 0 1rem;
 	padding-bottom: 3rem;
 	position: relative;
+
 	&:not(:last-of-type) {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	}
@@ -36,6 +37,7 @@ export const ItemImageWrapper = styled.div`
 	max-width: 20rem;
 	height: 20rem;
 	display: block;
+	background-color: var(--color-grey-light);
 	&::before {
 		content: '';
 		position: absolute;

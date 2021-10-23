@@ -106,6 +106,13 @@ export const ProductsListContainer = styled(MainContainer)`
 		}
 	}
 `;
+export const ListImageWrapper = styled.div`
+	height: 6rem;
+	width: 6rem;
+	background-color: var(--color-grey-light);
+	display: inline-block;
+	border-radius: 5px;
+`;
 
 export const ListImage = styled(LazyLoadImage)`
 	height: 6rem;
@@ -163,11 +170,12 @@ export const ProductsReset = ({
 	loading,
 	onSetItems,
 	resetSuccess,
+	showSuccess,
 }) => {
 	return (
 		<ProductsResetButton
 			onClick={onSetItems}
-			disabled={loading || resetSuccess}
+			disabled={loading || resetSuccess || showSuccess}
 			resetSuccess={resetSuccess}
 		>
 			{resetSuccess && 'Done'}

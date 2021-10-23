@@ -25,6 +25,11 @@ export const TopProductContainer = styled.figure`
 	}
 `;
 
+export const TopProductImageWrapper = styled.div`
+	background-color: var(--color-grey-light);
+	clip-path: polygon(0 85%, 0 0, 100% 0, 100% 85%, 50% 100%);
+`;
+
 export const TopProductImage = styled(LazyLoadImage)`
 	display: block;
 	height: 25rem;

@@ -10,6 +10,7 @@ import {
 	TopProductDesc,
 	TopProductOrder,
 	TopProductStars,
+	TopProductImageWrapper,
 } from './TopProductElements';
 
 import { StarRating } from 'components';
@@ -29,12 +30,15 @@ export const TopProduct = ({ el }) => {
 			<TopProductPrice>
 				${el.discountPrice !== 0 ? el.discountPrice : el.price}
 			</TopProductPrice>
-			<TopProductImage
-				effect="blur"
-				src={el.img}
-				alt={el.name}
-				width="100%"
-			/>
+			<TopProductImageWrapper>
+				<TopProductImage
+					effect="blur"
+					src={el.img}
+					alt={el.name}
+					width="100%"
+				/>
+			</TopProductImageWrapper>
+
 			<TopProductInfo>
 				<TopProductHeading>{el.name}</TopProductHeading>
 				<TopProductIngs>

@@ -103,13 +103,22 @@ export const OrderChangeButton = styled.button`
 	@media only screen and (min-width: 1024px) {
 		&:hover {
 			transform: translateY(-6px);
-			box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.5);
+			box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.3);
 		}
 	}
 
 	&:active {
-		transform: translateY(-2px);
-		box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.5);
+		transform: translateY(0px);
+		box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.3);
+	}
+
+	&:disabled {
+		opacity: 0.5;
+		&:hover {
+			transform: none;
+			box-shadow: none;
+			cursor: default;
+		}
 	}
 `;
 
