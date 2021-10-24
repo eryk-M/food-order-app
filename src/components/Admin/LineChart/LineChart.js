@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-
-import Chart from 'react-apexcharts';
+import loadable from '@loadable/component';
 import LazyLoad from 'react-lazyload';
 
 import { LineChartContainer, Loader } from 'components';
@@ -10,6 +9,10 @@ import {
 	LineChartSpan,
 	LineChartWrapper,
 } from './LineChartElements';
+
+const Chart = loadable(() => import('react-apexcharts'), {
+	fallback: <Loader primary high margincenter />,
+});
 
 export const LineChart = ({ array, days, color, text, span }) => {
 	const [data] = useState(array);

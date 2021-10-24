@@ -1,5 +1,4 @@
 import React from 'react';
-import { Draggable } from 'react-beautiful-dnd';
 
 import {
 	QuestionElement,
@@ -7,6 +6,12 @@ import {
 	QuestionAnswerP,
 } from './QuestionElements';
 import { CrossDeleteIcon, DragLinesIcon } from 'components';
+
+import loadable from '@loadable/component';
+const Draggable = loadable(() =>
+	import('react-beautiful-dnd').then((module) => module.Draggable)
+);
+
 export const Question = ({ questions, onDelete }) => {
 	return (
 		<>

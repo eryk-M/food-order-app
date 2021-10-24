@@ -1,10 +1,22 @@
 import React from 'react';
 
-import { Droppable } from 'react-beautiful-dnd';
-import { DragDropContext } from 'react-beautiful-dnd';
 import { QuestionList, IconWrapper } from './ColumnElements';
-import { Question } from 'components';
-import { DragIcon } from 'components/Admin/Icons';
+import { Question, DragIcon, Loader } from 'components';
+
+import loadable from '@loadable/component';
+
+const DragDropContext = loadable(
+	() =>
+		import('react-beautiful-dnd').then(
+			(module) => module.DragDropContext
+		),
+	{
+		fallback: <Loader primary veryhigh margincenter />,
+	}
+);
+const Droppable = loadable(() =>
+	import('react-beautiful-dnd').then((module) => module.Droppable)
+);
 const Column = ({ initialData, setInitialData, onDelete }) => {
 	const onDragEnd = (result) => {
 		const { destination, source, draggableId } = result;

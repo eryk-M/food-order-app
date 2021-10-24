@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Chart from 'react-apexcharts';
-
+import loadable from '@loadable/component';
 import { DonutChartContainer, Loader } from 'components';
 import {
 	LineChartTop,
@@ -12,6 +11,10 @@ import {
 import { DonutChartWrapper } from './DonutChartElements.js';
 import { useWindowSize } from 'hooks';
 import LazyLoad from 'react-lazyload';
+
+const Chart = loadable(() => import('react-apexcharts'), {
+	fallback: <Loader primary veryhigh margincenter />,
+});
 
 export const DonutChart = () => {
 	const { width } = useWindowSize();
